@@ -1,0 +1,2162 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Joseph Chan Colin — Project Walkthrough</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ground: #eceae3;
+    --plinth: #f8f7f3;
+    --plinth-2: #e3e1d9;
+    --ink: #1b201d;
+    --ink-soft: #596059;
+    --ink-faint: #8a8f87;
+    --rule: #d1cfc5;
+    --rule-strong: #b8b5a9;
+    --accent: #2f5d50;
+    --accent-soft: #dee7e2;
+    --signal: #9a5426;
+    --signal-soft: #f0e3d8;
+    --pass: #2f5d50;
+    --fail: #8a8f87;
+    --focus: #2f5d50;
+    --shadow: rgba(27, 32, 29, 0.07);
+    --gain: #2a78d6;
+    --loss: #eb6834;
+    --track: #e3e1d9;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #141715;
+      --plinth: #1d211e;
+      --plinth-2: #262b27;
+      --ink: #e7e9e3;
+      --ink-soft: #a8afa7;
+      --ink-faint: #7b827a;
+      --rule: #2f3632;
+      --rule-strong: #434b45;
+      --accent: #85bda8;
+      --accent-soft: #1d2b26;
+      --signal: #d59463;
+      --signal-soft: #2b211a;
+      --pass: #85bda8;
+      --fail: #7b827a;
+      --focus: #85bda8;
+      --shadow: rgba(0, 0, 0, 0.4);
+      --gain: #3987e5;
+      --loss: #d95926;
+      --track: #262b27;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #141715;
+    --plinth: #1d211e;
+    --plinth-2: #262b27;
+    --ink: #e7e9e3;
+    --ink-soft: #a8afa7;
+    --ink-faint: #7b827a;
+    --rule: #2f3632;
+    --rule-strong: #434b45;
+    --accent: #85bda8;
+    --accent-soft: #1d2b26;
+    --signal: #d59463;
+    --signal-soft: #2b211a;
+    --pass: #85bda8;
+    --fail: #7b827a;
+    --focus: #85bda8;
+    --shadow: rgba(0, 0, 0, 0.4);
+    --gain: #3987e5;
+    --loss: #d95926;
+    --track: #262b27;
+  }
+
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+
+  /* ---------- signage ---------- */
+
+  .signage {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--plinth);
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+  }
+  .sign-name {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: -0.005em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .sign-room {
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    text-align: center;
+    white-space: nowrap;
+  }
+  .sign-actions { justify-self: end; }
+
+  .btn {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 13.5px;
+    font-weight: 500;
+    line-height: 1.2;
+    padding: 9px 15px;
+    border-radius: 4px;
+    border: 1px solid var(--rule-strong);
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .btn:hover { color: var(--ink); border-color: var(--ink-faint); }
+  .btn-solid { background: var(--accent); border-color: var(--accent); color: var(--plinth); }
+  .btn-solid:hover { color: var(--plinth); opacity: .88; }
+  .btn-quiet { border-color: transparent; }
+  .btn-quiet:hover { border-color: var(--rule-strong); }
+  .btn-sm { font-size: 12.5px; padding: 6px 11px; }
+
+  /* ---------- rooms ---------- */
+
+  main {
+    max-width: 1380px;
+    margin: 0 auto;
+    padding: 0 20px;
+    padding-block: 28px 16px;
+  }
+
+  .room { animation: rise .22s ease both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .room { animation: none; }
+    * { transition: none !important; }
+  }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 12px;
+  }
+
+  h1 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(30px, 5.4vw, 42px);
+    line-height: 1.1;
+    letter-spacing: -0.012em;
+    margin: 0 0 14px;
+    text-wrap: balance;
+  }
+  h2 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.25;
+    margin: 0 0 10px;
+    text-wrap: balance;
+  }
+  h3 { font-size: 14px; font-weight: 600; margin: 0 0 8px; }
+  .lede { font-size: 16.5px; color: var(--ink-soft); max-width: 62ch; margin: 0 0 8px; }
+  p { max-width: 68ch; }
+
+  /* ---------- lobby ---------- */
+
+  .lobby-head { margin-bottom: 38px; }
+  .exhibit-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+
+  .exhibit-card {
+    background: var(--plinth);
+    border: 1px solid var(--rule);
+    border-radius: 5px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    box-shadow: 0 1px 2px var(--shadow);
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .exhibit-card:hover { border-color: var(--rule-strong); transform: translateY(-2px); }
+  .exhibit-card .room-no {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint);
+  }
+  .exhibit-card h2 { margin: 0; }
+  .exhibit-card p { margin: 0; color: var(--ink-soft); font-size: 14.5px; }
+  .exhibit-card .enter { margin-top: auto; font-size: 13.5px; font-weight: 500; color: var(--accent); }
+
+  .lobby-note {
+    margin-top: 32px; padding-top: 22px;
+    border-top: 1px solid var(--rule);
+    font-size: 14px; color: var(--ink-soft);
+  }
+
+  /* ---------- exhibit layout ---------- */
+
+  .exhibit-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+    gap: 26px;
+    align-items: start;
+  }
+  @media (max-width: 760px) { .exhibit-grid { grid-template-columns: 1fr; } }
+
+  .wall-label {
+    background: var(--plinth);
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 20px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .wall-label .room-no {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint);
+  }
+  .wall-label h2 { margin: 0; }
+  .wall-label p { margin: 0; font-size: 14.5px; color: var(--ink-soft); max-width: none; }
+  .label-block { display: flex; flex-direction: column; gap: 5px; margin: 0; }
+  .label-block dt {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-faint);
+  }
+  .label-block dd { margin: 0; font-size: 14.5px; color: var(--ink); }
+
+  /* ---------- the case ---------- */
+
+  .case {
+    background: var(--plinth);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .case-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; padding: 10px 14px;
+    background: var(--plinth-2);
+    border-bottom: 1px solid var(--rule);
+    flex-wrap: wrap;
+  }
+  .case-bar-left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; min-width: 0; }
+  .crumbs {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11.5px; color: var(--ink-faint);
+    display: flex; gap: 7px; align-items: center; flex-wrap: wrap;
+  }
+  .crumbs button {
+    font: inherit; background: none; border: 0; padding: 0;
+    color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 2px;
+  }
+  .crumbs .here { color: var(--ink); }
+
+  .sample-chip {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--signal); background: var(--signal-soft);
+    border-radius: 100px; padding: 3px 9px; white-space: nowrap;
+  }
+
+  .case-body { padding: 18px; display: flex; flex-direction: column; gap: 14px; }
+  .pane-title { font-size: 13px; font-weight: 600; color: var(--ink-soft); margin: 0; }
+  .pane-note { font-size: 13.5px; color: var(--ink-soft); margin: 0; max-width: 70ch; }
+
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+  .tile {
+    background: var(--ground); border: 1px solid var(--rule); border-radius: 4px;
+    padding: 15px; text-align: left; font: inherit; color: inherit; cursor: pointer;
+    display: flex; flex-direction: column; gap: 5px;
+    transition: border-color .15s ease;
+  }
+  .tile:hover { border-color: var(--accent); }
+  .tile[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); }
+  .tile .tile-name { font-weight: 600; font-size: 14.5px; }
+  .tile .tile-sub { font-size: 13px; color: var(--ink-soft); }
+
+  .rows { display: flex; flex-direction: column; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+  .row {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center;
+    padding: 12px 14px; background: var(--ground);
+    border: 0; border-bottom: 1px solid var(--rule);
+    font: inherit; color: inherit; text-align: left; cursor: pointer;
+    transition: background .12s ease;
+  }
+  .row:last-child { border-bottom: 0; }
+  .row:hover { background: var(--accent-soft); }
+  .row-main { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .row-title { font-size: 14.5px; font-weight: 500; }
+  .row-sub { font-size: 12.5px; color: var(--ink-soft); }
+  .row-meta {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px; color: var(--ink-faint);
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+
+  .table-wrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; }
+  table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+  th {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--ink-faint); background: var(--plinth-2);
+  }
+  td { font-size: 13.5px; background: var(--ground); }
+  td.num { text-align: right; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12.5px; }
+  tbody tr { cursor: pointer; }
+  tbody tr:hover td { background: var(--accent-soft); }
+  tbody tr:last-child td { border-bottom: 0; }
+
+  .gate {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.04em;
+    padding: 2px 7px; border-radius: 100px; border: 1px solid currentColor;
+  }
+  .gate.y { color: var(--pass); }
+  .gate.n { color: var(--fail); }
+  .verdict {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; color: var(--ink-faint);
+  }
+
+  /* live desk session */
+  .sessionbar {
+    display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: baseline;
+    padding: 12px 14px; border: 1px solid var(--rule); border-radius: 4px;
+    background: var(--ground);
+  }
+  .sessionbar .sb-date { font-weight: 600; font-size: 14.5px; }
+  .sessionbar .sb-meta {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11.5px; color: var(--ink-faint);
+  }
+  .status-pill {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 100px;
+    background: var(--signal-soft); color: var(--signal); white-space: nowrap;
+  }
+  .status-pill.ok { background: var(--accent-soft); color: var(--accent); }
+
+  .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; }
+  .stat {
+    border: 1px solid var(--rule); border-radius: 4px; background: var(--ground);
+    padding: 12px 14px; display: flex; flex-direction: column; gap: 2px;
+  }
+  .stat .sv {
+    font-family: "Fraunces", Georgia, serif; font-size: 22px; font-weight: 600; line-height: 1.1;
+  }
+  .stat .sl {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-faint);
+  }
+
+  .ev {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: 0.04em;
+    padding: 2px 7px; border-radius: 3px;
+    background: var(--plinth-2); color: var(--ink-soft); white-space: nowrap;
+  }
+  .ev.in { background: var(--accent-soft); color: var(--accent); }
+  .ev.out { background: var(--plinth-2); color: var(--ink-soft); }
+  .ev.stop { background: var(--signal-soft); color: var(--signal); }
+  td.why { white-space: normal; min-width: 240px; color: var(--ink-soft); font-size: 13px; }
+  tr.halt td { background: var(--signal-soft); }
+  tr.halt td.why { color: var(--signal); font-weight: 500; }
+
+  .corro {
+    margin-top: 14px; padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    display: flex; flex-direction: column; gap: 9px;
+  }
+  .c-kicker {
+    font-size: 10.5px; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .c-stats { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+  .c-stats > div { display: flex; align-items: baseline; gap: 8px; }
+  .c-stats b {
+    font-family: "Fraunces", Georgia, serif; font-size: 21px; font-weight: 600;
+    line-height: 1; color: var(--signal);
+  }
+  .c-stats span { font-size: 12.5px; color: var(--ink-soft); }
+  .corro p { margin: 0; font-size: 13px; line-height: 1.5; color: var(--ink-soft); }
+  .corro .c-src { font-size: 11.5px; color: var(--ink-faint); }
+  .corro .c-src a { color: var(--ink-faint); }
+
+  .shot { margin: 0; }
+  .shot img {
+    width: 100%; max-width: 100%; display: block;
+    border: 1px solid var(--rule); border-radius: 4px;
+    box-shadow: 0 1px 3px var(--shadow);
+  }
+  .leftout {
+    border: 1px dashed var(--rule-strong); border-radius: 4px;
+    padding: 12px 14px; display: flex; flex-direction: column; gap: 6px;
+  }
+  .leftout ul { margin: 0; padding-left: 18px; font-size: 13px; color: var(--ink-soft); }
+  .checklist {
+    border: 1px solid var(--rule); border-radius: 4px; background: var(--ground);
+    padding: 14px 16px; display: flex; flex-direction: column; gap: 8px;
+  }
+  .check-row {
+    display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; gap: 10px;
+    align-items: baseline; font-size: 13.5px;
+  }
+  .check-row .tick { color: var(--pass); font-weight: 700; }
+  .allpass {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--plinth); background: var(--pass);
+    padding: 3px 9px; border-radius: 100px;
+  }
+  #room-ex2 .stills { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  @media (max-width: 560px) { #room-ex2 .stills { grid-template-columns: 1fr 1fr; } }
+
+  /* emphasis */
+  .key {
+    background: var(--accent-soft); color: var(--ink);
+    padding: 1px 5px; border-radius: 3px; font-weight: 600;
+    box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  }
+  .key.warn { background: var(--signal-soft); color: var(--ink); }
+
+  .claims {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 1px; background: var(--rule);
+    border: 1px solid var(--rule); border-radius: 5px; overflow: hidden;
+    margin: 26px 0 30px;
+  }
+  .claim { background: var(--plinth); padding: 15px 16px; display: flex; flex-direction: column; gap: 3px; }
+  .claim b {
+    font-family: "Fraunces", Georgia, serif; font-weight: 600;
+    font-size: 16px; line-height: 1.22; letter-spacing: -0.005em;
+  }
+  .claim span { font-size: 13px; color: var(--ink-soft); line-height: 1.45; }
+  .claim:nth-child(2) b { color: var(--signal); }
+
+  .lead-claim {
+    font-family: "Fraunces", Georgia, serif; font-weight: 500;
+    font-size: 16.5px; line-height: 1.3; color: var(--ink);
+    margin: 0; text-wrap: balance;
+  }
+
+  .stat.warn { border-color: var(--signal); }
+  .stat.warn .sv { color: var(--signal); }
+
+  /* app map + promoted card */
+  .appmap {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px;
+    background: var(--rule); border: 1px solid var(--rule); border-radius: 4px; overflow: hidden;
+  }
+  .apptab { background: var(--ground); padding: 11px 13px; display: flex; flex-direction: column; gap: 2px; }
+  .at-name { font-weight: 600; font-size: 13.5px; }
+  .at-desc { font-size: 12.5px; color: var(--ink-soft); }
+
+  .promoted {
+    border: 1px solid var(--rule); border-left: 3px solid var(--accent);
+    border-radius: 4px; background: var(--ground); padding: 15px;
+    display: flex; flex-direction: column; gap: 5px;
+  }
+  .pr-name { font-weight: 600; font-size: 15px; }
+  .pr-meta { font-size: 13px; color: var(--ink-soft); }
+  .pr-params {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11.5px; color: var(--ink-faint);
+  }
+
+  /* pipeline */
+  .stages { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+  .stage {
+    flex: 1 0 auto; min-width: 112px;
+    background: var(--ground); border: 1px solid var(--rule); border-radius: 4px;
+    padding: 12px 11px; font: inherit; color: inherit; text-align: left; cursor: pointer;
+    display: flex; flex-direction: column; gap: 4px;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .stage:hover { border-color: var(--accent); }
+  .stage[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); }
+  .stage .stage-no {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: 0.08em; color: var(--ink-faint);
+  }
+  .stage .stage-name { font-size: 13.5px; font-weight: 500; line-height: 1.25; }
+
+  .stills { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+  .still { display: flex; flex-direction: column; gap: 7px; }
+  .still img {
+    width: 100%; max-width: 100%; display: block;
+    border: 1px solid var(--rule); border-radius: 4px; background: #0d0f0e;
+  }
+  .still figcaption { font-size: 12.5px; color: var(--ink-faint); margin: 0; }
+  figure { margin: 0; }
+
+  .scorecard { display: flex; flex-direction: column; gap: 10px; }
+  .score-head {
+    display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+    padding-bottom: 10px; border-bottom: 1px solid var(--rule);
+  }
+  .score-num {
+    font-family: "Fraunces", Georgia, serif; font-size: 34px; font-weight: 600;
+    line-height: 1; color: var(--signal);
+  }
+  .score-of { font-size: 13.5px; color: var(--ink-soft); }
+  .blocked {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--signal); background: var(--signal-soft);
+    padding: 3px 9px; border-radius: 100px;
+  }
+  .dims { display: flex; flex-direction: column; gap: 7px; }
+  .dim { display: grid; grid-template-columns: minmax(0, 1fr) 46px; gap: 10px; align-items: center; font-size: 13.5px; }
+  .dim .bar { grid-column: 1 / -1; height: 4px; border-radius: 2px; background: var(--rule); overflow: hidden; }
+  .dim .bar span { display: block; height: 100%; background: var(--accent); }
+  .dim .dv {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12.5px; text-align: right; color: var(--ink-soft); font-variant-numeric: tabular-nums;
+  }
+
+  /* boundary */
+  .boundary {
+    border: 1px solid var(--signal); border-left: 3px solid var(--signal);
+    background: var(--signal-soft); border-radius: 4px; padding: 20px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .boundary .b-kicker {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--signal);
+  }
+  .boundary h3 { font-size: 16px; margin: 0; font-family: "Fraunces", Georgia, serif; font-weight: 500; }
+  .boundary p { margin: 0; font-size: 14.5px; color: var(--ink-soft); max-width: 60ch; }
+  .boundary-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2px; }
+
+  .exhibit-grid > div > .sidepanel, #room-ex0 .sidepanel, #room-ex1 .sidepanel { margin-top: 22px; }
+  @media (min-width: 1180px) { #room-ex0 .sidepanel, #room-ex1 .sidepanel { margin-top: 0; } }
+
+  /* wide screens: three columns, nothing stacked below the fold */
+  @media (min-width: 1180px) {
+    .exhibit-grid {
+      grid-template-columns: 250px minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: 20px;
+    }
+    .exhibit-grid > div { display: contents; }
+    .wall-label { grid-column: 1; grid-row: 1; }
+    .case { grid-column: 2; grid-row: 1; }
+    .sidepanel { grid-column: 3; grid-row: 1; }
+    #room-ex2 .exhibit-grid { grid-template-columns: 300px minmax(0, 1fr); }
+    #room-ex2 .exhibit-grid > div { display: block; }
+    #room-ex2 .wall-label { grid-column: 1; grid-row: auto; }
+    #room-ex2 .decision { grid-column: auto; grid-row: auto; margin-top: 22px; }
+    #room-ex2 .wall-label { grid-row: 1; }
+  }
+
+  /* timeline */
+  .sidepanel {
+    background: var(--plinth);
+    border: 1px solid var(--rule); border-radius: 4px; padding: 16px 18px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .arcbody ol { list-style: none; margin: 0; padding: 0 0 0 22px; position: relative; }
+  .arcbody ol::before {
+    content: ""; position: absolute; left: 4px; top: 6px; bottom: 6px;
+    width: 1px; background: var(--rule-strong);
+  }
+  .arcbody li { position: relative; padding-bottom: 14px; }
+  .arcbody li:last-child { padding-bottom: 0; }
+  .arcbody li::before {
+    content: ""; position: absolute; left: -22px; top: 5px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--plinth); border: 1.5px solid var(--rule-strong);
+  }
+  .arcbody li.turn::before { border-color: var(--signal); background: var(--signal); }
+  .arcbody li.end::before { border-color: var(--signal); background: var(--plinth); }
+  .arcbody li.after::before { border-color: var(--accent); background: var(--accent); }
+  .arcbody li.after .what { color: var(--accent); }
+  .arcbody .when {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--ink-faint); display: block;
+  }
+  .arcbody .what { font-weight: 600; font-size: 14.5px; display: block; margin: 1px 0 2px; }
+  .arcbody li.turn .what, .arcbody li.end .what { color: var(--signal); }
+  .arcbody p { margin: 0; font-size: 13.5px; line-height: 1.48; color: var(--ink-soft); max-width: none; }
+  .arcbody li.turn p, .arcbody li.end p {
+    background: var(--signal-soft); color: var(--ink);
+    padding: 9px 11px; border-radius: 4px; margin-top: 4px;
+  }
+
+  .decision {
+    background: var(--plinth);
+    border: 1px solid var(--rule); border-radius: 4px; padding: 18px 20px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .decision .d-kicker {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent);
+  }
+  .decision p { margin: 0; font-size: 13.5px; line-height: 1.5; max-width: none; }
+  .dtabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 4px; }
+  .dtab {
+    font: inherit; font-size: 12.5px; font-weight: 500;
+    padding: 6px 12px; border-radius: 100px; cursor: pointer;
+    border: 1px solid var(--rule-strong); background: transparent; color: var(--ink-soft);
+  }
+  .dtab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: var(--plinth); }
+  .dpanel { display: flex; flex-direction: column; gap: 10px; }
+
+  .decision ul.tried, .sidepanel ul.tried {
+    margin: 2px 0; padding-left: 20px;
+    display: flex; flex-direction: column; gap: 5px;
+    font-size: 14.5px; color: var(--ink-soft); max-width: 66ch;
+  }
+  .decision ul.tried li::marker, .sidepanel ul.tried li::marker { color: var(--ink-faint); }
+
+  .decision .pull, .sidepanel .pull {
+    font-family: "Fraunces", Georgia, serif; font-weight: 600;
+    font-size: 17px; line-height: 1.28;
+    margin: 6px 0 0; padding-top: 12px; border-top: 1px solid var(--rule);
+    text-wrap: balance; color: var(--ink);
+  }
+
+  /* exit */
+  .exit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 28px; }
+  .exit-panel {
+    background: var(--plinth); border: 1px solid var(--rule); border-radius: 4px;
+    padding: 20px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .exit-panel p { margin: 0; font-size: 14.5px; color: var(--ink-soft); max-width: none; }
+  .taglist { display: flex; flex-wrap: wrap; gap: 7px; }
+  .tag {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 11.5px;
+    border: 1px solid var(--rule-strong); border-radius: 100px; padding: 4px 10px; color: var(--ink-soft);
+  }
+
+  /* wayfinding */
+  .wayfinding {
+    position: sticky; bottom: 0; z-index: 20;
+    background: var(--plinth); border-top: 1px solid var(--rule);
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    gap: 12px; padding: 12px 20px; margin-top: 44px;
+  }
+  .way-left { justify-self: start; }
+  .way-right { justify-self: end; }
+  .way-count {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--ink-faint); white-space: nowrap;
+  }
+
+  @media (max-width: 560px) {
+    main { padding-block: 30px 12px; }
+    .signage { padding: 10px 16px; grid-template-columns: 1fr auto; }
+    .sign-room { display: none; }
+    body { font-size: 14.5px; }
+    .wayfinding { padding: 10px 16px; grid-template-columns: 1fr 1fr; }
+    .way-count { display: none; }
+  }
+
+  /* ===== image-led redesign ===== */
+  .lobby-head { margin-bottom: 0; }
+  .claims { margin: 22px 0 24px; }
+  .claim { flex-direction: row; align-items: center; gap: 14px; }
+  .claim b { font-size: 40px; line-height: 1; color: var(--accent); min-width: 34px; }
+  .claim.warnc b { color: var(--signal); }
+  .claim:nth-child(2) b { color: var(--signal); }
+
+  .exhibit-card { padding: 0; overflow: hidden; gap: 0; }
+  .card-media {
+    display: block; height: 168px; overflow: hidden; position: relative;
+    background: var(--plinth-2); border-bottom: 1px solid var(--rule);
+  }
+  .card-media img, .card-media video {
+    width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block;
+    transition: transform .35s ease;
+  }
+  .dark-media { background: #0d1210; }
+  .dark-media video, .dark-media img { object-position: center; }
+  .exhibit-card:hover .card-media img, .exhibit-card:hover .card-media video { transform: scale(1.04); }
+  .chart-media { display: flex; flex-direction: column; justify-content: center; padding: 14px 18px; gap: 8px; }
+  .card-text { display: flex; flex-direction: column; gap: 8px; padding: 18px 20px 20px; flex: 1; }
+  .exhibit-card h2 { font-size: 20px; }
+
+  /* bar charts (html) */
+  .bars { display: flex; flex-direction: column; gap: 9px; width: 100%; }
+  .bar-row { display: flex; flex-direction: column; gap: 3px; }
+  .bar-lab { display: flex; justify-content: space-between; gap: 8px; font-size: 12.5px; color: var(--ink-soft); line-height: 1.25; }
+  .bar-lab b { color: var(--ink); font-variant-numeric: tabular-nums; font-weight: 700; }
+  .bar-track { position: relative; height: 14px; }
+  .bar-track::before { content: ""; position: absolute; top: -3px; bottom: -3px; left: 50%; width: 1px; background: var(--rule-strong); }
+  .bar {
+    position: absolute; top: 0; bottom: 0; border-radius: 0;
+    transform-origin: left center; animation: grow .7s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .bar.gain { background: var(--gain); left: 50%; border-radius: 0 4px 4px 0; }
+  .bar.loss { background: var(--loss); right: 50%; border-radius: 4px 0 0 4px; transform-origin: right center; }
+  @keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .bars.big .bar-track { height: 20px; }
+  .bars.big .bar-lab { font-size: 13px; }
+  .bars.big .bar-lab b { font-size: 16px; font-family: "Fraunces", Georgia, serif; }
+  .viz { display: flex; flex-direction: column; gap: 10px; }
+  .viz-title { font-size: 12px; font-weight: 600; color: var(--ink-soft); margin: 0; }
+  .viz-foot { font-size: 11.5px; color: var(--ink-faint); margin: 0; }
+  .hbars { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px 10px; align-items: center; }
+  .hbars .hl { font-size: 13px; color: var(--ink); white-space: nowrap; }
+  .hbars .ht { height: 22px; background: var(--track); border-radius: 0 4px 4px 0; position: relative; }
+  .hbars .hb { position: absolute; left: 0; top: 0; bottom: 0; background: var(--gain); border-radius: 0 4px 4px 0; transform-origin: left center; animation: grow .7s cubic-bezier(.2,.7,.2,1) both; }
+  .hbars .hv { font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--ink); text-align: right; }
+  .hbars .na { color: var(--ink-faint); font-weight: 400; }
+  .hbars .ht.empty { background: repeating-linear-gradient(45deg, var(--track) 0 6px, transparent 6px 12px); }
+  .tip {
+    position: fixed; z-index: 50; pointer-events: none;
+    background: var(--ink); color: var(--plinth); font-size: 12px; line-height: 1.35;
+    padding: 6px 9px; border-radius: 4px; max-width: 240px; box-shadow: 0 4px 14px var(--shadow);
+  }
+  [data-tip] { cursor: default; }
+
+  /* room 1 */
+  .mini-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .mini-stats > div {
+    background: var(--ground); border: 1px solid var(--rule); border-radius: 4px;
+    padding: 10px 11px; display: flex; flex-direction: column; gap: 2px;
+  }
+  .mini-stats b { font-family: "Fraunces", Georgia, serif; font-size: 28px; line-height: 1; color: var(--accent); }
+  .mini-stats .warn b { color: var(--signal); }
+  .mini-stats span { font-size: 11.5px; line-height: 1.3; color: var(--ink-soft); }
+  .facts { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; margin: 0; font-size: 12.5px; }
+  .facts dt { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-faint); padding-top: 2px; }
+  .facts dd { margin: 0; color: var(--ink); }
+  .wall-label { gap: 14px; }
+
+  .icon-cards { display: grid; gap: 10px; }
+  .icon-card {
+    display: grid; grid-template-columns: 38px 1fr; gap: 12px; align-items: center;
+    background: var(--ground); border: 1px solid var(--rule); border-radius: 4px; padding: 11px 12px;
+  }
+  .icon-card svg {
+    width: 38px; height: 38px; padding: 8px; border-radius: 50%;
+    background: var(--accent-soft); stroke: var(--accent); fill: none; stroke-width: 1.8;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .icon-card.warn svg { background: var(--signal-soft); stroke: var(--signal); }
+  .icon-card b { display: block; font-size: 14px; }
+  .icon-card span { display: block; font-size: 12.5px; color: var(--ink-soft); line-height: 1.4; }
+
+  .thumbtiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .thumbtile {
+    font: inherit; color: inherit; text-align: left; cursor: pointer; padding: 0; overflow: hidden;
+    background: var(--ground); border: 1px solid var(--rule); border-radius: 4px; display: flex; flex-direction: column;
+  }
+  .thumbtile img { width: 100%; height: 62px; object-fit: cover; object-position: top left; display: block; border-bottom: 1px solid var(--rule); opacity: .75; }
+  .thumbtile span { font-size: 12.5px; font-weight: 600; padding: 6px 9px; }
+  .thumbtile:hover { border-color: var(--accent); }
+  .thumbtile[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  .thumbtile[aria-pressed="true"] img { opacity: 1; }
+  .shot img { cursor: zoom-in; }
+  .shot.zoom { position: fixed; inset: 0; z-index: 60; background: rgba(10,12,11,.82); display: flex; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; }
+  .shot.zoom img { max-height: 100%; width: auto; cursor: zoom-out; }
+
+  /* room 2 */
+  .tiles.four { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  @media (max-width: 640px) { .tiles.four { grid-template-columns: 1fr 1fr; } }
+  .tiles.four .tile { padding: 10px 11px; }
+  .tiles.four .tile-name { font-size: 13.5px; }
+  .tiles.four .tile-sub { font-size: 11.5px; }
+  .live-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--gain); margin-right: 6px; vertical-align: 1px; box-shadow: 0 0 0 3px color-mix(in srgb, var(--gain) 25%, transparent); }
+
+  /* room 3 */
+  .phone {
+    align-self: center; width: 180px; aspect-ratio: 9 / 16; border-radius: 22px; overflow: hidden;
+    border: 6px solid #111; background: #000; box-shadow: 0 8px 24px var(--shadow);
+  }
+  .phone video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .phone-cap { font-size: 11.5px !important; color: var(--ink-faint) !important; text-align: center; margin-top: -6px !important; }
+  .flow { display: flex; align-items: stretch; gap: 8px; flex-wrap: wrap; }
+  .flow > div {
+    flex: 1 1 120px; background: var(--ground); border: 1px solid var(--rule); border-radius: 4px;
+    padding: 12px; display: flex; flex-direction: column; gap: 4px;
+  }
+  .flow b { font-size: 14px; }
+  .flow span { font-size: 12px; color: var(--ink-soft); }
+  .flow .step { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 10.5px; letter-spacing: .08em; color: var(--accent); }
+  .flow .arrow { flex: 0 0 auto; background: none; border: 0; padding: 0; justify-content: center; color: var(--ink-faint); font-size: 18px; }
+  .counted { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: center; }
+  .counted .outlets { display: flex; flex-direction: column; gap: 6px; }
+  .counted .chip { font-size: 12.5px; border: 1px solid var(--rule-strong); border-radius: 100px; padding: 4px 10px; text-align: center; background: var(--ground); }
+  .counted .chip.src { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+  .counted .eq { font-family: "Fraunces", Georgia, serif; font-size: 34px; color: var(--accent); text-align: center; line-height: 1; }
+  .counted .eq small { display: block; font-family: "IBM Plex Sans", sans-serif; font-size: 11.5px; color: var(--ink-soft); margin-top: 4px; }
+
+  /* exit */
+  .exit-thumbs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 22px; }
+  @media (max-width: 640px) { .exit-thumbs { grid-template-columns: 1fr; } }
+  .exit-thumbs button {
+    font: inherit; color: inherit; cursor: pointer; padding: 0; overflow: hidden; text-align: left;
+    background: var(--plinth); border: 1px solid var(--rule); border-radius: 5px; display: flex; flex-direction: column;
+    transition: transform .15s ease, border-color .15s ease;
+  }
+  .exit-thumbs button:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .exit-thumbs .card-media { height: 120px; }
+  .exit-thumbs button > span:last-child { padding: 10px 14px; font-weight: 600; font-size: 14px; }
+  .exit-thumbs button > span:last-child::after { content: " ↺"; color: var(--accent); }
+  .exit-grid { margin-top: 18px; }
+
+  .wall-label .viz-title { font-size: 12.5px; font-family: inherit; color: var(--ink-soft); font-weight: 600; }
+  .wall-label .viz-foot { font-size: 11.5px; color: var(--ink-faint); }
+  .wall-label .lead-claim { font-size: 16px; color: var(--ink); }
+  .mini-stats b { font-size: 25px; }
+  .mini-stats span { font-size: 11px; }
+  #room-ex2 .still img { aspect-ratio: 1 / 1; object-fit: cover; object-position: center 42%; height: auto; }
+  .exit-thumbs .dark-media img { object-position: center 40%; }
+  .card-media { height: 156px; }
+  .claims { margin: 18px 0 20px; }
+  .claim { padding: 12px 16px; }
+  .claim b { font-size: 36px; }
+  .lobby-head h1 { margin-bottom: 8px; }
+  .arcbody li { padding-bottom: 9px; }
+  .arcbody li.turn p, .arcbody li.end p { padding: 6px 10px; }
+  .sidepanel { gap: 10px; }
+
+  .watch { display: grid; grid-template-columns: repeat(2, minmax(0, 236px)); justify-content: center; gap: 28px; }
+  @media (max-width: 560px) { .watch { grid-template-columns: minmax(0, 280px); } }
+  .watch-card { display: flex; flex-direction: column; gap: 8px; }
+  .watch-card video {
+    width: 100%; aspect-ratio: 9 / 16; object-fit: contain;
+    background: #000; border-radius: 6px; display: block;
+  }
+  .vol {
+    display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-soft);
+    background: var(--ground); border: 1px solid var(--rule); border-radius: 100px; padding: 5px 12px;
+  }
+  .vol input { flex: 1; accent-color: var(--accent); min-width: 0; }
+  .vol-pct { font-variant-numeric: tabular-nums; min-width: 34px; text-align: right; }
+  .vol-lab { font-weight: 600; }
+  .watch-title { margin: 0; font-size: 14px; font-weight: 600; line-height: 1.35; color: var(--ink); }
+  .watch-meta { margin: 0; font-size: 12px; color: var(--ink-faint); }
+  .watch-warn { margin: 0; font-size: 12px; color: var(--signal); }
+
+  /* room 4 */
+  #room-ex3 .exhibit-grid > div { display: block; }
+  @media (min-width: 1180px) {
+    #room-ex3 .exhibit-grid { grid-template-columns: 300px minmax(0, 1fr); }
+    #room-ex3 .wall-label { grid-column: 1; grid-row: 1; }
+  }
+  .darkthumb img { background: #1e2a6e; object-fit: cover; object-position: center; }
+  .globe-media { background: #232f78; }
+  .globe-media video { object-fit: cover; object-position: center 40%; }
+  .globe-feature { display: grid; grid-template-columns: minmax(0, 400px) minmax(0, 1fr); gap: 16px; align-items: start; }
+  @media (max-width: 760px) { .globe-feature { grid-template-columns: 1fr; } }
+  .globe-stage { position: relative; border-radius: 6px; overflow: hidden; background: #232f78; }
+  .globe-stage video { display: block; width: 100%; height: auto; }
+  .globe-badge {
+    position: absolute; left: 10px; top: 10px; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: .07em; text-transform: uppercase; color: #f4e3b0;
+    background: rgba(10, 16, 50, .6); border: 1px solid rgba(195, 151, 29, .7); border-radius: 100px; padding: 3px 9px;
+  }
+  .globe-points { gap: 8px; }
+  .globe-points .icon-card { grid-template-columns: 30px 1fr; padding: 9px 11px; }
+  .icon-card .num-dot {
+    width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center;
+    background: #c3971d; color: #1b2160; font-weight: 700; font-size: 14px;
+  }
+  .beforeafter { display: grid; grid-template-columns: minmax(0, 300px) auto minmax(0, 300px); justify-content: center; gap: 14px; align-items: center; }
+  @media (max-width: 560px) { .beforeafter { grid-template-columns: 1fr; } .ba-arrow { transform: rotate(90deg); } }
+  .ba-side { margin: 0; position: relative; display: flex; flex-direction: column; gap: 8px; }
+  .ba-side img, .ba-side video { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 6px; background: #232f78; display: block; }
+  .ba-side figcaption { font-size: 13px; color: var(--ink-soft); }
+  .ba-tag {
+    position: absolute; left: 10px; top: 10px; z-index: 1; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; padding: 3px 9px; border-radius: 100px;
+    background: rgba(255,255,255,.85); color: #1b201d;
+  }
+  .ba-side.after .ba-tag { background: #c3971d; color: #1b2160; font-weight: 700; }
+  .ba-arrow { font-size: 26px; color: var(--accent); }
+  .siteshots { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 12px; align-items: start; }
+  .siteshots-side { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  .phone-shot img { max-height: 220px; width: auto; margin: 0 auto; }
+  .exit-thumbs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  @media (max-width: 900px) { .exit-thumbs { grid-template-columns: 1fr 1fr; } }
+  @media (prefers-reduced-motion: reduce) { .bar, .hb { animation: none; } }
+</style>
+
+<header class="signage">
+  <div class="sign-name">Joseph Chan Colin</div>
+  <div class="sign-room mono" id="room-label">Entrance</div>
+  <div class="sign-actions">
+    <button class="btn btn-quiet" type="button" data-goto="lobby">Overview</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===================== LOBBY ===================== -->
+  <section class="room" id="room-lobby">
+    <div class="lobby-head">
+      <p class="eyebrow">Project walkthrough</p>
+      <h1>Four projects I designed, built and run</h1>
+      <p class="lede">Built with AI coding tools — and what I had to work out before I could trust each one.</p>
+    </div>
+
+    <div class="claims">
+      <div class="claim"><b>4</b><span>projects built and used on real work</span></div>
+      <div class="claim warnc"><b>6</b><span>trading searches — none passed, so I shut trading down</span></div>
+      <div class="claim"><b>2</b><span>independent sources behind every published fact</span></div>
+    </div>
+
+    <div class="exhibit-cards">
+      <button class="exhibit-card" type="button" data-goto="ex0">
+        <span class="card-media"><img src="sec-today.jpg" alt="The compliance system's Today screen" loading="lazy"></span>
+        <span class="card-text">
+          <span class="room-no mono">Room 1</span>
+          <h2>Corporate compliance system</h2>
+          <p>Deadlines, documents and client screening — and it can't delete a file.</p>
+          <span class="enter">Enter room →</span>
+        </span>
+      </button>
+
+      <button class="exhibit-card" type="button" data-goto="ex1">
+        <span class="card-media chart-media" id="lobby-chart"></span>
+        <span class="card-text">
+          <span class="room-no mono">Room 2</span>
+          <h2>Stock screening → ETF tracker</h2>
+          <p>Simply holding the shares beat every strategy I tested.</p>
+          <span class="enter">Enter room →</span>
+        </span>
+      </button>
+
+      <button class="exhibit-card" type="button" data-goto="ex2">
+        <span class="card-media dark-media"><video src="tat-clip.mp4" poster="tat-poster.jpg" muted autoplay loop playsinline aria-label="Clip from a published video: a satellite map flying from South America to the Caribbean"></video></span>
+        <span class="card-text">
+          <span class="room-no mono">Room 3</span>
+          <h2>News explainer channel</h2>
+          <p>Every fact checked against two outlets, then published.</p>
+          <span class="enter">Enter room →</span>
+        </span>
+      </button>
+      <button class="exhibit-card" type="button" data-goto="ex3">
+        <span class="card-media dark-media globe-media"><video src="gal-globe.mp4" poster="gal-globe-poster.jpg" muted autoplay loop playsinline aria-label="The website's animated gold globe touring routes to Singapore"></video></span>
+        <span class="card-text">
+          <span class="room-no mono">Room 4</span>
+          <h2>Company website</h2>
+          <p>A live site built around a globe drawn in code.</p>
+          <span class="enter">Enter room →</span>
+        </span>
+      </button>
+    </div>
+
+    <div class="lobby-note">
+      <p style="margin:0">Looking for qualifications instead? <a href="https://jcczkl.github.io/Certificates/" target="_top" rel="noopener">My verified certificates are here ↗</a></p>
+    </div>
+  </section>
+
+  <!-- ===================== ROOM 1: COMPLIANCE SYSTEM ===================== -->
+  <section class="room" id="room-ex0" hidden>
+    <div class="exhibit-grid">
+
+      <aside class="wall-label">
+        <span class="room-no mono">Room 1 of 4</span>
+        <h2>Corporate compliance system</h2>
+        <p class="lead-claim">A compliance system that can't miss a deadline or lose a client's file.</p>
+        <div class="mini-stats">
+          <div><b>2.1M</b><span>ACRA company records it checks against</span></div>
+          <div class="warn"><b>0</b><span>ways to delete a client's file</span></div>
+          <div><b>135</b><span>automated test files</span></div>
+          <div><b>3×</b><span>full test passes before any release</span></div>
+        </div>
+        <dl class="facts">
+          <dt>Role</dt><dd>Designed it, set its rules, test it on real work</dd>
+          <dt>Status</dt><dd>In use, still being built</dd>
+          <dt>Built with</dt><dd>TypeScript, Electron, encrypted SQLite</dd>
+        </dl>
+      </aside>
+
+      <div>
+        <div class="case">
+          <div class="case-bar">
+            <div class="case-bar-left">
+              <nav class="crumbs mono" id="ex0-crumbs" aria-label="Where you are"></nav>
+            </div>
+            <span class="sample-chip">Practice copy · fictional data</span>
+          </div>
+          <div class="case-body" id="ex0-body"></div>
+        </div>
+
+        <div class="sidepanel">
+          <div class="dtabs" role="tablist">
+            <button type="button" class="dtab" data-panel="sec-rules" aria-selected="true">Rules it can't break</button>
+            <button type="button" class="dtab" data-panel="sec-tests" aria-selected="false">How it's tested</button>
+            <button type="button" class="dtab" data-panel="sec-decision" aria-selected="false">A rule I set</button>
+          </div>
+
+          <div class="dpanel" id="dp-sec-rules">
+            <div class="icon-cards">
+              <div class="icon-card warn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/><path d="M3 3l18 18"/></svg><div><b>Never deletes a file</b><span>It can only add. Every change is a new, dated file.</span></div></div>
+              <div class="icon-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M12 11v6M9 14h6"/></svg><div><b>Every action leaves a record</b><span>The client's folder is a full history, even without the app.</span></div></div>
+              <div class="icon-card"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><div><b>No client data in the code</b><span>Every change is scanned for client names and IDs, and refused if one appears.</span></div></div>
+              <div class="icon-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg><div><b>No tipping off</b><span>Letters never reveal screening results or risk ratings.</span></div></div>
+            </div>
+          </div>
+
+          <div class="dpanel" id="dp-sec-tests" hidden>
+            <ul class="tried">
+              <li>Deadlines, files, templates and encryption are tested almost line by line.</li>
+              <li>Testing uses a separate copy of fictional companies, marked <b>TEST</b> on every page.</li>
+              <li>Every upgrade: back up, verify, install, confirm record counts match — or restore and stop.</li>
+            </ul>
+            <p class="pull">A new version ships only after the full test suite passes three times in a row.</p>
+          </div>
+
+          <div class="dpanel" id="dp-sec-decision" hidden>
+            <p class="pull">A calculated deadline nobody has checked is a guess.</p>
+            <p>Each rule shows its ACRA source and stays marked <b>Not yet</b> until a person checks it against a real filing.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== ROOM 2: SCREENING ===================== -->
+  <section class="room" id="room-ex1" hidden>
+    <div class="exhibit-grid">
+
+      <aside class="wall-label">
+        <span class="room-no mono">Room 2 of 4</span>
+        <h2>Stock screening → ETF tracker</h2>
+        <p class="lead-claim">I built a trading system, tested it honestly, and found that simply holding the shares beat it.</p>
+        <div class="viz" id="beat-chart"></div>
+        <dl class="facts">
+          <dt>Role</dt><dd>Designed it, tested its assumptions</dd>
+          <dt>Status</dt><dd>Trading closed Sep 2026 · now an ETF tracker</dd>
+          <dt>Built with</dt><dd>Python, pandas, Streamlit</dd>
+        </dl>
+      </aside>
+
+      <div>
+        <div class="case">
+          <div class="case-bar">
+            <div class="case-bar-left">
+              <button class="btn btn-sm" type="button" id="ex1-back" hidden>← Back</button>
+              <nav class="crumbs mono" id="ex1-crumbs" aria-label="Where you are"></nav>
+            </div>
+            <span class="sample-chip">Real records · Sep 2026</span>
+          </div>
+          <div class="case-body" id="ex1-body"></div>
+        </div>
+
+        <div class="sidepanel">
+          <div class="dtabs" role="tablist">
+            <button type="button" class="dtab" data-panel="arc" aria-selected="true">How it went</button>
+            <button type="button" class="dtab" data-panel="tried" aria-selected="false">What I tried next</button>
+            <button type="button" class="dtab" data-panel="method" aria-selected="false">How I tested it</button>
+            <button type="button" class="dtab" data-panel="why" aria-selected="false">Why nothing worked</button>
+          </div>
+
+          <div class="dpanel arcbody" id="dp-arc">
+          <ol>
+            <li><span class="when">Aug 2026</span><span class="what">Northstar — the daily screen</span><p>Fixed rules over large US shares. Every decision checkable.</p></li>
+            <li><span class="when">9 Sep</span><span class="what">Live Desk added</span><p>A same-day strategy passed 27 of 29 tests on unseen data.</p></li>
+            <li><span class="when">Mid-Sep</span><span class="what">Running on a practice account</span><p>Real orders, pretend money.</p></li>
+            <li class="turn"><span class="when">18 Sep</span><span class="what">The first doubt</span><p>A rebuilt test showed it relied on <span class="key warn">a number only known after the market closed.</span></p></li>
+            <li class="turn"><span class="when">19 Sep</span><span class="what">Confirmed, twice</span><p>Without that number, profit became loss — and real fees were four times what was assumed.</p></li>
+            <li class="end"><span class="when">21 Sep</span><span class="what">Closed</span><p><span class="key warn">I shut it down.</span></p></li>
+            <li class="after"><span class="when">30 Sep</span><span class="what">Became an ETF tracker</span><p>Seven markets, the US and six in Asia.</p></li>
+          </ol>
+          </div>
+
+          <div class="dpanel" id="dp-tried" hidden>
+            <p>I ran five more searches — over 650 rule sets, fund-switching schemes and a self-learning model.</p>
+            <p>None passed. The closest failed a fairness check: random decisions did just as well.</p>
+            <p class="pull">Simply holding a market fund beat everything I built.</p>
+            <div class="corro">
+              <span class="c-kicker mono">Someone else, at far larger scale</span>
+              <div class="c-stats">
+                <div><b>10,500</b><span>strategies tested</span></div>
+                <div><b>99%</b><span>beaten by random picks</span></div>
+              </div>
+              <p class="c-src">A trading YouTuber's own published figures, which argue against his video's framing. <a href="https://youtu.be/XLMG6-SATRk" target="_top" rel="noopener">Source ↗</a></p>
+            </div>
+          </div>
+
+          <div class="dpanel" id="dp-method" hidden>
+            <ul class="tried">
+              <li>Pass criteria written down and saved <b>before</b> any search ran — never lowered after.</li>
+              <li>Every rule had to beat two fairness checks: random trades, and its own decisions scrambled.</li>
+            </ul>
+            <p class="pull">Decide what counts as success after seeing the results, and almost anything looks like a win.</p>
+          </div>
+
+          <div class="dpanel" id="dp-why" hidden>
+            <p>Simple patterns in public price data are the most crowded corner of the market. Firms with more of these found them first:</p>
+            <ul class="tried">
+              <li><b>Speed</b> — servers inside the exchange.</li>
+              <li><b>Breadth</b> — thousands of instruments, far more data.</li>
+              <li><b>Scale</b> — enormous capital on thin, known edges.</li>
+            </ul>
+            <p class="pull">A clean negative from a careful process is the process working.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== ROOM 3: NEWS CHANNEL ===================== -->
+  <section class="room" id="room-ex2" hidden>
+    <div class="exhibit-grid">
+
+      <aside class="wall-label">
+        <span class="room-no mono">Room 3 of 4</span>
+        <h2>News explainer channel</h2>
+        <p class="lead-claim">A news channel where every fact is confirmed by two outlets before it airs.</p>
+        <div class="phone"><video src="tat-clip.mp4" poster="tat-poster.jpg" muted autoplay loop playsinline aria-label="Clip from a published video: a satellite map flying from South America to the Caribbean, with the five island nations marked"></video></div>
+        <p class="phone-cap">From a published video · live on YouTube and TikTok</p>
+        <dl class="facts">
+          <dt>Role</dt><dd>Set the standards, approve or reject every video</dd>
+          <dt>Status</dt><dd>Publishing since Oct 2026</dd>
+          <dt>Built with</dt><dd>Python, Remotion, ElevenLabs, Mapbox</dd>
+        </dl>
+      </aside>
+
+      <div>
+        <div class="case">
+          <div class="case-bar">
+            <div class="case-bar-left">
+              <button class="btn btn-sm" type="button" id="ex2-back" hidden>← Back</button>
+              <nav class="crumbs mono" id="ex2-crumbs" aria-label="Where you are"></nav>
+            </div>
+            <span class="sample-chip">Real channel output · Oct 2026</span>
+          </div>
+          <div class="case-body" id="ex2-body"></div>
+        </div>
+
+        <div class="decision">
+          <span class="d-kicker mono">A decision I had to make</span>
+          <p class="pull">I switched off the automated version.</p>
+          <p>It paid for an AI model on every video, couldn't earn its keep in Singapore, and <span class="key warn">never checked whether a video was actually good.</span> Now each video is built one at a time, and any failed check blocks it outright.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== ROOM 4: COMPANY WEBSITE ===================== -->
+  <section class="room" id="room-ex3" hidden>
+    <div class="exhibit-grid">
+
+      <aside class="wall-label">
+        <span class="room-no mono">Room 4 of 4</span>
+        <h2>Company website</h2>
+        <p class="lead-claim">The website of GAL Global Advisory, the corporate services firm I work at, built around a live globe.</p>
+        <div class="mini-stats">
+          <div><b>21</b><span>markets the globe tours, each linked to Singapore</span></div>
+          <div><b>2</b><span>closing views that together show all 21 routes</span></div>
+          <div><b>11</b><span>screen sizes every page is tested on</span></div>
+          <div><b>Live</b><span>since 15 Sep 2026</span></div>
+        </div>
+        <dl class="facts">
+          <dt>Role</dt><dd>Designed, built and deployed it</dd>
+          <dt>Status</dt><dd>Live at <a href="https://gal-global.com" target="_top" rel="noopener">gal-global.com ↗</a></dd>
+          <dt>Built with</dt><dd>HTML, CSS, JavaScript; no frameworks</dd>
+        </dl>
+      </aside>
+
+      <div>
+        <div class="case">
+          <div class="case-bar">
+            <div class="case-bar-left">
+              <nav class="crumbs mono" id="ex3-crumbs" aria-label="Where you are"></nav>
+            </div>
+            <span class="sample-chip">Live site · Oct 2026</span>
+          </div>
+          <div class="case-body" id="ex3-body"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== EXIT ===================== -->
+  <section class="room" id="room-exit" hidden>
+    <p class="eyebrow">End of the walkthrough</p>
+    <h1>Thanks for walking through</h1>
+
+    <div class="exit-thumbs">
+      <button type="button" data-goto="ex0"><span class="card-media"><img src="sec-company.jpg" alt="" loading="lazy"></span><span>Compliance system</span></button>
+      <button type="button" data-goto="ex1"><span class="card-media chart-media" id="exit-chart"></span><span>Screening → ETF tracker</span></button>
+      <button type="button" data-goto="ex2"><span class="card-media dark-media"><img src="tat-map.jpg" alt="" loading="lazy"></span><span>News channel</span></button>
+      <button type="button" data-goto="ex3"><span class="card-media dark-media"><img src="gal-globe-poster.jpg" alt="" loading="lazy"></span><span>Company website</span></button>
+    </div>
+
+    <div class="exit-grid">
+      <div class="exit-panel">
+        <h3>What I claim</h3>
+        <p>I'm not a trained software engineer. I design the systems, set the rules, review what comes back — and <span class="key">I'm the one who finds the defects.</span></p>
+      </div>
+
+      <div class="exit-panel">
+        <h3>Tools I work with</h3>
+        <div class="taglist">
+          <span class="tag">TypeScript</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Electron</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">Python</span>
+          <span class="tag">pandas</span>
+          <span class="tag">Streamlit</span>
+          <span class="tag">Remotion</span>
+          <span class="tag">Playwright</span>
+          <span class="tag">ffmpeg</span>
+          <span class="tag">Git</span>
+          <span class="tag">Claude Code</span>
+        </div>
+      </div>
+
+      <div class="exit-panel">
+        <h3>Elsewhere</h3>
+        <p><a href="https://jcczkl.github.io/Certificates/" target="_top" rel="noopener">Verified certificates ↗</a></p>
+        <p><a href="https://www.linkedin.com/in/joseph-chan-colin" target="_top" rel="noopener">LinkedIn ↗</a></p>
+        <p>josephchancolin@gmail.com</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wayfinding">
+  <div class="way-left"><button class="btn" type="button" id="way-prev">← Previous</button></div>
+  <div class="way-count mono" id="way-count">Start here</div>
+  <div class="way-right"><button class="btn btn-solid" type="button" id="way-next">Next →</button></div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  var ORDER = ["lobby", "ex0", "ex1", "ex2", "ex3", "exit"];
+  var META = {
+    lobby: { label: "Entrance", count: "Start here" },
+    ex0:   { label: "Room 1 — Compliance system", count: "Room 1 of 4" },
+    ex1:   { label: "Room 2 — Screening", count: "Room 2 of 4" },
+    ex2:   { label: "Room 3 — News channel", count: "Room 3 of 4" },
+    ex3:   { label: "Room 4 — Company website", count: "Room 4 of 4" },
+    exit:  { label: "Exit", count: "End of walkthrough" }
+  };
+  var NEXT_LABEL = { lobby: "Enter Room 1 →", ex0: "Next room →", ex1: "Next room →", ex2: "Next room →", ex3: "Finish →", exit: "Back to start ↺" };
+  var PREV_LABEL = { lobby: "← Previous", ex0: "← Overview", ex1: "← Room 1", ex2: "← Room 2", ex3: "← Room 3", exit: "← Room 4" };
+
+  var current = "lobby";
+  function el(id) { return document.getElementById(id); }
+
+  function show(name) {
+    if (typeof stopVideos === "function") { stopVideos(); }
+    if (ORDER.indexOf(name) === -1) { name = "lobby"; }
+    current = name;
+    ORDER.forEach(function (r) { el("room-" + r).hidden = (r !== name); });
+    el("room-label").textContent = META[name].label;
+    el("way-count").textContent = META[name].count;
+    el("way-next").textContent = NEXT_LABEL[name];
+    el("way-prev").textContent = PREV_LABEL[name];
+    el("way-prev").disabled = (name === "lobby");
+    el("way-prev").style.opacity = (name === "lobby") ? "0.35" : "1";
+    window.scrollTo(0, 0);
+  }
+
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest("[data-goto]");
+    if (t) { show(t.getAttribute("data-goto")); }
+  });
+
+  el("way-next").addEventListener("click", function () {
+    var i = ORDER.indexOf(current);
+    show(current === "exit" ? "lobby" : ORDER[i + 1]);
+  });
+  el("way-prev").addEventListener("click", function () {
+    var i = ORDER.indexOf(current);
+    if (i > 0) { show(ORDER[i - 1]); }
+  });
+
+  function makeBoundary(title, body, backText, backFn, showOnward) {
+    var box = document.createElement("div");
+    box.className = "boundary";
+
+    var k = document.createElement("span");
+    k.className = "b-kicker mono";
+    k.textContent = "End of the demonstration";
+
+    var h = document.createElement("h3");
+    h.textContent = title;
+
+    var p = document.createElement("p");
+    p.textContent = body;
+
+    var actions = document.createElement("div");
+    actions.className = "boundary-actions";
+
+    var back = document.createElement("button");
+    back.type = "button";
+    back.className = "btn btn-solid";
+    back.textContent = backText;
+    back.addEventListener("click", backFn);
+    actions.appendChild(back);
+
+    if (showOnward) {
+      var onward = document.createElement("button");
+      onward.type = "button";
+      onward.className = "btn";
+      var nextRoom = ORDER[ORDER.indexOf(current) + 1] || "exit";
+      onward.textContent = (nextRoom === "exit") ? "Finish →" : "Next room →";
+      onward.addEventListener("click", function () { show(nextRoom); });
+      actions.appendChild(onward);
+    }
+
+    box.appendChild(k); box.appendChild(h); box.appendChild(p); box.appendChild(actions);
+    return box;
+  }
+
+  function note(text) {
+    var p = document.createElement("p");
+    p.className = "pane-note";
+    p.textContent = text;
+    return p;
+  }
+
+  /* ---------------- shared: tooltip + charts ---------------- */
+
+  var tip = document.createElement("div");
+  tip.className = "tip"; tip.hidden = true;
+  document.body.appendChild(tip);
+  document.addEventListener("mousemove", function (e) {
+    var t = e.target.closest ? e.target.closest("[data-tip]") : null;
+    if (!t) { tip.hidden = true; return; }
+    tip.textContent = t.getAttribute("data-tip");
+    tip.hidden = false;
+    var x = Math.min(e.clientX + 14, window.innerWidth - tip.offsetWidth - 8);
+    tip.style.left = x + "px";
+    tip.style.top = (e.clientY + 16) + "px";
+  });
+
+  function mk(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) { n.className = cls; }
+    if (text != null) { n.textContent = text; }
+    return n;
+  }
+
+  /* gain/loss bars from a shared zero line */
+  var BEAT = [
+    { label: "Just holding the shares", short: "Just holding", v: 57.1, tip: "Buy and hold, equal weight across the same shares — Jul 2024 to Sep 2026" },
+    { label: "Best same-day strategy found", short: "Best strategy", v: -21.3, tip: "The best result from the intraday searches, judged at realistic trading costs" },
+    { label: "The live strategy, real costs", short: "Live strategy", v: -64.3, tip: "The strategy that traded, re-tested with the real costs and without the after-the-close number" }
+  ];
+
+  function beatBars(container, big) {
+    var wrap = mk("div", "bars" + (big ? " big" : ""));
+    var MAX = 70;
+    BEAT.forEach(function (d, i) {
+      var row = mk("div", "bar-row");
+      row.setAttribute("data-tip", d.tip + ": " + (d.v > 0 ? "+" : "−") + Math.abs(d.v).toFixed(1) + "%");
+      var lab = mk("div", "bar-lab");
+      lab.appendChild(mk("span", null, big ? d.label : d.short));
+      lab.appendChild(mk("b", null, (d.v > 0 ? "+" : "−") + Math.abs(big ? d.v : Math.round(d.v)) + "%"));
+      var tr = mk("div", "bar-track");
+      var bar = mk("div", "bar " + (d.v > 0 ? "gain" : "loss"));
+      bar.style.width = (Math.abs(d.v) / MAX * 50) + "%";
+      bar.style.animationDelay = (i * 0.12) + "s";
+      tr.appendChild(bar);
+      row.appendChild(lab); row.appendChild(tr);
+      wrap.appendChild(row);
+    });
+    container.appendChild(wrap);
+  }
+
+  var MARKETS = [
+    ["Taiwan", 19.9, "MSCI Taiwan"],
+    ["US", 14.8, "S&P 500"],
+    ["South Korea", 10.2, "MSCI Korea"],
+    ["India", 8.7, "MSCI India"],
+    ["Japan", 8.0, "MSCI Japan, in US dollars"],
+    ["Singapore", 4.9, "Straits Times Index, approximate"],
+    ["Hong Kong", null, "No comparable ten-year figure in the tracker"]
+  ];
+
+  function marketBars(container) {
+    var g = mk("div", "hbars");
+    MARKETS.forEach(function (m, i) {
+      g.appendChild(mk("span", "hl", m[0]));
+      var t = mk("div", "ht" + (m[1] == null ? " empty" : ""));
+      t.setAttribute("data-tip", m[0] + " — " + m[2] + (m[1] == null ? "" : ": about " + m[1].toFixed(1) + "% a year, 2016–2025"));
+      if (m[1] != null) {
+        var b = mk("div", "hb");
+        b.style.width = (m[1] / 20 * 100) + "%";
+        b.style.animationDelay = (i * 0.06) + "s";
+        t.appendChild(b);
+      }
+      g.appendChild(t);
+      g.appendChild(mk("span", "hv" + (m[1] == null ? " na" : ""), m[1] == null ? "—" : m[1].toFixed(1) + "%"));
+    });
+    container.appendChild(g);
+  }
+
+  ["lobby-chart", "exit-chart"].forEach(function (id) { if (el(id)) { beatBars(el(id), false); } });
+  (function () {
+    var v = el("beat-chart");
+    v.appendChild(mk("p", "viz-title", "What beat what, Jul 2024 – Sep 2026"));
+    beatBars(v, true);
+    v.appendChild(mk("p", "viz-foot", "Judged at realistic trading costs. Hover a bar for detail."));
+  })();
+
+  /* ---------------- room 2: screening ---------------- */
+
+  var ex1 = { view: "etf", session: 0 };
+  var EX1_PARENT = { day: "sessions", boundary: "day" };
+  var EX1_TOOL = { etf: 0, sessions: 1, day: 1, boundary: 1, validation: 2, growth: 3 };
+
+  var SESSIONS = [
+    {
+      date: "18 September 2026",
+      sub: "Stopped mid-morning by its own loss limit",
+      meta: "11 filled",
+      started: "06:29 ET",
+      status: "Halted 10:10 ET",
+      halted: true,
+      stats: [["18", "Qualified"], ["11", "Bought"], ["7", "No money left"], ["4", "Losses in a row", 1]],
+      log: [
+        ["06:29:02", "SYSTEM", "DAY_START", "sys", "Starting balance recorded before any trade."],
+        ["09:35:08", "ABBV", "SKIP_DAY", "out", "Too quiet to meet the rules. Skipped."],
+        ["09:36:11", "TMUS", "ENTER_LONG", "in", "607 shares at 164.76."],
+        ["09:36:29", "CMCSA", "ENTER_SHORT", "in", "4,441 shares at 22.53."],
+        ["09:40:12", "AMAT", "ENTRY_SKIPPED", "out", "Money fully committed. Nothing bought."],
+        ["10:10:26", "GOOG", "EXIT", "stop", "Sold at its preset loss limit."],
+        ["10:10:38", "SYSTEM", "TRADING_HALTED", "halt", "Four losses in a row. No new trades today."],
+        ["15:50:49", "BKNG", "EOD_FLATTEN", "out", "Closed before the bell. Nothing held overnight."]
+      ],
+      note: "After three losses in a row it stops opening trades for the day — a limit set in advance."
+    },
+    {
+      date: "21 September 2026",
+      sub: "The last day — it refused to trade",
+      meta: "0 filled",
+      started: "06:28 ET",
+      status: "No entries",
+      halted: false,
+      stats: [["0", "Bought"], ["2", "Refused", 1], ["—", "Losses"], ["Last", "Day ever"]],
+      log: [
+        ["10:30:01", "LRCX", "ENTRY_SKIPPED", "out", "Balance unreadable, so no safe size. Refused."],
+        ["10:40:06", "ISRG", "ENTRY_SKIPPED", "out", "Same reason. It would not guess."],
+        ["10:54:37", "SYSTEM", "ACCOUNT_CHECK", "sys", "Confirmed it was on the practice account."],
+        ["10:54:38", "SYSTEM", "AUTHORIZATION_OK", "sys", "Broker confirmed it was allowed to trade."]
+      ],
+      note: "It couldn't confirm the balance, so it refused to trade rather than guess."
+    }
+  ];
+
+  /* symbol, side, qty, log, broker, diff, flag */
+  var RECON = [
+    ["MU", "Down", "110", "-994.84", "-1,102.75", "-107.91", "Loss, handled"],
+    ["ORCL", "Down", "708", "-999.77", "-262.67", "+737.10", "Loss, handled"],
+    ["GOOG", "Up", "292", "+402.96", "+75.92", "-327.04", "Win, handled"],
+    ["GOOGL", "Up", "289", "not recorded", "+466.74", "—", "Wrongly logged as failed"]
+  ];
+
+  var GROWTH = [
+    ["2019", "4", "0", "21 of 30"],
+    ["2020", "4", "0", "21 of 30"],
+    ["2021", "4", "2 (AMZN, twice)", "20–21 of 30"],
+    ["2022", "4", "0", "21 of 30"],
+    ["2023", "3", "0", "21 of 30"]
+  ];
+
+  var EX1_TILES = [
+    ["ETF Tracker", "In use now", "etf"],
+    ["Live Desk", "Same-day trades", "sessions"],
+    ["Validation", "Pass or no trade", "validation"],
+    ["Growth Screen", "Long-term picks", "growth"]
+  ];
+
+  function ex1Crumbs() {
+    var c = el("ex1-crumbs");
+    c.innerHTML = "";
+    var trail = [];
+    if (ex1.view === "etf") { trail.push({ key: "etf", text: "ETF Tracker" }); }
+    else if (ex1.view === "validation") { trail.push({ key: "validation", text: "Validation" }); }
+    else if (ex1.view === "growth") { trail.push({ key: "growth", text: "Growth Screen" }); }
+    else {
+      trail.push({ key: "sessions", text: "Live Desk" });
+      if (ex1.view === "day" || ex1.view === "boundary") {
+        trail.push({ key: "day", text: SESSIONS[ex1.session].date.replace(" September 2026", " Sep") });
+      }
+      if (ex1.view === "boundary") { trail.push({ key: "boundary", text: "Order detail" }); }
+    }
+    trail.forEach(function (step, i) {
+      if (i > 0) { c.appendChild(mk("span", null, "/")); }
+      if (i === trail.length - 1) {
+        c.appendChild(mk("span", "here", step.text));
+      } else {
+        var b = mk("button", null, step.text);
+        b.type = "button";
+        b.addEventListener("click", function () { ex1.view = step.key; renderEx1(); });
+        c.appendChild(b);
+      }
+    });
+  }
+
+  function ex1Tiles(body) {
+    var tiles = mk("div", "tiles four");
+    EX1_TILES.forEach(function (t, idx) {
+      var b = mk("button", "tile");
+      b.type = "button";
+      b.setAttribute("aria-pressed", String(EX1_TOOL[ex1.view] === idx));
+      var n = mk("span", "tile-name");
+      if (idx === 0) { n.appendChild(mk("span", "live-dot")); }
+      n.appendChild(document.createTextNode(t[0]));
+      b.appendChild(n);
+      b.appendChild(mk("span", "tile-sub", t[1]));
+      b.addEventListener("click", function () { ex1.view = t[2]; renderEx1(); });
+      tiles.appendChild(b);
+    });
+    body.appendChild(tiles);
+  }
+
+  function simpleTable(body, headers, rows, numCols) {
+    var wrap = mk("div", "table-wrap");
+    var table = document.createElement("table");
+    var thead = document.createElement("thead");
+    var htr = document.createElement("tr");
+    headers.forEach(function (h) { htr.appendChild(mk("th", null, h)); });
+    thead.appendChild(htr); table.appendChild(thead);
+    var tbody = document.createElement("tbody");
+    rows.forEach(function (r) {
+      var tr = document.createElement("tr");
+      tr.style.cursor = "default";
+      r.forEach(function (cell, i) { tr.appendChild(mk("td", numCols.indexOf(i) !== -1 ? "num" : null, cell)); });
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    wrap.appendChild(table);
+    body.appendChild(wrap);
+  }
+
+  function renderEx1() {
+    ex1Crumbs();
+
+    var backBtn = el("ex1-back");
+    var parent = EX1_PARENT[ex1.view] || null;
+    backBtn.hidden = !parent;
+    backBtn.onclick = parent ? function () { ex1.view = parent; renderEx1(); } : null;
+
+    var body = el("ex1-body");
+    body.innerHTML = "";
+    ex1Tiles(body);
+
+    if (ex1.view === "etf") {
+      var v = mk("div", "viz");
+      v.appendChild(mk("p", "pane-title", "Average yearly growth of each market, 2016–2025"));
+      marketBars(v);
+      body.appendChild(v);
+      body.appendChild(note("What's left now: a tracker for regular investing across seven markets. No trading."));
+      return;
+    }
+
+    if (ex1.view === "sessions") {
+      var rows = mk("div", "rows");
+      SESSIONS.forEach(function (s, i) {
+        var r = mk("button", "row");
+        r.type = "button";
+        var main = mk("span", "row-main");
+        main.appendChild(mk("span", "row-title", s.date));
+        main.appendChild(mk("span", "row-sub", s.sub));
+        r.appendChild(main);
+        r.appendChild(mk("span", "row-meta", s.meta));
+        r.addEventListener("click", function () { ex1.session = i; ex1.view = "day"; renderEx1(); });
+        rows.appendChild(r);
+      });
+      body.appendChild(rows);
+      body.appendChild(note("Two real days from the system's own records. Practice account — no real money."));
+      return;
+    }
+
+    if (ex1.view === "day") {
+      var S = SESSIONS[ex1.session];
+
+      var bar = mk("div", "sessionbar");
+      bar.appendChild(mk("span", "sb-date", S.date));
+      bar.appendChild(mk("span", "sb-meta", "Practice account · started " + S.started));
+      bar.appendChild(mk("span", "status-pill" + (S.halted ? "" : " ok"), S.status));
+      body.appendChild(bar);
+
+      var stats = mk("div", "stat-row");
+      S.stats.forEach(function (st) {
+        var box = mk("div", "stat" + (st[2] ? " warn" : ""));
+        box.appendChild(mk("span", "sv", st[0]));
+        box.appendChild(mk("span", "sl", st[1]));
+        stats.appendChild(box);
+      });
+      body.appendChild(stats);
+
+      var wrap = mk("div", "table-wrap");
+      var table = document.createElement("table");
+      var thead = document.createElement("thead");
+      var htr = document.createElement("tr");
+      ["Time", "Company", "Event", "Why"].forEach(function (h) { htr.appendChild(mk("th", null, h)); });
+      thead.appendChild(htr); table.appendChild(thead);
+      var tbody = document.createElement("tbody");
+      S.log.forEach(function (row) {
+        var tr = document.createElement("tr");
+        if (row[3] === "halt") { tr.className = "halt"; }
+        tr.appendChild(mk("td", "num", row[0]));
+        tr.appendChild(mk("td", null, row[1]));
+        var t3 = document.createElement("td");
+        t3.appendChild(mk("span", "ev " + (row[3] === "halt" ? "stop" : row[3]), row[2]));
+        tr.appendChild(t3);
+        tr.appendChild(mk("td", "why", row[4]));
+        tr.addEventListener("click", function () { ex1.view = "boundary"; renderEx1(); });
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+      wrap.appendChild(table);
+      body.appendChild(wrap);
+      body.appendChild(note(S.note));
+      return;
+    }
+
+    if (ex1.view === "validation") {
+      var card = mk("div", "promoted");
+      card.appendChild(mk("span", "pr-name", "The one strategy approved to trade"));
+      card.appendChild(mk("span", "pr-meta", "Approved 9 Sep 2026 · passed 27 of 29 tests on unseen data"));
+      card.appendChild(mk("span", "pr-params", "Watch the first 5 minutes · sell at −1% · aim for 3× that · busy days only · one trade per company per day"));
+      body.appendChild(card);
+
+      body.appendChild(mk("p", "pane-title", "Its own record, checked against the broker's"));
+      simpleTable(body, ["Company", "Bet", "Shares", "System", "Broker", "Gap", "Verdict"], RECON, [2, 3, 4, 5]);
+      body.appendChild(note("This check caught a real bug, and a trade the system wrongly thought had failed."));
+      return;
+    }
+
+    if (ex1.view === "growth") {
+      body.appendChild(mk("p", "pane-title", "Checked 19 times, 2019–2023"));
+      simpleTable(body, ["Year", "Checks", "Approved", "Rejected per check"], GROWTH, [1]);
+      body.appendChild(note("Nine companies couldn't be judged when the free data ran out — marked 'not checked', not dropped."));
+      return;
+    }
+
+    if (ex1.view === "boundary") {
+      body.appendChild(makeBoundary(
+        "This is as far as the walkthrough goes",
+        "In the real system, each line opened the broker's reply and the trade it belonged to.",
+        "← Back to the day",
+        function () { ex1.view = "day"; renderEx1(); },
+        true
+      ));
+    }
+  }
+
+  /* ---------------- room 1: compliance system ---------------- */
+
+  var SEC_VIEWS = [
+    {
+      name: "Today",
+      img: "sec-today.jpg",
+      alt: "The Today screen: counts of jobs due in the next 14 days, waiting on others and overdue, a document tracker, and a list of companies whose financial year end still needs entering",
+      note: "Due, waiting and overdue at a glance. Missing information is flagged, never guessed."
+    },
+    {
+      name: "A company's record",
+      img: "sec-company.jpg",
+      alt: "A company record with tabs for officers and members, controllers, changes, files, documents, history, compare with registry, KYC/CDD, data protection and activity log",
+      note: "Officers, owners, history, files and screening on one page — compared against ACRA's register."
+    },
+    {
+      name: "Deadline rules",
+      img: "sec-rules.jpg",
+      alt: "The deadline rules settings: each rule shows the statutory deadline, an earlier internal target, its ACRA source, and a checkbox marked Not yet",
+      note: "Every deadline traces to an ACRA source, and stays 'Not yet' until a person checks it."
+    }
+  ];
+
+  var ex0 = { view: 0 };
+
+  function renderEx0() {
+    var c = el("ex0-crumbs");
+    c.innerHTML = "";
+    c.appendChild(mk("span", null, "Screens"));
+    c.appendChild(mk("span", null, "/"));
+    c.appendChild(mk("span", "here", SEC_VIEWS[ex0.view].name));
+
+    var body = el("ex0-body");
+    body.innerHTML = "";
+
+    var tiles = mk("div", "thumbtiles");
+    SEC_VIEWS.forEach(function (v, i) {
+      var b = mk("button", "thumbtile");
+      b.type = "button";
+      b.setAttribute("aria-pressed", String(i === ex0.view));
+      var im = document.createElement("img"); im.src = v.img; im.alt = ""; im.loading = "lazy";
+      b.appendChild(im);
+      b.appendChild(mk("span", null, v.name));
+      b.addEventListener("click", function () { ex0.view = i; renderEx0(); });
+      tiles.appendChild(b);
+    });
+    body.appendChild(tiles);
+
+    var v = SEC_VIEWS[ex0.view];
+    var fig = mk("figure", "shot");
+    var img = document.createElement("img");
+    img.src = v.img; img.alt = v.alt;
+    img.title = "Click to enlarge";
+    fig.appendChild(img);
+    fig.addEventListener("click", function () { fig.classList.toggle("zoom"); });
+    body.appendChild(fig);
+    body.appendChild(note(v.note));
+  }
+
+  /* ---------------- room 3: news channel ---------------- */
+
+  var FACTS = [
+    ["1", "For $350,000, you can now buy Argentine citizenship.", "AP · Reuters · Buenos Aires Times"],
+    ["3", "Or buy an $800,000 government bond. A family of four pays $500,000.", "AP · Reuters · Buenos Aires Times"],
+    ["4", "Applications are expected to open before the end of the year.", "AP · Reuters · Buenos Aires Times"],
+    ["5", "It's the first programme like this in South America.", "AP · Reuters · Buenos Aires Times"]
+  ];
+
+  var LEFT_OUT = [
+    "Visa-free travel to 140+ countries",
+    "An estimated $2.5 billion raised",
+    "“The first G20 country to do this”"
+  ];
+
+  var GATE = [
+    ["Loudness right for YouTube and TikTok", "−14 ±0.5"],
+    ["No distortion at peaks", "pass"],
+    ["Text clear of phone buttons", "pass"],
+    ["No black bands", "pass"],
+    ["No blank frames or cut-off text", "0 flags"],
+    ["First frame matches thumbnail", "pass"]
+  ];
+
+  var STAGES = [
+    { name: "Story in", kind: "counted", body: "Outlets re-running one news-agency report count as one source, not several." },
+    { name: "Fact check", kind: "facts", body: "Every spoken line needs two independent outlets. One isn't enough." },
+    { name: "Script", kind: "script", body: "Three standing rules for every script." },
+    { name: "Visuals", kind: "stills", body: "Sources on screen, real satellite maps, illustrations labelled." },
+    { name: "Release checks", kind: "gate", body: "Run automatically. Any failure blocks the video." },
+    { name: "Review & publish", kind: "flow", body: "Nothing uploads on its own or on a schedule." }
+  ];
+
+  var ex2 = { stage: 3, view: "stage" };
+
+  function ex2Crumbs() {
+    var c = el("ex2-crumbs");
+    c.innerHTML = "";
+    var b = mk("button", null, "How a video is made");
+    b.type = "button";
+    b.addEventListener("click", function () { ex2.view = "stage"; renderEx2(); });
+    c.appendChild(b);
+    c.appendChild(mk("span", null, "/"));
+    c.appendChild(mk("span", "here", (ex2.view === "watch") ? "Watch two videos" : STAGES[ex2.stage].name));
+  }
+
+  function stillFigure(src, alt, caption) {
+    var fig = mk("figure", "still");
+    var img = document.createElement("img");
+    img.src = src; img.alt = alt; img.loading = "lazy";
+    fig.appendChild(img);
+    fig.appendChild(mk("figcaption", null, caption));
+    return fig;
+  }
+
+  function factTable() {
+    var wrap = mk("div", "table-wrap");
+    var table = document.createElement("table");
+    var thead = document.createElement("thead");
+    var htr = document.createElement("tr");
+    ["Line", "Voiceover", "Confirmed by", ""].forEach(function (h) { htr.appendChild(mk("th", null, h)); });
+    thead.appendChild(htr); table.appendChild(thead);
+    var tbody = document.createElement("tbody");
+    FACTS.forEach(function (r) {
+      var tr = document.createElement("tr");
+      tr.style.cursor = "default";
+      tr.appendChild(mk("td", "num", r[0]));
+      tr.appendChild(mk("td", "why", r[1]));
+      tr.appendChild(mk("td", "why", r[2]));
+      var d = document.createElement("td");
+      d.appendChild(mk("span", "gate y", "PASS"));
+      tr.appendChild(d);
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    wrap.appendChild(table);
+    return wrap;
+  }
+
+  function leftOut() {
+    var box = mk("div", "leftout");
+    box.appendChild(mk("span", "c-kicker mono", "Cut — only one outlet reported it"));
+    var ul = document.createElement("ul");
+    LEFT_OUT.forEach(function (t) { ul.appendChild(mk("li", null, t)); });
+    box.appendChild(ul);
+    return box;
+  }
+
+  function gateCard() {
+    var wrap = mk("div", "checklist");
+    var head = mk("div", "score-head");
+    head.appendChild(mk("span", "score-of", "Checks for the video shown here"));
+    head.appendChild(mk("span", "allpass", "All pass"));
+    wrap.appendChild(head);
+    GATE.forEach(function (g) {
+      var row = mk("div", "check-row");
+      row.appendChild(mk("span", "tick", "✓"));
+      row.appendChild(mk("span", null, g[0]));
+      row.appendChild(mk("span", "dv", g[1]));
+      wrap.appendChild(row);
+    });
+    return wrap;
+  }
+
+  function countedCard() {
+    var g = mk("div", "counted");
+    var left = mk("div", "outlets");
+    left.appendChild(mk("span", "chip src", "AP report"));
+    left.appendChild(mk("span", "chip", "→ ABC News"));
+    left.appendChild(mk("span", "chip", "→ Euronews"));
+    g.appendChild(left);
+    g.appendChild(mk("span", "eq", "="));
+    var right = mk("div", "eq", "1");
+    right.appendChild(mk("small", null, "source, not three"));
+    g.appendChild(right);
+    return g;
+  }
+
+  var SCRIPT_RULES = [
+    ["file", "Clear to a 14-year-old", "Any word a 14-year-old might not know is explained as soon as it's said, aloud and on screen."],
+    ["pin", "Always say where and who", "No place or group is named without saying where it is and whose side it's on."],
+    ["shield", "Allegations handled carefully", "“Not convicted” stays on screen. No one accused or harmed is named or shown."]
+  ];
+  var SVG = {
+    file: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z"/><path d="M8 7h6M8 11h6"/></svg>',
+    pin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+    shield: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>'
+  };
+
+  function scriptCards() {
+    var g = mk("div", "icon-cards");
+    SCRIPT_RULES.forEach(function (r) {
+      var c = mk("div", "icon-card");
+      c.innerHTML = SVG[r[0]];
+      var t = mk("div");
+      t.appendChild(mk("b", null, r[1]));
+      t.appendChild(mk("span", null, r[2]));
+      c.appendChild(t);
+      g.appendChild(c);
+    });
+    return g;
+  }
+
+  function flowCard() {
+    var f = mk("div", "flow");
+    [["01", "Uploaded private", "Always first"], null, ["02", "I review it", "Approve or reject, with notes"], null, ["03", "Made public", "A separate, confirmed step"]]
+      .forEach(function (s) {
+        if (!s) { f.appendChild(mk("div", "arrow", "→")); return; }
+        var d = mk("div");
+        d.appendChild(mk("span", "step", s[0]));
+        d.appendChild(mk("b", null, s[1]));
+        d.appendChild(mk("span", null, s[2]));
+        f.appendChild(d);
+      });
+    return f;
+  }
+
+
+  var VIDEOS = [
+    { src: "tat-okinawa.mp4", poster: "tat-okinawa-poster.jpg", len: "2:04",
+      title: "US Marine arrested over a woman's death in Okinawa: why Japan is angry" },
+    { src: "tat-panfilov.mp4", poster: "tat-panfilov-poster.jpg", len: "1:44",
+      title: "Ex-Wah!Banana actor speaks out after court overturns rape conviction",
+      warn: "Content note: discusses a sexual-assault case" }
+  ];
+  var VOL = 0.3;
+
+  function watchView() {
+    var wrap = mk("div", "watch");
+    var list = [];
+    VIDEOS.forEach(function (v) {
+      var card = mk("div", "watch-card");
+      var vid = document.createElement("video");
+      vid.src = v.src; vid.poster = v.poster;
+      vid.controls = true; vid.preload = "metadata";
+      vid.setAttribute("playsinline", "");
+      vid.volume = VOL;
+      vid.addEventListener("play", function () {
+        list.forEach(function (o) { if (o !== vid) { o.pause(); } });
+        vid.volume = VOL;
+      });
+      list.push(vid);
+      card.appendChild(vid);
+
+      var volRow = mk("label", "vol");
+      var slider = document.createElement("input");
+      slider.type = "range"; slider.min = "0"; slider.max = "100"; slider.value = String(Math.round(VOL * 100));
+      slider.setAttribute("aria-label", "Volume");
+      var pct = mk("span", "vol-pct", slider.value + "%");
+      slider.addEventListener("input", function () {
+        VOL = slider.value / 100;
+        list.forEach(function (o) { o.volume = VOL; o.muted = false; });
+        Array.prototype.forEach.call(wrap.querySelectorAll(".vol input"), function (o) { o.value = slider.value; });
+        Array.prototype.forEach.call(wrap.querySelectorAll(".vol-pct"), function (o) { o.textContent = slider.value + "%"; });
+      });
+      volRow.appendChild(mk("span", "vol-lab", "Volume"));
+      volRow.appendChild(slider);
+      volRow.appendChild(pct);
+      card.appendChild(volRow);
+
+      card.appendChild(mk("p", "watch-title", v.title));
+      card.appendChild(mk("p", "watch-meta", v.len + " · from the channel · sound starts at 30%"));
+      if (v.warn) { card.appendChild(mk("p", "watch-warn", v.warn)); }
+      wrap.appendChild(card);
+    });
+    return wrap;
+  }
+
+  function stopVideos() {
+    Array.prototype.forEach.call(document.querySelectorAll(".watch video"), function (v) { v.pause(); });
+  }
+
+  function renderEx2() {
+    ex2Crumbs();
+
+    var backBtn2 = el("ex2-back");
+    backBtn2.hidden = (ex2.view !== "watch");
+    backBtn2.onclick = function () { ex2.view = "stage"; renderEx2(); };
+
+    var body = el("ex2-body");
+    body.innerHTML = "";
+
+    var strip = mk("div", "stages");
+    STAGES.forEach(function (st, i) {
+      var b = mk("button", "stage");
+      b.type = "button";
+      b.setAttribute("aria-pressed", String(ex2.view === "stage" && i === ex2.stage));
+      b.appendChild(mk("span", "stage-no mono", "0" + (i + 1)));
+      b.appendChild(mk("span", "stage-name", st.name));
+      b.addEventListener("click", function () { ex2.stage = i; ex2.view = "stage"; renderEx2(); });
+      strip.appendChild(b);
+    });
+    body.appendChild(strip);
+
+    if (ex2.view === "watch") {
+      body.appendChild(watchView());
+      return;
+    }
+
+    var s = STAGES[ex2.stage];
+    body.appendChild(mk("p", "pane-title", "Stage " + (ex2.stage + 1) + " — " + s.name));
+    body.appendChild(note(s.body));
+
+    if (s.kind === "counted") { body.appendChild(countedCard()); }
+    if (s.kind === "facts") {
+      body.appendChild(factTable());
+      body.appendChild(leftOut());
+      body.appendChild(note("From a published video on Argentina selling citizenship. All 10 lines passed; 4 shown."));
+    }
+    if (s.kind === "script") { body.appendChild(scriptCards()); }
+    if (s.kind === "stills") {
+      var stills = mk("div", "stills");
+      stills.appendChild(stillFigure("tat-routes.jpg",
+        "Frame from a published video: two routes to Argentine citizenship, a $350,000 payment or an $800,000 government bond, with sources listed underneath",
+        "Figures, with sources underneath."));
+      stills.appendChild(stillFigure("tat-map.jpg",
+        "Frame from a published video: a satellite map of the Caribbean with five island nations marked",
+        "Real satellite map."));
+      stills.appendChild(stillFigure("tat-scale.jpg",
+        "Frame from a published video: a balance scale weighing Argentina's need for cash against the risk of money laundering",
+        "The trade-off, drawn."));
+      body.appendChild(stills);
+    }
+    if (s.kind === "gate") { body.appendChild(gateCard()); }
+    if (s.kind === "flow") { body.appendChild(flowCard()); }
+
+    var runWrap = mk("div", "boundary-actions");
+    var run = mk("button", "btn btn-solid", "▶ Watch two videos from the channel");
+    run.type = "button";
+    run.addEventListener("click", function () { ex2.view = "watch"; renderEx2(); });
+    runWrap.appendChild(run);
+    body.appendChild(runWrap);
+  }
+
+
+  /* ---------------- room 4: company website ---------------- */
+
+  var GLOBE_POINTS = [
+    ["Drawn live, not a picture", "Coastlines, gold and shading are drawn in code every frame, so it can turn."],
+    ["Tours all 21 markets", "It flies each route to Singapore, turning so both ends face you."],
+    ["Every route in the finale", "It ends on two views that, between them, show all 21 routes."],
+    ["Drag to spin it", "The tour picks up again when you let go."],
+    ["Tested frame by frame", "No route may light up without its country's name showing."]
+  ];
+  var EX3_VIEWS = [
+    { name: "The globe", img: "gal-globe-poster.jpg" },
+    { name: "Before → after", img: "gal-before.jpg" },
+    { name: "The website", img: "gal-home.jpg" }
+  ];
+  var ex3 = { view: 0 };
+
+  function renderEx3() {
+    var c = el("ex3-crumbs");
+    c.innerHTML = "";
+    c.appendChild(mk("span", null, "Website"));
+    c.appendChild(mk("span", null, "/"));
+    c.appendChild(mk("span", "here", EX3_VIEWS[ex3.view].name));
+
+    var body = el("ex3-body");
+    body.innerHTML = "";
+
+    var tiles = mk("div", "thumbtiles");
+    EX3_VIEWS.forEach(function (v, i) {
+      var b = mk("button", "thumbtile" + (i < 2 ? " darkthumb" : ""));
+      b.type = "button";
+      b.setAttribute("aria-pressed", String(i === ex3.view));
+      var im = document.createElement("img"); im.src = v.img; im.alt = ""; im.loading = "lazy";
+      b.appendChild(im);
+      b.appendChild(mk("span", null, v.name));
+      b.addEventListener("click", function () { ex3.view = i; renderEx3(); });
+      tiles.appendChild(b);
+    });
+    body.appendChild(tiles);
+
+    if (ex3.view === 0) {
+      var g = mk("div", "globe-feature");
+      var stage = mk("div", "globe-stage");
+      var vid = document.createElement("video");
+      vid.src = "gal-globe.mp4"; vid.poster = "gal-globe-poster.jpg";
+      vid.muted = true; vid.autoplay = true; vid.loop = true;
+      vid.setAttribute("playsinline", ""); vid.setAttribute("muted", "");
+      vid.setAttribute("aria-label", "The website's gold globe, recorded live: it turns from market to market, lighting each route to Singapore, then shows every route at once");
+      stage.appendChild(vid);
+      stage.appendChild(mk("span", "globe-badge", "Recorded from the live site"));
+      g.appendChild(stage);
+      var list = mk("div", "icon-cards globe-points");
+      GLOBE_POINTS.forEach(function (pt, i) {
+        var card = mk("div", "icon-card");
+        card.appendChild(mk("span", "num-dot", String(i + 1)));
+        var t = mk("div");
+        t.appendChild(mk("b", null, pt[0]));
+        t.appendChild(mk("span", null, pt[1]));
+        card.appendChild(t);
+        list.appendChild(card);
+      });
+      g.appendChild(list);
+      body.appendChild(g);
+      return;
+    }
+
+    if (ex3.view === 1) {
+      var ba = mk("div", "beforeafter");
+      var b1 = mk("figure", "ba-side");
+      var i1 = document.createElement("img"); i1.src = "gal-before.jpg"; i1.alt = "Before: a supplied photo of a globe in natural colours";
+      b1.appendChild(mk("span", "ba-tag", "Before"));
+      b1.appendChild(i1);
+      b1.appendChild(mk("figcaption", null, "A supplied photo. It looked right, but it could never move."));
+      var arrow = mk("div", "ba-arrow", "→");
+      var b2 = mk("figure", "ba-side after");
+      var v2 = document.createElement("video");
+      v2.src = "gal-globe.mp4"; v2.poster = "gal-globe-poster.jpg";
+      v2.muted = true; v2.autoplay = true; v2.loop = true;
+      v2.setAttribute("playsinline", ""); v2.setAttribute("muted", "");
+      v2.setAttribute("aria-label", "After: the live gold globe");
+      b2.appendChild(mk("span", "ba-tag", "After"));
+      b2.appendChild(v2);
+      b2.appendChild(mk("figcaption", null, "Rebuilt in code in the firm's gold and navy. It spins, tours and can be dragged."));
+      ba.appendChild(b1); ba.appendChild(arrow); ba.appendChild(b2);
+      body.appendChild(ba);
+      return;
+    }
+
+    var shots = mk("div", "siteshots");
+    var big = mk("figure", "shot");
+    var bi = document.createElement("img"); bi.src = "gal-home.jpg"; bi.alt = "The website's home page: a night view of Singapore's skyline with the heading 'A one-stop solution consultancy for your company needs'";
+    big.appendChild(bi);
+    big.addEventListener("click", function () { big.classList.toggle("zoom"); });
+    var side = mk("div", "siteshots-side");
+    var s2 = mk("figure", "shot");
+    var si = document.createElement("img"); si.src = "gal-services.jpg"; si.alt = "The Our Services page header";
+    s2.appendChild(si);
+    s2.addEventListener("click", function () { s2.classList.toggle("zoom"); });
+    var s3 = mk("figure", "shot phone-shot");
+    var pi = document.createElement("img"); pi.src = "gal-phone.jpg"; pi.alt = "The home page on a phone";
+    s3.appendChild(pi);
+    side.appendChild(s2); side.appendChild(s3);
+    shots.appendChild(big); shots.appendChild(side);
+    body.appendChild(shots);
+    body.appendChild(note("Replaced the firm's old site on 15 Sep 2026. Five pages, a working contact form and a help panel — checked on 11 screen sizes, from wide desktop to small phone."));
+    var go = mk("div", "boundary-actions");
+    var a = document.createElement("a");
+    a.className = "btn btn-solid"; a.href = "https://gal-global.com"; a.target = "_top"; a.rel = "noopener";
+    a.textContent = "Visit the live site ↗";
+    go.appendChild(a);
+    body.appendChild(go);
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll(".dtab"), function (tab) {
+    tab.addEventListener("click", function () {
+      var group = tab.closest(".sidepanel");
+      Array.prototype.forEach.call(group.querySelectorAll(".dtab"), function (t) {
+        var on = (t === tab);
+        t.setAttribute("aria-selected", String(on));
+        el("dp-" + t.getAttribute("data-panel")).hidden = !on;
+      });
+    });
+  });
+
+  renderEx0();
+  renderEx1();
+  renderEx2();
+  renderEx3();
+  show("lobby");
+})();
+</script>
+</html>
