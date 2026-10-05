@@ -243,7 +243,8 @@
     gap: 26px;
     align-items: start;
   }
-  @media (max-width: 760px) { .exhibit-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 760px) { .exhibit-grid { grid-template-columns: minmax(0, 1fr); } }
+  .exhibit-grid > *, .exhibit-grid > div > *, .case, .case-body, .case-body > * { min-width: 0; }
 
   .wall-label {
     background: var(--plinth);
@@ -403,7 +404,17 @@
   .ev.in { background: var(--accent-soft); color: var(--accent); }
   .ev.out { background: var(--plinth-2); color: var(--ink-soft); }
   .ev.stop { background: var(--signal-soft); color: var(--signal); }
-  td.why { white-space: normal; min-width: 240px; color: var(--ink-soft); font-size: 13px; }
+  td.why { white-space: normal; min-width: 140px; color: var(--ink-soft); font-size: 13px; }
+  .case th, .case td { padding: 8px 7px; }
+  @media (max-width: 560px) {
+    .case th, .case td { white-space: normal; padding: 6px 4px; }
+    .case td.num { font-size: 10.5px; }
+    .case td { font-size: 12px; }
+    main { padding-left: 16px; padding-right: 16px; }
+    .case-body { padding: 12px; }
+    .case .ev { white-space: normal; font-size: 9.5px; }
+    .case td.why { min-width: 0; }
+  }
   tr.halt td { background: var(--signal-soft); }
   tr.halt td.why { color: var(--signal); font-weight: 500; }
 
@@ -459,10 +470,13 @@
   /* emphasis */
   .key {
     background: var(--accent-soft); color: var(--ink);
-    padding: 1px 5px; border-radius: 3px; font-weight: 600;
+    padding: 1px 0; border-radius: 2px; font-weight: 600;
+    box-shadow: -3px 0 0 var(--accent-soft), 3px 0 0 var(--accent-soft);
     box-decoration-break: clone; -webkit-box-decoration-break: clone;
   }
-  .key.warn { background: var(--signal-soft); color: var(--ink); }
+  .key.warn { background: var(--signal-soft); color: var(--ink); box-shadow: -3px 0 0 var(--signal-soft), 3px 0 0 var(--signal-soft); }
+  /* inside an already-shaded box, emphasis is bold text only */
+  .arcbody li.turn p .key, .arcbody li.end p .key { background: none; box-shadow: none; padding: 0; }
 
   .claims {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -509,7 +523,7 @@
   }
 
   /* pipeline */
-  .stages { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+  .stages { display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 4px; }
   .stage {
     flex: 1 0 auto; min-width: 112px;
     background: var(--ground); border: 1px solid var(--rule); border-radius: 4px;
@@ -574,10 +588,10 @@
   .boundary-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2px; }
 
   .exhibit-grid > div > .sidepanel, #room-ex0 .sidepanel, #room-ex1 .sidepanel { margin-top: 22px; }
-  @media (min-width: 1180px) { #room-ex0 .sidepanel, #room-ex1 .sidepanel { margin-top: 0; } }
+  @media (min-width: 1280px) { #room-ex0 .sidepanel, #room-ex1 .sidepanel { margin-top: 0; } }
 
   /* wide screens: three columns, nothing stacked below the fold */
-  @media (min-width: 1180px) {
+  @media (min-width: 1280px) {
     .exhibit-grid {
       grid-template-columns: 250px minmax(0, 1.15fr) minmax(0, 1fr);
       gap: 20px;
@@ -822,7 +836,7 @@
   .flow span { font-size: 12px; color: var(--ink-soft); }
   .flow .step { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 10.5px; letter-spacing: .08em; color: var(--accent); }
   .flow .arrow { flex: 0 0 auto; background: none; border: 0; padding: 0; justify-content: center; color: var(--ink-faint); font-size: 18px; }
-  .counted { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: center; }
+  .counted { display: grid; grid-template-columns: max-content auto max-content; justify-content: start; gap: 18px; align-items: center; }
   .counted .outlets { display: flex; flex-direction: column; gap: 6px; }
   .counted .chip { font-size: 12.5px; border: 1px solid var(--rule-strong); border-radius: 100px; padding: 4px 10px; text-align: center; background: var(--ground); }
   .counted .chip.src { border-color: var(--accent); color: var(--accent); font-weight: 600; }
@@ -879,7 +893,7 @@
 
   /* room 4 */
   #room-ex3 .exhibit-grid > div { display: block; }
-  @media (min-width: 1180px) {
+  @media (min-width: 1280px) {
     #room-ex3 .exhibit-grid { grid-template-columns: 300px minmax(0, 1fr); }
     #room-ex3 .wall-label { grid-column: 1; grid-row: 1; }
   }
@@ -918,6 +932,21 @@
   .phone-shot img { max-height: 220px; width: auto; margin: 0 auto; }
   .exit-thumbs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   @media (max-width: 900px) { .exit-thumbs { grid-template-columns: 1fr 1fr; } }
+
+  /* lobby wings */
+  .wing { margin-top: 18px; }
+  .wing + .wing { margin-top: 26px; }
+  @media (min-width: 1000px) { .wings .wing + .wing { margin-top: 18px; } }
+  .wing-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+  .wing-kicker { font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--plinth); background: var(--accent); padding: 3px 9px; border-radius: 100px; }
+  .wing + .wing .wing-kicker { background: var(--ink-faint); }
+  .wing-title { margin: 0; font-size: 20px; }
+  .exhibit-cards.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .exhibit-cards.two .card-media { height: 132px; }
+  @media (max-width: 700px) { .exhibit-cards.two { grid-template-columns: 1fr; } }
+  @media (min-width: 1000px) {
+    .wings { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  }
   @media (prefers-reduced-motion: reduce) { .bar, .hb { animation: none; } }
 </style>
 
@@ -945,45 +974,54 @@
       <div class="claim"><b>2</b><span>independent sources behind every published fact</span></div>
     </div>
 
-    <div class="exhibit-cards">
+    <div class="wings">
+    <div class="wing">
+      <div class="wing-head"><span class="wing-kicker mono">GAL Global Advisory</span><h2 class="wing-title">Projects built for companies</h2></div>
+    <div class="exhibit-cards two">
       <button class="exhibit-card" type="button" data-goto="ex0">
         <span class="card-media"><img src="sec-today.jpg" alt="The compliance system's Today screen" loading="lazy"></span>
         <span class="card-text">
           <span class="room-no mono">Room 1</span>
           <h2>Corporate compliance system</h2>
-          <p>Deadlines, documents and client screening — and it can't delete a file.</p>
-          <span class="enter">Enter room →</span>
-        </span>
-      </button>
-
-      <button class="exhibit-card" type="button" data-goto="ex1">
-        <span class="card-media chart-media" id="lobby-chart"></span>
-        <span class="card-text">
-          <span class="room-no mono">Room 2</span>
-          <h2>Stock screening → ETF tracker</h2>
-          <p>Simply holding the shares beat every strategy I tested.</p>
-          <span class="enter">Enter room →</span>
-        </span>
-      </button>
-
-      <button class="exhibit-card" type="button" data-goto="ex2">
-        <span class="card-media dark-media"><video src="tat-clip.mp4" poster="tat-poster.jpg" muted autoplay loop playsinline aria-label="Clip from a published video: a satellite map flying from South America to the Caribbean"></video></span>
-        <span class="card-text">
-          <span class="room-no mono">Room 3</span>
-          <h2>News explainer channel</h2>
-          <p>Every fact checked against two outlets, then published.</p>
+          <p>Built for the firm I work at: deadlines, documents and client screening.</p>
           <span class="enter">Enter room →</span>
         </span>
       </button>
       <button class="exhibit-card" type="button" data-goto="ex3">
         <span class="card-media dark-media globe-media"><video src="gal-globe.mp4" poster="gal-globe-poster.jpg" muted autoplay loop playsinline aria-label="The website's animated gold globe touring routes to Singapore"></video></span>
         <span class="card-text">
-          <span class="room-no mono">Room 4</span>
+          <span class="room-no mono">Room 2</span>
           <h2>Company website</h2>
           <p>A live site built around a globe drawn in code.</p>
           <span class="enter">Enter room →</span>
         </span>
       </button>
+    </div>
+    </div>
+
+    <div class="wing">
+      <div class="wing-head"><span class="wing-kicker mono">On my own time</span><h2 class="wing-title">Personal projects</h2></div>
+    <div class="exhibit-cards two">
+      <button class="exhibit-card" type="button" data-goto="ex1">
+        <span class="card-media chart-media" id="lobby-chart"></span>
+        <span class="card-text">
+          <span class="room-no mono">Room 3</span>
+          <h2>Stock screening → ETF tracker</h2>
+          <p>Simply holding the shares beat every strategy I tested.</p>
+          <span class="enter">Enter room →</span>
+        </span>
+      </button>
+      <button class="exhibit-card" type="button" data-goto="ex2">
+        <span class="card-media dark-media"><video src="tat-clip.mp4" poster="tat-poster.jpg" muted autoplay loop playsinline aria-label="Clip from a published video: a satellite map flying from South America to the Caribbean"></video></span>
+        <span class="card-text">
+          <span class="room-no mono">Room 4</span>
+          <h2>News explainer channel</h2>
+          <p>Every fact checked against two outlets, then published.</p>
+          <span class="enter">Enter room →</span>
+        </span>
+      </button>
+    </div>
+    </div>
     </div>
 
     <div class="lobby-note">
@@ -996,9 +1034,9 @@
     <div class="exhibit-grid">
 
       <aside class="wall-label">
-        <span class="room-no mono">Room 1 of 4</span>
+        <span class="room-no mono">Room 1 of 4 · At GAL Global Advisory</span>
         <h2>Corporate compliance system</h2>
-        <p class="lead-claim">A compliance system that can't miss a deadline or lose a client's file.</p>
+        <p class="lead-claim">A compliance system that can't miss a deadline or lose a client's file, built for GAL Global Advisory, the firm I work at.</p>
         <div class="mini-stats">
           <div><b>2.1M</b><span>ACRA company records it checks against</span></div>
           <div class="warn"><b>0</b><span>ways to delete a client's file</span></div>
@@ -1006,7 +1044,7 @@
           <div><b>3×</b><span>full test passes before any release</span></div>
         </div>
         <dl class="facts">
-          <dt>Role</dt><dd>Designed it, set its rules, test it on real work</dd>
+          <dt>Role</dt><dd>Designed it, set its rules, test it on the firm's real work</dd>
           <dt>Status</dt><dd>In use, still being built</dd>
           <dt>Built with</dt><dd>TypeScript, Electron, encrypted SQLite</dd>
         </dl>
@@ -1050,7 +1088,7 @@
 
           <div class="dpanel" id="dp-sec-decision" hidden>
             <p class="pull">A calculated deadline nobody has checked is a guess.</p>
-            <p>Each rule shows its ACRA source and stays marked <b>Not yet</b> until a person checks it against a real filing.</p>
+            <p>Each rule shows its ACRA source and stays marked ‘Not yet’ until a person checks it against a real filing.</p>
           </div>
         </div>
 
@@ -1064,7 +1102,7 @@
     <div class="exhibit-grid">
 
       <aside class="wall-label">
-        <span class="room-no mono">Room 2 of 4</span>
+        <span class="room-no mono">Room 3 of 4 · Personal project</span>
         <h2>Stock screening → ETF tracker</h2>
         <p class="lead-claim">I built a trading system, tested it honestly, and found that simply holding the shares beat it.</p>
         <div class="viz" id="beat-chart"></div>
@@ -1150,7 +1188,7 @@
     <div class="exhibit-grid">
 
       <aside class="wall-label">
-        <span class="room-no mono">Room 3 of 4</span>
+        <span class="room-no mono">Room 4 of 4 · Personal project</span>
         <h2>News explainer channel</h2>
         <p class="lead-claim">A news channel where every fact is confirmed by two outlets before it airs.</p>
         <div class="phone"><video src="tat-clip.mp4" poster="tat-poster.jpg" muted autoplay loop playsinline aria-label="Clip from a published video: a satellite map flying from South America to the Caribbean, with the five island nations marked"></video></div>
@@ -1189,7 +1227,7 @@
     <div class="exhibit-grid">
 
       <aside class="wall-label">
-        <span class="room-no mono">Room 4 of 4</span>
+        <span class="room-no mono">Room 2 of 4 · At GAL Global Advisory</span>
         <h2>Company website</h2>
         <p class="lead-claim">The website of GAL Global Advisory, the corporate services firm I work at, built around a live globe.</p>
         <div class="mini-stats">
@@ -1227,9 +1265,9 @@
 
     <div class="exit-thumbs">
       <button type="button" data-goto="ex0"><span class="card-media"><img src="sec-company.jpg" alt="" loading="lazy"></span><span>Compliance system</span></button>
+      <button type="button" data-goto="ex3"><span class="card-media dark-media"><img src="gal-globe-poster.jpg" alt="" loading="lazy"></span><span>Company website</span></button>
       <button type="button" data-goto="ex1"><span class="card-media chart-media" id="exit-chart"></span><span>Screening → ETF tracker</span></button>
       <button type="button" data-goto="ex2"><span class="card-media dark-media"><img src="tat-map.jpg" alt="" loading="lazy"></span><span>News channel</span></button>
-      <button type="button" data-goto="ex3"><span class="card-media dark-media"><img src="gal-globe-poster.jpg" alt="" loading="lazy"></span><span>Company website</span></button>
     </div>
 
     <div class="exit-grid">
@@ -1277,17 +1315,17 @@
 (function () {
   "use strict";
 
-  var ORDER = ["lobby", "ex0", "ex1", "ex2", "ex3", "exit"];
+  var ORDER = ["lobby", "ex0", "ex3", "ex1", "ex2", "exit"];
   var META = {
     lobby: { label: "Entrance", count: "Start here" },
-    ex0:   { label: "Room 1 — Compliance system", count: "Room 1 of 4" },
-    ex1:   { label: "Room 2 — Screening", count: "Room 2 of 4" },
-    ex2:   { label: "Room 3 — News channel", count: "Room 3 of 4" },
-    ex3:   { label: "Room 4 — Company website", count: "Room 4 of 4" },
+    ex0:   { label: "Room 1 — Compliance system", count: "Room 1 of 4 · At GAL Global Advisory" },
+    ex3:   { label: "Room 2 — Company website", count: "Room 2 of 4 · At GAL Global Advisory" },
+    ex1:   { label: "Room 3 — Screening", count: "Room 3 of 4 · Personal project" },
+    ex2:   { label: "Room 4 — News channel", count: "Room 4 of 4 · Personal project" },
     exit:  { label: "Exit", count: "End of walkthrough" }
   };
-  var NEXT_LABEL = { lobby: "Enter Room 1 →", ex0: "Next room →", ex1: "Next room →", ex2: "Next room →", ex3: "Finish →", exit: "Back to start ↺" };
-  var PREV_LABEL = { lobby: "← Previous", ex0: "← Overview", ex1: "← Room 1", ex2: "← Room 2", ex3: "← Room 3", exit: "← Room 4" };
+  var NEXT_LABEL = { lobby: "Enter Room 1 →", ex0: "Next room →", ex3: "To personal projects →", ex1: "Next room →", ex2: "Finish →", exit: "Back to start ↺" };
+  var PREV_LABEL = { lobby: "← Previous", ex0: "← Overview", ex3: "← Room 1", ex1: "← Room 2", ex2: "← Room 3", exit: "← Room 4" };
 
   var current = "lobby";
   function el(id) { return document.getElementById(id); }
@@ -1495,12 +1533,12 @@
     }
   ];
 
-  /* symbol, side, qty, log, broker, diff, flag */
+  /* symbol, system figure, broker figure, gap, verdict */
   var RECON = [
-    ["MU", "Down", "110", "-994.84", "-1,102.75", "-107.91", "Loss, handled"],
-    ["ORCL", "Down", "708", "-999.77", "-262.67", "+737.10", "Loss, handled"],
-    ["GOOG", "Up", "292", "+402.96", "+75.92", "-327.04", "Win, handled"],
-    ["GOOGL", "Up", "289", "not recorded", "+466.74", "—", "Wrongly logged as failed"]
+    ["MU", "−994.84", "−1,102.75", "−107.91", "Loss, handled"],
+    ["ORCL", "−999.77", "−262.67", "+737.10", "Loss, handled"],
+    ["GOOG", "+402.96", "+75.92", "−327.04", "Win, handled"],
+    ["GOOGL", "not recorded", "+466.74", "—", "Wrongly logged as failed"]
   ];
 
   var GROWTH = [
@@ -1562,7 +1600,8 @@
     body.appendChild(tiles);
   }
 
-  function simpleTable(body, headers, rows, numCols) {
+  function simpleTable(body, headers, rows, numCols, wrapCols) {
+    wrapCols = wrapCols || [];
     var wrap = mk("div", "table-wrap");
     var table = document.createElement("table");
     var thead = document.createElement("thead");
@@ -1573,7 +1612,7 @@
     rows.forEach(function (r) {
       var tr = document.createElement("tr");
       tr.style.cursor = "default";
-      r.forEach(function (cell, i) { tr.appendChild(mk("td", numCols.indexOf(i) !== -1 ? "num" : null, cell)); });
+      r.forEach(function (cell, i) { tr.appendChild(mk("td", numCols.indexOf(i) !== -1 ? "num" : (wrapCols.indexOf(i) !== -1 ? "why" : null), cell)); });
       tbody.appendChild(tr);
     });
     table.appendChild(tbody);
@@ -1651,7 +1690,7 @@
         tr.appendChild(mk("td", "num", row[0]));
         tr.appendChild(mk("td", null, row[1]));
         var t3 = document.createElement("td");
-        t3.appendChild(mk("span", "ev " + (row[3] === "halt" ? "stop" : row[3]), row[2]));
+        t3.appendChild(mk("span", "ev " + (row[3] === "halt" ? "stop" : row[3]), row[2].replace(/_/g, "_\u200b")));
         tr.appendChild(t3);
         tr.appendChild(mk("td", "why", row[4]));
         tr.addEventListener("click", function () { ex1.view = "boundary"; renderEx1(); });
@@ -1672,7 +1711,7 @@
       body.appendChild(card);
 
       body.appendChild(mk("p", "pane-title", "Its own record, checked against the broker's"));
-      simpleTable(body, ["Company", "Bet", "Shares", "System", "Broker", "Gap", "Verdict"], RECON, [2, 3, 4, 5]);
+      simpleTable(body, ["Company", "System said", "Broker said", "Gap", "Verdict"], RECON, [1, 2, 3], [4]);
       body.appendChild(note("This check caught a real bug, and a trade the system wrongly thought had failed."));
       return;
     }
@@ -1680,7 +1719,7 @@
     if (ex1.view === "growth") {
       body.appendChild(mk("p", "pane-title", "Checked 19 times, 2019–2023"));
       simpleTable(body, ["Year", "Checks", "Approved", "Rejected per check"], GROWTH, [1]);
-      body.appendChild(note("Nine companies couldn't be judged when the free data ran out — marked 'not checked', not dropped."));
+      body.appendChild(note("Nine companies couldn't be judged when the free data ran out — marked ‘not checked’, not dropped."));
       return;
     }
 
@@ -1714,7 +1753,7 @@
       name: "Deadline rules",
       img: "sec-rules.jpg",
       alt: "The deadline rules settings: each rule shows the statutory deadline, an earlier internal target, its ACRA source, and a checkbox marked Not yet",
-      note: "Every deadline traces to an ACRA source, and stays 'Not yet' until a person checks it."
+      note: "Every deadline traces to an ACRA source, and stays ‘Not yet’ until a person checks it."
     }
   ];
 
@@ -1770,7 +1809,7 @@
   ];
 
   var GATE = [
-    ["Loudness right for YouTube and TikTok", "−14 ±0.5"],
+    ["Loudness right for YouTube and TikTok", "on target"],
     ["No distortion at peaks", "pass"],
     ["Text clear of phone buttons", "pass"],
     ["No black bands", "pass"],
@@ -1787,7 +1826,7 @@
     { name: "Review & publish", kind: "flow", body: "Nothing uploads on its own or on a schedule." }
   ];
 
-  var ex2 = { stage: 3, view: "stage" };
+  var ex2 = { stage: 0, view: "stage" };
 
   function ex2Crumbs() {
     var c = el("ex2-crumbs");
