@@ -947,6 +947,68 @@
   @media (min-width: 1000px) {
     .wings { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
   }
+
+  /* room 5: news tracker */
+  .exhibit-cards.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .exhibit-cards.three .card-media { height: 132px; }
+  @media (max-width: 900px) { .exhibit-cards.three { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .exhibit-cards.three { grid-template-columns: 1fr; } }
+  @media (min-width: 1000px) { .wings { grid-template-columns: 2fr 3fr; } }
+  .news-media img { object-position: left top; }
+  .exit-thumbs { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  @media (max-width: 900px) { .exit-thumbs { grid-template-columns: 1fr 1fr; } }
+  .seg { display: flex; gap: 6px; flex-wrap: wrap; }
+  .seg-b { font: inherit; font-size: 12.5px; font-weight: 600; padding: 6px 12px; border-radius: 100px; cursor: pointer;
+           border: 1px solid var(--rule-strong); background: transparent; color: var(--ink-soft); }
+  .seg-b[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--plinth); }
+  .nr-bar { display: flex; gap: 8px; flex-wrap: wrap; }
+  .nr-bar select, .nr-bar input { font: inherit; font-size: 13px; padding: 6px 9px; border-radius: 4px;
+           border: 1px solid var(--rule-strong); background: var(--ground); color: var(--ink); min-width: 0; }
+  .nr-bar input { flex: 1 1 160px; }
+  .nr-h { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-faint); margin: 2px 0 -4px; }
+  .nr-strip { display: flex; flex-wrap: wrap; gap: 6px; }
+  .nr-strip .t { white-space: normal !important; flex: 0 1 auto !important; max-width: 100%; }
+  .nr-strip .t { flex: 0 0 auto; font-size: 12.5px; padding: 4px 10px; border-radius: 100px; border: 1px solid var(--rule-strong);
+           color: var(--ink); text-decoration: none; background: var(--ground); white-space: nowrap; }
+  .nr-strip a.t:hover { border-color: var(--accent); }
+  .nr-strip .t small { margin-left: 6px; color: var(--ink-faint); font-size: 10.5px; font-family: "IBM Plex Mono", ui-monospace, monospace; }
+  .nr-list { display: flex; flex-direction: column; gap: 10px; }
+  .nr-card { border: 1px solid var(--rule); border-radius: 5px; padding: 11px 13px; background: var(--ground); display: flex; flex-direction: column; gap: 7px; }
+  .nr-card.hot { border-color: #c3971d; box-shadow: inset 3px 0 0 #c3971d; }
+  .nr-hd { font-weight: 700; font-size: 14.5px; line-height: 1.35; }
+  .nr-bd { display: flex; flex-wrap: wrap; gap: 5px; }
+  .nr-b { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 100px; border: 1px solid var(--rule-strong); white-space: nowrap; }
+  .nr-b.surging { background: #fbe3d4; border-color: #e5895c; color: #7a2e0a; }
+  .nr-b.trending { background: #fbf0cf; border-color: #d5aa3a; color: #6a4d05; }
+  .nr-b.update { background: #dcebf8; border-color: #6a9fd0; color: #164a78; }
+  .nr-b.new { background: #e3f2e6; border-color: #6fae7c; color: #1e5a2c; }
+  .nr-b.nonwest { background: #ece4f7; border-color: #9a7cc8; color: #47286f; }
+  .nr-b.covered { background: #e3f2e6; border-color: #6fae7c; color: #1e5a2c; }
+  .nr-b.maybe-elsewhere { background: #f6e1e4; border-color: #c97884; color: #6e1f2b; }
+  .nr-chip { font-size: 11.5px; padding: 2px 8px; border-radius: 3px; background: var(--plinth-2); color: var(--ink-soft); white-space: nowrap; }
+  .nr-chip.more { font-style: italic; }
+  .nr-meta { font-size: 12px; color: var(--ink-faint); line-height: 1.45; }
+  .nr-card details summary { font-size: 12.5px; color: var(--accent); cursor: pointer; font-weight: 600; }
+  .nr-card details ul { margin: 6px 0 0; padding-left: 18px; font-size: 12.5px; display: flex; flex-direction: column; gap: 4px; }
+  .nr-card details small { color: var(--ink-faint); }
+  .nr-acts { display: flex; gap: 6px; }
+  .btn.picked { background: #fbf0cf; border-color: #d5aa3a; color: #6a4d05; }
+  .badge-key { display: flex; flex-direction: column; gap: 8px; }
+  .badge-key > div { display: grid; grid-template-columns: 150px 1fr; gap: 10px; align-items: center; font-size: 13px; color: var(--ink-soft); }
+  .badge-key .nr-b { justify-self: start; }
+  .src-live { display: flex; flex-wrap: wrap; gap: 5px; }
+  .src-off { display: flex; flex-direction: column; border: 1px solid var(--rule); border-radius: 4px; max-height: 300px; overflow-y: auto; }
+  .src-row { display: grid; grid-template-columns: 150px 1fr; gap: 10px; padding: 7px 10px; border-bottom: 1px solid var(--rule); font-size: 12.5px; }
+  .src-row:last-child { border-bottom: 0; }
+  .src-row span { color: var(--ink-soft); }
+  @media (max-width: 560px) { .src-row, .badge-key > div { grid-template-columns: 1fr; gap: 2px; } }
+
+  .nr-notice { font-size: 12.5px; color: var(--ink-soft); background: var(--plinth-2); border-radius: 4px; padding: 8px 11px; line-height: 1.45; }
+  .nr-notice.warn { background: var(--signal-soft); color: var(--ink); }
+  .sample-chip.live { color: #1e5a2c; background: #e3f2e6; }
+  .nc-list { margin: 0; padding-left: 18px; font-size: 12.5px; color: var(--ink-soft); display: flex; flex-direction: column; gap: 4px; }
+  .sidepanel ul.flaws { font-size: 13px; gap: 8px; }
+  .sidepanel ul.flaws b { color: var(--ink); }
   @media (prefers-reduced-motion: reduce) { .bar, .hb { animation: none; } }
 </style>
 
@@ -964,12 +1026,12 @@
   <section class="room" id="room-lobby">
     <div class="lobby-head">
       <p class="eyebrow">Project walkthrough</p>
-      <h1>Four projects I designed, built and run</h1>
+      <h1>Five projects I designed, built and run</h1>
       <p class="lede">Built with AI coding tools — and what I had to work out before I could trust each one.</p>
     </div>
 
     <div class="claims">
-      <div class="claim"><b>4</b><span>projects built and used on real work</span></div>
+      <div class="claim"><b>5</b><span>projects built and used on real work</span></div>
       <div class="claim warnc"><b>6</b><span>trading searches — none passed, so I shut trading down</span></div>
       <div class="claim"><b>2</b><span>independent sources behind every published fact</span></div>
     </div>
@@ -1001,7 +1063,7 @@
 
     <div class="wing">
       <div class="wing-head"><span class="wing-kicker mono">On my own time</span><h2 class="wing-title">Personal projects</h2></div>
-    <div class="exhibit-cards two">
+    <div class="exhibit-cards three">
       <button class="exhibit-card" type="button" data-goto="ex1">
         <span class="card-media chart-media" id="lobby-chart"></span>
         <span class="card-text">
@@ -1020,6 +1082,15 @@
           <span class="enter">Enter room →</span>
         </span>
       </button>
+      <button class="exhibit-card" type="button" data-goto="ex4">
+        <span class="card-media dark-media news-media"><img src="news-card.jpg" alt="The live news tracker's board of stories" loading="lazy"></span>
+        <span class="card-text">
+          <span class="room-no mono">Room 5</span>
+          <h2>Live news tracker</h2>
+          <p>Live headlines from around the world, updated every hour.</p>
+          <span class="enter">Enter room →</span>
+        </span>
+      </button>
     </div>
     </div>
     </div>
@@ -1034,7 +1105,7 @@
     <div class="exhibit-grid">
 
       <aside class="wall-label">
-        <span class="room-no mono">Room 1 of 4 · At GAL Global Advisory</span>
+        <span class="room-no mono">Room 1 of 5 · At GAL Global Advisory</span>
         <h2>Corporate compliance system</h2>
         <p class="lead-claim">A compliance system that can't miss a deadline or lose a client's file, built for GAL Global Advisory, the firm I work at.</p>
         <div class="mini-stats">
@@ -1102,7 +1173,7 @@
     <div class="exhibit-grid">
 
       <aside class="wall-label">
-        <span class="room-no mono">Room 3 of 4 · Personal project</span>
+        <span class="room-no mono">Room 3 of 5 · Personal project</span>
         <h2>Stock screening → ETF tracker</h2>
         <p class="lead-claim">I built a trading system, tested it honestly, and found that simply holding the shares beat it.</p>
         <div class="viz" id="beat-chart"></div>
@@ -1188,7 +1259,7 @@
     <div class="exhibit-grid">
 
       <aside class="wall-label">
-        <span class="room-no mono">Room 4 of 4 · Personal project</span>
+        <span class="room-no mono">Room 4 of 5 · Personal project</span>
         <h2>News explainer channel</h2>
         <p class="lead-claim">A news channel where every fact is confirmed by two outlets before it airs.</p>
         <div class="phone"><video src="tat-clip.mp4" poster="tat-poster.jpg" muted autoplay loop playsinline aria-label="Clip from a published video: a satellite map flying from South America to the Caribbean, with the five island nations marked"></video></div>
@@ -1227,7 +1298,7 @@
     <div class="exhibit-grid">
 
       <aside class="wall-label">
-        <span class="room-no mono">Room 2 of 4 · At GAL Global Advisory</span>
+        <span class="room-no mono">Room 2 of 5 · At GAL Global Advisory</span>
         <h2>Company website</h2>
         <p class="lead-claim">The website of GAL Global Advisory, the corporate services firm I work at, built around a live globe.</p>
         <div class="mini-stats">
@@ -1258,6 +1329,92 @@
     </div>
   </section>
 
+  <!-- ===================== ROOM 5: LIVE NEWS TRACKER ===================== -->
+  <section class="room" id="room-ex4" hidden>
+    <div class="exhibit-grid">
+
+      <aside class="wall-label">
+        <span class="room-no mono">Room 5 of 5 · Personal project</span>
+        <h2>Live news tracker</h2>
+        <p class="lead-claim">A board that reads news outlets around the world and shows which stories are spreading.</p>
+        <div class="mini-stats">
+          <div><b id="nr-outlets-stat">43</b><span>news outlets read live, worldwide</span></div>
+          <div><b>38</b><span>countries' Google searches checked</span></div>
+          <div><b>1 h</b><span>between updates here (10 min in my app)</span></div>
+          <div class="warn"><b>$0</b><span>to run: plain code, no AI</span></div>
+        </div>
+        <dl class="facts">
+          <dt>Role</dt><dd>Designed it and set its rules</dd>
+          <dt>Status</dt><dd>In use since Oct 2026</dd>
+          <dt>Built with</dt><dd>Python, RSS feeds, Google Trends, JavaScript</dd>
+        </dl>
+      </aside>
+
+      <div>
+        <div class="case">
+          <div class="case-bar">
+            <div class="case-bar-left">
+              <nav class="crumbs mono" id="ex4-crumbs" aria-label="Where you are"></nav>
+            </div>
+            <span class="sample-chip" id="ex4-chip">Loading latest…</span>
+          </div>
+          <div class="case-body" id="ex4-body"></div>
+        </div>
+
+        <div class="sidepanel">
+          <div class="dtabs" role="tablist">
+            <button type="button" class="dtab" data-panel="nr-how" aria-selected="true">How it works</button>
+            <button type="button" class="dtab" data-panel="nr-badges" aria-selected="false">The badges</button>
+            <button type="button" class="dtab" data-panel="nr-honest" aria-selected="false">Rules it keeps</button>
+            <button type="button" class="dtab" data-panel="nr-flaws" aria-selected="false">Known flaws</button>
+          </div>
+
+          <div class="dpanel" id="dp-nr-how">
+            <div class="icon-cards">
+              <div class="icon-card"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b>Reads every 10 minutes</b><span>Headlines and links only, from each outlet's public feed.</span></div></div>
+              <div class="icon-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><div><b>Groups them into stories</b><span>Headlines that share the same unusual words become one story.</span></div></div>
+              <div class="icon-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V10M12 20V4M19 20v-7"/></svg><div><b>Scores each story</b><span>More outlets, more regions and fresh pick-ups push it up the board.</span></div></div>
+              <div class="icon-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg><div><b>Matches what people search</b><span>Google Trends from 38 countries shows what's being searched but not yet reported.</span></div></div>
+            </div>
+          </div>
+
+          <div class="dpanel" id="dp-nr-badges" hidden>
+            <div class="badge-key">
+              <div><span class="nr-b surging">🔥 Surging</span><span>3 or more outlets picked it up in the last 2 hours</span></div>
+              <div><span class="nr-b trending">📈 Trending</span><span>people are searching for it on Google</span></div>
+              <div><span class="nr-b update">🔄 Update</span><span>a story I'm following has moved (my app only)</span></div>
+              <div><span class="nr-b new">🆕 New</span><span>first seen in the last hour</span></div>
+              <div><span class="nr-b nonwest">🌏 Non-Western</span><span>every outlet carrying it is outside the West</span></div>
+              <div><span class="nr-b covered">✅ Covered</span><span>my channel has already made a video on it (my app only)</span></div>
+              <div><span class="nr-b maybe-elsewhere">📍 Maybe elsewhere</span><span>a wire dateline suggests it happened in another country</span></div>
+            </div>
+          </div>
+
+          <div class="dpanel" id="dp-nr-honest" hidden>
+            <div class="icon-cards">
+              <div class="icon-card"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg><div><b>A site that says no is respected</b><span>Outlets that block automated readers, have no feed or stopped updating are listed in Sources with the reason, never worked around.</span></div></div>
+              <div class="icon-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><div><b>Stories filed in the right country</b><span>A US story once showed under Singapore. Where a wire dateline exists, it now moves the story to where it happened.</span></div></div>
+              <div class="icon-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><div><b>No made-up links</b><span>A search term only links to an article when Google gives a real one.</span></div></div>
+            </div>
+          </div>
+          <div class="dpanel" id="dp-nr-flaws" hidden>
+            <ul class="tried flaws">
+              <li><b>The country can be wrong.</b> Stories are filed by which countries' outlets carried them, not where they happened. Most have no dateline to check: on 6 Oct, only 4 of 294 did.</li>
+              <li><b>Stories can merge or split.</b> Headlines are grouped by shared words, so two different events can end up as one story, and one event worded differently can show up twice.</li>
+              <li><b>One wire story can look like many.</b> When several outlets run the same AP or AFP report, each counts as its own outlet, so a story can look bigger than it is.</li>
+              <li><b>Headlines only.</b> It never reads the articles, so it can't tell whether a headline is accurate.</li>
+              <li><b>Search matches are word-based.</b> A Google search term is linked to a story by shared words, so a common term can match the wrong story, or none.</li>
+              <li><b>Gaps in coverage.</b> Some outlets can't be read (see Sources), AP and Reuters only arrive through other outlets, and China, TikTok and Reddit aren't covered.</li>
+              <li><b>This page is slower than my app.</b> It updates hourly and can run late, some outlets may refuse GitHub's servers, and two badges need my own files, so they only appear in my app.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
   <!-- ===================== EXIT ===================== -->
   <section class="room" id="room-exit" hidden>
     <p class="eyebrow">End of the walkthrough</p>
@@ -1268,6 +1425,7 @@
       <button type="button" data-goto="ex3"><span class="card-media dark-media"><img src="gal-globe-poster.jpg" alt="" loading="lazy"></span><span>Company website</span></button>
       <button type="button" data-goto="ex1"><span class="card-media chart-media" id="exit-chart"></span><span>Screening → ETF tracker</span></button>
       <button type="button" data-goto="ex2"><span class="card-media dark-media"><img src="tat-map.jpg" alt="" loading="lazy"></span><span>News channel</span></button>
+      <button type="button" data-goto="ex4"><span class="card-media dark-media"><img src="news-card.jpg" alt="" loading="lazy"></span><span>News tracker</span></button>
     </div>
 
     <div class="exit-grid">
@@ -1284,6 +1442,7 @@
           <span class="tag">Electron</span>
           <span class="tag">SQLite</span>
           <span class="tag">Python</span>
+          <span class="tag">RSS</span>
           <span class="tag">pandas</span>
           <span class="tag">Streamlit</span>
           <span class="tag">Remotion</span>
@@ -1315,17 +1474,18 @@
 (function () {
   "use strict";
 
-  var ORDER = ["lobby", "ex0", "ex3", "ex1", "ex2", "exit"];
+  var ORDER = ["lobby", "ex0", "ex3", "ex1", "ex2", "ex4", "exit"];
   var META = {
     lobby: { label: "Entrance", count: "Start here" },
-    ex0:   { label: "Room 1 — Compliance system", count: "Room 1 of 4 · At GAL Global Advisory" },
-    ex3:   { label: "Room 2 — Company website", count: "Room 2 of 4 · At GAL Global Advisory" },
-    ex1:   { label: "Room 3 — Screening", count: "Room 3 of 4 · Personal project" },
-    ex2:   { label: "Room 4 — News channel", count: "Room 4 of 4 · Personal project" },
+    ex0:   { label: "Room 1 — Compliance system", count: "Room 1 of 5 · At GAL Global Advisory" },
+    ex3:   { label: "Room 2 — Company website", count: "Room 2 of 5 · At GAL Global Advisory" },
+    ex1:   { label: "Room 3 — Screening", count: "Room 3 of 5 · Personal project" },
+    ex2:   { label: "Room 4 — News channel", count: "Room 4 of 5 · Personal project" },
+    ex4:   { label: "Room 5 — News tracker", count: "Room 5 of 5 · Personal project" },
     exit:  { label: "Exit", count: "End of walkthrough" }
   };
-  var NEXT_LABEL = { lobby: "Enter Room 1 →", ex0: "Next room →", ex3: "To personal projects →", ex1: "Next room →", ex2: "Finish →", exit: "Back to start ↺" };
-  var PREV_LABEL = { lobby: "← Previous", ex0: "← Overview", ex3: "← Room 1", ex1: "← Room 2", ex2: "← Room 3", exit: "← Room 4" };
+  var NEXT_LABEL = { lobby: "Enter Room 1 →", ex0: "Next room →", ex3: "To personal projects →", ex1: "Next room →", ex2: "Next room →", ex4: "Finish →", exit: "Back to start ↺" };
+  var PREV_LABEL = { lobby: "← Previous", ex0: "← Overview", ex3: "← Room 1", ex1: "← Room 2", ex2: "← Room 3", ex4: "← Room 4", exit: "← Room 5" };
 
   var current = "lobby";
   function el(id) { return document.getElementById(id); }
@@ -2180,6 +2340,242 @@
     body.appendChild(go);
   }
 
+
+  /* ---------------- room 5: live news tracker ---------------- */
+
+  /* Saved sample (6 Oct 2026). On the published site this is replaced by
+     news.json, which a GitHub job rebuilds every hour. Same shape either way. */
+  var NEWS_SAMPLE = {"snap":"06 Oct 10:52 SGT","total":294,"outlets_live":43,"feeds_live":45,"trends_ok":38,"trends_n":38,"stories":[{"id":"19a94d0747d5","h":"Georgia officials hunt for suspect in shooting that killed two and injured 35","b":["surging","trending"],"o":[["The Hindu","South Asia"],["BBC","Europe"],["ABC News (Australia)","Oceania"],["The Guardian","Europe"],["CNA","SE Asia"],["The Jerusalem Post","Middle East"]],"r":["Europe","Middle East","Oceania","SE Asia","South Asia"],"fs":"05 Oct 08:09 SGT","fo":"The Hindu","ro":3,"tr":[["AU","5000+"]],"dl":null,"n":6,"l":[["The Hindu","Georgia block party shooting kills two, injures dozens","https://www.thehindu.com/news/international/georgia-vienna-block-party-shooting-toll-updates-october-5-2026/article71545655.ece","05 Oct 08:09 SGT"],["BBC","Georgia officials hunt for suspect in shooting that killed two and injured 35","https://www.bbc.co.uk/news/articles/c6e9lj5r3ej7o?at_medium=RSS&at_campaign=rss","05 Oct 20:08 SGT"],["ABC News (Australia)","Defence confirms 28yo male soldier killed in vehicle rollover","https://www.abc.net.au/news/2026-10-06/australian-army-soldier-dies-in-training-exercise/107232278","06 Oct 06:29 SGT"],["The Guardian","Australian Army soldier killed and five others injured in training exercise in the Northern Territory","https://www.theguardian.com/australia-news/2026/oct/06/australian-defence-force-soldier-killed-five-injuried-mount-bundey-training-northern-territory","06 Oct 09:28 SGT"]]},{"id":"32446ba8e9cf","h":"Trump approves firing-squad execution of Fort Hood shooter Nidal Hasan","b":["surging"],"o":[["Straits Times","SE Asia"],["AFP (via France 24)","Wire"],["The Guardian","Europe"],["UPI","Wire"],["Indian Express","South Asia"],["ABC News (Australia)","Oceania"],["SCMP","East Asia"],["Anadolu","Middle East"],["CNA","SE Asia"]],"r":["East Asia","Europe","Middle East","Oceania","SE Asia","South Asia","Wire"],"fs":"06 Oct 08:42 SGT","fo":"Straits Times","ro":8,"tr":[],"dl":null,"n":9,"l":[["Straits Times","Trump approves firing squad for convicted US military base shooter: Pentagon","https://www.straitstimes.com/world/united-states/trump-approves-firing-squad-for-convicted-us-military-base-shooter-pentagon","06 Oct 08:42 SGT"],["AFP (via France 24)","Trump approves firing-squad execution of Fort Hood shooter Nidal Hasan","https://www.france24.com/en/americas/20261006-trump-approves-firing-squad-execution-of-fort-hood-shooter-nidal-hasan","06 Oct 09:31 SGT"],["The Guardian","Trump approves firing-squad execution of Fort Hood shooter, Pentagon says","https://www.theguardian.com/us-news/2026/oct/05/trump-fort-hood-shooter-execution","06 Oct 09:33 SGT"],["UPI","Pentagon: Fort Hood shooter to be executed by firing squad","https://www.upi.com/Top_News/US/2026/10/05/Pentagon-Nidal-Hasan-execution-firing-squad/5951791248598/","06 Oct 09:44 SGT"]]},{"id":"7ad7e0a2e68d","h":"German and US scientists win Nobel Prize in medicine for research on brain activity","b":[],"o":[["The Hindu","South Asia"],["Japan Times","East Asia"],["DW (English)","Europe"],["Straits Times","SE Asia"],["SCMP","East Asia"],["Indian Express","South Asia"],["NPR","US"],["BBC","Europe"],["Rappler","SE Asia"],["Africanews","Africa"],["CNA","SE Asia"],["Al Jazeera","Middle East"],["UPI","Wire"],["AFP (via France 24)","Wire"],["Taipei Times","East Asia"],["VnExpress","SE Asia"]],"r":["Africa","East Asia","Europe","Middle East","SE Asia","South Asia","US","Wire"],"fs":"05 Oct 17:06 SGT","fo":"The Hindu","ro":1,"tr":[],"dl":null,"n":22,"l":[["The Hindu","Nobel Prize 2026: When will the awards be announced, date and timings in IST","https://www.thehindu.com/news/international/nobel-prize-2026-date-timings-ist-how-to-watch/article71546193.ece","05 Oct 17:06 SGT"],["Japan Times","Scientists win Nobel Prize in medicine for work on ‘light-gated ion channels and optogenetics’","https://www.japantimes.co.jp/news/2026/10/05/world/science-health/2026-nobel-prize-medicine/","05 Oct 17:34 SGT"],["DW (English)","German and US scientists win Nobel Prize in medicine for research on brain activity","https://www.dw.com/en/german-and-us-scientists-win-nobel-prize-in-medicine-for-research-on-brain-activity/a-79544130?maca=en-rss-en-all-1573-rdf","05 Oct 17:37 SGT"],["Straits Times","Scientists Deisseroth, Hegemann and Nagel win 2026 Nobel Prize in medicine","https://www.straitstimes.com/world/europe/american-deisseroth-and-germans-hegemann-and-nagel-win-2026-nobel-medicine-prize","05 Oct 17:43 SGT"]]},{"id":"5c6f45d2e676","h":"Brazil’s presidential race goes to second round as Flávio Bolsonaro leads incumbent Lula","b":[],"o":[["Folha (EN)","Latin America"],["The Guardian","Europe"],["The Hindu","South Asia"],["Euronews","Europe"],["Japan Times","East Asia"],["Nation (KE)","Africa"],["El País (EN)","Latin America"],["Indian Express","South Asia"],["Africanews","Africa"],["SCMP","East Asia"],["Buenos Aires Times","Latin America"],["NPR","US"],["AFP (via France 24)","Wire"],["Straits Times","SE Asia"],["Al Jazeera","Middle East"],["Taipei Times","East Asia"]],"r":["Africa","East Asia","Europe","Latin America","Middle East","SE Asia","South Asia","US","Wire"],"fs":"05 Oct 07:20 SGT","fo":"Folha (EN)","ro":0,"tr":[],"dl":null,"n":21,"l":[["Folha (EN)","Flávio Bolsonaro and Lula Advance to Presidential Election Runoff","https://redir.folha.com.br/redir/online//rss091/*https://www1.folha.uol.com.br/internacional/en/brazil/2026/10/datafolha-projects-flavio-bolsonaro-and-lula-advance-to-presidential-election-runoff.shtml","05 Oct 07:20 SGT"],["The Guardian","Brazil’s presidential race goes to second round as Flávio Bolsonaro leads incumbent Lula","https://www.theguardian.com/world/2026/oct/05/brazil-presidential-race-election-result-second-round-lula-flavio-bolsonaro","05 Oct 08:16 SGT"],["The Hindu","Brazil’s Flavio Bolsonaro beats polls in presidential vote, faces Lula in runoff","https://www.thehindu.com/news/international/brazil-election-results-updated-flavio-bolsonaro-luiz-inacio-lula-da-silva/article71545022.ece","05 Oct 09:59 SGT"],["Euronews","Brazil heads to a runoff presidential vote after Bolsonaro and Lula fail to acquire outright majority needed","https://www.euronews.com/2026/10/05/brazil-heads-to-a-runoff-presidential-vote-after-bolsonaro-and-lula-fail-to-acquire-outrig","05 Oct 12:08 SGT"]]},{"id":"6528aeea0475","h":"Watch: How Spain's housing crisis has resulted in an early general election","b":["maybe-elsewhere","trending"],"o":[["The Hindu","South Asia"],["El País (EN)","Latin America"],["SCMP","East Asia"],["BBC","Europe"],["NPR","US"],["The National (UAE)","Middle East"],["UPI","Wire"],["Straits Times","SE Asia"],["Al Jazeera","Middle East"],["Kathmandu Post","South Asia"],["AFP (via France 24)","Wire"],["Taipei Times","East Asia"]],"r":["East Asia","Europe","Latin America","Middle East","SE Asia","South Asia","US","Wire"],"fs":"05 Oct 15:23 SGT","fo":"The Hindu","ro":0,"tr":[["AU","200+"]],"dl":{"city":"MADRID","date":"05 Oct"},"n":18,"l":[["The Hindu","Spain PM to make public address after housing measures rejected: office","https://www.thehindu.com/news/international/spain-pm-to-make-public-address-after-housing-measures-rejected-office/article71546224.ece","05 Oct 15:23 SGT"],["El País (EN)","Spain calls snap election as housing protests spread nationwide","https://english.elpais.com/international/2026-10-05/spain-calls-snap-election-as-housing-protests-spread-nationwide.html","05 Oct 15:46 SGT"],["SCMP","Spain’s prime minister calls early election as housing becomes a national flashpoint","https://www.scmp.com/news/world/europe/article/3369786/spains-prime-minister-calls-early-election-housing-becomes-national-flashpoint?utm_source=rss_feed","05 Oct 16:04 SGT"],["BBC","Watch: How Spain's housing crisis has resulted in an early general election","https://www.bbc.co.uk/news/videos/c83vqk2k2k20o?at_medium=RSS&at_campaign=rss","05 Oct 17:03 SGT"]]},{"id":"21e75ceee5f9","h":"Hundreds of French schools shut, teen loses hand in protests","b":["trending"],"o":[["The Hindu","South Asia"],["DW (English)","Europe"],["Straits Times","SE Asia"],["UPI","Wire"],["CNA","SE Asia"],["Al Jazeera","Middle East"],["AFP (via France 24)","Wire"],["SCMP","East Asia"],["Euronews","Europe"],["The National (UAE)","Middle East"],["The Guardian","Europe"],["BBC","Europe"]],"r":["East Asia","Europe","Middle East","SE Asia","South Asia","Wire"],"fs":"05 Oct 03:34 SGT","fo":"The Hindu","ro":0,"tr":[["NL","200+"],["NG","2000+"],["KE","200+"],["ZA","1000+"]],"dl":null,"n":20,"l":[["The Hindu","Hundreds of schools to shut on October 5 as student protests rock France","https://www.thehindu.com/news/international/hundreds-of-schools-to-shut-on-october-5-as-student-protests-rock-france/article71544839.ece","05 Oct 03:34 SGT"],["DW (English)","Hundreds of French schools shut, teen loses hand in protests","https://www.dw.com/en/hundreds-of-french-schools-shut-teen-loses-hand-in-protests/a-79542656?maca=en-rss-en-all-1573-rdf","05 Oct 13:48 SGT"],["Straits Times","Hundreds of French schools stay closed ahead of nationwide day of student protests","https://www.straitstimes.com/world/europe/hundreds-of-french-schools-stay-closed-ahead-of-nationwide-day-of-student-protests","05 Oct 16:33 SGT"],["UPI","France protests: Up to 500 schools closed due to security concerns","https://www.upi.com/Top_News/World-News/2026/10/05/France-education-protests-shutter-schools/3941791187985/","05 Oct 17:44 SGT"]]},{"id":"fca58c087d06","h":"Yemen’s Saudi-backed government launches military drive to retake all Houthi-held territory","b":[],"o":[["The National (UAE)","Middle East"],["The Hindu","South Asia"],["The Guardian","Europe"],["Africanews","Africa"],["Straits Times","SE Asia"],["SCMP","East Asia"],["AFP (via France 24)","Wire"],["Anadolu","Middle East"],["Al Jazeera","Middle East"],["Kathmandu Post","South Asia"],["DW (English)","Europe"],["Japan Times","East Asia"]],"r":["Africa","East Asia","Europe","Middle East","SE Asia","South Asia","Wire"],"fs":"04 Oct 12:47 SGT","fo":"The National (UAE)","ro":1,"tr":[],"dl":null,"n":19,"l":[["The National (UAE)","Yemen's Al Alimi announces military operations to retake territory from Houthis","https://www.thenationalnews.com/news/gulf/2026/10/04/yemen-government-forces-strike-sanaa-and-saada-as-houthis-claim-aramco-attack/","04 Oct 12:47 SGT"],["The Hindu","Yemen presidency announces military drive to retake all Houthi territory","https://www.thehindu.com/news/international/yemen-presidency-announces-military-drive-to-retake-all-houthi-territory/article71544431.ece","04 Oct 23:15 SGT"],["The Guardian","Yemen’s Saudi-backed government launches military drive to retake all Houthi-held territory","https://www.theguardian.com/world/2026/oct/05/saudi-backed-yemen-government-military-drive-retake-houthi-territory","05 Oct 08:38 SGT"],["Africanews","Yemeni government forces launch major offensive to retake Houthi-held territory","http://www.africanews.com/2026/10/05/yemeni-government-forces-launch-major-offensive-to-retake-houthi-held-territory/","05 Oct 16:06 SGT"]]},{"id":"da4dcbbc8628","h":"Trump says Super Pac will pay for taxpayer-funded ads that sparked outcry","b":["surging"],"o":[["Straits Times","SE Asia"],["SCMP","East Asia"],["The Hindu","South Asia"],["The Guardian","Europe"],["CNA","SE Asia"],["Al Jazeera","Middle East"],["DW (English)","Europe"]],"r":["East Asia","Europe","Middle East","SE Asia","South Asia"],"fs":"06 Oct 07:30 SGT","fo":"Straits Times","ro":5,"tr":[],"dl":null,"n":7,"l":[["Straits Times","Trump says taxpayers will no longer pay for TV ads that praised him","https://www.straitstimes.com/world/united-states/trump-says-will-pay-for-tv-ads-after-pushback-over-taxpayer-funding-close-to-election","06 Oct 07:30 SGT"],["SCMP","Trump says will pay for TV ads after pushback over taxpayer funding close to election","https://www.scmp.com/news/world/united-states-canada/article/3369846/trump-says-will-pay-tv-ads-after-pushback-over-taxpayer-funding-close-election?utm_source=rss_feed","06 Oct 07:34 SGT"],["The Hindu","Trump says his super PAC will pay for taxpayer-funded ads that sparked backlash for glorifying him","https://www.thehindu.com/news/international/trump-says-his-super-pac-will-pay-for-taxpayer-funded-ads-that-sparked-backlash-for-glorifying-him/article71549746.ece","06 Oct 09:12 SGT"],["The Guardian","Trump says Super Pac will pay for taxpayer-funded ads that sparked outcry","https://www.theguardian.com/us-news/2026/oct/05/trump-super-pac-ads","06 Oct 09:35 SGT"]]},{"id":"1e23e8825568","h":"Student protests erupt at Cornell over mishandling of gang-rape allegations","b":["surging","covered"],"o":[["Al Jazeera","Middle East"],["The Hindu","South Asia"],["Straits Times","SE Asia"],["The Guardian","Europe"],["Kathmandu Post","South Asia"],["ABC News (Australia)","Oceania"],["The Jerusalem Post","Middle East"]],"r":["Europe","Middle East","Oceania","SE Asia","South Asia"],"fs":"06 Oct 05:50 SGT","fo":"Al Jazeera","ro":5,"tr":[],"dl":null,"n":8,"l":[["Al Jazeera","‘Smash the patriarchy’: Activists graffiti Cornell hall over gang rape case","https://www.aljazeera.com/news/2026/10/5/smash-the-patriarchy-activists-graffiti-cornell-hall-over-gang-rape-case?traffic_source=rss","06 Oct 05:50 SGT"],["The Hindu","Students protest Cornell’s response to gang rape complaint","https://www.thehindu.com/news/international/students-protest-cornells-response-to-gang-rape-complaint/article71549035.ece","06 Oct 07:14 SGT"],["Straits Times","Cornell students stage anti-rape rally","https://www.straitstimes.com/world/united-states/cornell-students-stage-anti-rape-rally","06 Oct 09:13 SGT"],["The Guardian","Student protests erupt at Cornell over mishandling of gang-rape allegations","https://www.theguardian.com/us-news/2026/oct/05/students-vandalize-cornell-building","06 Oct 09:30 SGT"]]},{"id":"828f1759ee36","h":"Has plague returned to Siberia? Panic in Russia after death of lab worker","b":["update","covered","maybe-elsewhere","trending"],"o":[["Euronews","Europe"],["Indian Express","South Asia"],["Straits Times","SE Asia"],["The Guardian","Europe"],["The Hindu","South Asia"],["SCMP","East Asia"],["Al Jazeera","Middle East"],["CNA","SE Asia"],["Japan Times","East Asia"]],"r":["East Asia","Europe","Middle East","SE Asia","South Asia"],"fs":"04 Oct 23:07 SGT","fo":"Euronews","ro":1,"tr":[["AE","100+"],["IN","10000+"],["BD","200+"],["NZ","200+"]],"dl":{"city":"WASHINGTON","date":"05 Oct"},"n":13,"l":[["Euronews","Has plague returned to Siberia? Panic in Russia after death of lab worker","https://www.euronews.com/2026/10/04/has-plague-returned-to-siberia-panic-in-russia-after-death-of-lab-worker","04 Oct 23:07 SGT"],["Indian Express","Nearly 200 isolated after lab worker dies of suspected plague in Siberia","https://indianexpress.com/article/world/russia-suspected-plague-case-irkutsk-lab-worker-dies-10906926/","05 Oct 12:38 SGT"],["Indian Express","Pneumonic plague in Russia? What we know about Siberian lab tech’s death","https://indianexpress.com/article/world/pneumonic-plague-in-russia-what-we-know-about-siberian-lab-techs-death-10907301/","05 Oct 17:11 SGT"],["Euronews","Russia denies lab worker died of plague as quarantine in Siberia stays in place","https://www.euronews.com/2026/10/05/situation-under-control-russian-authorities-reassure-public-after-plague-reports-in-siberi","05 Oct 21:02 SGT"]]},{"id":"a43d9616b034","h":"Former House Speaker Dennis Hastert dies at 84","b":["trending"],"o":[["Straits Times","SE Asia"],["UPI","Wire"],["ABC News (Australia)","Oceania"],["SCMP","East Asia"],["The Guardian","Europe"],["The Jerusalem Post","Middle East"],["Indian Express","South Asia"]],"r":["East Asia","Europe","Middle East","Oceania","SE Asia","South Asia","Wire"],"fs":"05 Oct 23:15 SGT","fo":"Straits Times","ro":2,"tr":[["IN","500+"],["NZ","200+"]],"dl":null,"n":10,"l":[["Straits Times","Dennis Hastert, former US House speaker and admitted child molester, dies at 84","https://www.straitstimes.com/world/united-states/dennis-hastert-former-us-house-speaker-and-admitted-child-molester-dies-at-84","05 Oct 23:15 SGT"],["UPI","Former House Speaker Dennis Hastert dies at 84","https://www.upi.com/Top_News/US/2026/10/05/dennis-hastert/3201791209930/","05 Oct 23:49 SGT"],["ABC News (Australia)","Bestselling UK novelist Jeffrey Archer dies days before latest book release","https://www.abc.net.au/news/2026-10-06/uk-author-politician-jeffrey-archer-dies-aged-86/107232026","06 Oct 05:00 SGT"],["Straits Times","British author and politician Jeffrey Archer dies aged 86","https://www.straitstimes.com/world/europe/uk-author-and-politician-jeffrey-archer-dies-aged-86","06 Oct 05:03 SGT"]]},{"id":"fe92319952ed","h":"Flydubai co-pilot accused of attacking fellow pilot had spent time in NZ, police confirm","b":[],"o":[["The Hindu","South Asia"],["Indian Express","South Asia"],["Straits Times","SE Asia"],["RNZ","Oceania"],["NPR","US"],["BBC","Europe"],["DW (English)","Europe"],["Euronews","Europe"],["The Guardian","Europe"],["The National (UAE)","Middle East"],["UPI","Wire"]],"r":["Europe","Middle East","Oceania","SE Asia","South Asia","US","Wire"],"fs":"04 Oct 16:40 SGT","fo":"The Hindu","ro":0,"tr":[],"dl":null,"n":17,"l":[["The Hindu","Watch: Netanyahu calls Indian FlyDubai pilot Smit Machchhar ‘hero of the entire world’","https://www.thehindu.com/videos/shorts/watch-netanyahu-calls-indian-flydubai-pilot-smit-machchhar-hero-of-the-entire-world/article71543260.ece","04 Oct 16:40 SGT"],["The Hindu","UAE shared details about FlyDubai flight with Israel, including pilots’ names, nationalities","https://www.thehindu.com/news/international/uae-shared-details-about-flydubai-flight-with-israel-including-pilots-names-nationalities/article71543481.ece","04 Oct 21:19 SGT"],["Indian Express","Israeli singer learns Shah Rukh Khan song to honour Flydubai pilot Smit Machchhar","https://indianexpress.com/article/trending/trending-globally/israeli-singer-itay-benda-shah-rukh-khan-tujh-mein-rab-dikhta-hai-captain-smit-machchhar-tribute-10907009/","05 Oct 12:19 SGT"],["The Hindu","Co-pilot accused of trying to hijack flydubai plane likely acted alone: Reports","https://www.thehindu.com/news/international/co-pilot-accused-of-trying-to-hijack-flydubai-plane-likely-acted-alone-reports/article71544657.ece","05 Oct 13:01 SGT"]]},{"id":"eb1e4fbdb960","h":"US pulls all B-1 bombers from UK airbase at centre of terror probe","b":[],"o":[["The Hindu","South Asia"],["Japan Times","East Asia"],["Euronews","Europe"],["AFP (via France 24)","Wire"],["Al Jazeera","Middle East"],["The National (UAE)","Middle East"],["Straits Times","SE Asia"],["Anadolu","Middle East"],["CNA","SE Asia"],["SCMP","East Asia"],["Taipei Times","East Asia"]],"r":["East Asia","Europe","Middle East","SE Asia","South Asia","Wire"],"fs":"05 Oct 06:30 SGT","fo":"The Hindu","ro":0,"tr":[],"dl":null,"n":12,"l":[["The Hindu","U.S. Air Force removes all bombers from British air base targeted by a suspected terror attack","https://www.thehindu.com/news/international/us-air-force-removes-all-bombers-from-british-air-base-targeted-by-a-suspected-terror-attack/article71544899.ece","05 Oct 06:30 SGT"],["Japan Times","U.S. B-1 bombers removed from U.K. base at center of terror plot","https://www.japantimes.co.jp/news/2026/10/05/world/us-b-1-bombers-uk/","05 Oct 12:39 SGT"],["Euronews","US pulls all B-1 bombers from UK airbase at centre of terror probe","https://www.euronews.com/2026/10/05/us-pulls-all-b-1-bombers-from-uk-airbase-at-centre-of-terror-probe","05 Oct 13:58 SGT"],["AFP (via France 24)","US bombers leave UK air base amid 'new threats': What we know so far","https://www.france24.com/en/video/20261005-us-bombers-leave-uk-air-base-amid-new-threats-what-we-know-so-far","05 Oct 21:00 SGT"]]},{"id":"408b06984e1f","h":"Sochi’s former mayor reportedly left to fight in Ukraine. Authorities brought him back, and a court has now sentenced him to 15 years for bribery.","b":[],"o":[["Premium Times","Africa"],["Meduza","Europe"],["NL Times","Europe"],["The Hindu","South Asia"],["SCMP","East Asia"],["UPI","Wire"],["Al Jazeera","Middle East"],["Anadolu","Middle East"]],"r":["Africa","East Asia","Europe","Middle East","South Asia","Wire"],"fs":"05 Oct 22:24 SGT","fo":"Premium Times","ro":2,"tr":[],"dl":null,"n":8,"l":[["Premium Times","Court sentences man to death by hanging for murder","https://www.premiumtimesng.com/regional/ssouth-east/914646-court-sentences-man-to-death-by-hanging-for-murder.html","05 Oct 22:24 SGT"],["Meduza","Sochi’s former mayor reportedly left to fight in Ukraine. Authorities brought him back, and a court has now sentenced him to 15 years for bribery.","https://meduza.io/en/news/2026/10/05/sochi-s-former-mayor-reportedly-left-to-fight-in-ukraine-authorities-brought-him-back-and-a-court-has-now-sentenced-him-to-15-years-for-bribery","06 Oct 00:27 SGT"],["NL Times","Defense urges court to spare shooter's life sentence in Weiteveen double-murder","https://nltimes.nl/2026/10/05/defense-urges-court-spare-shooters-life-sentence-weiteveen-double-murder","06 Oct 02:20 SGT"],["The Hindu","Prisons DIG allegedly sexually exploited convict’s wife","https://www.thehindu.com/news/national/karnataka/prisons-dig-allegedly-sexually-exploited-convicts-wife/article71548549.ece","06 Oct 02:51 SGT"]]},{"id":"bfda9e28852d","h":"London to Chicago BA flight declares emergency after dropping 28,000 feet","b":["trending"],"o":[["Indian Express","South Asia"],["The Hindu","South Asia"],["Straits Times","SE Asia"],["The Guardian","Europe"],["AFP (via France 24)","Wire"],["Taipei Times","East Asia"],["Al Jazeera","Middle East"],["The Jerusalem Post","Middle East"]],"r":["East Asia","Europe","Middle East","SE Asia","South Asia","Wire"],"fs":"05 Oct 21:53 SGT","fo":"Indian Express","ro":0,"tr":[["GB","10000+"]],"dl":null,"n":11,"l":[["Indian Express","British Airways BA295 drops 28,000 feet over Ireland, declares emergency","https://indianexpress.com/article/world/british-airways-flight-issues-midair-alert-after-dropping-28000-feet-10907922/","05 Oct 21:53 SGT"],["The Hindu","British Airways London-Chicago flight declares ‘emergency’ mid air; makes U-turn after take-off","https://www.thehindu.com/news/international/british-airways-london-chicago-flight-declares-emergency-mid-air-makes-u-turn-after-take-off/article71548161.ece","05 Oct 23:10 SGT"],["Straits Times","New York declares state of emergency over measles outbreak","https://www.straitstimes.com/world/united-states/new-york-declares-state-of-emergency-over-measles-outbreak","06 Oct 03:51 SGT"],["The Guardian","London to Chicago BA flight declares emergency after dropping 28,000 feet","https://www.theguardian.com/business/2026/oct/05/london-to-chicago-ba-flight-declares-emergency-after-dropping-28000-feet","06 Oct 04:33 SGT"]]},{"id":"47620c3e1ae9","h":"Russia Says It Hit Kyiv Bridge, 2 Vessels in Black Sea","b":[],"o":[["The Moscow Times","Europe"],["The Hindu","South Asia"],["NPR","US"],["Straits Times","SE Asia"],["CNA","SE Asia"],["Anadolu","Middle East"],["The Kyiv Independent","Europe"],["BBC","Europe"],["Al Jazeera","Middle East"],["UPI","Wire"]],"r":["Europe","Middle East","SE Asia","South Asia","US","Wire"],"fs":"04 Oct 23:01 SGT","fo":"The Moscow Times","ro":0,"tr":[],"dl":null,"n":11,"l":[["The Moscow Times","Russia Says It Hit Kyiv Bridge, 2 Vessels in Black Sea","https://www.themoscowtimes.com/2026/10/04/russia-says-it-hit-kyiv-bridge-2-vessels-in-black-sea-a93868","04 Oct 23:01 SGT"],["The Hindu","Russia says it hit Kyiv bridge, two vessels in Black Sea","https://www.thehindu.com/news/international/russia-says-it-hit-kyiv-bridge-two-vessels-in-black-sea/article71544840.ece","05 Oct 03:15 SGT"],["NPR","Russia's attacks on Ukraine escalate as its drones target bridges in Kyiv","https://www.npr.org/2026/10/05/nx-s1-5989637/russias-attacks-on-ukraine-escalate-as-its-drones-target-bridges-in-kyiv","05 Oct 16:44 SGT"],["Straits Times","Two dead, 11 rescued after fire on board ship in Black Sea, Romania says","https://www.straitstimes.com/world/europe/two-dead-11-rescued-after-fire-onboard-ship-in-black-sea-romania-says","05 Oct 19:43 SGT"]]},{"id":"dab343f63b1d","h":"Britain's Green Party votes to treat Zionism as racism","b":[],"o":[["The Hindu","South Asia"],["UPI","Wire"],["The Guardian","Europe"],["Al Jazeera","Middle East"],["Anadolu","Middle East"],["RNZ","Oceania"],["CNA","SE Asia"]],"r":["Europe","Middle East","Oceania","SE Asia","South Asia","Wire"],"fs":"05 Oct 02:23 SGT","fo":"The Hindu","ro":1,"tr":[],"dl":null,"n":10,"l":[["The Hindu","Britain’s Green Party votes to class Zionism as a form of racism","https://www.thehindu.com/news/international/britains-green-party-votes-to-class-zionism-as-a-form-of-racism/article71544765.ece","05 Oct 02:23 SGT"],["UPI","Britain's Green Party votes to treat Zionism as racism","https://www.upi.com/Top_News/World-News/2026/10/05/Green-Party-Zionism-racism-Israel/4681791182020/","05 Oct 15:44 SGT"],["The Guardian","Head of Jewish Greens says she may leave party over ‘Zionism is racism’ vote","https://www.theguardian.com/politics/2026/oct/05/head-of-jewish-greens-says-she-may-leave-party-over-zionism-is-racism-vote","05 Oct 17:00 SGT"],["Al Jazeera","UK Green Party votes to define Zionism as ‘racism’","https://www.aljazeera.com/video/newsfeed/2026/10/5/uk-green-party-votes-to-define-zionism-as?traffic_source=rss","05 Oct 20:16 SGT"]]},{"id":"c87a6340f9d4","h":"US marine arrested in Japan on suspicion of killing woman, police say","b":["update","covered"],"o":[["The Guardian","Europe"],["The Hindu","South Asia"],["VnExpress","SE Asia"],["BBC","Europe"],["NPR","US"],["Al Jazeera","Middle East"],["SCMP","East Asia"]],"r":["East Asia","Europe","Middle East","SE Asia","South Asia","US"],"fs":"04 Oct 21:46 SGT","fo":"The Guardian","ro":0,"tr":[],"dl":null,"n":7,"l":[["The Guardian","US marine arrested in Japan on suspicion of killing woman, police say","https://www.theguardian.com/us-news/2026/oct/04/marine-arrested-japan-suspicion-murder","04 Oct 21:46 SGT"],["The Hindu","U.S. Marine arrested for alleged killing of woman on Okinawa, triggers outrage from Japan","https://www.thehindu.com/news/international/us-marine-arrested-for-alleged-killing-of-woman-on-okinawa-triggers-outrage-from-japan/article71544884.ece","05 Oct 05:31 SGT"],["VnExpress","US Marine arrested in Japan on suspicion of murder","https://e.vnexpress.net/news/news/crime/us-marine-arrested-in-japan-on-suspicion-of-murder-5128254.html","05 Oct 10:44 SGT"],["BBC","'Not again': Arrest of US marine for murder reignites protests in Japan's Okinawa","https://www.bbc.co.uk/news/articles/cwgkv70gg1j3o?at_medium=RSS&at_campaign=rss","05 Oct 16:22 SGT"]]},{"id":"9839a201ee0c","h":"Tory plan to cut energy efficiency rule for builders will cost new home owners £1,000 a year, says thinktank – as it happened","b":["surging"],"o":[["The Guardian","Europe"],["Nikkei Asia","East Asia"],["Straits Times","SE Asia"],["Anadolu","Middle East"],["CNA","SE Asia"]],"r":["East Asia","Europe","Middle East","SE Asia"],"fs":"06 Oct 01:06 SGT","fo":"The Guardian","ro":3,"tr":[],"dl":null,"n":5,"l":[["The Guardian","Tory plan to cut energy efficiency rule for builders will cost new home owners £1,000 a year, says thinktank – as it happened","https://www.theguardian.com/politics/live/2026/oct/05/tory-party-conference-labour-reform-planning-economy-business-latest-news-updates","06 Oct 01:06 SGT"],["Nikkei Asia","Vietnam extends fuel tax breaks as energy supply disruptions drag on","https://asia.nikkei.com/business/energy/vietnam-extends-fuel-tax-breaks-as-energy-supply-disruptions-drag-on","06 Oct 08:50 SGT"],["Straits Times","Trump eases limits on dyed diesel in bid to cut fuel costs","https://www.straitstimes.com/world/united-states/trump-eases-limits-on-dyed-diesel-in-bid-to-cut-fuel-costs","06 Oct 09:45 SGT"],["Anadolu","Trump signs executive order widening access to tax-exempt diesel","https://www.aa.com.tr/en/americas/trump-signs-executive-order-widening-access-to-tax-exempt-diesel/4079116","06 Oct 09:55 SGT"]]},{"id":"e90ab6cdc425","h":"Air campaign against Houthis under way in Yemen, says Saudi-led coalition","b":["trending"],"o":[["Africanews","Africa"],["The National (UAE)","Middle East"],["The Guardian","Europe"],["The Hindu","South Asia"],["Anadolu","Middle East"],["Straits Times","SE Asia"]],"r":["Africa","Europe","Middle East","SE Asia","South Asia"],"fs":"04 Oct 18:19 SGT","fo":"Africanews","ro":0,"tr":[["SA","100+"]],"dl":null,"n":10,"l":[["Africanews","Houthi rebels claim attack on Saudi oil facility in Riyadh","http://www.africanews.com/2026/10/04/houthi-rebels-claim-attack-on-saudi-oil-facility-in-riyadh/","04 Oct 18:19 SGT"],["The National (UAE)","Egypt committed to diplomatic solution on Nile dam dispute with Ethiopia, says PM","https://www.thenationalnews.com/news/mena/2026/10/04/egypt-committed-to-diplomatic-solution-on-nile-dam-dispute-with-ethiopia-says-pm/","05 Oct 01:00 SGT"],["The National (UAE)","Yemen begins offensive against Houthis, Egypt seeks Nile dam solution and UAE launches commercial satellite","https://www.thenationalnews.com/podcasts/trending-middle-east/2026/10/05/yemen-begins-offensive-against-houthis-egypt-seeks-nile-dam-solution-and-uae-launches-commercial-satellite/","05 Oct 13:38 SGT"],["The Guardian","Air campaign against Houthis under way in Yemen, says Saudi-led coalition","https://www.theguardian.com/world/2026/oct/05/yemen-air-campaign-houthis-saudi-led-coalition","05 Oct 23:21 SGT"]]},{"id":"9bb75c2092dc","h":"Vanuatu women win MSG Cup title in tribute to sea tragedy victims","b":["trending"],"o":[["Japan Times","East Asia"],["The National (UAE)","Middle East"],["RNZ","Oceania"],["Taipei Times","East Asia"],["Straits Times","SE Asia"]],"r":["East Asia","Middle East","Oceania","SE Asia"],"fs":"05 Oct 15:57 SGT","fo":"Japan Times","ro":1,"tr":[["BR","500+"]],"dl":null,"n":5,"l":[["Japan Times","Preventing artificial intelligence from triggering a world war","https://www.japantimes.co.jp/commentary/2026/10/05/world/ai-world-war/","05 Oct 15:57 SGT"],["The National (UAE)","Polish embassy in US expresses outrage over Tucker Carlson comments on Second World War","https://www.thenationalnews.com/news/us/2026/10/05/polish-embassy-in-us-expresses-outrage-over-tucker-carlson-comments-on-second-world-war/","06 Oct 03:56 SGT"],["RNZ","Vanuatu women win MSG Cup title in tribute to sea tragedy victims","https://www.rnz.co.nz/news/pacific/1753645/vanuatu-women-win-msg-cup-title-in-tribute-to-sea-tragedy-victims","06 Oct 04:21 SGT"],["Taipei Times","Chou wins second women’s 9-ball world title in Bali","https://www.taipeitimes.com/News/sport/archives/2026/10/06/2003865471","06 Oct 08:00 SGT"]]},{"id":"f9ddaa7371fb","h":"Children among dozens injured as Russian glide bombs hit Kharkiv, 5 dead","b":[],"o":[["Straits Times","SE Asia"],["The Kyiv Independent","Europe"],["AFP (via France 24)","Wire"],["DW (English)","Europe"],["Meduza","Europe"],["Nikkei Asia","East Asia"],["Al Jazeera","Middle East"]],"r":["East Asia","Europe","Middle East","SE Asia","Wire"],"fs":"05 Oct 13:33 SGT","fo":"Straits Times","ro":0,"tr":[],"dl":null,"n":11,"l":[["Straits Times","Russian air strikes targeted port infrastructure in Ukraine's Odesa region, governor says","https://www.straitstimes.com/world/europe/russian-air-strikes-targeted-port-infrastructure-in-ukraines-odesa-region-governor-says","05 Oct 13:33 SGT"],["Straits Times","Ukraine scrambles for money to fight war as Russian strikes batter economy","https://www.straitstimes.com/world/europe/ukraine-scrambles-for-money-to-fight-war-as-russian-strikes-batter-economy","05 Oct 14:03 SGT"],["The Kyiv Independent","Children among dozens injured as Russian glide bombs hit Kharkiv, 5 dead","https://kyivindependent.com/children-among-dozens-injured-as-russian-glide-bombs-hit-kharkiv-3-dead/","05 Oct 21:59 SGT"],["AFP (via France 24)","Macron slams Russia’s ‘irresponsible’ strikes on Ukraine’s civilian infrastructure","https://www.france24.com/en/europe/20261005-macron-slams-russia-s-irresponsible-strikes-on-ukraine-s-civilian-infrastructure","05 Oct 22:09 SGT"]]},{"id":"c6a1e58c41cf","h":"Imran Khan supporters march in Pakistan to demand his release after talks failed","b":[],"o":[["The Hindu","South Asia"],["NPR","US"],["Geo News (English)","South Asia"],["Anadolu","Middle East"],["The Guardian","Europe"],["Kathmandu Post","South Asia"],["Nikkei Asia","East Asia"]],"r":["East Asia","Europe","Middle East","South Asia","US"],"fs":"04 Oct 20:34 SGT","fo":"The Hindu","ro":0,"tr":[],"dl":null,"n":7,"l":[["The Hindu","Pakistan braces for protest by ex-PM Imran Khan supporters after talks with government fail","https://www.thehindu.com/news/international/pakistan-braces-for-protest-by-ex-pm-imran-khan-supporters-after-talks-with-government-fail/article71543255.ece","04 Oct 20:34 SGT"],["NPR","Imran Khan supporters march in Pakistan to demand his release after talks failed","https://www.npr.org/2026/10/05/g-s1-146408/imran-khan-supporters-march-in-pakistan-to-demand-his-release-after-talks-failed","05 Oct 19:38 SGT"],["Geo News (English)","Islamabad court orders Imran Khan's production in Judicial Complex attack case","https://www.geo.tv/latest/685071-islamabad-court-orders-imran-khans-production-in-judicial-complex-attack-case","05 Oct 22:32 SGT"],["Anadolu","UN chief to visit Pakistan for talks with top leadership","https://www.aa.com.tr/en/asia-pacific/un-chief-to-visit-pakistan-for-talks-with-top-leadership/4078749","05 Oct 22:33 SGT"]]},{"id":"b822c2c34e63","h":"Estonia moves troops closer to Russian border under ‘active defense’ program","b":[],"o":[["Meduza","Europe"],["The Moscow Times","Europe"],["Straits Times","SE Asia"],["Al Jazeera","Middle East"],["Mexico News Daily","Latin America"],["Anadolu","Middle East"]],"r":["Europe","Latin America","Middle East","SE Asia"],"fs":"05 Oct 21:18 SGT","fo":"Meduza","ro":1,"tr":[],"dl":null,"n":6,"l":[["Meduza","Estonia moves troops closer to Russian border under ‘active defense’ program","https://meduza.io/en/news/2026/10/05/estonia-moves-troops-closer-to-russian-border-under-active-defense-program","05 Oct 21:18 SGT"],["The Moscow Times","Kremlin Downplays Estonia’s Troop Shift to Border, Plays Up Russia’s Intelligence Capabilities","https://www.themoscowtimes.com/2026/10/05/kremlin-downplays-estonias-troop-shift-to-border-plays-up-russias-intelligence-capabilities-a93882","05 Oct 22:15 SGT"],["Straits Times","Mexico sends troops after US says shots fired across border","https://www.straitstimes.com/world/mexico-demands-evidence-of-alleged-cross-border-shots-after-us-ambassador-comments","05 Oct 23:48 SGT"],["Al Jazeera","Mexico seeks evidence of border shooting that prompted US troop deployment","https://www.aljazeera.com/news/2026/10/5/mexico-seeks-evidence-of-border-shooting-that-prompted-us-troop-deployment?traffic_source=rss","06 Oct 03:43 SGT"]]},{"id":"80822e5896f7","h":"Trump’s former press secretary Karoline Leavitt to join Fox News","b":[],"o":[["The Guardian","Europe"],["El País (EN)","Latin America"],["UPI","Wire"],["ABC News (Australia)","Oceania"],["The Jerusalem Post","Middle East"]],"r":["Europe","Latin America","Middle East","Oceania","Wire"],"fs":"05 Oct 23:01 SGT","fo":"The Guardian","ro":1,"tr":[],"dl":null,"n":6,"l":[["The Guardian","Trump’s former press secretary Karoline Leavitt to join Fox News","https://www.theguardian.com/us-news/2026/oct/05/karoline-leavitt-joins-fox-news","05 Oct 23:01 SGT"],["El País (EN)","Former Trump White House press secretary Karoline Leavitt joins Fox News","https://english.elpais.com/usa/2026-10-05/former-trump-white-house-press-secretary-karoline-leavitt-joins-fox-news.html","05 Oct 23:59 SGT"],["The Guardian","Republican Ken Paxton admits forces in DC control his Texas Senate campaign","https://www.theguardian.com/us-news/2026/oct/05/ken-paxton-texas-senate-campaign-control","06 Oct 00:01 SGT"],["UPI","Former White House press secretary Karoline Leavitt joins Fox News","https://www.upi.com/Top_News/US/2026/10/05/karoline-leavitt-joins-fox-news/5161791229125/","06 Oct 04:14 SGT"]]},{"id":"757fbdace9a6","h":"Suspected pneumonic plague in Siberia: What we know about the disease","b":["update","trending"],"o":[["Indian Express","South Asia"],["DW (English)","Europe"],["Antara News (English)","SE Asia"],["The Jerusalem Post","Middle East"]],"r":["Europe","Middle East","SE Asia","South Asia"],"fs":"05 Oct 17:28 SGT","fo":"Indian Express","ro":0,"tr":[["AE","100+"],["BD","200+"],["NZ","200+"]],"dl":null,"n":6,"l":[["Indian Express","Pneumonic plague case in Russia raises questions: How it spreads and what Indians should know","https://indianexpress.com/article/lifestyle/health/pneumonic-plague-vs-covid-19-different-symptoms-indians-risks-experts-10907152/","05 Oct 17:28 SGT"],["Indian Express","Russian pneumonic plague scare: What it means for India","https://indianexpress.com/article/health-wellness/russia-irkutsk-lab-worker-death-pneumonic-plague-fears-yersinia-pestis-symptoms-antibiotics-india-risk-assessment-10907558/","05 Oct 18:38 SGT"],["Indian Express","Pneumonic plague: What to know about the disease after suspected case in Siberia","https://indianexpress.com/article/explained/explained-health/plague-types-symptoms-spread-treatment-10907595/","05 Oct 18:57 SGT"],["DW (English)","Suspected pneumonic plague in Siberia: What we know about the disease","https://www.dw.com/en/suspected-pneumonic-plague-in-siberia-what-we-know-about-the-disease/a-79547919?maca=en-rss-en-all-1573-rdf","05 Oct 19:58 SGT"]]},{"id":"23c1be7ecb68","h":"California woman arrested and accused of spying on Taiwan president’s son for China","b":[],"o":[["The Guardian","Europe"],["The Hindu","South Asia"],["Japan Times","East Asia"],["Euronews","Europe"],["NPR","US"],["SCMP","East Asia"],["Taipei Times","East Asia"]],"r":["East Asia","Europe","South Asia","US"],"fs":"05 Oct 13:39 SGT","fo":"The Guardian","ro":0,"tr":[],"dl":null,"n":7,"l":[["The Guardian","California woman arrested and accused of spying on Taiwan president’s son for China","https://www.theguardian.com/world/2026/oct/05/california-woman-arrested-and-accused-of-spying-on-taiwan-presidents-son-for-china","05 Oct 13:39 SGT"],["The Hindu","U.S. accuses California woman of spying for China, surveilling Taiwan leader's son","https://www.thehindu.com/news/international/us-accuses-california-woman-of-spying-for-china-surveilling-taiwan-leaders-son/article71545758.ece","05 Oct 14:07 SGT"],["Japan Times","U.S. accuses California woman of spying for China, surveilling Taiwan leader’s son","https://www.japantimes.co.jp/news/2026/10/05/world/us-taiwan-china-california-spy/","05 Oct 14:35 SGT"],["Euronews","FBI arrests woman accused of spying on Taiwanese president's family in the US for China","https://www.euronews.com/2026/10/05/fbi-arrests-woman-accused-of-spying-on-taiwanese-presidents-family-in-the-us-for-china","05 Oct 17:16 SGT"]]},{"id":"b86337f1a567","h":"Brazilians vote in first round of presidential election","b":[],"o":[["Euronews","Europe"],["The Guardian","Europe"],["Indian Express","South Asia"],["Al Jazeera","Middle East"],["Folha (EN)","Latin America"],["The Hindu","South Asia"],["Anadolu","Middle East"]],"r":["Europe","Latin America","Middle East","South Asia"],"fs":"04 Oct 22:32 SGT","fo":"Euronews","ro":0,"tr":[],"dl":null,"n":7,"l":[["Euronews","Brazilians vote in first round of presidential election","https://www.euronews.com/2026/10/04/polling-stations-open-in-brazil-for-some-160-million-voters","04 Oct 22:32 SGT"],["The Guardian","Brazil presidential election 2026: first-round live results","https://www.theguardian.com/world/ng-interactive/2026/oct/04/brazil-presidential-election-2026-first-round-live-results","05 Oct 08:24 SGT"],["Indian Express","Trump’s Brazil blooper: ‘125 million voted in India’s Presidential Election’","https://indianexpress.com/article/world/trump-125-million-india-presidential-election-brazil-10906999/","05 Oct 12:44 SGT"],["Al Jazeera","Bolsonaro favourite to win: What Brazil’s first round of elections tells us","https://www.aljazeera.com/news/2026/10/5/bolsonaro-favourite-to-win-what-brazils-first-round-of-election-tells-us?traffic_source=rss","05 Oct 20:34 SGT"]]},{"id":"70bb4f544010","h":"Japan bids farewell to Asian Games after fortnight of turmoil and records","b":[],"o":[["The National (UAE)","Middle East"],["Yonhap","East Asia"],["Indian Express","South Asia"],["AFP (via France 24)","Wire"],["The Hindu","South Asia"],["Kathmandu Post","South Asia"],["Taipei Times","East Asia"]],"r":["East Asia","Middle East","South Asia","Wire"],"fs":"04 Oct 17:27 SGT","fo":"The National (UAE)","ro":0,"tr":[],"dl":null,"n":12,"l":[["The National (UAE)","UAE sign off Asian Games campaign with second equestrian medal","https://www.thenationalnews.com/sport/2026/10/04/uae-sign-off-asian-games-campaign-with-second-equestrian-medal/","04 Oct 17:27 SGT"],["Yonhap","(Asiad) 20th Asian Games draw to conclusion with celebration of athletic feats","https://en.yna.co.kr/view/AEN20261004002900315","04 Oct 18:29 SGT"],["The National (UAE)","Asian Games success shows UAE is rising as a sporting force, says President of the UAE Olympic Committee","https://www.thenationalnews.com/news/uae/2026/10/04/asian-games-show-uae-is-rising-as-a-sporting-force-says-president-of-the-uae-olympic-committee/","04 Oct 22:25 SGT"],["Yonhap","(Asiad) Accommodation, transportation problems mar 2026 Aichi-Nagoya Asian Games","https://en.yna.co.kr/view/AEN20261004001100320","05 Oct 05:00 SGT"]]},{"id":"66422bb3c644","h":"Russian tennis star Daniil Medvedev disqualified from Beijing semifinal against Novak Djokovic after hitting spectator in face with ball","b":["trending"],"o":[["The National (UAE)","Middle East"],["Al Jazeera","Middle East"],["Meduza","Europe"],["ABC News (Australia)","Oceania"]],"r":["Europe","Middle East","Oceania"],"fs":"06 Oct 00:13 SGT","fo":"The National (UAE)","ro":1,"tr":[["DE","10000+"]],"dl":null,"n":5,"l":[["The National (UAE)","Daniil Medvedev disqualified from China Open after hitting spectator in face with ball","https://www.thenationalnews.com/sport/tennis/2026/10/05/daniil-medvedev-disqualified-from-china-open-after-hitting-spectator-in-face-with-ball/","06 Oct 00:13 SGT"],["Al Jazeera","Medvedev disqualified from China Open for hitting fan with a ball","https://www.aljazeera.com/sports/2026/10/5/medvedev-disqualified-from-china-open-for-hitting-fan-with-a-ball?traffic_source=rss","06 Oct 00:17 SGT"],["Meduza","Russian tennis star Daniil Medvedev disqualified from Beijing semifinal against Novak Djokovic after hitting spectator in face with ball","https://meduza.io/en/news/2026/10/05/russian-tennis-star-daniil-medvedev-disqualified-from-beijing-semifinal-against-novak-djokovic-after-hitting-spectator-in-face-with-ball","06 Oct 00:56 SGT"],["Al Jazeera","Medvedev disqualified after hitting spectator with ball","https://www.aljazeera.com/video/newsfeed/2026/10/5/medvedev-disqualified-after-hitting-spectator-with-ball?traffic_source=rss","06 Oct 04:09 SGT"]]},{"id":"fe0528110645","h":"Ethiopia again demands access to the Red Sea","b":[],"o":[["Anadolu","Middle East"],["AFP (via France 24)","Wire"],["Al Jazeera","Middle East"],["Africanews","Africa"],["BBC","Europe"]],"r":["Africa","Europe","Middle East","Wire"],"fs":"06 Oct 03:46 SGT","fo":"Anadolu","ro":1,"tr":[],"dl":null,"n":5,"l":[["Anadolu","Germany's Merz voices cautious optimism as Yemen reports Red Sea advances","https://www.aa.com.tr/en/middle-east/germanys-merz-voices-cautious-optimism-as-yemen-reports-red-sea-advances/4079004","06 Oct 03:46 SGT"],["AFP (via France 24)","Ethiopia again demands access to the Red Sea","https://www.france24.com/en/ethiopia-again-demands-access-to-the-red-sea","06 Oct 04:28 SGT"],["Al Jazeera","Ethiopia’s Abiy demands access to Red Sea as tensions with neighbours rise","https://www.aljazeera.com/news/2026/10/5/ethiopias-pm-insists-on-access-to-red-sea-despite-regional-conflict-threat?traffic_source=rss","06 Oct 05:10 SGT"],["Africanews","Ethiopia: PM vows to secure sea access amid fears of return to war","http://www.africanews.com/2026/10/05/ethiopia-pm-vows-to-secure-sea-access-amid-fears-of-return-to-war/","06 Oct 05:18 SGT"]]},{"id":"cce8fe4fe58c","h":"Euro falls to lowest level against U.S. dollar since May 2025","b":[],"o":[["UPI","Wire"],["DW (English)","Europe"],["AFP (via France 24)","Wire"],["CNA","SE Asia"],["The Jerusalem Post","Middle East"]],"r":["Europe","Middle East","SE Asia","Wire"],"fs":"05 Oct 21:51 SGT","fo":"UPI","ro":1,"tr":[],"dl":null,"n":5,"l":[["UPI","Euro falls to lowest level against U.S. dollar since May 2025","https://www.upi.com/Top_News/World-News/2026/10/05/Belgium-Euro-hits-17-month-low-against-dollar/5601791202139/","05 Oct 21:51 SGT"],["DW (English)","Euro plummets against US dollar: has the next financial crisis begun?","https://www.dw.com/en/euro-plummets-against-us-dollar-has-the-next-financial-crisis-begun/a-79549031?maca=en-rss-en-all-1573-rdf","05 Oct 22:28 SGT"],["AFP (via France 24)","Euro falls to 17-month low against the USD on French debt concerns","https://www.france24.com/en/tv-shows/business/20261005-euro-falls-to-17-month-low-against-the-usd-on-french-debt-concerns","06 Oct 04:51 SGT"],["CNA","Euro slides as concerns about French debt mount","https://www.channelnewsasia.com/world/euro-slides-concerns-about-french-debt-mount-6434551","06 Oct 05:44 SGT"]]},{"id":"715aa8b5f6b9","h":"Pro-Israel Samoa prime minister apologises for Nazi gesture in leaked video","b":["nonwest"],"o":[["SCMP","East Asia"],["Al Jazeera","Middle East"],["Anadolu","Middle East"],["Africanews","Africa"],["Kathmandu Post","South Asia"]],"r":["Africa","East Asia","Middle East","South Asia"],"fs":"05 Oct 10:57 SGT","fo":"SCMP","ro":1,"tr":[],"dl":null,"n":9,"l":[["SCMP","Pro-Israel Samoa prime minister apologises for Nazi gesture in leaked video","https://www.scmp.com/news/asia/australasia/article/3369742/pro-israel-samoa-prime-minister-apologises-nazi-gesture-leaked-video?utm_source=rss_feed","05 Oct 10:57 SGT"],["Al Jazeera","Samoa prime minister apologises after Nazi salute video surfaces","https://www.aljazeera.com/video/newsfeed/2026/10/5/samoa-prime-minister-apologises-after-nazi-salute-video-surfaces?traffic_source=rss","05 Oct 21:48 SGT"],["Anadolu","Ethiopia’s parliament reelects Abiy Ahmed as prime minister","https://www.aa.com.tr/en/africa/ethiopia-s-parliament-reelects-abiy-ahmed-as-prime-minister/4078851","06 Oct 00:39 SGT"],["Africanews","Ethiopia: Abiy Ahmed takes oath of office as Prime Minister","http://www.africanews.com/2026/10/05/ethiopia-abiy-ahmed-takes-oath-of-office-as-prime-minister/","06 Oct 01:46 SGT"]]},{"id":"3c8712b052d9","h":"What does Russia's rising military budget say about its plans for the war?","b":[],"o":[["The Kyiv Independent","Europe"],["Antara News (English)","SE Asia"],["Anadolu","Middle East"],["Nikkei Asia","East Asia"],["Al Jazeera","Middle East"],["The Guardian","Europe"]],"r":["East Asia","Europe","Middle East","SE Asia"],"fs":"05 Oct 23:08 SGT","fo":"The Kyiv Independent","ro":0,"tr":[],"dl":null,"n":6,"l":[["The Kyiv Independent","What does Russia's rising military budget say about its plans for the war?","https://kyivindependent.com/russias-military-spending-masks-a-longer-term-strategy-for-a-prolonged-war/","05 Oct 23:08 SGT"],["Antara News (English)","Indonesia's fuel prices among Southeast Asia's lowest: Pertamina","https://en.antaranews.com/news/434233/indonesias-fuel-prices-among-southeast-asias-lowest-pertamina","05 Oct 23:24 SGT"],["Anadolu","Trump blames Russia-Ukraine war, Democratic-led states for rising US gasoline prices","https://www.aa.com.tr/en/americas/trump-blames-russia-ukraine-war-democratic-led-states-for-rising-us-gasoline-prices/4078883","06 Oct 01:33 SGT"],["Nikkei Asia","Nippon Paint clinches Dulux brand with deal for Akzo Nobel's Southeast Asia business","https://asia.nikkei.com/business/business-deals/nippon-paint-clinches-dulux-brand-with-deal-for-akzo-nobel-s-southeast-asia-business","06 Oct 01:55 SGT"]]},{"id":"d43f283394bf","h":"UK threatens to expel Israeli diplomats over planned East Jerusalem consulate closure","b":[],"o":[["SCMP","East Asia"],["Straits Times","SE Asia"],["The Guardian","Europe"],["The Jerusalem Post","Middle East"],["Al Jazeera","Middle East"],["Anadolu","Middle East"]],"r":["East Asia","Europe","Middle East","SE Asia"],"fs":"05 Oct 15:13 SGT","fo":"SCMP","ro":0,"tr":[],"dl":null,"n":6,"l":[["SCMP","Days after Xi-Trump summit, top Taiwan diplomat opens de facto consulate in the US","https://www.scmp.com/news/china/diplomacy/article/3369770/days-after-xi-trump-summit-top-taiwan-diplomat-opens-de-facto-consulate-us?utm_source=rss_feed","05 Oct 15:13 SGT"],["Straits Times","British security adviser visited Israel in bid to keep Jerusalem consulate open, sources say","https://www.straitstimes.com/world/europe/uk-security-adviser-visited-israel-in-bid-to-keep-jerusalem-consulate-open-sources-say","05 Oct 23:33 SGT"],["The Guardian","UK threatens to expel Israeli diplomats over planned East Jerusalem consulate closure","https://www.theguardian.com/world/2026/oct/05/uk-threatens-to-expel-israeli-diplomats-after-closing-of-east-jerusalem-consulate","06 Oct 01:53 SGT"],["The Jerusalem Post","UK to expel 27 Israeli diplomats if east Jerusalem consulate closed, British diplomats expelled","https://www.jpost.com/israel-news/article-910687","06 Oct 02:29 SGT"]]},{"id":"8f84a7a4350e","h":"Pennsylvania faces largest measles outbreak in decades as case count rises to 1,000","b":[],"o":[["Indian Express","South Asia"],["Anadolu","Middle East"],["The Guardian","Europe"],["The Kyiv Independent","Europe"],["DW (English)","Europe"]],"r":["Europe","Middle East","South Asia"],"fs":"05 Oct 17:23 SGT","fo":"Indian Express","ro":1,"tr":[],"dl":null,"n":5,"l":[["Indian Express","Pune Crime Files | Attacks on gay dating app users rise; reported cases ‘tip of iceberg’","https://indianexpress.com/article/cities/pune/pune-gay-dating-app-attacks-robbery-extortion-cases-10907461/","05 Oct 17:23 SGT"],["Anadolu","Trump says US 'looking very strongly' at reported plague case in Russia","https://www.aa.com.tr/en/world/trump-says-us-looking-very-strongly-at-reported-plague-case-in-russia-/4079042","06 Oct 04:40 SGT"],["The Guardian","Pennsylvania faces largest measles outbreak in decades as case count rises to 1,000","https://www.theguardian.com/us-news/2026/oct/05/pennsylvania-measles-outbreak-hospitalizations-deaths","06 Oct 05:09 SGT"],["The Kyiv Independent","Trump says US will 'help' Russia deal with plague","https://kyivindependent.com/trump-says-us-will-help-russia-deal-with-plague/","06 Oct 07:05 SGT"]]},{"id":"785e407f6102","h":"Takaichi lays out ‘proactive fiscal policy’ as new session of parliament begins","b":["nonwest"],"o":[["Japan Times","East Asia"],["SCMP","East Asia"],["Straits Times","SE Asia"],["Kathmandu Post","South Asia"],["Yonhap","East Asia"]],"r":["East Asia","SE Asia","South Asia"],"fs":"05 Oct 14:18 SGT","fo":"Japan Times","ro":1,"tr":[],"dl":null,"n":5,"l":[["Japan Times","Takaichi lays out ‘proactive fiscal policy’ as new session of parliament begins","https://www.japantimes.co.jp/news/2026/10/05/japan/politics/prime-minister-speech-autumn-diet/","05 Oct 14:18 SGT"],["SCMP","China’s finance minister on fiscal policy","https://www.scmp.com/plus/economy/china-economy/article/3369803/chinas-finance-minister-fiscal-policy?utm_source=rss_feed","05 Oct 17:42 SGT"],["Straits Times","Brazil's Lula weighs VP Alckmin as next finance minister to woo centrist voters","https://www.straitstimes.com/world/brazils-lula-weighs-vp-alckmin-as-next-finance-minister-to-woo-centrist-voters","06 Oct 00:03 SGT"],["Kathmandu Post","Home Minister Sudan Gurung to visit India next week","https://kathmandupost.com/politics/2026/10/05/home-minister-sudan-gurung-to-visit-india-next-week","06 Oct 01:55 SGT"]]},{"id":"46a75ebf70e6","h":"Former Prince Andrew files legal action to quash warrants that led to residence searches","b":[],"o":[["Straits Times","SE Asia"],["SCMP","East Asia"],["NPR","US"],["The Hindu","South Asia"],["UPI","Wire"]],"r":["East Asia","SE Asia","South Asia","US","Wire"],"fs":"05 Oct 14:15 SGT","fo":"Straits Times","ro":0,"tr":[],"dl":null,"n":5,"l":[["Straits Times","Britain’s ex-prince Andrew takes police to court over Epstein files arrest","https://www.straitstimes.com/world/europe/former-prince-andrew-takes-police-to-court-over-epstein-files-arrest-telegraph-says","05 Oct 14:15 SGT"],["SCMP","Ex-prince Andrew takes UK police to court to ‘quash’ Epstein affair search warrants","https://www.scmp.com/news/world/europe/article/3369800/ex-prince-andrew-takes-uk-police-court-quash-epstein-affair-search-warrants?utm_source=rss_feed","05 Oct 17:07 SGT"],["NPR","Former Prince Andrew files legal action to quash warrants that led to residence searches","https://www.npr.org/2026/10/05/g-s1-146396/former-prince-andrew-legal-action","05 Oct 18:01 SGT"],["The Hindu","Ex-prince Andrew asks to ‘quash’ Epstein affair search warrants: U.K. judiciary","https://www.thehindu.com/news/international/ex-prince-andrew-asks-to-quash-epstein-affair-search-warrants-uk-judiciary/article71546410.ece","05 Oct 18:01 SGT"]]},{"id":"ec3daecbfbe1","h":"Australian leaders condemn pro-Palestine vigils planned for 7 October anniversary amid Jewish commemorations","b":[],"o":[["The Guardian","Europe"],["The Hindu","South Asia"],["The Jerusalem Post","Middle East"],["ABC News (Australia)","Oceania"]],"r":["Europe","Middle East","Oceania","South Asia"],"fs":"05 Oct 22:00 SGT","fo":"The Guardian","ro":1,"tr":[],"dl":null,"n":4,"l":[["The Guardian","Australian leaders condemn pro-Palestine vigils planned for 7 October anniversary amid Jewish commemorations","https://www.theguardian.com/australia-news/2026/oct/06/australian-leaders-condemn-pro-palestine-vigils-planned-for-7-october-anniversary-amid-jewish-commemorations","05 Oct 22:00 SGT"],["The Hindu","Pro-Left Syndicate members to boycott honourary doctorate presentation event in Calicut varsity on October 6","https://www.thehindu.com/news/national/kerala/pro-left-syndicate-members-to-boycott-honourary-doctorate-presentation-event-in-calicut-varsity-today/article71547383.ece","06 Oct 01:58 SGT"],["The Jerusalem Post","Joint List calls for Jewish-Arab support to oust Netanyahu, bring 'peace between Israel, Palestine'","https://www.jpost.com/israel-news/article-910700","06 Oct 04:53 SGT"],["ABC News (Australia)","'Heartless': Pro-Palestinian groups criticised for October 7 vigils","https://www.abc.net.au/news/2026-10-06/sydney-palestine-protest-on-israel-october-7-attack-anniversary/107232144","06 Oct 10:08 SGT"]]},{"id":"a97448826632","h":"Australia's migrant policy offers lessons for EU and US","b":[],"o":[["Indian Express","South Asia"],["Nikkei Asia","East Asia"],["DW (English)","Europe"],["Rappler","SE Asia"]],"r":["East Asia","Europe","SE Asia","South Asia"],"fs":"05 Oct 17:58 SGT","fo":"Indian Express","ro":1,"tr":[],"dl":null,"n":4,"l":[["Indian Express","The migrant in Germany, caught between nativist politics and an open policy","https://indianexpress.com/article/opinion/columns/the-migrant-in-germany-nativist-politics-afd-open-policy-10907493/","05 Oct 17:58 SGT"],["Nikkei Asia","Hiroshima and Nagasaki disasters offer lesson for AI governance","https://asia.nikkei.com/spotlight/comment/hiroshima-and-nagasaki-disasters-offer-lesson-for-ai-governance","06 Oct 01:55 SGT"],["DW (English)","Australia's migrant policy offers lessons for EU and US","https://www.dw.com/en/australia-s-migrant-policy-offers-lessons-for-eu-and-us/a-79388096?maca=en-rss-en-all-1573-rdf","06 Oct 03:26 SGT"],["Rappler","US judge blocks Trump policy of fining migrants up to $1.8 million","https://www.rappler.com/world/us-canada/usa-judge-blocks-trump-policy-fine-migrants/","06 Oct 09:47 SGT"]]}],"searching":[["france national football team vs belgium national football team standings","https://www.bbc.com/sport/football/live/c6wyzyjez0n4t",["IL","PK","PH","MY"],20000],["bijan robinson","https://www.espn.com/nfl/story/_/id/50101403/falcons-bijan-robinson-prime-mnf",["CA","MX","GB"],2000],["romania vs sweden","https://www.bbc.com/sport/football/live/ckjw5w4d553qt",["AE","KE","PK"],1000],["banfield - rosario central","https://www.rosario3.com/deportes/tras-los-festejos-central-vuelve-a-poner-el-foco-en-el-torneo-y-visita-a-banfield-20261004-0028.html",["AR","CO"],50000],["сборная украины по футболу – сборная венгрии по футболу турнирная таблица","https://champion.com.ua/rus/football/ukraina-ustupila-vengrii-v-chetvertom-ture-ligi-naciy-uefa-2026-27-1087377/",["UA","RU"],20000],["windsor","https://www.bbc.co.uk/news/articles/c9ly0l028d1go",["GB","NZ"],10000],["citi","https://www.ft.com/content/41b567dc-50e9-4c41-95bb-e295caaf2340?syn-25a6b1a6=1",["GB","NZ"],5000],["manchester city f.c.","https://www.skysports.com/football/news/13595428/man-city-charges-premier-league-clubs-do-not-expect-city-to-be-in-premier-league-next-season-if-appeal-fails",["KE","SG"],5000],["yankees","https://www.espn.com/mlb/game/_/gameId/401907986/yankees-rays",["CA","MX"],2000],["saints vs falcons","https://www.nfl.com/news/20th-anniversary-of-superdome-reopening-revisiting-key-moments-from-saints-emotional-win-over-falcons",["GB","AU"],2000],["ticketmaster","https://www.ticketnews.com/2026/10/ticketmaster-transfer-problems-october-2/",["SG","AU"],2000],["ziaire williams","https://ktla.com/entertainment/lakers-ziaire-williams-proposes-to-girlfriend-as-bruno-mars-marry-you-plays-at-concert/",["US","PH"],1000],["goldman","https://www.cnbc.com/2026/10/05/goldman-sachs-fiscal-deficit-bond-yields.html",["GB","NZ"],1000],["honduras vs jamaica","https://www.infobae.com/honduras/2026/10/05/honduras-enfrenta-a-jamaica-por-el-pase-a-cuartos-de-final-de-la-liga-de-naciones/",["CA","BD"],500]],"feeds":[["Africanews","Africa",1,""],["News24","Africa",1,""],["Premium Times","Africa",1,""],["Nation (KE)","Africa",0,"error: HTTPError: HTTP Error 404: Not Found"],["The East African","Africa",0,"no public RSS found; Google News route is disallowed by its robots.txt"],["Daily Maverick","Africa",0,"site refuses automated readers (HTTP 403)"],["Addis Standard","Africa",0,"site refuses automated readers (HTTP 403)"],["The Hindu","South Asia",1,""],["Indian Express","South Asia",1,""],["Kathmandu Post","South Asia",1,""],["Dawn","South Asia",0,"site refuses automated readers (HTTP 403)"],["The Daily Star (BD)","South Asia",0,"its RSS stopped updating in 2022 (empty titles)"],["Geo News (English)","South Asia",1,""],["The News International","South Asia",0,"its RSS feeds stopped updating (newest items 4-10 months old)"],["Dhaka Tribune","South Asia",0,"site refuses automated readers (HTTP 403); /feed is 404"],["CNA","SE Asia",1,""],["Straits Times","SE Asia",1,""],["VnExpress","SE Asia",1,""],["Rappler","SE Asia",1,""],["Bangkok Post","SE Asia",1,""],["Jakarta Post","SE Asia",0,"no public RSS found; Google News route is disallowed by its robots.txt"],["Antara News (English)","SE Asia",1,""],["The Star (Malaysia)","SE Asia",0,"no public RSS found (its /rss/ paths are 404, no feed link on its site)"],["SCMP","East Asia",1,""],["Nikkei Asia","East Asia",1,""],["Yonhap","East Asia",1,""],["Japan Times","East Asia",1,""],["Taipei Times","East Asia",1,""],["Kyodo","East Asia",0,"no public RSS found; Google News route is disallowed by its robots.txt"],["Al Jazeera","Middle East",1,""],["The National (UAE)","Middle East",1,""],["Anadolu","Middle East",1,""],["Arab News","Middle East",0,"site refuses automated readers (HTTP 403)"],["Times of Israel","Middle East",0,"its robots.txt disallows the RSS feed"],["The Jerusalem Post","Middle East",1,""],["Al Arabiya English","Middle East",0,"site refuses automated readers (HTTP 403 on all three feed paths)"],["Buenos Aires Times","Latin America",1,""],["Folha (EN)","Latin America",1,""],["El País (EN)","Latin America",1,""],["Mexico News Daily","Latin America",1,""],["Colombia Reports","Latin America",1,""],["MercoPress","Latin America",0,"its HTTPS certificate fails verification here (not bypassed)"],["Rest of World","Global South",1,""],["AFP (via France 24)","Wire",1,""],["UPI","Wire",1,""],["AP","Wire",0,"no public RSS; the Google News route is disallowed by news.google.com's robots.txt. AP copies still arrive via other outlets"],["Reuters","Wire",0,"no public RSS; the Google News route is disallowed by news.google.com's robots.txt"],["BBC","Europe",1,""],["The Guardian","Europe",1,""],["Euronews","Europe",1,""],["Meduza","Europe",1,""],["The Moscow Times","Europe",1,""],["DW (English)","Europe",1,""],["ANSA (English)","Europe",1,""],["NL Times","Europe",1,""],["Notes From Poland","Europe",1,""],["The Kyiv Independent","Europe",1,""],["RFE/RL","Europe",0,"its robots.txt disallows the /api/ RSS feeds"],["NPR","US",1,""],["CNN","US",0,"its RSS stopped updating in 2023"],["ABC News (Australia)","Oceania",1,""],["RNZ","Oceania",1,""],["CBC News","Canada",0,"connections reset or time out on both its feed hosts (www.cbc.ca, rss.cbc.ca), 4 tries - not worked around"]],"not_covered":["China: Google is blocked there, so no Trends data. Baidu/Weibo hot lists are web pages with unclear terms for automated reading - left out.","TikTok: no public trending feed or API - not covered.","Reddit r/worldnews: its robots.txt disallows automated reading - not covered.","Paywalled outlets: only their public headline feeds are read."],"schema":1,"updated_utc":"2026-10-06T02:52:00Z","placement_checked":4};
+  var NEWSDEMO = NEWS_SAMPLE;
+  var newsMode = "loading";   // "loading" -> "live" or "sample"
+
+  var NB = { surging: "🔥 Surging", trending: "📈 Trending", update: "🔄 Update", "new": "🆕 New",
+             nonwest: "🌏 Non-Western", covered: "✅ Covered", "maybe-elsewhere": "📍 Maybe elsewhere", watch: "👁 Watching" };
+  var EX4_VIEWS = ["Latest stories", "My app", "Sources"];
+  var ex4 = { view: 0, region: "", badge: "", q: "", more: false, picked: {} };
+
+  function newsValid(j) {
+    return j && j.schema === 1 && Array.isArray(j.stories) && j.stories.length > 0 && Array.isArray(j.feeds);
+  }
+
+  function loadLiveNews() {
+    if (!window.fetch) { newsMode = "sample"; return; }
+    fetch("news.json", { cache: "no-store" })
+      .then(function (r) { if (!r.ok) { throw new Error("no file"); } return r.json(); })
+      .then(function (j) {
+        if (!newsValid(j)) { throw new Error("bad shape"); }
+        NEWSDEMO = j; newsMode = "live";
+      })
+      .catch(function () { NEWSDEMO = NEWS_SAMPLE; newsMode = "sample"; })
+      .then(function () { renderEx4(); });
+  }
+
+  function hoursOld(iso) {
+    var t = Date.parse(iso);
+    if (isNaN(t)) { return null; }
+    return (Date.now() - t) / 3600000;
+  }
+
+  function newsChip() {
+    if (newsMode === "loading") { return "Loading latest…"; }
+    if (newsMode === "sample") { return "Saved sample · " + NEWS_SAMPLE.snap; }
+    var h = hoursOld(NEWSDEMO.updated_utc);
+    var age = (h === null) ? "" : (h < 1 ? " · under 1 h ago" : " · " + Math.round(h) + " h ago");
+    return "Live · updated " + NEWSDEMO.snap + age;
+  }
+
+  function nrCard(c) {
+    var card = mk("div", "nr-card" + ((c.b.indexOf("surging") >= 0 || c.b.indexOf("trending") >= 0) ? " hot" : ""));
+    card.appendChild(mk("div", "nr-hd", c.h));
+    var bd = mk("div", "nr-bd");
+    c.b.forEach(function (b) {
+      if (!NB[b]) { return; }
+      var pill = mk("span", "nr-b " + b, NB[b]);
+      if (b === "maybe-elsewhere") {
+        pill.title = "A wire dateline points to " + (c.dl ? c.dl.city : "another place") + ", but outlets from several countries carried it, so it stays listed by their countries. It may belong elsewhere.";
+      }
+      bd.appendChild(pill);
+    });
+    c.o.slice(0, 6).forEach(function (o) { var ch = mk("span", "nr-chip", o[0]); ch.title = o[1]; bd.appendChild(ch); });
+    if (c.o.length > 6) { bd.appendChild(mk("span", "nr-chip more", "+" + (c.o.length - 6) + " more")); }
+    card.appendChild(bd);
+    var meta = "first seen " + c.fs + " (" + c.fo + ") · " + c.o.length + " outlet" + (c.o.length === 1 ? "" : "s") + " · " + c.r.length + " region" + (c.r.length === 1 ? "" : "s");
+    if (c.ro) { meta += " · " + c.ro + " joined in the last 2 h"; }
+    if (c.tr.length) { meta += " · searched in " + c.tr.map(function (t) { return t[0] + " " + t[1]; }).join(", "); }
+    if (c.dl) { meta += " · datelined " + c.dl.city + (c.dl.date ? " " + c.dl.date : ""); }
+    card.appendChild(mk("div", "nr-meta", meta));
+    var det = document.createElement("details");
+    det.appendChild(mk("summary", null, c.n > c.l.length ? "Read it: " + c.l.length + " of " + c.n + " links" : "Read it: " + c.n + " link" + (c.n === 1 ? "" : "s")));
+    var ul = document.createElement("ul");
+    c.l.forEach(function (l) {
+      var li = document.createElement("li");
+      li.appendChild(document.createTextNode(l[0] + ": "));
+      var a = document.createElement("a"); a.href = l[2]; a.target = "_blank"; a.rel = "noopener"; a.textContent = l[1];
+      li.appendChild(a);
+      li.appendChild(mk("small", null, " · " + l[3]));
+      ul.appendChild(li);
+    });
+    det.appendChild(ul);
+    card.appendChild(det);
+    var acts = mk("div", "nr-acts");
+    var pick = mk("button", "btn btn-sm" + (ex4.picked[c.id] ? " picked" : ""), ex4.picked[c.id] ? "⭐ Picked" : "☆ Pick");
+    pick.type = "button";
+    pick.addEventListener("click", function () {
+      if (ex4.picked[c.id]) { delete ex4.picked[c.id]; } else { ex4.picked[c.id] = 1; }
+      renderEx4();
+    });
+    var copy = mk("button", "btn btn-sm", "📋 Copy");
+    copy.type = "button";
+    copy.addEventListener("click", function () {
+      var t = "## " + c.h + "\nFirst seen: " + c.fs + " (" + c.fo + ")\n" + c.l.map(function (l) { return "- " + l[0] + ": " + l[1] + " - " + l[2]; }).join("\n") + "\n";
+      var done = function (ok) { copy.textContent = ok ? "📋 Copied" : "Couldn't copy"; };
+      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(function () { done(true); }, function () { done(false); }); }
+      else { done(false); }
+    });
+    acts.appendChild(pick); acts.appendChild(copy);
+    card.appendChild(acts);
+    return card;
+  }
+
+  function renderEx4() {
+    if (newsMode === "loading" && !ex4.asked) { ex4.asked = true; loadLiveNews(); }
+
+    var c = el("ex4-crumbs");
+    c.innerHTML = "";
+    c.appendChild(mk("span", null, "Newsroom"));
+    c.appendChild(mk("span", null, "/"));
+    c.appendChild(mk("span", "here", EX4_VIEWS[ex4.view]));
+    var chip = el("ex4-chip");
+    chip.textContent = newsChip();
+    chip.className = "sample-chip" + (newsMode === "live" ? " live" : "");
+    if (el("nr-outlets-stat")) { el("nr-outlets-stat").textContent = String(NEWSDEMO.outlets_live); }
+
+    var body = el("ex4-body");
+    body.innerHTML = "";
+
+    var tabs = mk("div", "seg");
+    EX4_VIEWS.forEach(function (name, i) {
+      var b = mk("button", "seg-b", name);
+      b.type = "button";
+      b.setAttribute("aria-pressed", String(i === ex4.view));
+      b.addEventListener("click", function () { ex4.view = i; renderEx4(); });
+      tabs.appendChild(b);
+    });
+    body.appendChild(tabs);
+
+    if (ex4.view === 1) {
+      var fig = mk("figure", "shot");
+      var img = document.createElement("img");
+      img.src = "news-real.jpg";
+      img.alt = "The real news tracker on my computer: filters across the top, a strip of Google search terms, then story cards with badges, outlet names and links";
+      fig.appendChild(img);
+      fig.addEventListener("click", function () { fig.classList.toggle("zoom"); });
+      body.appendChild(fig);
+      body.appendChild(note("The tracker as it runs on my computer, on 6 Oct 2026. It reads every 10 minutes and adds two badges this page can't show."));
+      return;
+    }
+
+    if (ex4.view === 2) {
+      var live = NEWSDEMO.feeds.filter(function (f) { return f[2]; });
+      var off = NEWSDEMO.feeds.filter(function (f) { return !f[2]; });
+      body.appendChild(mk("p", "pane-title", live.length + " outlets read on the last update · " + NEWSDEMO.trends_ok + " of " + NEWSDEMO.trends_n + " countries' Google Trends answering"));
+      var chips = mk("div", "src-live");
+      live.forEach(function (f) { var ch = mk("span", "nr-chip", f[0]); ch.title = f[1]; chips.appendChild(ch); });
+      body.appendChild(chips);
+      body.appendChild(mk("p", "pane-title", off.length + " not read, and why"));
+      var tbl = mk("div", "src-off");
+      off.forEach(function (f) {
+        var row = mk("div", "src-row");
+        row.appendChild(mk("b", null, f[0]));
+        row.appendChild(mk("span", null, f[3]));
+        tbl.appendChild(row);
+      });
+      body.appendChild(tbl);
+      if (NEWSDEMO.not_covered && NEWSDEMO.not_covered.length) {
+        body.appendChild(mk("p", "pane-title", "Not covered at all"));
+        var ncl = document.createElement("ul");
+        ncl.className = "nc-list";
+        NEWSDEMO.not_covered.forEach(function (t) { ncl.appendChild(mk("li", null, t)); });
+        body.appendChild(ncl);
+      }
+      return;
+    }
+
+    /* view 0: latest stories */
+    if (newsMode === "sample") {
+      body.appendChild(mk("div", "nr-notice", "Showing a saved sample from " + NEWS_SAMPLE.snap + ". On the published page this board refreshes every hour."));
+    }
+    var bar = mk("div", "nr-bar");
+    var regions = {}, present = {};
+    NEWSDEMO.stories.forEach(function (s) {
+      s.r.forEach(function (r) { regions[r] = 1; });
+      s.b.forEach(function (b) { present[b] = 1; });
+    });
+    if (ex4.region && !regions[ex4.region]) { ex4.region = ""; }
+    if (ex4.badge && !present[ex4.badge]) { ex4.badge = ""; }
+    var rs = document.createElement("select"); rs.setAttribute("aria-label", "Region");
+    rs.appendChild(Object.assign(document.createElement("option"), { value: "", textContent: "All regions" }));
+    Object.keys(regions).sort().forEach(function (r) { var o = document.createElement("option"); o.value = r; o.textContent = r; if (r === ex4.region) { o.selected = true; } rs.appendChild(o); });
+    rs.addEventListener("change", function () { ex4.region = rs.value; ex4.more = false; renderEx4(); });
+    var bs = document.createElement("select"); bs.setAttribute("aria-label", "Badge");
+    bs.appendChild(Object.assign(document.createElement("option"), { value: "", textContent: "All badges" }));
+    ["surging", "trending", "new", "nonwest", "maybe-elsewhere", "update", "covered"].forEach(function (b) {
+      if (!present[b]) { return; }
+      var o = document.createElement("option"); o.value = b; o.textContent = NB[b]; if (b === ex4.badge) { o.selected = true; } bs.appendChild(o);
+    });
+    bs.addEventListener("change", function () { ex4.badge = bs.value; ex4.more = false; renderEx4(); });
+    var qi = document.createElement("input"); qi.type = "search"; qi.placeholder = "Search headlines…"; qi.value = ex4.q; qi.setAttribute("aria-label", "Search headlines");
+    qi.addEventListener("input", function () { ex4.q = qi.value; ex4.more = false; paintList(); });
+    bar.appendChild(rs); bar.appendChild(bs); bar.appendChild(qi);
+    body.appendChild(bar);
+
+    if (ex4.region) {
+      body.appendChild(mk("div", "nr-notice warn", "These stories were carried by outlets in " + ex4.region + ". That doesn't mean they happened there: only " + NEWSDEMO.placement_checked + " of " + NEWSDEMO.total + " stories on the board could be checked against a wire dateline."));
+    }
+
+    var terms = NEWSDEMO.searching.filter(function (t) { return t[0].length <= 34; }).slice(0, 7);
+    if (terms.length && !ex4.region) {
+      body.appendChild(mk("p", "nr-h", "📈 People are searching, with no matching news yet"));
+      var strip = mk("div", "nr-strip");
+      terms.forEach(function (t) {
+        var chip2 = t[1] ? document.createElement("a") : document.createElement("span");
+        chip2.className = "t";
+        if (t[1]) { chip2.href = t[1]; chip2.target = "_blank"; chip2.rel = "noopener"; }
+        chip2.textContent = t[0];
+        chip2.appendChild(mk("small", null, t[2].join(" ")));
+        strip.appendChild(chip2);
+      });
+      body.appendChild(strip);
+    }
+
+    var count = mk("p", "nr-h", "");
+    var list = mk("div", "nr-list");
+    body.appendChild(count);
+    body.appendChild(list);
+
+    function paintList() {
+      var q = ex4.q.trim().toLowerCase();
+      var shown = NEWSDEMO.stories.filter(function (s) {
+        return (!ex4.region || s.r.indexOf(ex4.region) >= 0)
+          && (!ex4.badge || s.b.indexOf(ex4.badge) >= 0)
+          && (!q || s.h.toLowerCase().indexOf(q) >= 0 || s.o.some(function (o) { return o[0].toLowerCase().indexOf(q) >= 0; }));
+      });
+      var npick = Object.keys(ex4.picked).length;
+      count.textContent = shown.length + " of the top " + NEWSDEMO.stories.length + " stories · sorted by score" + (npick ? " · ⭐ " + npick + " picked" : "");
+      list.innerHTML = "";
+      if (!shown.length) { list.appendChild(note("Nothing matches. Try another region or badge.")); return; }
+      var lim = ex4.more ? shown.length : 6;
+      shown.slice(0, lim).forEach(function (s) { list.appendChild(nrCard(s)); });
+      if (shown.length > lim) {
+        var more = mk("button", "btn btn-sm", "Show all " + shown.length);
+        more.type = "button";
+        more.addEventListener("click", function () { ex4.more = true; paintList(); });
+        list.appendChild(more);
+      }
+    }
+    paintList();
+  }
+
   Array.prototype.forEach.call(document.querySelectorAll(".dtab"), function (tab) {
     tab.addEventListener("click", function () {
       var group = tab.closest(".sidepanel");
@@ -2195,6 +2591,7 @@
   renderEx1();
   renderEx2();
   renderEx3();
+  renderEx4();
   show("lobby");
 })();
 </script>

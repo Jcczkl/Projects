@@ -1,0 +1,109 @@
+# Newsroom sources for the public demo board (Room 5 at https://jcczkl.github.io/Projects/).
+# Headlines + links only. Each feed was fetched for real on 2026-10-06 with the
+# Newsroom's own fetcher, after checking that site's robots.txt.
+#
+# `unavailable:` = deliberately not fetched, with the reason shown in the board's
+# Sources view. A site that refuses us is listed, never evaded.
+
+settings:
+  trends_minutes: 30          # Google Trends: every country is due on each hourly run
+  window_hours: 48            # how long a story stays on the board
+
+outlets:
+  # region: Africa, South Asia, SE Asia, East Asia, Middle East, Latin America,
+  #         Global South, Wire, Europe, US, Oceania, Canada
+  #         (Wire/Europe/US/Oceania/Canada count as "the West" for 🌏)
+  # country: home country (ISO code), for the per-country view of a region.
+  #         Left off for outlets that cover a whole region or the world (Al Jazeera,
+  #         Africanews, Euronews, the wires...): they show under "Regional".
+  - {name: Africanews, region: Africa, feeds: ["https://www.africanews.com/feed/rss"]}
+  - {name: News24, region: Africa, country: ZA, feeds: ["https://feeds.capi24.com/v1/Search/articles/news24/TopStories/rss"]}
+  - {name: Premium Times, region: Africa, country: NG, feeds: ["https://www.premiumtimesng.com/feed"]}
+  - {name: Nation (KE), region: Africa, country: KE, feeds: ["https://nation.africa/kenya/rss.xml"]}
+  - {name: The East African, region: Africa, unavailable: "no public RSS found; Google News route is disallowed by its robots.txt"}
+  - {name: Daily Maverick, region: Africa, country: ZA, unavailable: "site refuses automated readers (HTTP 403)"}
+  - {name: Addis Standard, region: Africa, country: ET, unavailable: "site refuses automated readers (HTTP 403)"}
+
+  - {name: The Hindu, region: South Asia, country: IN, feeds: ["https://www.thehindu.com/news/international/feeder/default.rss", "https://www.thehindu.com/news/national/feeder/default.rss"]}
+  - {name: Indian Express, region: South Asia, country: IN, feeds: ["https://indianexpress.com/feed/"]}
+  - {name: Kathmandu Post, region: South Asia, country: NP, feeds: ["https://kathmandupost.com/rss"]}
+  - {name: Dawn, region: South Asia, country: PK, unavailable: "site refuses automated readers (HTTP 403)"}
+  - {name: The Daily Star (BD), region: South Asia, country: BD, unavailable: "its RSS stopped updating in 2022 (empty titles)"}
+  # 2026-10-06 (claude_code_newsroom_more_sources.md): fetched for real with the Newsroom's own fetcher.
+  - {name: Geo News (English), region: South Asia, country: PK, feeds: ["https://www.geo.tv/rss/1/1"]}   # replaces Dawn; its dates run ~3 h ahead, so first-seen time is used
+  - {name: The News International, region: South Asia, country: PK, unavailable: "its RSS feeds stopped updating (newest items 4-10 months old)"}
+  - {name: Dhaka Tribune, region: South Asia, country: BD, unavailable: "site refuses automated readers (HTTP 403); /feed is 404"}
+
+  - {name: CNA, region: SE Asia, country: SG, feeds: ["https://www.channelnewsasia.com/rssfeeds/8395986"]}
+  - {name: Straits Times, region: SE Asia, country: SG, feeds: ["https://www.straitstimes.com/news/world/rss.xml", "https://www.straitstimes.com/news/singapore/rss.xml"]}
+  - {name: VnExpress, region: SE Asia, country: VN, feeds: ["https://e.vnexpress.net/rss/news.rss"]}
+  - {name: Rappler, region: SE Asia, country: PH, feeds: ["https://www.rappler.com/feed/"]}
+  - {name: Bangkok Post, region: SE Asia, country: TH, feeds: ["https://www.bangkokpost.com/rss/data/topstories.xml"]}
+  - {name: Jakarta Post, region: SE Asia, country: ID, unavailable: "no public RSS found; Google News route is disallowed by its robots.txt"}
+  # 2026-10-06 (claude_code_newsroom_more_sources.md): fetched for real with the Newsroom's own fetcher.
+  - {name: Antara News (English), region: SE Asia, country: ID, feeds: ["https://en.antaranews.com/rss/news.xml"]}   # replaces Jakarta Post
+  - {name: The Star (Malaysia), region: SE Asia, country: MY, unavailable: "no public RSS found (its /rss/ paths are 404, no feed link on its site)"}
+
+  - {name: SCMP, region: East Asia, country: HK, feeds: ["https://www.scmp.com/rss/91/feed"]}
+  - {name: Nikkei Asia, region: East Asia, country: JP, feeds: ["https://asia.nikkei.com/rss/feed/nar"]}
+  - {name: Yonhap, region: East Asia, country: KR, feeds: ["https://en.yna.co.kr/RSS/news.xml"]}
+  - {name: Japan Times, region: East Asia, country: JP, feeds: ["https://www.japantimes.co.jp/feed/"]}
+  - {name: Taipei Times, region: East Asia, country: TW, feeds: ["https://www.taipeitimes.com/xml/index.rss"]}
+  - {name: Kyodo, region: East Asia, country: JP, unavailable: "no public RSS found; Google News route is disallowed by its robots.txt"}
+
+  - {name: Al Jazeera, region: Middle East, feeds: ["https://www.aljazeera.com/xml/rss/all.xml"]}
+  - {name: The National (UAE), region: Middle East, country: AE, feeds: ["https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml"]}
+  - {name: Anadolu, region: Middle East, country: TR, feeds: ["https://www.aa.com.tr/en/rss/default?cat=guncel"]}
+  - {name: Arab News, region: Middle East, country: SA, unavailable: "site refuses automated readers (HTTP 403)"}
+  - {name: Times of Israel, region: Middle East, country: IL, unavailable: "its robots.txt disallows the RSS feed"}
+  # 2026-10-06 (claude_code_newsroom_more_sources.md): fetched for real with the Newsroom's own fetcher.
+  - {name: The Jerusalem Post, region: Middle East, country: IL, feeds: ["https://www.jpost.com/rss/rssfeedsfrontpage.aspx"]}   # replaces Times of Israel
+  - {name: Al Arabiya English, region: Middle East, unavailable: "site refuses automated readers (HTTP 403 on all three feed paths)"}
+
+  - {name: Buenos Aires Times, region: Latin America, country: AR, feeds: ["https://www.batimes.com.ar/feed"]}
+  - {name: Folha (EN), region: Latin America, country: BR, feeds: ["https://feeds.folha.uol.com.br/internacional/en/rss091.xml"]}
+  - {name: El País (EN), region: Latin America, feeds: ["https://feeds.elpais.com/mrss-s/pages/ep/site/english.elpais.com/portada"]}
+  - {name: Mexico News Daily, region: Latin America, country: MX, feeds: ["https://mexiconewsdaily.com/feed/"]}
+  - {name: Colombia Reports, region: Latin America, country: CO, feeds: ["https://colombiareports.com/feed/"]}   # 2026-10-06, Colombia
+  - {name: MercoPress, region: Latin America, country: UY, unavailable: "its HTTPS certificate fails verification here (not bypassed)"}
+
+  - {name: Rest of World, region: Global South, feeds: ["https://restofworld.org/feed/latest"]}
+
+  - {name: AFP (via France 24), region: Wire, feeds: ["https://www.france24.com/en/rss"]}
+  - {name: UPI, region: Wire, feeds: ["https://rss.upi.com/news/top_news.rss"]}   # 2026-10-06: second live wire, its own RSS
+  - {name: AP, region: Wire, unavailable: "no public RSS; the Google News route is disallowed by news.google.com's robots.txt. AP copies still arrive via other outlets"}
+  - {name: Reuters, region: Wire, unavailable: "no public RSS; the Google News route is disallowed by news.google.com's robots.txt"}
+
+  - {name: BBC, region: Europe, country: GB, feeds: ["https://feeds.bbci.co.uk/news/world/rss.xml"]}
+  - {name: The Guardian, region: Europe, country: GB, feeds: ["https://www.theguardian.com/world/rss"]}
+  - {name: Euronews, region: Europe, feeds: ["https://www.euronews.com/rss?level=theme&name=news"]}
+  - {name: Meduza, region: Europe, country: RU, feeds: ["https://meduza.io/rss/en/all"]}
+  - {name: The Moscow Times, region: Europe, country: RU, feeds: ["https://www.themoscowtimes.com/rss/news"]}
+  # 2026-10-06 (claude_code_newsroom_more_sources.md): fetched for real with the Newsroom's own fetcher.
+  - {name: DW (English), region: Europe, country: DE, feeds: ["https://rss.dw.com/rdf/rss-en-all"]}   # Germany
+  - {name: ANSA (English), region: Europe, country: IT, feeds: ["https://www.ansa.it/english/news/english_nr_rss.xml"]}   # Italy
+  - {name: NL Times, region: Europe, country: NL, tz: Europe/Amsterdam, feeds: ["https://nltimes.nl/rss"]}   # Netherlands; dates have no zone
+  - {name: Notes From Poland, region: Europe, country: PL, feeds: ["https://notesfrompoland.com/feed/"]}   # Poland
+  - {name: The Kyiv Independent, region: Europe, country: UA, feeds: ["https://kyivindependent.com/news-archive/rss/"]}   # Ukraine
+  - {name: RFE/RL, region: Europe, unavailable: "its robots.txt disallows the /api/ RSS feeds"}
+  - {name: NPR, region: US, country: US, feeds: ["https://feeds.npr.org/1004/rss.xml"]}
+  - {name: CNN, region: US, country: US, unavailable: "its RSS stopped updating in 2023"}
+
+  # Oceania and Canada count as "the West" for 🌏 (runtime/newsroom.py WEST).
+  - {name: ABC News (Australia), region: Oceania, country: AU, feeds: ["https://www.abc.net.au/news/feed/51120/rss.xml"]}
+  - {name: RNZ, region: Oceania, country: NZ, feeds: ["https://www.rnz.co.nz/rss/national.xml"]}
+  - {name: CBC News, region: Canada, country: CA, unavailable: "connections reset or time out on both its feed hosts (www.cbc.ca, rss.cbc.ca), 4 tries - not worked around"}
+
+# Google Trends "Trending now" (official public RSS; no scraping, no pytrends).
+trends:
+  url: "https://trends.google.com/trending/rss?geo={cc}"
+  countries:
+    Americas: [US, CA, MX, BR, AR, CO]
+    Europe: [GB, DE, FR, IT, ES, NL, PL, UA, RU, TR]
+    Middle East / Africa: [SA, AE, IL, EG, NG, KE, ZA]
+    Asia-Pacific: [IN, PK, BD, ID, PH, VN, TH, MY, SG, JP, KR, TW, HK, AU, NZ]
+  not_covered:
+    - "China: Google is blocked there, so no Trends data. Baidu/Weibo hot lists are web pages with unclear terms for automated reading - left out."
+    - "TikTok: no public trending feed or API - not covered."
+    - "Reddit r/worldnews: its robots.txt disallows automated reading - not covered."
+    - "Paywalled outlets: only their public headline feeds are read."

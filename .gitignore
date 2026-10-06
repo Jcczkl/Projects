@@ -1,0 +1,5 @@
+# built hourly by .github/workflows/news.yml; never committed
+news.json
+.news_state/
+_site/
+__pycache__/
