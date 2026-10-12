@@ -782,6 +782,20 @@
   .facts { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; margin: 0; font-size: 12.5px; }
   .facts dt { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-faint); padding-top: 2px; }
   .facts dd { margin: 0; color: var(--ink); }
+  .room-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+  .archived-tag {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: .08em; text-transform: uppercase; line-height: 1.4;
+    color: var(--ink-soft); background: var(--plinth); border: 1px solid var(--rule-strong);
+    border-radius: 100px; padding: 2px 8px; white-space: nowrap;
+  }
+  .ended-box { margin-top: 22px; }
+  .ended-box .arcbody { margin-top: 4px; }
+  @media (min-width: 1280px) {
+    #room-ex1 .exhibit-grid { grid-template-rows: auto 1fr; }
+    #room-ex1 .wall-label, #room-ex1 .sidepanel { grid-row: 1 / span 2; }
+    #room-ex1 .ended-box { grid-column: 2; grid-row: 2; margin-top: 0; align-self: start; }
+  }
   .wall-label { gap: 14px; }
 
   .icon-cards { display: grid; gap: 10px; }
@@ -1010,6 +1024,269 @@
   .sidepanel ul.flaws { font-size: 13px; gap: 8px; }
   .sidepanel ul.flaws b { color: var(--ink); }
   @media (prefers-reduced-motion: reduce) { .bar, .hb { animation: none; } }
+
+  /* ================= v21 museum: story first, full-size rooms, slim pinned bar, smooth room changes =================
+     Motion scale borrowed from Walk-In Studio's kit (approach, not files): 120/240/480/800 ms,
+     ease-out cubic-bezier(.2,.7,.2,1), ease-in-out cubic-bezier(.6,0,.2,1). Reduced motion: instant. */
+  :root {
+    --dur-tap: 120ms; --dur-ui: 240ms; --dur-reveal: 480ms; --dur-scene: 800ms;
+    --ease-out: cubic-bezier(.2, .7, .2, 1); --ease-in-out: cubic-bezier(.6, 0, .2, 1);
+    --bar-h: 52px; --sign-h: 49px;
+  }
+  body { padding-bottom: var(--bar-h); }
+  main { max-width: 1720px; padding: 26px 32px 26px; }
+  @media (max-width: 560px) { main { padding: 22px 16px 22px; } }
+  .room { min-height: calc(100dvh - var(--sign-h) - var(--bar-h) - 52px); animation: rise var(--dur-reveal) var(--ease-out) both; }
+  .vt .room { animation: none; }
+
+  /* the bottom bar: slim and pinned, never a tall block */
+  .wayfinding {
+    position: fixed; left: 0; right: 0; bottom: 0; height: var(--bar-h);
+    margin: 0; padding: 0 20px; z-index: 30; box-shadow: 0 -6px 18px var(--shadow, rgba(0,0,0,.06));
+  }
+  .wayfinding .btn { padding: 7px 14px; }
+  @media (max-width: 560px) { .wayfinding { padding: 0 12px; } }
+  .signage { view-transition-name: signage; }
+  .wayfinding { view-transition-name: wayfinding; }
+
+  /* room changes */
+  ::view-transition-old(root) { animation: vt-out 150ms var(--ease-in-out) both; }
+  ::view-transition-new(root) { animation: vt-in 300ms var(--ease-out) 90ms both; }
+  ::view-transition-group(signage), ::view-transition-group(wayfinding) { animation-duration: 420ms; }
+  @keyframes vt-out { to { opacity: 0; transform: translateY(-12px); } }
+  @keyframes vt-in { from { opacity: 0; transform: translateY(16px); } }
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+    .room { animation: none; }
+  }
+
+  /* story column first and widest, pictures second */
+  .museum { display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; align-items: start; }
+  @media (min-width: 1000px) { .museum { grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); gap: 34px; } }
+  .story {
+    background: var(--plinth); border: 1px solid var(--rule); border-top: 4px solid var(--accent);
+    border-radius: 6px; padding: 26px 28px 24px; display: flex; flex-direction: column; gap: 16px; min-width: 0;
+  }
+  @media (max-width: 560px) { .story { padding: 20px 18px; } }
+  .exhibit { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+  .story-title {
+    font-family: "Fraunces", Georgia, serif; font-weight: 600; color: var(--accent);
+    font-size: clamp(32px, 3vw, 54px); line-height: 1.04; letter-spacing: -.012em; margin: 0;
+  }
+  .story-lede { font-size: clamp(17px, 1.15vw, 21px); line-height: 1.5; color: var(--ink); margin: 0; max-width: 62ch; }
+  .story-p { font-size: clamp(15px, .95vw, 17px); line-height: 1.55; color: var(--ink-soft); margin: 0; max-width: 64ch; }
+  .story-p b { color: var(--ink); }
+  .signpost {
+    font-family: "IBM Plex Sans", sans-serif; font-weight: 600; color: var(--ink);
+    font-size: clamp(16px, 1.05vw, 19px); margin: 8px 0 0; display: flex; gap: 9px; align-items: center;
+  }
+  .story-list { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: clamp(15px, .95vw, 16.5px); color: var(--ink-soft); }
+  .story .facts { font-size: 13.5px; border-top: 1px solid var(--rule); padding-top: 14px; }
+  .story .facts dt { font-size: 10.5px; }
+  .live-tag {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--accent); background: var(--accent-soft); border-radius: 100px; padding: 3px 9px; white-space: nowrap;
+  }
+  .proves { font-size: 13px; color: var(--ink-soft); margin: 0; }
+
+  /* timelines: vertical, one emoji per step, picture with its step */
+  .tl { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+  .tl > li { display: grid; grid-template-columns: 42px minmax(0, 1fr); gap: 14px; position: relative; }
+  .tl > li::before { content: ""; position: absolute; left: 20px; top: 44px; bottom: -14px; width: 2px; background: var(--rule); }
+  .tl > li:last-child::before, .tl.plain > li::before { display: none; }
+  .tl-ico {
+    width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--accent-soft); font-size: 20px; line-height: 1;
+  }
+  .tl-when { display: block; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-faint); }
+  .tl-what { display: block; font-weight: 600; font-size: clamp(15.5px, 1vw, 17.5px); color: var(--ink); margin: 1px 0 2px; }
+  .tl-note { margin: 0; font-size: clamp(14px, .9vw, 15.5px); line-height: 1.5; color: var(--ink-soft); max-width: 62ch; }
+  .tl-note a { color: var(--accent); }
+  .tl > li.turn .tl-ico { background: var(--signal-soft); }
+  .tl > li.turn .tl-what { color: var(--signal); }
+  .tl > li.now .tl-ico { background: var(--accent); }
+  .tl > li.now .tl-what { color: var(--accent); }
+  .tl-pic { margin: 9px 0 0; max-width: 340px; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; background: var(--paper, var(--plinth)); }
+  .tl-pic img { display: block; width: 100%; height: auto; }
+  .tl-pic figcaption { font-size: 12.5px; color: var(--ink-soft); padding: 6px 9px; }
+  .js .tl-pic { transition: opacity var(--dur-reveal) var(--ease-out), transform var(--dur-reveal) var(--ease-out); }
+  .js .tl-pic:not(.seen) { opacity: 0; transform: translateY(16px); }
+  @media (prefers-reduced-motion: reduce) { .js .tl-pic { transition: none; } .js .tl-pic:not(.seen) { opacity: 1; transform: none; } }
+
+  /* Room 1: the rules as big cards */
+  .rule-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  @media (max-width: 560px) { .rule-cards { grid-template-columns: 1fr; } }
+  .rule-card {
+    display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 4px 12px; align-items: start;
+    background: var(--paper, transparent); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 15px;
+  }
+  .rule-card .rc-emoji { grid-row: span 2; font-size: 28px; line-height: 1.1; }
+  .rule-card b { font-size: clamp(15.5px, 1vw, 17.5px); color: var(--ink); }
+  .rule-card span:last-child { font-size: 14px; line-height: 1.45; color: var(--ink-soft); }
+  .rule-card.warn { border-color: var(--signal); background: var(--signal-soft); }
+  .mini-stats.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  @media (max-width: 760px) { .mini-stats.four { grid-template-columns: 1fr 1fr; } }
+
+  /* Room 4: how one video was made */
+  .vstrip { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .vstep {
+    font: 500 14px "IBM Plex Sans", sans-serif; display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 12px; border-radius: 100px; border: 1px solid var(--rule-strong); background: transparent;
+    color: var(--ink-soft); cursor: pointer; transition: background var(--dur-tap) var(--ease-out), color var(--dur-tap) var(--ease-out), border-color var(--dur-tap) var(--ease-out);
+  }
+  .vstep:hover { color: var(--ink); border-color: var(--ink-faint); }
+  .vstep[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--plinth); }
+  .vstrip .varrow { color: var(--ink-faint); font-size: 14px; }
+
+  /* Room 3: the ETFs behind each market */
+  .hl small { display: block; font-size: 11px; color: var(--ink-faint); font-weight: 400; }
+  .etf-lists { display: grid; gap: 6px; }
+  .etf-mkt { border: 1px solid var(--rule); border-radius: 5px; background: var(--paper, transparent); }
+  .etf-mkt summary { cursor: pointer; padding: 9px 12px; font-size: 14px; font-weight: 600; color: var(--ink); display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+  .etf-mkt summary small { font-weight: 400; color: var(--ink-faint); font-size: 12.5px; }
+  .etf-mkt ul { margin: 0; padding: 2px 12px 10px 30px; display: grid; gap: 3px; font-size: 13.5px; color: var(--ink-soft); }
+  .etf-mkt li b { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12.5px; color: var(--ink); }
+
+  /* Room 5: the app's Newsroom look - KPI tiles, a highlighted surging row, region buttons */
+  .nr-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+  @media (max-width: 640px) { .nr-kpis { grid-template-columns: 1fr 1fr; } }
+  .nr-kpi { border: 1px solid var(--rule); border-radius: 10px; padding: 11px 13px; background: var(--paper, transparent); min-width: 0; }
+  .nr-kpi b { display: block; font-family: "Fraunces", Georgia, serif; font-size: 26px; line-height: 1.05; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .nr-kpi span { font-size: 12.5px; color: var(--ink-soft); }
+  .nr-kpi.hot { border-color: #e38b4a; background: linear-gradient(160deg, rgba(227,139,74,.16), transparent 60%); }
+  .nr-kpi.hot b { color: #c4621d; }
+  .nr-regions { display: flex; gap: 7px; flex-wrap: wrap; }
+  .reg {
+    font: 600 13px "IBM Plex Sans", sans-serif; padding: 6px 11px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--rule-strong); background: transparent; color: var(--ink-soft);
+    transition: background var(--dur-tap) var(--ease-out), color var(--dur-tap) var(--ease-out), border-color var(--dur-tap) var(--ease-out);
+  }
+  .reg:hover { color: var(--ink); border-color: var(--ink-faint); }
+  .reg[aria-pressed="true"] { background: #e38b4a; border-color: #e38b4a; color: #1b1208; }
+  .nr-hotrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+  .nr-hot {
+    border: 1px solid rgba(227,139,74,.55); border-radius: 10px; padding: 11px 13px; display: grid; gap: 6px;
+    background: linear-gradient(160deg, rgba(227,139,74,.18), transparent 65%);
+  }
+  .nr-hot b { font-size: 14px; line-height: 1.35; color: var(--ink); }
+  .nr-hot span { font-size: 12px; color: var(--ink-soft); }
+  .nr-card.hot { border-color: rgba(227,139,74,.6); background: linear-gradient(160deg, rgba(227,139,74,.10), transparent 55%); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .nr-kpi.hot b { color: #ffa45c; } }
+  :root[data-theme="dark"] .nr-kpi.hot b { color: #ffa45c; }
+
+  /* Room 6 */
+  .tier-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  @media (max-width: 560px) { .tier-cards { grid-template-columns: 1fr; } }
+  .tier-card { border: 1px solid var(--rule); border-radius: 6px; padding: 12px 14px; display: grid; gap: 4px; background: var(--paper, transparent); }
+  .tier-card b { font-size: 15px; color: var(--ink); }
+  .tier-card span { font-size: 13.5px; color: var(--ink-soft); line-height: 1.45; }
+  .ws-shots { display: grid; grid-template-columns: minmax(0, 2.4fr) minmax(0, 1fr); gap: 12px; align-items: start; }
+  @media (max-width: 560px) { .ws-shots { grid-template-columns: 1fr; } .ws-shots .phone-shot { max-width: 260px; } }
+  .ws-shots figure { margin: 0; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; background: #0b0b0d; }
+  .ws-shots img { display: block; width: 100%; height: auto; }
+  .ws-shots figcaption { background: var(--plinth); font-size: 12.5px; color: var(--ink-soft); padding: 7px 10px; }
+
+  /* lobby and exit */
+  .lobby-head .lede.subtle { font-size: 15px; color: var(--ink-faint); }
+  .lobby-head h1 { font-size: clamp(36px, 4.2vw, 64px); }
+  .lobby-head .lede { font-size: clamp(17px, 1.2vw, 21px); }
+  .wings.six { display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  @media (min-width: 1000px) {
+    .wings.six { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+    .wings.six .wing-personal { grid-column: 1 / -1; }
+  }
+  .wings.six .wing + .wing { margin-top: 0; }
+  .exhibit-cards.one { grid-template-columns: minmax(0, 1fr); }
+  .exit-thumbs.six { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  @media (max-width: 1100px) { .exit-thumbs.six { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .exit-thumbs.six { grid-template-columns: 1fr 1fr; } }
+
+  .exhibit .case { scroll-margin-top: 64px; }
+  .ex2-phone { display: grid; justify-items: center; gap: 6px; }
+  .ex2-phone .phone { width: min(220px, 60vw); }
+  .story-more summary { cursor: pointer; list-style: none; margin: 0; }
+  .story-more summary::-webkit-details-marker { display: none; }
+  .story-more summary::after { content: "+"; margin-left: auto; color: var(--ink-faint); font-weight: 400; }
+  .story-more[open] summary::after { content: "−"; }
+  .story-more .story-list { margin-top: 8px; }
+  .story .badge-key > div { grid-template-columns: 170px 1fr; }
+
+  /* ---- round 2 (fresh review) ---- */
+  /* pictures stay beside the story while it is read (only where they fit on screen) */
+  @media (min-width: 1000px) and (min-height: 760px) {
+    .museum.pin .exhibit { position: sticky; top: calc(var(--sign-h) + 18px); }
+  }
+  .exhibit .globe-feature { grid-template-columns: minmax(0, 260px) minmax(0, 1fr); }
+  @media (max-width: 760px) { .exhibit .globe-feature { grid-template-columns: 1fr; } }
+  .ex2-phone .phone { width: min(180px, 52vw); }
+  .tl-pic.portrait { max-width: 210px; }
+  .result-box { border: 1px solid var(--rule); border-left: 4px solid var(--accent); border-radius: 6px; padding: 14px 16px; display: grid; gap: 10px; background: var(--paper, transparent); }
+  .result-box .pull { margin: 0; font-family: "Fraunces", Georgia, serif; font-size: clamp(18px, 1.3vw, 23px); line-height: 1.25; color: var(--ink); }
+  .result-box .c-stats { display: flex; gap: 22px; flex-wrap: wrap; }
+  .result-box .c-stats b { display: block; font-family: "Fraunces", Georgia, serif; font-size: 26px; color: var(--accent); line-height: 1; }
+  .result-box .c-stats span, .result-box .c-src { font-size: 13px; color: var(--ink-soft); margin: 0; }
+  /* readable small print */
+  .viz-foot, .wall-label .viz-foot { font-size: 13px; color: var(--ink-soft); }
+  .phone-cap { font-size: 13px !important; color: var(--ink-soft) !important; }
+  .story .facts dt { font-size: 11.5px; color: var(--ink-soft); }
+  .lobby-head .lede.subtle { font-size: 15.5px; color: var(--ink-soft); }
+  .lobby-head .lede, .story-lede, .tl-note, .story-p { text-wrap: pretty; }
+  /* lobby: the two top wings line up */
+  .wings.six > .wing { display: flex; flex-direction: column; }
+  .wings.six > .wing > .exhibit-cards { flex: 1; }
+  .wings.six .wing-head { min-height: 34px; align-items: center; }
+  img[src="ws-showroom.jpg"] { object-position: left top; }
+  /* exit: fills the screen, centred */
+  #room-exit:not([hidden]) { display: flex; flex-direction: column; justify-content: center; }
+  #room-exit h1 { font-size: clamp(36px, 4vw, 60px); }
+  .exit-thumbs.six .card-media { height: clamp(120px, 11vw, 190px); }
+  /* Room 4 strip: no orphan arrows on a phone */
+  @media (max-width: 560px) { .vstrip .varrow { display: none; } }
+  /* Room 5: a calmer board */
+  .nr-terms summary { cursor: pointer; font-size: 13px; color: var(--ink-soft); }
+  /* room changes: the header and bar labels cross over with the content, not before it */
+  ::view-transition-old(signage), ::view-transition-old(wayfinding) { animation: vt-fade-out 150ms var(--ease-in-out) both; }
+  ::view-transition-new(signage), ::view-transition-new(wayfinding) { animation: vt-fade-in 300ms var(--ease-out) 90ms both; }
+  @keyframes vt-fade-out { to { opacity: 0; } }
+  @keyframes vt-fade-in { from { opacity: 0; } }
+
+  /* ---- round 3 (second fresh review) ---- */
+  .glance { border: 1px solid var(--rule); border-radius: 6px; background: var(--plinth); padding: 14px 16px; display: grid; gap: 12px; }
+  .glance .facts { font-size: 13.5px; }
+  .glance .facts dt { font-size: 11.5px; color: var(--ink-soft); }
+  .glance .d-kicker { color: var(--accent); }
+  .pair { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: center; }
+  .pair figure { margin: 0; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; background: var(--plinth); }
+  .pair img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .pair figcaption { font-size: 13px; color: var(--ink-soft); padding: 6px 9px; }
+  .pair .ba-arrow { font-size: 22px; }
+  /* bigger, darker small print */
+  .mini-stats span { font-size: 13px; color: var(--ink-soft); }
+  .etf-mkt summary small { font-size: 13px; color: var(--ink-soft); }
+  .story .badge-key > div { font-size: 14px; color: var(--ink-soft); }
+  .claim span { font-size: 14.5px; color: var(--ink-soft); }
+  @media (max-width: 560px) { .story .badge-key > div { grid-template-columns: 1fr; gap: 2px; } }
+  /* Room 5: the board supports the story instead of out-shouting it */
+  .nr-kpi.hot { border-color: var(--rule); background: transparent; }
+  .nr-kpi.hot b { color: var(--signal); }
+  .nr-hot { border-color: var(--rule); background: linear-gradient(160deg, var(--signal-soft), transparent 70%); }
+  .nr-card.hot { border-color: var(--rule); background: transparent; border-left: 3px solid var(--signal); }
+  .reg[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--plinth); }
+
+  /* ---- round 4 (third fresh review) ---- */
+  .ws-shots { grid-template-columns: 1fr; }
+  .ws-shots .phone-shot { justify-self: start; width: min(240px, 60%); }
+  @media (min-width: 1000px) { .ws-shots { grid-template-columns: minmax(0, 1fr) 200px; } .ws-shots figure:first-child { grid-column: 1 / -1; } .ws-shots .phone-shot { width: 200px; } }
+  .ws-side { display: grid; gap: 10px; align-content: start; }
+  .tl-pic.portrait img { aspect-ratio: 3 / 4; object-fit: cover; object-position: top; }
+  .vstrip .varrow { display: none; }
+  .vstep .vnum { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 11px; color: inherit; opacity: .7; }
+  #room-exit:not([hidden]) { justify-content: flex-start; padding-top: 4vh; }
+  .exit-thumbs img { object-position: left top; }
+
+  /* ---- round 5 (fourth fresh review) ---- */
+  @media (min-width: 1000px) { .ex2-phone .phone { width: 250px; } }
+  .exit-thumbs.six .card-media { height: clamp(140px, 13vw, 240px); }
 </style>
 
 <header class="signage">
@@ -1026,17 +1303,18 @@
   <section class="room" id="room-lobby">
     <div class="lobby-head">
       <p class="eyebrow">Project walkthrough</p>
-      <h1>Five projects I designed, built and run</h1>
-      <p class="lede">Built with AI coding tools — and what I had to work out before I could trust each one.</p>
+      <h1>Six projects I designed and built</h1>
+      <p class="lede">A small museum of what I build: what each project does, and how it came to be. Two are archived, and one is my own business.</p>
+      <p class="lede subtle">Built with AI coding tools — and what I had to work out before I could trust each one.</p>
     </div>
 
     <div class="claims">
-      <div class="claim"><b>5</b><span>projects built and used on real work</span></div>
-      <div class="claim warnc"><b>6</b><span>trading searches — none passed, so I shut trading down</span></div>
+      <div class="claim"><b>6</b><span>projects designed and built, two now archived</span></div>
+      <div class="claim warnc"><b>6</b><span>searches for a trading strategy that works — none passed, so I shut my trading system down</span></div>
       <div class="claim"><b>2</b><span>independent sources behind every published fact</span></div>
     </div>
 
-    <div class="wings">
+    <div class="wings six">
     <div class="wing">
       <div class="wing-head"><span class="wing-kicker mono">GAL Global Advisory</span><h2 class="wing-title">Projects built for companies</h2></div>
     <div class="exhibit-cards two">
@@ -1054,7 +1332,7 @@
         <span class="card-text">
           <span class="room-no mono">Room 2</span>
           <h2>Company website</h2>
-          <p>A live site built around a globe drawn in code.</p>
+          <p>A live globe that lights a route from each client country to Singapore.</p>
           <span class="enter">Enter room →</span>
         </span>
       </button>
@@ -1062,12 +1340,27 @@
     </div>
 
     <div class="wing">
+      <div class="wing-head"><span class="wing-kicker mono">My own business</span><h2 class="wing-title">Walk-In Studio</h2></div>
+    <div class="exhibit-cards one">
+      <button class="exhibit-card" type="button" data-goto="ex5">
+        <span class="card-media dark-media"><img src="ws-showroom.jpg" alt="The Walk-In Studio showroom's first screen" loading="lazy"></span>
+        <span class="card-text">
+          <span class="room-row"><span class="room-no mono">Room 6</span><span class="live-tag">Showroom live</span></span>
+          <h2>Websites for small shops</h2>
+          <p>Simple, fast websites for Singapore shops, from S$300.</p>
+          <span class="enter">Enter room →</span>
+        </span>
+      </button>
+    </div>
+    </div>
+
+    <div class="wing wing-personal">
       <div class="wing-head"><span class="wing-kicker mono">On my own time</span><h2 class="wing-title">Personal projects</h2></div>
     <div class="exhibit-cards three">
       <button class="exhibit-card" type="button" data-goto="ex1">
         <span class="card-media chart-media" id="lobby-chart"></span>
         <span class="card-text">
-          <span class="room-no mono">Room 3</span>
+          <span class="room-row"><span class="room-no mono">Room 3</span><span class="archived-tag">Archived · Oct 2026</span></span>
           <h2>Stock screening → ETF tracker</h2>
           <p>Simply holding the shares beat every strategy I tested.</p>
           <span class="enter">Enter room →</span>
@@ -1076,7 +1369,7 @@
       <button class="exhibit-card" type="button" data-goto="ex2">
         <span class="card-media dark-media"><video src="tat-clip.mp4" poster="tat-poster.jpg" muted autoplay loop playsinline aria-label="Clip from a published video: a satellite map flying from South America to the Caribbean"></video></span>
         <span class="card-text">
-          <span class="room-no mono">Room 4</span>
+          <span class="room-row"><span class="room-no mono">Room 4</span><span class="archived-tag">Archived · Oct 2026</span></span>
           <h2>News explainer channel</h2>
           <p>Every fact checked against two outlets, then published.</p>
           <span class="enter">Enter room →</span>
@@ -1102,26 +1395,33 @@
 
   <!-- ===================== ROOM 1: COMPLIANCE SYSTEM ===================== -->
   <section class="room" id="room-ex0" hidden>
-    <div class="exhibit-grid">
+    <div class="museum pin">
+      <article class="story">
+        <span class="room-row"><span class="room-no mono">Room 1 of 6 · At GAL Global Advisory</span></span>
+        <h2 class="story-title">Corporate compliance system</h2>
+        <p class="story-lede">A corporate secretarial firm can't miss a filing deadline or lose a client's file. I designed this system for GAL Global Advisory, the firm I work at, so neither can happen.</p>
 
-      <aside class="wall-label">
-        <span class="room-no mono">Room 1 of 5 · At GAL Global Advisory</span>
-        <h2>Corporate compliance system</h2>
-        <p class="lead-claim">A compliance system that can't miss a deadline or lose a client's file, built for GAL Global Advisory, the firm I work at.</p>
-        <div class="mini-stats">
-          <div><b>2.1M</b><span>ACRA company records it checks against</span></div>
-          <div class="warn"><b>0</b><span>ways to delete a client's file</span></div>
-          <div><b>135</b><span>automated test files</span></div>
-          <div><b>3×</b><span>full test passes before any release</span></div>
+        <h3 class="signpost"><span aria-hidden="true">🛡️</span> Four rules it can't break</h3>
+        <div class="rule-cards">
+          <div class="rule-card warn"><span class="rc-emoji" aria-hidden="true">🗑️</span><b>Never deletes a file</b><span>It can only add. Every change is a new, dated file.</span></div>
+          <div class="rule-card"><span class="rc-emoji" aria-hidden="true">🧾</span><b>Every action leaves a record</b><span>The client's folder is a full history, even without the app.</span></div>
+          <div class="rule-card"><span class="rc-emoji" aria-hidden="true">🔒</span><b>No client data in the code</b><span>Every change is scanned for client names and IDs, and refused if one appears.</span></div>
+          <div class="rule-card"><span class="rc-emoji" aria-hidden="true">🤐</span><b>No tipping off</b><span>Letters never reveal screening results or risk ratings.</span></div>
         </div>
-        <dl class="facts">
-          <dt>Role</dt><dd>Designed it, set its rules, test it on the firm's real work</dd>
-          <dt>Status</dt><dd>In use, still being built</dd>
-          <dt>Built with</dt><dd>TypeScript, Electron, encrypted SQLite</dd>
-        </dl>
-      </aside>
 
-      <div>
+        <h3 class="signpost"><span aria-hidden="true">🧪</span> How it's tested</h3>
+        <ul class="story-list">
+          <li>Deadlines, files, templates and encryption are tested almost line by line, on a separate copy of fictional companies marked <b>TEST</b>.</li>
+          <li>Every upgrade: back up, verify, install, confirm record counts match — or restore and stop.</li>
+          <li>A new version ships only after the full test suite passes three times in a row.</li>
+        </ul>
+
+        <h3 class="signpost"><span aria-hidden="true">✋</span> A rule I set</h3>
+        <p class="story-p"><b>A calculated deadline nobody has checked is a guess.</b> Each rule shows its ACRA source and stays “Not yet” until a person checks it against a real filing.</p>
+
+      </article>
+
+      <div class="exhibit">
         <div class="case">
           <div class="case-bar">
             <div class="case-bar-left">
@@ -1131,60 +1431,72 @@
           </div>
           <div class="case-body" id="ex0-body"></div>
         </div>
-
-        <div class="sidepanel">
-          <div class="dtabs" role="tablist">
-            <button type="button" class="dtab" data-panel="sec-rules" aria-selected="true">Rules it can't break</button>
-            <button type="button" class="dtab" data-panel="sec-tests" aria-selected="false">How it's tested</button>
-            <button type="button" class="dtab" data-panel="sec-decision" aria-selected="false">A rule I set</button>
-          </div>
-
-          <div class="dpanel" id="dp-sec-rules">
-            <div class="icon-cards">
-              <div class="icon-card warn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/><path d="M3 3l18 18"/></svg><div><b>Never deletes a file</b><span>It can only add. Every change is a new, dated file.</span></div></div>
-              <div class="icon-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M12 11v6M9 14h6"/></svg><div><b>Every action leaves a record</b><span>The client's folder is a full history, even without the app.</span></div></div>
-              <div class="icon-card"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><div><b>No client data in the code</b><span>Every change is scanned for client names and IDs, and refused if one appears.</span></div></div>
-              <div class="icon-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg><div><b>No tipping off</b><span>Letters never reveal screening results or risk ratings.</span></div></div>
+        <div class="glance">
+          <span class="d-kicker mono">At a glance</span>
+            <div class="mini-stats four">
+              <div><b>2.1M</b><span>ACRA company records it checks against</span></div>
+              <div class="warn"><b>0</b><span>ways to delete a client's file</span></div>
+              <div><b>135</b><span>automated test files</span></div>
+              <div><b>3×</b><span>full test passes before any release</span></div>
             </div>
-          </div>
-
-          <div class="dpanel" id="dp-sec-tests" hidden>
-            <ul class="tried">
-              <li>Deadlines, files, templates and encryption are tested almost line by line.</li>
-              <li>Testing uses a separate copy of fictional companies, marked <b>TEST</b> on every page.</li>
-              <li>Every upgrade: back up, verify, install, confirm record counts match — or restore and stop.</li>
-            </ul>
-            <p class="pull">A new version ships only after the full test suite passes three times in a row.</p>
-          </div>
-
-          <div class="dpanel" id="dp-sec-decision" hidden>
-            <p class="pull">A calculated deadline nobody has checked is a guess.</p>
-            <p>Each rule shows its ACRA source and stays marked ‘Not yet’ until a person checks it against a real filing.</p>
-          </div>
+    <dl class="facts">
+              <dt>Role</dt><dd>Designed it, set its rules, test it on the firm's real work</dd>
+              <dt>Status</dt><dd>In use, still being built</dd>
+              <dt>Built with</dt><dd>TypeScript, Electron, encrypted SQLite</dd>
+            </dl>
         </div>
-
       </div>
-
     </div>
   </section>
 
-  <!-- ===================== ROOM 2: SCREENING ===================== -->
+  <!-- ===================== ROOM 3: SCREENING ===================== -->
   <section class="room" id="room-ex1" hidden>
-    <div class="exhibit-grid">
+    <div class="museum">
+      <article class="story">
+        <span class="room-row"><span class="room-no mono">Room 3 of 6 · Personal project</span><span class="archived-tag">Archived · Oct 2026</span></span>
+        <h2 class="story-title">Stock screening → ETF tracker</h2>
+        <p class="story-lede">I built a trading system, tested it honestly, and found that simply holding the shares beat it. What survived is a tracker for regular ETF investing.</p>
 
-      <aside class="wall-label">
-        <span class="room-no mono">Room 3 of 5 · Personal project</span>
-        <h2>Stock screening → ETF tracker</h2>
-        <p class="lead-claim">I built a trading system, tested it honestly, and found that simply holding the shares beat it.</p>
-        <div class="viz" id="beat-chart"></div>
+        <h3 class="signpost"><span aria-hidden="true">🗓️</span> How it went</h3>
+        <ol class="tl">
+          <li><span class="tl-ico" aria-hidden="true">🧭</span><div><span class="tl-when">Aug 2026</span><span class="tl-what">Northstar — the daily screen</span><p class="tl-note">Fixed rules over large US shares. Every decision checkable.</p></div></li>
+          <li><span class="tl-ico" aria-hidden="true">⚡</span><div><span class="tl-when">9 Sep</span><span class="tl-what">Live Desk added</span><p class="tl-note">A same-day strategy passed 27 of 29 tests on unseen data.</p></div></li>
+          <li><span class="tl-ico" aria-hidden="true">🧪</span><div><span class="tl-when">Mid-Sep</span><span class="tl-what">Running on a practice account</span><p class="tl-note">Real orders, pretend money.</p></div></li>
+          <li class="turn"><span class="tl-ico" aria-hidden="true">⚠️</span><div><span class="tl-when">18 Sep</span><span class="tl-what">The first doubt</span><p class="tl-note">A rebuilt test showed it relied on <b>a number only known after the market closed.</b></p></div></li>
+          <li class="turn"><span class="tl-ico" aria-hidden="true">🔁</span><div><span class="tl-when">19 Sep</span><span class="tl-what">Confirmed, twice</span><p class="tl-note">Without that number, profit became loss — and real fees were four times what was assumed.</p></div></li>
+          <li class="turn"><span class="tl-ico" aria-hidden="true">🛑</span><div><span class="tl-when">21 Sep</span><span class="tl-what">Closed</span><p class="tl-note"><b>I shut it down.</b></p></div></li>
+          <li><span class="tl-ico" aria-hidden="true">📊</span><div><span class="tl-when">30 Sep</span><span class="tl-what">Became an ETF tracker</span><p class="tl-note">Seven markets, the US and six in Asia: which index each one follows, and which funds track it.</p></div></li>
+          <li class="now"><span class="tl-ico" aria-hidden="true">🗄️</span><div><span class="tl-when">Oct 2026</span><span class="tl-what">Archived</span><p class="tl-note">Code kept read-only. The ETF tracker runs on privately, inside my own console.</p></div></li>
+        </ol>
+
+        <div class="result-box">
+          <span class="d-kicker mono">🎯 The result</span>
+          <p class="pull">Simply holding a market fund beat everything I built.</p>
+          <p class="story-p">Five more searches — over 650 rule sets, fund-switching schemes and a self-learning model — and none passed. The closest failed a fairness check: random decisions did just as well.</p>
+          <div class="c-stats">
+            <div><b>10,500</b><span>strategies someone else tested</span></div>
+            <div><b>99%</b><span>beaten by random picks</span></div>
+          </div>
+          <p class="c-src">A trading YouTuber's own published figures, which argue against his video's framing. <a href="https://youtu.be/XLMG6-SATRk" target="_top" rel="noopener">Source ↗</a></p>
+        </div>
+
+        <div class="decision ended-box">
+          <span class="d-kicker mono">What it was, and why it ended</span>
+          <p>A rules-based system for screening shares and testing trades, built to find out whether simple patterns could beat the market. They couldn't, and the careful testing is what showed it: that is the part I kept. I closed trading in September, moved the useful part, an ETF tracker, into my own console, and archived the code in October.</p>
+        </div>
+
         <dl class="facts">
           <dt>Role</dt><dd>Designed it, tested its assumptions</dd>
-          <dt>Status</dt><dd>Trading closed Sep 2026 · now an ETF tracker</dd>
+          <dt>Status</dt><dd>Trading closed Sep 2026 · ETF tracker now runs privately inside my own console · code archived Oct 2026</dd>
           <dt>Built with</dt><dd>Python, pandas, Streamlit</dd>
         </dl>
-      </aside>
+      </article>
 
-      <div>
+      <div class="exhibit">
+        <div class="case">
+          <div class="case-bar"><div class="case-bar-left"><nav class="crumbs mono" aria-label="Chart">What beat what</nav></div><span class="sample-chip">Real records · Sep 2026</span></div>
+          <div class="case-body"><div class="viz" id="beat-chart"></div></div>
+        </div>
         <div class="case">
           <div class="case-bar">
             <div class="case-bar-left">
@@ -1198,39 +1510,11 @@
 
         <div class="sidepanel">
           <div class="dtabs" role="tablist">
-            <button type="button" class="dtab" data-panel="arc" aria-selected="true">How it went</button>
-            <button type="button" class="dtab" data-panel="tried" aria-selected="false">What I tried next</button>
-            <button type="button" class="dtab" data-panel="method" aria-selected="false">How I tested it</button>
+            <button type="button" class="dtab" data-panel="method" aria-selected="true">How I tested it</button>
             <button type="button" class="dtab" data-panel="why" aria-selected="false">Why nothing worked</button>
           </div>
 
-          <div class="dpanel arcbody" id="dp-arc">
-          <ol>
-            <li><span class="when">Aug 2026</span><span class="what">Northstar — the daily screen</span><p>Fixed rules over large US shares. Every decision checkable.</p></li>
-            <li><span class="when">9 Sep</span><span class="what">Live Desk added</span><p>A same-day strategy passed 27 of 29 tests on unseen data.</p></li>
-            <li><span class="when">Mid-Sep</span><span class="what">Running on a practice account</span><p>Real orders, pretend money.</p></li>
-            <li class="turn"><span class="when">18 Sep</span><span class="what">The first doubt</span><p>A rebuilt test showed it relied on <span class="key warn">a number only known after the market closed.</span></p></li>
-            <li class="turn"><span class="when">19 Sep</span><span class="what">Confirmed, twice</span><p>Without that number, profit became loss — and real fees were four times what was assumed.</p></li>
-            <li class="end"><span class="when">21 Sep</span><span class="what">Closed</span><p><span class="key warn">I shut it down.</span></p></li>
-            <li class="after"><span class="when">30 Sep</span><span class="what">Became an ETF tracker</span><p>Seven markets, the US and six in Asia.</p></li>
-          </ol>
-          </div>
-
-          <div class="dpanel" id="dp-tried" hidden>
-            <p>I ran five more searches — over 650 rule sets, fund-switching schemes and a self-learning model.</p>
-            <p>None passed. The closest failed a fairness check: random decisions did just as well.</p>
-            <p class="pull">Simply holding a market fund beat everything I built.</p>
-            <div class="corro">
-              <span class="c-kicker mono">Someone else, at far larger scale</span>
-              <div class="c-stats">
-                <div><b>10,500</b><span>strategies tested</span></div>
-                <div><b>99%</b><span>beaten by random picks</span></div>
-              </div>
-              <p class="c-src">A trading YouTuber's own published figures, which argue against his video's framing. <a href="https://youtu.be/XLMG6-SATRk" target="_top" rel="noopener">Source ↗</a></p>
-            </div>
-          </div>
-
-          <div class="dpanel" id="dp-method" hidden>
+          <div class="dpanel" id="dp-method">
             <ul class="tried">
               <li>Pass criteria written down and saved <b>before</b> any search ran — never lowered after.</li>
               <li>Every rule had to beat two fairness checks: random trades, and its own decisions scrambled.</li>
@@ -1248,73 +1532,95 @@
             <p class="pull">A clean negative from a careful process is the process working.</p>
           </div>
         </div>
-
       </div>
-
     </div>
   </section>
 
-  <!-- ===================== ROOM 3: NEWS CHANNEL ===================== -->
+  <!-- ===================== ROOM 4: NEWS CHANNEL ===================== -->
   <section class="room" id="room-ex2" hidden>
-    <div class="exhibit-grid">
+    <div class="museum pin">
+      <article class="story">
+        <span class="room-row"><span class="room-no mono">Room 4 of 6 · Personal project</span><span class="archived-tag">Archived · Oct 2026</span></span>
+        <h2 class="story-title">News explainer channel</h2>
+        <p class="story-lede">A news channel where every fact was confirmed by two outlets before it aired. Tap a step to see how one video was made.</p>
 
-      <aside class="wall-label">
-        <span class="room-no mono">Room 4 of 5 · Personal project</span>
-        <h2>News explainer channel</h2>
-        <p class="lead-claim">A news channel where every fact is confirmed by two outlets before it airs.</p>
-        <div class="phone"><video src="tat-clip.mp4" poster="tat-poster.jpg" muted autoplay loop playsinline aria-label="Clip from a published video: a satellite map flying from South America to the Caribbean, with the five island nations marked"></video></div>
-        <p class="phone-cap">From a published video · live on YouTube and TikTok</p>
-        <dl class="facts">
-          <dt>Role</dt><dd>Set the standards, approve or reject every video</dd>
-          <dt>Status</dt><dd>Publishing since Oct 2026</dd>
-          <dt>Built with</dt><dd>Python, Remotion, ElevenLabs, Mapbox</dd>
-        </dl>
-      </aside>
+        <h3 class="signpost"><span aria-hidden="true">🎬</span> How one video was made</h3>
+        <div class="vstrip" id="ex2-strip" role="group" aria-label="Steps of one video"></div>
 
-      <div>
+        <h3 class="signpost"><span aria-hidden="true">🗓️</span> How it went</h3>
+        <ol class="tl">
+          <li><span class="tl-ico" aria-hidden="true">🤖</span><div><span class="tl-when">Sep 2026</span><span class="tl-what">The automated version</span><p class="tl-note">Trending news in, finished video out, with an AI model paid for on every video.</p></div></li>
+          <li class="turn"><span class="tl-ico" aria-hidden="true">✋</span><div><span class="tl-when">3 Oct</span><span class="tl-what">I switched it off</span><p class="tl-note">It couldn't earn its keep in Singapore, and <b>never checked whether a video was actually good.</b> From then on, each video was built one at a time, and any failed check blocked it outright.</p>
+            <figure class="tl-pic portrait"><img src="tat-routes.jpg" alt="Frame from a published video: two routes to Argentine citizenship, with sources listed underneath" loading="lazy"><figcaption>A finished frame: figures, with their sources underneath.</figcaption></figure></div></li>
+          <li><span class="tl-ico" aria-hidden="true">📲</span><div><span class="tl-when">Early Oct</span><span class="tl-what">Publishing, one video at a time</span><p class="tl-note">Every video uploaded private first, then made public only after my review.</p></div></li>
+          <li class="turn"><span class="tl-ico" aria-hidden="true">📺</span><div><span class="tl-when">6 Oct</span><span class="tl-what">YouTube channel deleted</span></div></li>
+          <li><span class="tl-ico" aria-hidden="true">⏸️</span><div><span class="tl-when">9 Oct</span><span class="tl-what">Stopped making videos</span><p class="tl-note">No new videos after this: Shorts alone couldn't pay for themselves.</p></div></li>
+          <li class="now"><span class="tl-ico" aria-hidden="true">🗄️</span><div><span class="tl-when">12 Oct</span><span class="tl-what">Archived</span><p class="tl-note">Code kept read-only; the finished videos are kept.</p></div></li>
+        </ol>
+
+        <div class="decision ended-box">
+          <span class="d-kicker mono">What it was, and why it ended</span>
+          <p>A short-video news channel built on one rule: every spoken fact confirmed by two independent outlets, with automatic checks that blocked any video that failed. It taught me how much work honest sourcing takes. In October 2026 I stopped. TikTok's creator rewards programme isn't open to Singapore accounts, and on YouTube, Shorts earn far less than longer videos. The channel only made Shorts, so it couldn't pay for itself, and I archived the code.</p>
+        </div>
+
+      </article>
+
+      <div class="exhibit">
         <div class="case">
           <div class="case-bar">
             <div class="case-bar-left">
-              <button class="btn btn-sm" type="button" id="ex2-back" hidden>← Back</button>
               <nav class="crumbs mono" id="ex2-crumbs" aria-label="Where you are"></nav>
             </div>
             <span class="sample-chip">Real channel output · Oct 2026</span>
           </div>
           <div class="case-body" id="ex2-body"></div>
         </div>
-
-        <div class="decision">
-          <span class="d-kicker mono">A decision I had to make</span>
-          <p class="pull">I switched off the automated version.</p>
-          <p>It paid for an AI model on every video, couldn't earn its keep in Singapore, and <span class="key warn">never checked whether a video was actually good.</span> Now each video is built one at a time, and any failed check blocks it outright.</p>
+        <div class="ex2-phone">
+          <div class="phone"><video src="tat-clip.mp4" poster="tat-poster.jpg" muted autoplay loop playsinline aria-label="Clip from a published video: a satellite map flying from South America to the Caribbean, with the five island nations marked"></video></div>
+          <p class="phone-cap">From a published video</p>
+        </div>
+        <div class="glance">
+          <span class="d-kicker mono">At a glance</span>
+    <dl class="facts">
+              <dt>Role</dt><dd>Set the standards, approved or rejected every video</dd>
+              <dt>Status</dt><dd>Stopped making videos Oct 2026 · code archived (read-only) · finished videos kept</dd>
+              <dt>Built with</dt><dd>Python, Remotion, ElevenLabs, Mapbox</dd>
+            </dl>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- ===================== ROOM 4: COMPANY WEBSITE ===================== -->
+  <!-- ===================== ROOM 2: COMPANY WEBSITE ===================== -->
   <section class="room" id="room-ex3" hidden>
-    <div class="exhibit-grid">
+    <div class="museum pin">
+      <article class="story">
+        <span class="room-row"><span class="room-no mono">Room 2 of 6 · At GAL Global Advisory</span></span>
+        <h2 class="story-title">Company website</h2>
+        <p class="story-lede">I rebuilt GAL Global Advisory's website around a live gold globe that lights a route from each of 21 client markets to Singapore.</p>
 
-      <aside class="wall-label">
-        <span class="room-no mono">Room 2 of 5 · At GAL Global Advisory</span>
-        <h2>Company website</h2>
-        <p class="lead-claim">The website of GAL Global Advisory, the corporate services firm I work at, built around a live globe.</p>
-        <div class="mini-stats">
-          <div><b>21</b><span>markets the globe tours, each linked to Singapore</span></div>
-          <div><b>2</b><span>closing views that together show all 21 routes</span></div>
-          <div><b>11</b><span>screen sizes every page is tested on</span></div>
-          <div><b>Live</b><span>since 15 Sep 2026</span></div>
-        </div>
-        <dl class="facts">
-          <dt>Role</dt><dd>Designed, built and deployed it</dd>
-          <dt>Status</dt><dd>Live at <a href="https://gal-global.com" target="_top" rel="noopener">gal-global.com ↗</a></dd>
-          <dt>Built with</dt><dd>HTML, CSS, JavaScript; no frameworks</dd>
-        </dl>
-      </aside>
+        <ol class="tl plain">
+          <li><span class="tl-ico" aria-hidden="true">🏢</span><div><span class="tl-what">The client</span><p class="tl-note">GAL Global Advisory, a Singapore corporate service provider. Most of the companies it sets up are owned from outside Singapore.</p></div></li>
+          <li><span class="tl-ico" aria-hidden="true">🎯</span><div><span class="tl-what">Their goal</span><p class="tl-note">Owners abroad setting up their company in Singapore, with GAL handling the Singapore end.</p></div></li>
+          <li><span class="tl-ico" aria-hidden="true">🌐</span><div><span class="tl-what">Their logo</span><p class="tl-note">It already has a globe in it.</p></div></li>
+          <li class="now"><span class="tl-ico" aria-hidden="true">💡</span><div><span class="tl-what">The idea</span><p class="tl-note">Make the site's centrepiece a live gold globe that tours 21 of their clients' markets and lights a route from each one to Singapore. The picture is the message.</p></div></li>
+        </ol>
 
-      <div>
+        <h3 class="signpost"><span aria-hidden="true">🛠️</span> How it came together</h3>
+        <ol class="tl">
+          <li><span class="tl-ico" aria-hidden="true">📄</span><div><span class="tl-when">Before</span><span class="tl-what">The old WordPress site</span><p class="tl-note">Replaced at the firm's choice.</p></div></li>
+          <li><span class="tl-ico" aria-hidden="true">🚀</span><div><span class="tl-when">15 Sep 2026</span><span class="tl-what">New static site live</span>
+            <figure class="tl-pic"><img src="gal-home.jpg" alt="The new website's home page" loading="lazy"><figcaption>The new home page.</figcaption></figure></div></li>
+          <li><span class="tl-ico" aria-hidden="true">📮</span><div><span class="tl-when">26 Sep</span><span class="tl-what">Deploy pipeline, a working contact form, FAQ helper</span><p class="tl-note">The FAQ helper is buttons only: no typing, no AI.</p></div></li>
+          <li class="turn"><span class="tl-ico" aria-hidden="true">🌍</span><div><span class="tl-when">27–28 Sep</span><span class="tl-what">The globe rebuilt as a live, spinnable globe</span><p class="tl-note">It replaced a supplied photo that could never move. Then came the 21-market tour and two finales that, between them, light every route.</p></div></li>
+          <li><span class="tl-ico" aria-hidden="true">📱</span><div><span class="tl-when">29 Sep</span><span class="tl-what">Checked on 11 screen sizes</span><p class="tl-note">Every page, from a wide desktop down to a small phone.</p></div></li>
+          <li><span class="tl-ico" aria-hidden="true">📜</span><div><span class="tl-when">29–30 Sep</span><span class="tl-what">Notarisation &amp; apostille service added</span><p class="tl-note">At the client's request.</p></div></li>
+          <li class="now"><span class="tl-ico" aria-hidden="true">✅</span><div><span class="tl-when">Now</span><span class="tl-what">Live at gal-global.com</span><p class="tl-note"><a href="https://gal-global.com" target="_top" rel="noopener">Visit the live site ↗</a></p></div></li>
+        </ol>
+
+      </article>
+
+      <div class="exhibit">
         <div class="case">
           <div class="case-bar">
             <div class="case-bar-left">
@@ -1324,33 +1630,78 @@
           </div>
           <div class="case-body" id="ex3-body"></div>
         </div>
+        <div class="glance">
+          <span class="d-kicker mono">Before → after</span>
+          <div class="pair">
+            <figure><img src="gal-before.jpg" alt="Before: a supplied photo of a globe in natural colours" loading="lazy"><figcaption>Before: a supplied photo. It could never move.</figcaption></figure>
+            <span class="ba-arrow" aria-hidden="true">→</span>
+            <figure><img src="gal-globe-poster.jpg" alt="After: the live gold globe" loading="lazy"><figcaption>After: drawn live in code.</figcaption></figure>
+          </div>
+          <span class="d-kicker mono">At a glance</span>
+    <dl class="facts">
+              <dt>Role</dt><dd>Designed, built and deployed it</dd>
+              <dt>Status</dt><dd>Live at <a href="https://gal-global.com" target="_top" rel="noopener">gal-global.com ↗</a></dd>
+              <dt>Built with</dt><dd>HTML, CSS, JavaScript; no frameworks</dd>
+            </dl>
+        </div>
       </div>
-
     </div>
   </section>
 
   <!-- ===================== ROOM 5: LIVE NEWS TRACKER ===================== -->
   <section class="room" id="room-ex4" hidden>
-    <div class="exhibit-grid">
+    <div class="museum">
+      <article class="story">
+        <span class="room-row"><span class="room-no mono">Room 5 of 6 · Personal project</span></span>
+        <h2 class="story-title">Live news tracker</h2>
+        <p class="story-lede">A board that reads news outlets around the world and shows which stories are spreading. Plain code, no AI, $0 to run.</p>
 
-      <aside class="wall-label">
-        <span class="room-no mono">Room 5 of 5 · Personal project</span>
-        <h2>Live news tracker</h2>
-        <p class="lead-claim">A board that reads news outlets around the world and shows which stories are spreading.</p>
-        <div class="mini-stats">
-          <div><b id="nr-outlets-stat">43</b><span>news outlets read live, worldwide</span></div>
-          <div><b>38</b><span>countries' Google searches checked</span></div>
-          <div><b>1 h</b><span>between updates here (10 min in my app)</span></div>
-          <div class="warn"><b>$0</b><span>to run: plain code, no AI</span></div>
+        <h3 class="signpost"><span aria-hidden="true">⚙️</span> How it works</h3>
+        <ol class="tl plain">
+          <li><span class="tl-ico" aria-hidden="true">🕔</span><div><span class="tl-what">Reads every 5 minutes</span><p class="tl-note">In my app; this page is refreshed several times a day. Headlines and links only, from each outlet's public feed.</p></div></li>
+          <li><span class="tl-ico" aria-hidden="true">🔗</span><div><span class="tl-what">Groups them into stories</span><p class="tl-note">Headlines that share the same unusual words become one story.</p></div></li>
+          <li><span class="tl-ico" aria-hidden="true">📊</span><div><span class="tl-what">Scores each story</span><p class="tl-note">More outlets, more regions and fresh pick-ups push it up the board.</p></div></li>
+          <li><span class="tl-ico" aria-hidden="true">🔎</span><div><span class="tl-what">Matches what people search</span><p class="tl-note">Google Trends from 38 countries shows what's being searched but not yet reported.</p></div></li>
+        </ol>
+
+        <h3 class="signpost"><span aria-hidden="true">🏷️</span> The badges</h3>
+        <div class="badge-key">
+          <div><span class="nr-b surging">🔥 Surging</span><span>3 or more outlets picked it up in the last 2 hours</span></div>
+          <div><span class="nr-b trending">📈 Trending</span><span>people are searching for it on Google</span></div>
+          <div><span class="nr-b new">🆕 New</span><span>first seen in the last hour</span></div>
+          <div><span class="nr-b nonwest">🌏 Non-Western</span><span>every outlet carrying it is outside the West</span></div>
+          <div><span class="nr-b maybe-elsewhere">📍 Maybe elsewhere</span><span>a wire dateline suggests it happened in another country</span></div>
         </div>
+        <p class="proves">Two more badges, 🔄 Update and ✅ Covered, came from my news channel's files and were retired with it in Oct 2026.</p>
+
+        <details class="story-more">
+          <summary class="signpost"><span aria-hidden="true">🤝</span> Rules it keeps</summary>
+          <ul class="story-list">
+            <li><b>A site that says no is respected.</b> Outlets that block automated readers, have no feed or stopped updating are listed in Sources with the reason, never worked around.</li>
+            <li><b>Stories filed in the right country.</b> Where a wire dateline exists, it moves the story to where it happened.</li>
+            <li><b>No made-up links.</b> A search term only links to an article when Google gives a real one.</li>
+          </ul>
+        </details>
+        <details class="story-more">
+          <summary class="signpost"><span aria-hidden="true">⚠️</span> Known flaws</summary>
+          <ul class="story-list">
+            <li><b>The country can be wrong.</b> Stories are filed by which countries' outlets carried them; most have no dateline to check.</li>
+            <li><b>Stories can merge or split.</b> Headlines are grouped by shared words, so two events can become one story, or one event two.</li>
+            <li><b>One wire story can look like many.</b> Several outlets running the same AP or AFP report each count as an outlet.</li>
+            <li><b>Headlines only.</b> It never reads the articles, so it can't tell whether a headline is accurate.</li>
+            <li><b>Gaps in coverage.</b> Some outlets can't be read (see Sources); China, TikTok and Reddit aren't covered.</li>
+            <li><b>This page is slower than my app.</b> It is refreshed several times a day rather than on a fixed clock.</li>
+          </ul>
+        </details>
+
         <dl class="facts">
           <dt>Role</dt><dd>Designed it and set its rules</dd>
           <dt>Status</dt><dd>In use since Oct 2026</dd>
           <dt>Built with</dt><dd>Python, RSS feeds, Google Trends, JavaScript</dd>
         </dl>
-      </aside>
+      </article>
 
-      <div>
+      <div class="exhibit">
         <div class="case">
           <div class="case-bar">
             <div class="case-bar-left">
@@ -1360,58 +1711,66 @@
           </div>
           <div class="case-body" id="ex4-body"></div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="sidepanel">
-          <div class="dtabs" role="tablist">
-            <button type="button" class="dtab" data-panel="nr-how" aria-selected="true">How it works</button>
-            <button type="button" class="dtab" data-panel="nr-badges" aria-selected="false">The badges</button>
-            <button type="button" class="dtab" data-panel="nr-honest" aria-selected="false">Rules it keeps</button>
-            <button type="button" class="dtab" data-panel="nr-flaws" aria-selected="false">Known flaws</button>
-          </div>
+  <!-- ===================== ROOM 6: WALK-IN STUDIO ===================== -->
+  <section class="room" id="room-ex5" hidden>
+    <div class="museum pin">
+      <article class="story">
+        <span class="room-row"><span class="room-no mono">Room 6 of 6 · My own business</span><span class="live-tag">Showroom live</span></span>
+        <h2 class="story-title">Walk-In Studio</h2>
+        <p class="story-lede">Simple, fast, honest websites for small Singapore shops: bakeries, tailors, nail and beauty salons, renovation and aircon. From S$300.</p>
 
-          <div class="dpanel" id="dp-nr-how">
-            <div class="icon-cards">
-              <div class="icon-card"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b>Reads every 10 minutes</b><span>Headlines and links only, from each outlet's public feed.</span></div></div>
-              <div class="icon-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><div><b>Groups them into stories</b><span>Headlines that share the same unusual words become one story.</span></div></div>
-              <div class="icon-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V10M12 20V4M19 20v-7"/></svg><div><b>Scores each story</b><span>More outlets, more regions and fresh pick-ups push it up the board.</span></div></div>
-              <div class="icon-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg><div><b>Matches what people search</b><span>Google Trends from 38 countries shows what's being searched but not yet reported.</span></div></div>
-            </div>
-          </div>
+        <h3 class="signpost"><span aria-hidden="true">🏪</span> The idea</h3>
+        <p class="story-p">Each site is built around what that shop's customers look for — a bakery's menu board, a nail lookbook, an aircon price estimator — with one-tap WhatsApp booking. The showroom has five templates for made-up shops to try on a phone.</p>
 
-          <div class="dpanel" id="dp-nr-badges" hidden>
-            <div class="badge-key">
-              <div><span class="nr-b surging">🔥 Surging</span><span>3 or more outlets picked it up in the last 2 hours</span></div>
-              <div><span class="nr-b trending">📈 Trending</span><span>people are searching for it on Google</span></div>
-              <div><span class="nr-b update">🔄 Update</span><span>a story I'm following has moved (my app only)</span></div>
-              <div><span class="nr-b new">🆕 New</span><span>first seen in the last hour</span></div>
-              <div><span class="nr-b nonwest">🌏 Non-Western</span><span>every outlet carrying it is outside the West</span></div>
-              <div><span class="nr-b covered">✅ Covered</span><span>my channel has already made a video on it (my app only)</span></div>
-              <div><span class="nr-b maybe-elsewhere">📍 Maybe elsewhere</span><span>a wire dateline suggests it happened in another country</span></div>
-            </div>
-          </div>
-
-          <div class="dpanel" id="dp-nr-honest" hidden>
-            <div class="icon-cards">
-              <div class="icon-card"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg><div><b>A site that says no is respected</b><span>Outlets that block automated readers, have no feed or stopped updating are listed in Sources with the reason, never worked around.</span></div></div>
-              <div class="icon-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><div><b>Stories filed in the right country</b><span>A US story once showed under Singapore. Where a wire dateline exists, it now moves the story to where it happened.</span></div></div>
-              <div class="icon-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><div><b>No made-up links</b><span>A search term only links to an article when Google gives a real one.</span></div></div>
-            </div>
-          </div>
-          <div class="dpanel" id="dp-nr-flaws" hidden>
-            <ul class="tried flaws">
-              <li><b>The country can be wrong.</b> Stories are filed by which countries' outlets carried them, not where they happened. Most have no dateline to check: on 6 Oct, only 4 of 294 did.</li>
-              <li><b>Stories can merge or split.</b> Headlines are grouped by shared words, so two different events can end up as one story, and one event worded differently can show up twice.</li>
-              <li><b>One wire story can look like many.</b> When several outlets run the same AP or AFP report, each counts as its own outlet, so a story can look bigger than it is.</li>
-              <li><b>Headlines only.</b> It never reads the articles, so it can't tell whether a headline is accurate.</li>
-              <li><b>Search matches are word-based.</b> A Google search term is linked to a story by shared words, so a common term can match the wrong story, or none.</li>
-              <li><b>Gaps in coverage.</b> Some outlets can't be read (see Sources), AP and Reuters only arrive through other outlets, and China, TikTok and Reddit aren't covered.</li>
-              <li><b>This page is slower than my app.</b> It is refreshed several times a day rather than on a fixed clock, some outlets may refuse GitHub's servers, and two badges need my own files, so they only appear in my app.</li>
-            </ul>
-          </div>
+        <h3 class="signpost"><span aria-hidden="true">🧪</span> A quality harness, not just tests</h3>
+        <p class="story-p">My checks used to ask “is it broken?” and never “is it good?”. Now every page a visitor sees is screenshotted at four sizes and scored 1⁠–⁠5 on nine points by a blind review step that only sees the screenshots, the rubric and reference sites.</p>
+        <div class="tier-cards">
+          <div class="tier-card"><b>📐 Template tier</b><span>The showroom and demos: six points must score 4 or more, the other three at least 3.</span></div>
+          <div class="tier-card"><b>🤝 Client tier</b><span>A client's own site: every point must score 4 or more.</span></div>
         </div>
 
-      </div>
+        <h3 class="signpost"><span aria-hidden="true">✨</span> Motion as a choice</h3>
+        <p class="story-p"><b>Standard:</b> pages appear at once, included. <b>Smooth:</b> eased page changes and gentle reveals, +S$100. The room changes in this walkthrough use the same timing scale.</p>
 
+        <h3 class="signpost"><span aria-hidden="true">🗓️</span> How it went</h3>
+        <ol class="tl">
+          <li><span class="tl-ico" aria-hidden="true">🏷️</span><div><span class="tl-when">6 Oct 2026</span><span class="tl-what">Name chosen, first templates built</span><p class="tl-note">A master template and five demo sites for made-up shops.</p></div></li>
+          <li class="turn"><span class="tl-ico" aria-hidden="true">🧪</span><div><span class="tl-when">7 Oct</span><span class="tl-what">The quality harness</span><p class="tl-note">First round: none of the five demos or the showroom passed, so they went back for fixes.</p></div></li>
+          <li><span class="tl-ico" aria-hidden="true">🚀</span><div><span class="tl-when">8 Oct</span><span class="tl-what">Showroom goes live</span><p class="tl-note">Home, five templates, and a real case study.</p></div></li>
+          <li><span class="tl-ico" aria-hidden="true">💲</span><div><span class="tl-when">12 Oct</span><span class="tl-what">Prices set</span><p class="tl-note">A website from S$300; Smooth motion +S$100.</p></div></li>
+          <li class="now"><span class="tl-ico" aria-hidden="true">✅</span><div><span class="tl-when">Now</span><span class="tl-what">Open to visit</span><p class="tl-note"><a href="https://walkinstudio.pages.dev" target="_top" rel="noopener">walkinstudio.pages.dev ↗</a></p></div></li>
+        </ol>
+
+      </article>
+
+      <div class="exhibit">
+        <div class="case">
+          <div class="case-bar"><div class="case-bar-left"><nav class="crumbs mono" aria-label="Where you are">Showroom / First screen</nav></div><span class="sample-chip">Live site · Oct 2026</span></div>
+          <div class="case-body">
+            <div class="ws-shots">
+              <figure><img src="ws-showroom.jpg" alt="The Walk-In Studio showroom's first screen: 'Your shop, open online before they arrive', from S$300, beside two demo sites for made-up shops"><figcaption>The showroom's first screen. The two sites shown are demos for made-up shops.</figcaption></figure>
+              <div class="ws-side">
+                <p class="proves">What it proves: a real, public business site, built and run to the same standards as the rest of this walkthrough.</p>
+                <p class="proves">Every template page has a Standard / Smooth switch, so a shop owner can feel the difference before paying for it.</p>
+                <div class="boundary-actions"><a class="btn btn-solid" href="https://walkinstudio.pages.dev" target="_top" rel="noopener">Visit the showroom ↗</a></div>
+              </div>
+              <figure class="phone-shot"><img src="ws-phone.jpg" alt="The same first screen on a phone" loading="lazy"><figcaption>On a phone.</figcaption></figure>
+            </div>
+          </div>
+        </div>
+        <div class="glance">
+          <span class="d-kicker mono">At a glance</span>
+    <dl class="facts">
+              <dt>Role</dt><dd>Designing and building the business; no client sites yet</dd>
+              <dt>Status</dt><dd>Showroom live since Oct 2026</dd>
+              <dt>Built with</dt><dd>HTML, CSS, JavaScript; no frameworks</dd>
+            </dl>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1420,12 +1779,13 @@
     <p class="eyebrow">End of the walkthrough</p>
     <h1>Thanks for walking through</h1>
 
-    <div class="exit-thumbs">
+    <div class="exit-thumbs six">
       <button type="button" data-goto="ex0"><span class="card-media"><img src="sec-company.jpg" alt="" loading="lazy"></span><span>Compliance system</span></button>
       <button type="button" data-goto="ex3"><span class="card-media dark-media"><img src="gal-globe-poster.jpg" alt="" loading="lazy"></span><span>Company website</span></button>
       <button type="button" data-goto="ex1"><span class="card-media chart-media" id="exit-chart"></span><span>Screening → ETF tracker</span></button>
       <button type="button" data-goto="ex2"><span class="card-media dark-media"><img src="tat-map.jpg" alt="" loading="lazy"></span><span>News channel</span></button>
       <button type="button" data-goto="ex4"><span class="card-media dark-media"><img src="news-card.jpg" alt="" loading="lazy"></span><span>News tracker</span></button>
+      <button type="button" data-goto="ex5"><span class="card-media dark-media"><img src="ws-showroom.jpg" alt="" loading="lazy"></span><span>Walk-In Studio</span></button>
     </div>
 
     <div class="exit-grid">
@@ -1474,18 +1834,27 @@
 (function () {
   "use strict";
 
-  var ORDER = ["lobby", "ex0", "ex3", "ex1", "ex2", "ex4", "exit"];
+  var ORDER = ["lobby", "ex0", "ex3", "ex1", "ex2", "ex4", "ex5", "exit"];
   var META = {
     lobby: { label: "Entrance", count: "Start here" },
-    ex0:   { label: "Room 1 — Compliance system", count: "Room 1 of 5 · At GAL Global Advisory" },
-    ex3:   { label: "Room 2 — Company website", count: "Room 2 of 5 · At GAL Global Advisory" },
-    ex1:   { label: "Room 3 — Screening", count: "Room 3 of 5 · Personal project" },
-    ex2:   { label: "Room 4 — News channel", count: "Room 4 of 5 · Personal project" },
-    ex4:   { label: "Room 5 — News tracker", count: "Room 5 of 5 · Personal project" },
+    ex0:   { label: "Room 1 — Compliance system", count: "Room 1 of 6 · At GAL Global Advisory" },
+    ex3:   { label: "Room 2 — Company website", count: "Room 2 of 6 · At GAL Global Advisory" },
+    ex1:   { label: "Room 3 — Screening → ETF tracker", count: "Room 3 of 6 · Personal project" },
+    ex2:   { label: "Room 4 — News channel", count: "Room 4 of 6 · Personal project" },
+    ex4:   { label: "Room 5 — News tracker", count: "Room 5 of 6 · Personal project" },
+    ex5:   { label: "Room 6 — Walk-In Studio", count: "Room 6 of 6 · My own business" },
     exit:  { label: "Exit", count: "End of walkthrough" }
   };
-  var NEXT_LABEL = { lobby: "Enter Room 1 →", ex0: "Next room →", ex3: "To personal projects →", ex1: "Next room →", ex2: "Next room →", ex4: "Finish →", exit: "Back to start ↺" };
-  var PREV_LABEL = { lobby: "← Previous", ex0: "← Overview", ex3: "← Room 1", ex1: "← Room 2", ex2: "← Room 3", ex4: "← Room 4", exit: "← Room 5" };
+  var NEXT_LABEL = { lobby: "Enter Room 1 →", ex0: "Next room →", ex3: "To personal projects →", ex1: "Next room →", ex2: "Next room →", ex4: "To my business →", ex5: "Finish →", exit: "Back to start ↺" };
+  var PREV_LABEL = { lobby: "← Previous", ex0: "← Overview", ex3: "← Room 1", ex1: "← Room 2", ex2: "← Room 3", ex4: "← Room 4", ex5: "← Room 5", exit: "← Room 6" };
+
+  /* Room changes: a View Transition on Walk-In Studio's motion scale (see the CSS);
+     under reduced motion, or without support, rooms swap instantly. */
+  var REDUCE = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var CAN_VT = !!document.startViewTransition && !REDUCE;
+  var booted = false;
+  document.documentElement.classList.add("js");
+  if (CAN_VT) { document.documentElement.classList.add("vt"); }
 
   var current = "lobby";
   function el(id) { return document.getElementById(id); }
@@ -1493,6 +1862,14 @@
   function show(name) {
     if (typeof stopVideos === "function") { stopVideos(); }
     if (ORDER.indexOf(name) === -1) { name = "lobby"; }
+    if (booted && name === current) { window.scrollTo(0, 0); return; }
+    var first = !booted;
+    booted = true;
+    if (CAN_VT && !first) { document.startViewTransition(function () { swapTo(name); }); }
+    else { swapTo(name); }
+  }
+
+  function swapTo(name) {
     current = name;
     ORDER.forEach(function (r) { el("room-" + r).hidden = (r !== name); });
     el("room-label").textContent = META[name].label;
@@ -1502,7 +1879,33 @@
     el("way-prev").disabled = (name === "lobby");
     el("way-prev").style.opacity = (name === "lobby") ? "0.35" : "1";
     window.scrollTo(0, 0);
+    if (typeof fitPins === "function") { fitPins(); }
   }
+
+  /* A pinned picture column that is taller than the screen scrolls with the story until its
+     bottom is in view, then stays (a negative sticky top); one that fits pins to the top. */
+  function fitPins() {
+    var wide = window.matchMedia("(min-width: 1000px) and (min-height: 760px)").matches;
+    Array.prototype.forEach.call(document.querySelectorAll(".museum.pin .exhibit"), function (ex) {
+      if (!wide || ex.offsetParent === null) { ex.style.top = ""; return; }
+      var room = window.innerHeight - 52 - 16;
+      ex.style.top = Math.min(49 + 18, room - ex.offsetHeight) + "px";
+    });
+  }
+  window.addEventListener("resize", fitPins);
+  window.addEventListener("load", fitPins);
+  if ("ResizeObserver" in window) {
+    var pinWatch = new ResizeObserver(function () { fitPins(); });
+    Array.prototype.forEach.call(document.querySelectorAll(".museum.pin .exhibit"), function (ex) { pinWatch.observe(ex); });
+  }
+
+  /* A timeline picture appears when the reader reaches its step (instant under reduced motion). */
+  var reveal = ("IntersectionObserver" in window && !REDUCE) ? new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("seen"); reveal.unobserve(e.target); } });
+  }, { rootMargin: "0px 0px -8% 0px" }) : null;
+  Array.prototype.forEach.call(document.querySelectorAll(".tl-pic"), function (f) {
+    if (reveal) { reveal.observe(f); } else { f.classList.add("seen"); }
+  });
 
   document.addEventListener("click", function (e) {
     var t = e.target.closest("[data-goto]");
@@ -1622,10 +2025,24 @@
     ["Hong Kong", null, "No comparable ten-year figure in the tracker"]
   ];
 
+  /* What the tracker compares for each market, from its own fund catalogue: ticker and the
+     index it tracks. Listed A-Z on purpose, with no picks, weights or fees. */
+  var ETF_LISTS = [
+    ["Taiwan", [["EWT", "MSCI Taiwan 25/50"], ["FLXT", "FTSE Taiwan 30/18 Capped"], ["HTWN", "MSCI Taiwan 20/35 Custom Capped"], ["ITWN", "MSCI Taiwan 20/35"], ["XMTW", "MSCI Taiwan 20/35"]]],
+    ["United States", [["IVV", "S&P 500"], ["SPMO", "S&P 500 Momentum"], ["SPY", "S&P 500"], ["SPYM", "S&P 500"], ["VOO", "S&P 500"], ["VTI", "Total US market, about 3,500 shares"]]],
+    ["South Korea", [["069500.KS", "KOSPI 200"], ["069660.KS", "KOSPI 200"], ["102110.KS", "KOSPI 200"], ["148020.KS", "KOSPI 200"], ["EWY", "MSCI Korea 25/50"], ["FLXK", "FTSE Korea 30/18 Capped"]]],
+    ["India", [["FRIN", "FTSE India 30/18 Capped"], ["IIND", "MSCI India"], ["INDA", "MSCI India"], ["UBS MSCI India SF", "MSCI India (ticker unconfirmed)"], ["XCS5", "MSCI India (synthetic)"]]],
+    ["Japan", [["1306.T", "TOPIX"], ["1321.T", "Nikkei 225"], ["1348.T", "TOPIX"], ["BBJP", "Morningstar Japan Target Market Exposure"], ["EWJ", "MSCI Japan"], ["ZPDJ", "MSCI Japan, unhedged"]]],
+    ["Singapore", [["ES3.SI", "Straits Times Index"], ["G3B.SI", "Straits Times Index"]]],
+    ["Hong Kong", [["2800.HK", "Hang Seng Index"], ["2833.HK", "Hang Seng Index"], ["3115.HK", "Hang Seng Index, net total return"], ["EWH", "MSCI Hong Kong 25/50"]]]
+  ];
+
   function marketBars(container) {
     var g = mk("div", "hbars");
     MARKETS.forEach(function (m, i) {
-      g.appendChild(mk("span", "hl", m[0]));
+      var hl = mk("span", "hl", m[0]);
+      if (m[1] != null) { hl.appendChild(mk("small", null, m[2])); }
+      g.appendChild(hl);
       var t = mk("div", "ht" + (m[1] == null ? " empty" : ""));
       t.setAttribute("data-tip", m[0] + " — " + m[2] + (m[1] == null ? "" : ": about " + m[1].toFixed(1) + "% a year, 2016–2025"));
       if (m[1] != null) {
@@ -1794,10 +2211,30 @@
 
     if (ex1.view === "etf") {
       var v = mk("div", "viz");
-      v.appendChild(mk("p", "pane-title", "Average yearly growth of each market, 2016–2025"));
+      v.appendChild(mk("p", "pane-title", "Each market's index: average growth a year, 2016–2025"));
       marketBars(v);
       body.appendChild(v);
-      body.appendChild(note("What's left now: a tracker for regular investing across seven markets. No trading."));
+      body.appendChild(mk("p", "pane-title", "The ETFs the tracker compares for each market"));
+      var lists = mk("div", "etf-lists");
+      ETF_LISTS.forEach(function (m) {
+        var d = document.createElement("details");
+        d.className = "etf-mkt";
+        var sm = document.createElement("summary");
+        sm.appendChild(document.createTextNode(m[0]));
+        sm.appendChild(mk("small", null, m[1].length + " funds"));
+        d.appendChild(sm);
+        var ul = document.createElement("ul");
+        m[1].forEach(function (f) {
+          var li = document.createElement("li");
+          li.appendChild(mk("b", null, f[0]));
+          li.appendChild(document.createTextNode(" · " + f[1]));
+          ul.appendChild(li);
+        });
+        d.appendChild(ul);
+        lists.appendChild(d);
+      });
+      body.appendChild(lists);
+      body.appendChild(note("What the tracker compares, not a recommendation. Funds are listed A–Z. The bars are each market's index, not any one fund."));
       return;
     }
 
@@ -1978,25 +2415,23 @@
   ];
 
   var STAGES = [
-    { name: "Story in", kind: "counted", body: "Outlets re-running one news-agency report count as one source, not several." },
-    { name: "Fact check", kind: "facts", body: "Every spoken line needs two independent outlets. One isn't enough." },
-    { name: "Script", kind: "script", body: "Three standing rules for every script." },
-    { name: "Visuals", kind: "stills", body: "Sources on screen, real satellite maps, illustrations labelled." },
-    { name: "Release checks", kind: "gate", body: "Run automatically. Any failure blocks the video." },
-    { name: "Review & publish", kind: "flow", body: "Nothing uploads on its own or on a schedule." }
+    { emoji: "📈", name: "Trend", kind: "counted", body: "Each video started from a story in the news. Outlets re-running one news-agency report counted as one source, not several." },
+    { emoji: "🔍", name: "Facts & sources", kind: "facts", body: "Every spoken line needed two independent outlets. One wasn't enough." },
+    { emoji: "✍️", name: "Script", kind: "script", body: "Three standing rules for every script." },
+    { emoji: "🎨", name: "Visuals", kind: "stills", body: "Sources on screen, real satellite maps, illustrations labelled." },
+    { emoji: "🎧", name: "Voice & checks", kind: "gate", body: "Voiced, then checked automatically. Any failure blocked the video." },
+    { emoji: "👀", name: "Human review", kind: "flow", body: "Nothing uploaded on its own or on a schedule. I approved or rejected every video." },
+    { emoji: "📲", name: "Publish", kind: "watch", body: "Two of the finished videos." }
   ];
 
-  var ex2 = { stage: 0, view: "stage" };
+  var ex2 = { stage: 0 };
 
   function ex2Crumbs() {
     var c = el("ex2-crumbs");
     c.innerHTML = "";
-    var b = mk("button", null, "How a video is made");
-    b.type = "button";
-    b.addEventListener("click", function () { ex2.view = "stage"; renderEx2(); });
-    c.appendChild(b);
+    c.appendChild(mk("span", null, "How a video was made"));
     c.appendChild(mk("span", null, "/"));
-    c.appendChild(mk("span", "here", (ex2.view === "watch") ? "Watch two videos" : STAGES[ex2.stage].name));
+    c.appendChild(mk("span", "here", STAGES[ex2.stage].name));
   }
 
   function stillFigure(src, alt, caption) {
@@ -2165,35 +2600,43 @@
     Array.prototype.forEach.call(document.querySelectorAll(".watch video"), function (v) { v.pause(); });
   }
 
-  function renderEx2() {
+  /* On a phone the step viewer moves up under the step chips; on wide screens it stays beside the story. */
+  function placeEx2Case() {
+    var caseEl = el("ex2-body").parentNode;
+    var narrow = window.matchMedia("(max-width: 999px)").matches;
+    var strip = el("ex2-strip");
+    var home = document.querySelector("#room-ex2 .exhibit");
+    if (narrow && caseEl.previousElementSibling !== strip) { strip.parentNode.insertBefore(caseEl, strip.nextSibling); }
+    if (!narrow && caseEl.parentNode !== home) { home.insertBefore(caseEl, home.firstChild); }
+  }
+  placeEx2Case();
+  if (window.matchMedia) {
+    var mqEx2 = window.matchMedia("(max-width: 999px)");
+    if (mqEx2.addEventListener) { mqEx2.addEventListener("change", placeEx2Case); }
+  }
+
+  function renderEx2(fromStrip) {
     ex2Crumbs();
 
-    var backBtn2 = el("ex2-back");
-    backBtn2.hidden = (ex2.view !== "watch");
-    backBtn2.onclick = function () { ex2.view = "stage"; renderEx2(); };
+    var strip = el("ex2-strip");
+    strip.innerHTML = "";
+    STAGES.forEach(function (st, i) {
+      if (i) { var ar = mk("span", "varrow", "→"); ar.setAttribute("aria-hidden", "true"); strip.appendChild(ar); }
+      var b = mk("button", "vstep");
+      b.type = "button";
+      b.setAttribute("aria-pressed", String(i === ex2.stage));
+      b.appendChild(mk("span", "vnum", String(i + 1)));
+      var em = mk("span", null, st.emoji); em.setAttribute("aria-hidden", "true");
+      b.appendChild(em);
+      b.appendChild(document.createTextNode(st.name));
+      b.addEventListener("click", function () { ex2.stage = i; renderEx2(true); });
+      strip.appendChild(b);
+    });
 
     var body = el("ex2-body");
     body.innerHTML = "";
-
-    var strip = mk("div", "stages");
-    STAGES.forEach(function (st, i) {
-      var b = mk("button", "stage");
-      b.type = "button";
-      b.setAttribute("aria-pressed", String(ex2.view === "stage" && i === ex2.stage));
-      b.appendChild(mk("span", "stage-no mono", "0" + (i + 1)));
-      b.appendChild(mk("span", "stage-name", st.name));
-      b.addEventListener("click", function () { ex2.stage = i; ex2.view = "stage"; renderEx2(); });
-      strip.appendChild(b);
-    });
-    body.appendChild(strip);
-
-    if (ex2.view === "watch") {
-      body.appendChild(watchView());
-      return;
-    }
-
     var s = STAGES[ex2.stage];
-    body.appendChild(mk("p", "pane-title", "Stage " + (ex2.stage + 1) + " — " + s.name));
+    body.appendChild(mk("p", "pane-title", "Step " + (ex2.stage + 1) + " of " + STAGES.length + " — " + s.emoji + " " + s.name));
     body.appendChild(note(s.body));
 
     if (s.kind === "counted") { body.appendChild(countedCard()); }
@@ -2218,13 +2661,29 @@
     }
     if (s.kind === "gate") { body.appendChild(gateCard()); }
     if (s.kind === "flow") { body.appendChild(flowCard()); }
+    if (s.kind === "watch") { body.appendChild(watchView()); }
 
-    var runWrap = mk("div", "boundary-actions");
-    var run = mk("button", "btn btn-solid", "▶ Watch two videos from the channel");
-    run.type = "button";
-    run.addEventListener("click", function () { ex2.view = "watch"; renderEx2(); });
-    runWrap.appendChild(run);
-    body.appendChild(runWrap);
+    var acts = mk("div", "boundary-actions");
+    if (ex2.stage < STAGES.length - 1) {
+      var nx = mk("button", "btn", "Next step: " + STAGES[ex2.stage + 1].emoji + " " + STAGES[ex2.stage + 1].name + " →");
+      nx.type = "button";
+      nx.addEventListener("click", function () { ex2.stage += 1; renderEx2(); });
+      acts.appendChild(nx);
+      var run = mk("button", "btn btn-solid", "▶ Watch two finished videos");
+      run.type = "button";
+      run.addEventListener("click", function () { ex2.stage = STAGES.length - 1; renderEx2(); });
+      acts.appendChild(run);
+    } else {
+      var again = mk("button", "btn", "↺ Back to step 1");
+      again.type = "button";
+      again.addEventListener("click", function () { ex2.stage = 0; renderEx2(); });
+      acts.appendChild(again);
+    }
+    body.appendChild(acts);
+
+    if (fromStrip && window.innerWidth < 1000) {
+      body.parentNode.scrollIntoView({ block: "nearest", behavior: REDUCE ? "auto" : "smooth" });
+    }
   }
 
 
@@ -2352,6 +2811,9 @@
   var NB = { surging: "🔥 Surging", trending: "📈 Trending", update: "🔄 Update", "new": "🆕 New",
              nonwest: "🌏 Non-Western", covered: "✅ Covered", "maybe-elsewhere": "📍 Maybe elsewhere", watch: "👁 Watching" };
   var EX4_VIEWS = ["Latest stories", "My app", "Sources"];
+  var REGION_EMOJI = { "Africa": "🌍", "South Asia": "🌏", "SE Asia": "🌏", "East Asia": "🌏", "Middle East": "🌍",
+                       "Latin America": "🌎", "Global South": "🌐", "Wire": "📰", "Europe": "🌍", "US": "🌎",
+                       "Oceania": "🌏", "Canada": "🌎" };
   var ex4 = { view: 0, region: "", badge: "", q: "", more: false, picked: {} };
 
   function newsValid(j) {
@@ -2401,7 +2863,7 @@
     card.appendChild(bd);
     var meta = "first seen " + c.fs + " (" + c.fo + ") · " + c.o.length + " outlet" + (c.o.length === 1 ? "" : "s") + " · " + c.r.length + " region" + (c.r.length === 1 ? "" : "s");
     if (c.ro) { meta += " · " + c.ro + " joined in the last 2 h"; }
-    if (c.tr.length) { meta += " · searched in " + c.tr.map(function (t) { return t[0] + " " + t[1]; }).join(", "); }
+    if (c.tr.length) { meta += " · Google searches: " + c.tr.map(function (t) { return t[0] + " " + t[1]; }).join(", "); }
     if (c.dl) { meta += " · datelined " + c.dl.city + (c.dl.date ? " " + c.dl.date : ""); }
     card.appendChild(mk("div", "nr-meta", meta));
     var det = document.createElement("details");
@@ -2471,7 +2933,7 @@
       fig.appendChild(img);
       fig.addEventListener("click", function () { fig.classList.toggle("zoom"); });
       body.appendChild(fig);
-      body.appendChild(note("The tracker as it runs on my computer, on 6 Oct 2026. It reads every 10 minutes and adds two badges this page can't show."));
+      body.appendChild(note("The tracker on my computer, as it was on 6 Oct 2026. It now reads every 5 minutes; two badges in this picture were retired with my news channel."));
       return;
     }
 
@@ -2505,7 +2967,19 @@
     if (newsMode === "sample") {
       body.appendChild(mk("div", "nr-notice", "Showing a saved sample from " + NEWS_SAMPLE.snap + ". On the published page this board is refreshed several times a day."));
     }
-    var bar = mk("div", "nr-bar");
+    var surging = NEWSDEMO.stories.filter(function (st) { return st.b.indexOf("surging") >= 0; });
+    var kpis = mk("div", "nr-kpis");
+    [[String(NEWSDEMO.total), "stories on the board"],
+     [surging.length + " 🔥", "surging now", "hot"],
+     [String(NEWSDEMO.outlets_live), "outlets read live"],
+     [NEWSDEMO.trends_ok + " of " + NEWSDEMO.trends_n, "countries' Google searches"]].forEach(function (k) {
+      var d = mk("div", "nr-kpi" + (k[2] ? " " + k[2] : ""));
+      d.appendChild(mk("b", null, k[0]));
+      d.appendChild(mk("span", null, k[1]));
+      kpis.appendChild(d);
+    });
+    body.appendChild(kpis);
+
     var regions = {}, present = {};
     NEWSDEMO.stories.forEach(function (s) {
       s.r.forEach(function (r) { regions[r] = 1; });
@@ -2513,10 +2987,17 @@
     });
     if (ex4.region && !regions[ex4.region]) { ex4.region = ""; }
     if (ex4.badge && !present[ex4.badge]) { ex4.badge = ""; }
-    var rs = document.createElement("select"); rs.setAttribute("aria-label", "Region");
-    rs.appendChild(Object.assign(document.createElement("option"), { value: "", textContent: "All regions" }));
-    Object.keys(regions).sort().forEach(function (r) { var o = document.createElement("option"); o.value = r; o.textContent = r; if (r === ex4.region) { o.selected = true; } rs.appendChild(o); });
-    rs.addEventListener("change", function () { ex4.region = rs.value; ex4.more = false; renderEx4(); });
+    var regs = mk("div", "nr-regions");
+    regs.setAttribute("role", "group"); regs.setAttribute("aria-label", "Region");
+    [""].concat(Object.keys(regions).sort()).forEach(function (r) {
+      var rb = mk("button", "reg", r ? (REGION_EMOJI[r] || "🌐") + " " + r : "🌐 All regions");
+      rb.type = "button";
+      rb.setAttribute("aria-pressed", String(ex4.region === r));
+      rb.addEventListener("click", function () { ex4.region = r; ex4.more = false; renderEx4(); });
+      regs.appendChild(rb);
+    });
+    body.appendChild(regs);
+    var bar = mk("div", "nr-bar");
     var bs = document.createElement("select"); bs.setAttribute("aria-label", "Badge");
     bs.appendChild(Object.assign(document.createElement("option"), { value: "", textContent: "All badges" }));
     ["surging", "trending", "new", "nonwest", "maybe-elsewhere", "update", "covered"].forEach(function (b) {
@@ -2526,7 +3007,7 @@
     bs.addEventListener("change", function () { ex4.badge = bs.value; ex4.more = false; renderEx4(); });
     var qi = document.createElement("input"); qi.type = "search"; qi.placeholder = "Search headlines…"; qi.value = ex4.q; qi.setAttribute("aria-label", "Search headlines");
     qi.addEventListener("input", function () { ex4.q = qi.value; ex4.more = false; paintList(); });
-    bar.appendChild(rs); bar.appendChild(bs); bar.appendChild(qi);
+    bar.appendChild(bs); bar.appendChild(qi);
     body.appendChild(bar);
 
     if (ex4.region) {
@@ -2535,7 +3016,9 @@
 
     var terms = NEWSDEMO.searching.filter(function (t) { return t[0].length <= 34; }).slice(0, 7);
     if (terms.length && !ex4.region) {
-      body.appendChild(mk("p", "nr-h", "📈 People are searching, with no matching news yet"));
+      var fold = document.createElement("details");
+      fold.className = "nr-terms";
+      fold.appendChild(mk("summary", null, "📈 " + terms.length + " things people are searching for, with no matching news yet"));
       var strip = mk("div", "nr-strip");
       terms.forEach(function (t) {
         var chip2 = t[1] ? document.createElement("a") : document.createElement("span");
@@ -2545,7 +3028,20 @@
         chip2.appendChild(mk("small", null, t[2].join(" ")));
         strip.appendChild(chip2);
       });
-      body.appendChild(strip);
+      fold.appendChild(strip);
+      body.appendChild(fold);
+    }
+
+    if (surging.length && !ex4.region && !ex4.badge) {
+      body.appendChild(mk("p", "nr-h", "🔥 Surging now"));
+      var hot = mk("div", "nr-hotrow");
+      surging.slice(0, 3).forEach(function (st) {
+        var d = mk("div", "nr-hot");
+        d.appendChild(mk("b", null, st.h));
+        d.appendChild(mk("span", null, st.o.length + " outlets · " + st.ro + " joined in the last 2 h · first seen " + st.fs));
+        hot.appendChild(d);
+      });
+      body.appendChild(hot);
     }
 
     var count = mk("p", "nr-h", "");
@@ -2561,10 +3057,10 @@
           && (!q || s.h.toLowerCase().indexOf(q) >= 0 || s.o.some(function (o) { return o[0].toLowerCase().indexOf(q) >= 0; }));
       });
       var npick = Object.keys(ex4.picked).length;
-      count.textContent = shown.length + " of the top " + NEWSDEMO.stories.length + " stories · sorted by score" + (npick ? " · ⭐ " + npick + " picked" : "");
+      count.textContent = (shown.length === NEWSDEMO.stories.length ? "The top " + shown.length + " stories" : shown.length + " of the top " + NEWSDEMO.stories.length + " stories") + " · highest score first" + (npick ? " · ⭐ " + npick + " picked" : "");
       list.innerHTML = "";
       if (!shown.length) { list.appendChild(note("Nothing matches. Try another region or badge.")); return; }
-      var lim = ex4.more ? shown.length : 6;
+      var lim = ex4.more ? shown.length : 3;
       shown.slice(0, lim).forEach(function (s) { list.appendChild(nrCard(s)); });
       if (shown.length > lim) {
         var more = mk("button", "btn btn-sm", "Show all " + shown.length);
