@@ -1,14 +1,12 @@
-# Rebuilds Room 5's news board (news.json) and publishes the site, several times a day.
-# GitHub starts only some scheduled runs, so it tries four times an hour; a scheduled
-# try within 50 minutes of the last real build stops early and deploys nothing, so
-# outlets get at most one read an hour. Pushes and hand-started runs always build.
+# Publishes the site to GitHub Pages on every push to main (or when started by hand).
+# Room 5's board is a frozen week of top stories embedded in index.html, so nothing is
+# rebuilt and nothing runs on a schedule (the hourly news.json build was removed on
+# 12 Oct 2026: GitHub's scheduled runs fired too unreliably). newsroom/ is kept as the
+# record of how the live board worked; it is not run.
 # Runs on GitHub's free standard runners (public repo): no paid features.
-# news.json is never committed; it is deployed straight to Pages with the page.
-name: news board
+name: publish site
 
 on:
-  schedule:
-    - cron: "8,23,38,53 * * * *"
   workflow_dispatch:
   push:
     branches: [main]
@@ -19,65 +17,32 @@ permissions:
   id-token: write
 
 concurrency:
-  group: news-board
+  group: publish-site
   cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    outputs:
-      built: ${{ steps.build.outputs.built }}
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v7
-        with:
-          python-version: "3.12"
-
-      - name: Install PyYAML
-        run: python -m pip install --disable-pip-version-check "PyYAML==6.0.3"
-
-      - name: Restore board state
-        uses: actions/cache/restore@v6
-        with:
-          path: .news_state
-          key: news-state-${{ github.run_id }}
-          restore-keys: news-state-
-
-      - name: Build news.json
-        id: build
-        env:
-          NEWS_MIN_GAP_MIN: ${{ github.event_name == 'schedule' && '50' || '' }}
-        run: python newsroom/build_news.py
-
-      - name: Save board state
-        if: always() && steps.build.outputs.built == 'true'
-        uses: actions/cache/save@v6
-        with:
-          path: .news_state
-          key: news-state-${{ github.run_id }}
-
       - name: Assemble the site
-        if: steps.build.outputs.built == 'true'
         run: |
           mkdir _site
-          cp index.html .nojekyll news.json _site/
+          cp index.html .nojekyll _site/
           cp ./*.jpg ./*.mp4 _site/
           ls -la _site
 
       - uses: actions/configure-pages@v6
-        if: steps.build.outputs.built == 'true'
 
       - uses: actions/upload-pages-artifact@v5
-        if: steps.build.outputs.built == 'true'
         with:
           path: _site
           include-hidden-files: true
 
   deploy:
     needs: build
-    if: needs.build.outputs.built == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment:
