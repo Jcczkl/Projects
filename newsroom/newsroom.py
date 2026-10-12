@@ -39,7 +39,7 @@ REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent
 CONFIG_DIR = pathlib.Path(__file__).resolve().parent      # newsroom/news_feeds.yaml
 STATE_DIR = REPO_ROOT / ".news_state"                      # restored from the Actions cache
 
-UA = "JosephProjectsNewsBoard/1.0 (public demo board, rebuilt hourly; headlines and links only; respects robots.txt; https://jcczkl.github.io/Projects/)"
+UA = "JosephProjectsNewsBoard/1.0 (public demo board, refreshed several times a day, at most hourly; headlines and links only; respects robots.txt; https://jcczkl.github.io/Projects/)"
 SGT = _dt.timezone(_dt.timedelta(hours=8), "SGT")
 # "The West" for the 🌏 badge. Oceania (Australia, NZ) and Canada added
 # 2026-10-06 (claude_code_newsroom_more_sources.md): Western-aligned

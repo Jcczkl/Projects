@@ -1,11 +1,14 @@
-# Rebuilds Room 5's news board (news.json) every hour and publishes the site.
+# Rebuilds Room 5's news board (news.json) and publishes the site, several times a day.
+# GitHub starts only some scheduled runs, so it tries four times an hour; a scheduled
+# try within 50 minutes of the last real build stops early and deploys nothing, so
+# outlets get at most one read an hour. Pushes and hand-started runs always build.
 # Runs on GitHub's free standard runners (public repo): no paid features.
 # news.json is never committed; it is deployed straight to Pages with the page.
 name: news board
 
 on:
   schedule:
-    - cron: "23 * * * *"
+    - cron: "8,23,38,53 * * * *"
   workflow_dispatch:
   push:
     branches: [main]
@@ -23,6 +26,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    outputs:
+      built: ${{ steps.build.outputs.built }}
     steps:
       - uses: actions/checkout@v7
 
@@ -41,16 +46,20 @@ jobs:
           restore-keys: news-state-
 
       - name: Build news.json
+        id: build
+        env:
+          NEWS_MIN_GAP_MIN: ${{ github.event_name == 'schedule' && '50' || '' }}
         run: python newsroom/build_news.py
 
       - name: Save board state
-        if: always()
+        if: always() && steps.build.outputs.built == 'true'
         uses: actions/cache/save@v6
         with:
           path: .news_state
           key: news-state-${{ github.run_id }}
 
       - name: Assemble the site
+        if: steps.build.outputs.built == 'true'
         run: |
           mkdir _site
           cp index.html .nojekyll news.json _site/
@@ -58,14 +67,17 @@ jobs:
           ls -la _site
 
       - uses: actions/configure-pages@v6
+        if: steps.build.outputs.built == 'true'
 
       - uses: actions/upload-pages-artifact@v5
+        if: steps.build.outputs.built == 'true'
         with:
           path: _site
           include-hidden-files: true
 
   deploy:
     needs: build
+    if: needs.build.outputs.built == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment:

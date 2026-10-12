@@ -1,12 +1,19 @@
 """
-Build news.json for Room 5's live board (run hourly by .github/workflows/news.yml).
+Build news.json for Room 5's live board (run by .github/workflows/news.yml).
+
+GitHub starts only some scheduled runs, so the workflow tries four times an hour.
+On a scheduled try, NEWS_MIN_GAP_MIN is set: if the last real build (the
+restored state's last poll) was less than that many minutes ago, nothing is
+fetched and nothing is deployed - so outlets get at most one read an hour.
+Pushes and hand-started runs always build.
 
 One feed poll and one Google Trends poll with the engine in newsroom.py, then the
 app's own view() logic, cut down to the public contract the page reads:
 top 40 stories, the "people are searching" strip, and one health row per outlet.
 GDELT is skipped (it throttles hard; the app reports it as throttled anyway).
 
-Exit codes: 0 = news.json written and fit to publish; 1 = news.json written but
+Exit codes: 0 = news.json written and fit to publish, or the try was skipped
+(the workflow reads built=true/false from GITHUB_OUTPUT); 1 = news.json written but
 fewer than MIN_OUTLETS outlets answered (or it failed its own checks), so the
 deploy is skipped and the last good site stays up; 2 = the build itself failed.
 
@@ -16,6 +23,7 @@ from __future__ import annotations
 
 import datetime as _dt
 import json
+import os
 import pathlib
 import re
 import sys
@@ -154,10 +162,26 @@ def problems(board: dict, size: int) -> list[str]:
     return out
 
 
+def set_output(**kv) -> None:
+    """Tell the workflow what happened (no-op outside GitHub Actions)."""
+    path = os.environ.get("GITHUB_OUTPUT")
+    if path:
+        with open(path, "a", encoding="utf-8") as f:
+            for k, v in kv.items():
+                f.write(f"{k}={v}\n")
+
+
 def main() -> int:
     t0 = time.monotonic()
     room = nr.Newsroom(fetcher=nr.Fetcher(opener=budget_opener(t0 + RUN_BUDGET_S)))
     restored = len(room.items)
+    gap_min = float(os.environ.get("NEWS_MIN_GAP_MIN") or 0)
+    if gap_min and room.last_poll and time.time() - room.last_poll < gap_min * 60:
+        ago = (time.time() - room.last_poll) / 60
+        print(f"skipped: the last real build was {ago:.0f} min ago (under {gap_min:.0f}); nothing fetched or deployed")
+        set_output(built="false")
+        return 0
+    set_output(built="true")
     room.poll_feeds()
     room.poll_trends()
     now = time.time()

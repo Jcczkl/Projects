@@ -25,7 +25,7 @@ outlets:
   - {name: Addis Standard, region: Africa, country: ET, unavailable: "site refuses automated readers (HTTP 403)"}
 
   - {name: The Hindu, region: South Asia, country: IN, feeds: ["https://www.thehindu.com/news/international/feeder/default.rss", "https://www.thehindu.com/news/national/feeder/default.rss"]}
-  - {name: Indian Express, region: South Asia, country: IN, feeds: ["https://indianexpress.com/feed/"]}
+  - {name: Indian Express, region: South Asia, country: IN, unavailable: "site refuses GitHub's servers (HTTP 403)"}   # its feed (https://indianexpress.com/feed/) works from a home PC
   - {name: Kathmandu Post, region: South Asia, country: NP, feeds: ["https://kathmandupost.com/rss"]}
   - {name: Dawn, region: South Asia, country: PK, unavailable: "site refuses automated readers (HTTP 403)"}
   - {name: The Daily Star (BD), region: South Asia, country: BD, unavailable: "its RSS stopped updating in 2022 (empty titles)"}
