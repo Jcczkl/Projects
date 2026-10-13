@@ -1859,15 +1859,49 @@
   var current = "lobby";
   function el(id) { return document.getElementById(id); }
 
-  function show(name) {
+  /* Each room is a browser history step, so the mouse back/forward buttons, the browser's
+     Back button and a phone's swipe-back move between rooms. Rooms also get their own link. */
+  var SLUG = { lobby: "", ex0: "secretariat", ex3: "gal-website", ex1: "northstar", ex2: "news-shorts", ex4: "news-radar", ex5: "walk-in-studio", exit: "exit" };
+  function roomFromHash() {
+    var h = (location.hash || "").replace(/^#/, "").toLowerCase();
+    for (var r in SLUG) { if (SLUG[r] && SLUG[r] === h) { return r; } }
+    return "lobby";
+  }
+  function record(name, replace) {
+    try {
+      var url = location.pathname + location.search + (SLUG[name] ? "#" + SLUG[name] : "");
+      if (replace) { history.replaceState({ room: name }, "", url); }
+      else { history.pushState({ room: name }, "", url); }
+    } catch (err) { /* history unavailable (sandboxed frame): the buttons still work */ }
+  }
+  try { if ("scrollRestoration" in history) { history.scrollRestoration = "manual"; } } catch (err) {}
+
+  function show(name, fromHistory) {
     if (typeof stopVideos === "function") { stopVideos(); }
     if (ORDER.indexOf(name) === -1) { name = "lobby"; }
     if (booted && name === current) { window.scrollTo(0, 0); return; }
     var first = !booted;
     booted = true;
+    if (first) { record(name, true); }
+    else if (!fromHistory) { record(name, false); }
     if (CAN_VT && !first) { document.startViewTransition(function () { swapTo(name); }); }
     else { swapTo(name); }
   }
+  window.addEventListener("popstate", function (e) {
+    show((e.state && e.state.room) || roomFromHash(), true);
+  });
+
+  /* Keyboard: the left and right arrow keys step to the previous and next room. They are left
+     alone while typing, on a video, or with a modifier held (Alt+Left is already Back). */
+  document.addEventListener("keydown", function (e) {
+    if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) { return; }
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") { return; }
+    var t = e.target;
+    if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT|VIDEO|AUDIO)$/.test(t.tagName))) { return; }
+    e.preventDefault();
+    if (e.key === "ArrowRight") { el("way-next").click(); }
+    else if (current !== "lobby") { el("way-prev").click(); }
+  });
 
   function swapTo(name) {
     current = name;
@@ -3020,7 +3054,7 @@
   renderEx2();
   renderEx3();
   renderEx4();
-  show("lobby");
+  show(roomFromHash());
 })();
 </script>
 </html>
