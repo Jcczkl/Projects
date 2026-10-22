@@ -1,0 +1,144 @@
+/* Marblewick Learning Hub - "the parents' noticeboard" (business/layout_dna.md, tuition column).
+   Parents first: the headline answers "which class, which day, how much"; this week's classes sit beside it; the
+   signature is the term's timetable you filter by level, with fees per level under it; tutors in their own words
+   (qualifications only when the centre gives them); how lessons run; FAQ; a 3-field trial-class form.
+   Warm paper, school navy, one highlighter yellow; Bricolage Grotesque headings + Nunito body. */
+@font-face { font-family: "Bricolage Grotesque"; src: url("../fonts/bricolage-grotesque-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Nunito"; src: url("../fonts/nunito-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Nunito"; src: url("../fonts/nunito-800.woff2") format("woff2"); font-weight: 800; font-style: normal; font-display: swap; }
+:root {
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --c-whatsapp: #187a43;
+  --mw-ink: #1f3a5f;
+  --mw-mark: #f2c94c;
+}
+body { font-family: var(--font-body); }
+h1, h2, h3 { letter-spacing: -.01em; }
+.mw-head { max-width: 44rem; margin-bottom: var(--space-4); }
+.mw-note { color: var(--c-muted); font-size: .95rem; }
+
+/* hero: the question parents ask + this week's classes */
+.mw-hero { padding-block: var(--space-6); }
+.mw-hero__grid { display: grid; gap: var(--space-6); grid-template-columns: 1.15fr .85fr; align-items: center; }
+.mw-hero h1 { font-size: clamp(2.4rem, 3.6vw + 1rem, 4.6rem); line-height: 1.02; color: var(--mw-ink); max-width: 15ch; }
+.mw-hero h1::after { content: ""; display: block; width: 4.5rem; height: .45rem; margin-top: .9rem; border-radius: 99px; background: var(--mw-mark); }
+.mw-hero .lead { font-size: 1.2rem; max-width: 34rem; }
+.mw-hero__actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: var(--space-4); }
+.mw-hero__actions .btn svg { width: 1.1em; height: 1.1em; }
+.mw-glance { background: var(--mw-ink); color: #fff; border-radius: var(--radius-lg); padding: var(--space-5); box-shadow: 0 20px 50px rgba(31,58,95,.22); }
+.mw-glance h2 { margin: 0 0 var(--space-3); font-size: 1.5rem; color: var(--mw-mark); }
+.mw-glance__list { list-style: none; margin: 0; padding: 0; display: grid; gap: .1rem; }
+.mw-glance__list li { display: grid; grid-template-columns: 3.2rem 1fr auto; gap: .8rem; align-items: center; min-height: 48px;
+  border-bottom: 1px solid rgba(255,255,255,.14); }
+.mw-day { font-weight: 800; color: var(--mw-mark); text-transform: uppercase; letter-spacing: .06em; font-size: .85rem; }
+.mw-time { font-variant-numeric: tabular-nums; opacity: .9; }
+.mw-glance__note { margin: var(--space-3) 0 0; font-size: .9rem; opacity: .85; }
+
+.mw-band { margin: 0; position: relative; }
+.mw-band img { width: 100%; height: clamp(14rem, 34vw, 30rem); object-fit: cover; display: block; }
+.mw-band figcaption, .mw-photo figcaption { position: absolute; left: .8rem; bottom: .8rem; font-size: .78rem; letter-spacing: .06em;
+  text-transform: uppercase; background: rgba(255,255,255,.85); color: #333; padding: .15rem .55rem; border-radius: 99px; }
+
+/* levels: each its own anchor */
+.mw-levels__grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.mw-level { background: var(--c-surface); border: 1px solid var(--c-border); border-top: 6px solid var(--mw-ink); border-radius: var(--radius-lg);
+  padding: var(--space-4); display: grid; gap: .6rem; align-content: start; scroll-margin-top: calc(var(--header-h, 4rem) + 1rem); }
+.mw-level h3 { margin: 0; font-size: 1.6rem; color: var(--mw-ink); }
+.mw-level h3 small { font-family: var(--font-body); font-size: .95rem; color: var(--c-muted); font-weight: 400; margin-left: .3rem; }
+.mw-level p { margin: 0; }
+.mw-chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; }
+.mw-chips li { padding: .25rem .7rem; border-radius: 99px; background: var(--c-surface-2); font-weight: 700; font-size: .92rem; }
+.mw-more { font-weight: 800; color: var(--mw-ink); text-decoration-thickness: 2px; text-underline-offset: 3px; min-height: 44px; display: inline-flex; align-items: center; }
+
+/* the signature: this term's timetable, filtered by level */
+.mw-filter { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: var(--space-2); }
+.mw-filter button { min-height: 44px; padding: .5rem 1.1rem; border-radius: 99px; border: 2px solid var(--mw-ink); background: transparent;
+  color: var(--mw-ink); font: inherit; font-weight: 800; cursor: pointer; transition: background var(--dur-tap) var(--ease-out), color var(--dur-tap) var(--ease-out); }
+.mw-filter button[aria-pressed="true"] { background: var(--mw-ink); color: #fff; }
+.mw-filter button:focus-visible { outline: 3px solid var(--mw-mark); outline-offset: 2px; }
+.mw-count { margin: 0 0 var(--space-3); color: var(--c-muted); font-weight: 700; }
+.mw-tt__wrap { overflow-x: auto; border-radius: var(--radius-lg); border: 1px solid var(--c-border); background: var(--c-surface); }
+.mw-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.mw-table th, .mw-table td { text-align: left; padding: .85rem 1rem; border-bottom: 1px solid var(--c-border); }
+.mw-table thead th { font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: var(--c-muted); background: var(--c-surface-2); }
+.mw-table tbody tr:last-child td { border-bottom: 0; }
+.mw-table td:first-child { font-weight: 800; color: var(--mw-ink); }
+.mw-table td:nth-child(4) { font-weight: 700; }
+.mw-table tr[hidden] { display: none; }
+.mw-fees { margin-top: var(--space-5); max-width: 40rem; }
+.mw-fees h3 { color: var(--mw-ink); }
+
+/* tutors: in their own words */
+.mw-tutors__grid, .mw-how__grid { display: grid; gap: var(--space-6); grid-template-columns: 1.3fr .7fr; align-items: center; }
+.mw-how__grid { grid-template-columns: .7fr 1.3fr; }
+.mw-tutor-cards { display: grid; gap: var(--space-3); }
+.mw-tutor { display: grid; grid-template-columns: 3.2rem 1fr; gap: var(--space-3); align-items: start; padding: var(--space-3);
+  border-radius: var(--radius-lg); background: var(--c-surface); border: 1px solid var(--c-border); }
+.mw-tutor__mark { width: 3.2rem; height: 3.2rem; border-radius: 50%; display: grid; place-items: center; background: var(--mw-mark);
+  color: var(--mw-ink); font-family: var(--font-display); font-size: 1.4rem; }
+.mw-tutor h3 { margin: 0; font-size: 1.2rem; }
+.mw-tutor h3 small { font-family: var(--font-body); font-weight: 400; color: var(--c-muted); font-size: .9rem; }
+.mw-tutor p { margin: .25rem 0 0; }
+.mw-tutor__what { font-weight: 700; color: var(--mw-ink); }
+.mw-photo { margin: 0; position: relative; }
+.mw-photo img { width: 100%; height: auto; border-radius: var(--radius-lg); display: block; }
+
+/* how lessons run */
+.mw-steps { list-style: none; counter-reset: step; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
+.mw-steps li { counter-increment: step; position: relative; padding-left: 3.4rem; }
+.mw-steps li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 2.4rem; height: 2.4rem; border-radius: 50%;
+  display: grid; place-items: center; background: var(--mw-ink); color: #fff; font-weight: 800; }
+.mw-steps h3 { margin: 0 0 .25rem; font-size: 1.2rem; }
+.mw-steps p { margin: 0; }
+
+/* FAQ */
+.mw-faq__list { display: grid; gap: .6rem; max-width: 46rem; }
+.mw-faq details { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); padding: 0 var(--space-3); }
+.mw-faq summary { cursor: pointer; font-weight: 800; min-height: 48px; display: flex; align-items: center; color: var(--mw-ink); }
+.mw-faq details p { margin: 0 0 var(--space-3); }
+
+/* trial class */
+.mw-trial { display: grid; gap: var(--space-5); grid-template-columns: 1fr 1fr; align-items: start; }
+
+@media (max-width: 860px) {
+  .mw-hero__grid, .mw-levels__grid, .mw-tutors__grid, .mw-how__grid, .mw-trial { grid-template-columns: 1fr; }
+  .mw-hero { padding-block: var(--space-5); }
+  .mw-photo { max-width: 26rem; }
+  .mw-table th, .mw-table td { padding: .7rem .65rem; }
+}
+.price-list th small { display: block; font-weight: 400; color: var(--c-muted); font-size: .9rem; margin-top: .15rem; }
+@media (max-width: 600px) {                     /* phones: day, time, level, subject; the group size is said above the table */
+  .mw-table th:nth-child(5), .mw-table td:nth-child(5) { display: none; }
+  .mw-table td:nth-child(2) { white-space: nowrap; }
+  .mw-table th, .mw-table td { padding: .7rem .5rem; }
+  .mw-filter button { padding: .5rem .9rem; }
+}
+
+/* ---------- Smooth (the paid motion layer, tuition): a page being filled in, never a grade or a tick ----------
+   Played once when a part comes on screen (or when a level is tapped), never tied to the scroll position.
+   Standard and reduced motion: everything already written, nothing moves. */
+.js[data-motion="smooth"] .mw-hero h1::after { transform-origin: 0 50%; animation: mw-draw var(--dur-scene) var(--ease-out) var(--dur-ui) both; }
+.js[data-motion="smooth"] .mw-glance__list li { animation: mw-write var(--dur-reveal) var(--ease-out) both; animation-delay: calc(var(--dur-reveal) + var(--g, 0) * var(--stagger) * 1.5); }
+.mw-glance__list li:nth-child(2) { --g: 1; } .mw-glance__list li:nth-child(3) { --g: 2; }
+.mw-glance__list li:nth-child(4) { --g: 3; } .mw-glance__list li:nth-child(5) { --g: 4; } .mw-glance__list li:nth-child(6) { --g: 5; }
+/* the section label gets a marker stroke drawn under it */
+.js[data-motion="smooth"] .mw-head .eyebrow { display: inline-block; padding-bottom: .2em;
+  background: linear-gradient(var(--mw-mark), var(--mw-mark)) no-repeat 0 100% / 0 .22em; transition: background-size var(--dur-scene) var(--ease-out) var(--dur-ui); }
+.js[data-motion="smooth"] .mw-head.is-in .eyebrow { background-size: 100% .22em; }
+/* tables write themselves in, row by row, left to right */
+.js[data-motion="smooth"] [data-reveal="fill"]:not(.is-in) { opacity: 1; transform: none; }
+.js[data-motion="smooth"] [data-reveal="fill"] tbody tr > * { clip-path: inset(0 0 0 0); transition: clip-path var(--dur-reveal) var(--ease-out), opacity var(--dur-reveal) var(--ease-out);
+  transition-delay: calc(var(--r, 0) * var(--stagger) + var(--c, 0) * var(--stagger) * .5); }
+.js[data-motion="smooth"] [data-reveal="fill"]:not(.is-in) tbody tr > * { clip-path: inset(0 100% 0 0); opacity: .15; }
+/* a tapped level: its classes are marked as they appear */
+.js[data-motion="smooth"] .mw-table.is-rewrite tbody tr:not([hidden]) > * { animation: mw-mark-row var(--dur-scene) var(--ease-out) backwards;
+  animation-delay: calc(var(--v, 0) * var(--stagger)); }
+@keyframes mw-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes mw-write { from { clip-path: inset(0 100% 0 0); opacity: .2; } to { clip-path: inset(0 0 0 0); opacity: 1; } }
+@keyframes mw-mark-row { 0%, 35% { background-color: color-mix(in srgb, var(--mw-mark) 35%, transparent); } 100% { background-color: transparent; } }
+@media (prefers-reduced-motion: reduce) {
+  .js .mw-hero h1::after, .js .mw-glance__list li, .js .mw-table.is-rewrite tbody tr > * { animation: none !important; }
+  .js [data-reveal="fill"] tbody tr > * { clip-path: none !important; opacity: 1 !important; }
+  .js .mw-head .eyebrow { transition: none !important; background-size: 100% .22em; }
+}

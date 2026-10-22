@@ -1,0 +1,164 @@
+/* Signature · Place - the whole homepage is the walk into the place (template/COMPONENTS.md "Signature · Place";
+   claude_code_walk_in_site.md). Without JS, or with reduced motion: the stops as plain stills with their cards. */
+
+.place { position: relative; background: #0d0d0f; color: #fff; }
+.place__view { position: relative; height: calc(100svh - var(--header-h)); min-height: 22rem; overflow: hidden; background: #0d0d0f; }
+.place__poster, .place__poster img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.place__poster img { object-fit: cover; }
+.place__canvas, .place__backdrop { position: absolute; inset: 0; width: 100%; height: 100%; display: none; }
+.place__backdrop { transform: scale(1.15); }   /* a 40 px wide copy, stretched: soft without a per-frame blur filter */
+.place__scrim {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%);
+}
+.place__hero { position: absolute; inset: auto 0 0 0; padding-bottom: clamp(2rem, 8vh, 5rem); }
+.place__hero h1 { color: #fff; font-size: clamp(2.4rem, 7vw, 5.2rem); line-height: 1; margin: .2rem 0 .6rem; text-shadow: 0 2px 24px rgba(0,0,0,.35); }
+.place__hero .lead { color: rgba(255,255,255,.92); max-width: 34rem; margin: 0; text-shadow: 0 1px 12px rgba(0,0,0,.4); }
+.place__hero .eyebrow { color: rgba(255,255,255,.85); }
+.place__hint { margin: 1.4rem 0 0; font-size: .9rem; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.8); }
+.place__hint::after { content: " \2193"; }
+
+/* the stops: a plain list of stills + cards (no JS / reduced motion) */
+.place__stops { display: grid; gap: 0; }
+.place__stop { position: relative; outline: none; }
+.place__still { display: block; width: 100%; height: auto; max-height: 85svh; object-fit: cover; }
+.place__card {
+  position: relative; margin: -4rem auto 2.5rem; width: min(34rem, calc(100% - 2 * var(--space-3, 1rem)));
+  padding: 1.25rem 1.4rem; border-radius: 16px; background: rgba(16,16,19,.86); color: #fff;
+  box-shadow: 0 12px 40px rgba(0,0,0,.35);
+}
+.place__card h2 { color: #fff; font-size: clamp(1.4rem, 3vw, 2rem); margin: 0 0 .5rem; }
+.place__card p, .place__card li { color: rgba(255,255,255,.9); }
+.place__card ul { margin: 0; padding-left: 1.1rem; }
+.place__card address { font-style: normal; }
+.place__card .slot { color: #ffd88a; }
+.place__hours { list-style: none; padding: 0 !important; }
+.place__hours li { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px solid rgba(255,255,255,.12); padding: .3rem 0; }
+.place__actions { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1rem 0 0; }
+.place__card .btn--ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.6); }
+.place__product { display: block; width: 100%; max-width: 15rem; height: auto; border-radius: 12px; margin-top: .8rem; }
+.place__stop:focus-visible .place__card { outline: 3px solid var(--c-accent, #f2b134); outline-offset: 3px; }
+
+/* the live walk (place.js adds .place--live; reduced motion never gets it) */
+.place--live .place__stage { position: sticky; top: var(--header-h); height: calc(100svh - var(--header-h)); overflow: hidden; }
+.place--live .place__view { height: 100%; }
+.place--live .place__canvas { display: block; }
+.place--live.is-contain .place__backdrop { display: block; }
+.place--live.is-drawn .place__poster { visibility: hidden; }
+.place--live .place__hero { will-change: opacity, transform; }
+.place--live .place__stops { position: absolute; inset: 0; pointer-events: none; display: block; }
+.place--live .place__still { display: none; }
+@media (prefers-reduced-motion: no-preference) { .js .place__still { display: none; } }   /* never fetched when the walk runs */
+.place--live .place__stop { position: absolute; left: 0; right: 0; bottom: 0; }
+.place--live .place__card {
+  margin: 0 0 clamp(1.25rem, 6vh, 3.5rem) clamp(1rem, 6vw, 5rem); width: min(30rem, calc(100% - 2rem));
+  background: rgba(16,16,19,.72); -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2);
+  opacity: 0; transform: translateY(18px); transition: opacity var(--dur-reveal) var(--ease-out), transform var(--dur-reveal) var(--ease-out);
+}
+.place--live .place__stop.is-on .place__card { opacity: 1; transform: none; pointer-events: auto; }
+@media (max-width: 767px) {
+  .place--live .place__card { margin: 0 auto 1rem; width: calc(100% - 1.5rem); padding: 1rem 1.1rem; }
+}
+
+/* the stops as dots on the right (live only): each jumps to its stop */
+.place__dots { position: absolute; right: clamp(.6rem, 2vw, 1.5rem); top: 50%; transform: translateY(-50%); display: grid; gap: .55rem; z-index: 3; }
+.place__dots button {
+  width: 30px; height: 30px; border: 0; padding: 0; background: transparent; cursor: pointer; display: grid; place-items: center;
+}
+.place__dots button::before {
+  content: ""; width: 10px; height: 10px; border-radius: 50%; border: 2px solid rgba(255,255,255,.85); background: transparent;
+  transition: background var(--dur-ui) var(--ease-out), transform var(--dur-ui) var(--ease-out);
+}
+.place__dots button[aria-current="step"]::before { background: #fff; transform: scale(1.2); }
+.place__dots button:focus-visible { outline: 3px solid var(--c-accent, #f2b134); outline-offset: 2px; border-radius: 50%; }
+
+@media (prefers-reduced-motion: reduce) {
+  .place__card { transition: none !important; }
+}
+
+/* phones: the WhatsApp bar along the bottom (52 px, base.css) never covers the walk or a card */
+@media (max-width: 600px) {
+  body:has(.wa-fab) .place--live .place__stage { height: calc(100svh - var(--header-h) - 52px); }
+}
+.place:not(.place--live) .place__hint { display: none; }   /* stills: nothing to scroll through */
+@media (max-width: 767px) {               /* phones: the dots go along the top, clear of the cards */
+  .place__dots { top: .75rem; right: 50%; transform: translateX(50%); grid-auto-flow: column; gap: .2rem; }
+  .place--live .place__product { max-width: 8.5rem; }
+}
+
+/* ---- the opening: a designed door (claude_code_signature_overhaul.md Part 2) ----
+   Page elements only, no footage, no hands. --door-open (0 shut .. 1 open) and --door-zoom (0 .. 1 = gone through) are
+   set by place.js while scrolling; the default here is the door standing open, so no-JS and reduced motion show it open
+   (with the first walk frame through the doorway). Generic frontage = clearly a drawing in the site colours, the name only;
+   a client's own front photo (Files, marked for the site) becomes two doors instead (never an invented storefront). */
+.place { --door-open: 1; --door-zoom: 0;
+  --wall: color-mix(in srgb, var(--c-primary, #1f5f8b) 58%, #0d0d0f); --trim: color-mix(in srgb, var(--c-primary, #1f5f8b) 30%, #08080a);
+  --glow: color-mix(in srgb, var(--c-accent, #f2b134) 70%, #fff3d6); }
+@media (prefers-reduced-motion: no-preference) { .js .place:has(.place__door) { --door-open: 0; } }
+.place__door { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden;
+  opacity: calc(1 - var(--door-zoom)); }
+.place--live.is-through .place__door { visibility: hidden; }
+.place__front { position: absolute; inset: 0; overflow: hidden; transform-origin: 50% 57%; transform: scale(calc(1 + var(--door-zoom) * 4.2)); will-change: transform; }
+.place__doorway {
+  position: absolute; left: 50%; bottom: 12%; height: 60%; aspect-ratio: 1 / 1.9; transform: translateX(-50%);
+  box-shadow: 0 0 0 300vmax var(--wall), inset 0 0 0 clamp(6px, 1.1vh, 12px) var(--trim);   /* the wall around an open hole */
+  perspective: 1100px; border-radius: 3px 3px 0 0;
+}
+.place__sign {
+  position: absolute; left: 50%; bottom: calc(100% + clamp(.8rem, 3vh, 2rem)); transform: translateX(-50%);
+  min-width: 260%; max-width: 92vw; padding: clamp(.5rem, 1.6vh, 1rem) clamp(1rem, 3vw, 2.2rem); text-align: center; white-space: nowrap;
+  z-index: 2; background: var(--trim); border-bottom: 3px solid var(--c-accent, #f2b134); box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+.place__sign span { font-family: var(--font-display); font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--glow); font-size: clamp(1.1rem, 3.4vh, 2.3rem); text-shadow: 0 0 18px color-mix(in srgb, var(--glow) 55%, transparent); }
+.place__window { position: absolute; bottom: 30%; width: 85%; height: 42%; border: clamp(4px, .8vh, 8px) solid var(--trim); border-radius: 2px;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--glow) 38%, transparent), color-mix(in srgb, var(--glow) 12%, rgba(0,0,0,.4)) 70%);
+  opacity: calc(.55 + var(--door-open) * .45); }
+.place__window--l { right: calc(100% + 22%); }
+.place__window--r { left: calc(100% + 22%); }
+.place__light { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen;
+  background: radial-gradient(ellipse at 50% 55%, color-mix(in srgb, var(--glow) 85%, transparent), transparent 70%);
+  opacity: calc(var(--door-open) * .55); }
+.place__spill { position: absolute; top: 100%; left: -40%; right: -40%; height: 60%; pointer-events: none; mix-blend-mode: screen;
+  clip-path: polygon(28% 0, 72% 0, 100% 100%, 0 100%);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--glow) 70%, transparent), transparent 85%);
+  opacity: calc(var(--door-open) * .6); }
+.place__leaf {
+  position: absolute; z-index: 1; inset: clamp(6px, 1.1vh, 12px) clamp(6px, 1.1vh, 12px) 0; transform-origin: 0 50%;
+  transform: rotateY(calc(var(--door-open) * -104deg)); backface-visibility: visible;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--c-primary, #1f5f8b) 75%, #000), color-mix(in srgb, var(--c-primary, #1f5f8b) 92%, #fff));
+  box-shadow: inset 0 0 0 clamp(5px, .9vh, 10px) color-mix(in srgb, var(--c-primary, #1f5f8b) 55%, #000);
+}
+.place__pane { position: absolute; left: 18%; right: 18%; top: 10%; height: 44%; border-radius: 2px;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--glow) 55%, transparent), rgba(0,0,0,.35)); }
+.place__handle { position: absolute; right: 9%; top: 56%; width: 7%; aspect-ratio: 1 / 4; border-radius: 99px; background: var(--c-accent, #f2b134); }
+/* a client's own front photo: two doors */
+.place__leaves { position: absolute; inset: 0; perspective: 1600px; transform-origin: 50% 55%; transform: scale(calc(1 + var(--door-zoom) * 1.6)); }
+.place__half { position: absolute; top: 0; bottom: 0; width: 50%; overflow: hidden; box-shadow: 0 0 40px rgba(0,0,0,.4); backface-visibility: visible; }
+.place__half img { position: absolute; top: 0; width: 200%; max-width: none; height: 100%; object-fit: cover; }
+.place__half--l { left: 0; transform-origin: 0 50%; transform: rotateY(calc(var(--door-open) * -96deg)); }
+.place__half--l img { left: 0; }
+.place__half--r { right: 0; transform-origin: 100% 50%; transform: rotateY(calc(var(--door-open) * 96deg)); }
+.place__half--r img { right: 0; }
+.place__light--wide { inset: 0; background: radial-gradient(ellipse at 50% 55%, color-mix(in srgb, var(--glow) 70%, transparent), transparent 60%); }
+/* the generic frontage already shows the name on its sign: the heading stays for screen readers only */
+.place:has(.place__door:not(.place__door--photo)):not(.is-through) .place__hero h1 {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (max-width: 767px) {
+  .place__doorway { height: 46%; bottom: 22%; }
+  .place__sign { min-width: 0; width: 84vw; white-space: normal; }
+  .place__sign span { font-size: clamp(1rem, 6.4vw, 1.6rem); letter-spacing: .08em; }
+  .place__window { display: none; }
+}
+.place__door ~ .place__scrim { z-index: 2; }
+.place__door ~ .place__hero { z-index: 3; }   /* the tagline and the hint stay in front of the door */
+
+/* ---- triggered steps (claude_code_batch_gal_motion_tuition.md Part 2): Back / Next on the stage, one step per tap ---- */
+.place__steps { position: absolute; z-index: 4; right: clamp(1rem, 4vw, 3rem); bottom: clamp(1.25rem, 6vh, 3.5rem); display: flex; gap: .5rem; }
+.place__steps button { min-height: 44px; min-width: 44px; padding: .55rem 1.15rem; border-radius: 999px; cursor: pointer; font: inherit; font-weight: 600;
+  border: 1px solid rgba(255,255,255,.7); background: rgba(16,16,19,.55); color: #fff; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.place__steps .place__next { background: var(--c-accent, #f2b134); color: var(--c-accent-ink, #1d1b18); border-color: transparent; }
+.place__steps button:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+.place__steps button[hidden] { display: none; }
+.place--calm .place__door { display: none; }                 /* reduced motion / low power: no door, a fade between stops */
+@media (max-width: 767px) { .place__steps { right: .75rem; bottom: auto; top: 3rem; } }

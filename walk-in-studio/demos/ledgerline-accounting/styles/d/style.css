@@ -1,0 +1,138 @@
+/* Style D - Warm local partner (Ledgerline Accounting demo): warm paper, brick red, leaf green; Georgia bold + Trebuchet,
+   Segoe Print notes; a pinned desk print. Loaded after the demo's CSS; tokens from the template scale only. */
+/* Display face (finish pass 2026-10-10): Fraunces, a soft warm serif for the local-partner look; self-hosted, OFL (CREDITS.md) */
+@font-face { font-family: "Fraunces"; src: url("../../assets/fonts/fraunces-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Fraunces"; src: url("../../assets/fonts/fraunces-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Fraunces"; src: url("../../assets/fonts/fraunces-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+:root {
+  --c-bg: #fbf3e6;
+  --c-surface: #fffaf2;
+  --c-surface-2: #f1e1c6;
+  --c-text: #2b1d14;
+  --c-muted: #5e4a3a;
+  --c-border: #e3cfb0;
+  --c-primary: #9c3d1f;
+  --c-primary-ink: #ffffff;
+  --c-accent: #f6e7cd;
+  --c-accent-ink: #2b1d14;
+  --c-leaf: #2f6b4f;
+  --c-note: #fff1a8;
+  --font-display: "Fraunces", Georgia, "Iowan Old Style", Cambria, "Times New Roman", serif;
+  --font-body: "Trebuchet MS", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-note: "Segoe Print", "Bradley Hand", "Trebuchet MS", sans-serif;
+  --fw-display: 700;
+  --ls-display: -0.015em;
+  --radius: 10px;
+  --radius-lg: 18px;
+  --radius-btn: 12px;
+}
+
+.site-header::before { border-bottom: 2px dashed var(--c-border); }
+.site-header .brand__mark rect { fill: var(--c-primary); }
+
+.wl-btn { --btn-bg: var(--c-primary); --btn-ink: #fff; }
+.wl-btn--ghost { color: var(--c-leaf); border-color: var(--c-leaf); }
+.wl-head { max-width: 44rem; margin-bottom: var(--space-5); }
+.wl-head h2, .wl-promise h2, .wl-visit h2 { font-size: clamp(2rem, 2.4vw + 1rem, 3.1rem); line-height: 1.1; margin: 0 0 var(--space-3); }
+.wl-head p { font-size: var(--fs-lead); color: var(--c-muted); margin: 0; }
+.wl-lead { font-size: var(--fs-lead); color: var(--c-muted); max-width: 34rem; margin: 0 0 var(--space-4); }
+
+/* Hero: words + a pinned print */
+.wl-hero { padding-block: var(--space-5) var(--space-6); }
+.wl-hero__grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: var(--space-6); align-items: center; }
+.wl-where { display: inline-flex; align-items: center; gap: .5rem; margin: 0 0 var(--space-3); font-weight: 700; color: var(--c-leaf); }
+.wl-where::before { content: ""; width: .7rem; height: .7rem; border-radius: 50%; background: var(--c-leaf); }
+.wl-hero h1 { font-size: clamp(2.5rem, 3.6vw + 1rem, 4.6rem); line-height: 1.04; margin: 0 0 var(--space-4); max-width: 15ch; }
+.wl-print { position: relative; margin: 0; justify-self: center; width: min(100%, 500px); padding: 14px 14px 46px; background: #fff;
+  box-shadow: 0 2px 4px rgba(43,29,20,.08), 0 20px 40px rgba(43,29,20,.14); transform: rotate(1.5deg); }
+.wl-crop { display: block; overflow: hidden; aspect-ratio: 4 / 5; }
+.wl-print img { display: block; width: 100%; height: auto; }   /* shown at its own 4:5 crop: no stretch, no shift */
+.wl-print figcaption { position: absolute; left: 18px; bottom: 12px; font-size: .9rem; color: var(--c-muted); }
+.wl-sticky { position: absolute; left: -2.2rem; bottom: 3.4rem; margin: 0; width: 12rem; padding: 1rem 1.1rem; background: var(--c-note);
+  font-family: var(--font-note); font-size: 1.05rem; line-height: 1.35; color: var(--c-text); transform: rotate(-4deg);
+  box-shadow: 0 8px 18px rgba(43,29,20,.16); }
+
+/* Who does what */
+.wl-parts { padding-block: var(--space-6); background: var(--c-surface); border-block: 2px dashed var(--c-border); }
+.wl-parts__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+.wl-part { padding: var(--space-4) var(--space-5); border-radius: var(--radius-lg); }
+.wl-part--you { background: var(--c-accent); }
+.wl-part--us { background: var(--c-leaf); color: #fff; }
+.wl-part h3 { font-size: 1.6rem; margin: 0 0 var(--space-3); }
+.wl-part ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
+.wl-part li { position: relative; padding-left: 2.2rem; font-size: 1.1rem; }
+.wl-part li::before { content: ""; position: absolute; left: 0; top: .1em; width: 1.4rem; height: 1.4rem; border-radius: 50%;
+  border: 2px solid currentColor; opacity: .7; }
+.wl-part--us li::before { opacity: 1; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f6b4f' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / 64% no-repeat; border-color: #fff; }
+
+/* Which one sounds like you */
+.wl-packages { padding-block: var(--space-7) var(--space-6); }
+.wl-rows { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
+.wl-rows li { display: grid; grid-template-columns: 1fr 1.05fr; gap: var(--space-4); align-items: center; padding: var(--space-4);
+  background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius-lg);
+  transition: transform var(--dur-ui) var(--ease-out), box-shadow var(--dur-ui) var(--ease-out); }
+.wl-rows li:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(43,29,20,.10); }
+.wl-rows li.is-common { border: 2px solid var(--c-primary); }
+.wl-say { margin: 0; font-family: var(--font-display); font-style: italic; font-size: clamp(1.25rem, .8vw + 1rem, 1.6rem); line-height: 1.3; }
+.wl-pick { display: grid; grid-template-columns: auto 1fr; gap: .2rem var(--space-3); align-items: baseline; }
+.wl-pick strong { font-size: 1.15rem; }
+.wl-price { justify-self: end; font-family: var(--font-display); font-weight: 700; font-size: 1.9rem; color: var(--c-primary); }
+.wl-price small { font-family: var(--font-body); font-size: 1rem; font-weight: 400; color: var(--c-muted); }
+.wl-incl { grid-column: 1 / -1; color: var(--c-muted); }
+.wl-more { margin: var(--space-4) 0 0; }
+.wl-more a { font-weight: 700; color: var(--c-primary); }
+
+/* Promises + founder's note */
+.wl-promise { padding-block: var(--space-6); background: var(--c-surface-2); }
+.wl-promise__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); align-items: center; }
+.wl-notes { list-style: none; margin: var(--space-4) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+.wl-notes li { padding: 1rem; min-height: 8.5rem; background: var(--c-note); font-family: var(--font-note); font-size: 1.05rem; line-height: 1.35;
+  box-shadow: 0 6px 14px rgba(43,29,20,.12); transform: rotate(-1.5deg); }
+.wl-notes li:nth-child(2) { transform: rotate(1.5deg); background: #ffe2c7; }
+.wl-notes li:nth-child(3) { transform: rotate(-.5deg); background: #dcefd9; }
+.wl-letter { margin: 0; padding: var(--space-5); background: var(--c-surface); border-radius: var(--radius-lg); border-left: 6px solid var(--c-primary); }
+.wl-letter p { margin: 0 0 var(--space-3); font-family: var(--font-display); font-size: clamp(1.25rem, .8vw + 1rem, 1.55rem); line-height: 1.5; }
+.wl-letter figcaption { font-weight: 700; }
+.wl-letter figcaption span { font-weight: 400; color: var(--c-muted); }
+
+/* Filing dates helper */
+.wl-dates { padding-block: var(--space-7) var(--space-6); }
+.wl-fd { border: 2px dashed var(--c-border); box-shadow: none; }
+.wl-fd .fd__item { background: var(--c-accent); }
+.wl-fd .fd__item.is-next { background: var(--c-leaf); }
+.wl-fd .fd__note { background: var(--c-surface-2); border-left-color: var(--c-primary); }
+
+/* Visit */
+.wl-visit { padding-block: var(--space-6) var(--space-7); background: var(--c-surface); border-top: 2px dashed var(--c-border); }
+.wl-visit__grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: var(--space-6); align-items: center; }
+.wl-card { margin: 0; padding: var(--space-4) var(--space-5); background: var(--c-bg); border: 1px solid var(--c-border); border-radius: var(--radius-lg); }
+.wl-card div { display: grid; grid-template-columns: 7rem 1fr; gap: var(--space-3); padding: .7rem 0; border-bottom: 1px dashed var(--c-border); }
+.wl-card div:last-child { border-bottom: 0; }
+.wl-card dt { font-weight: 700; color: var(--c-leaf); }
+.wl-card dd { margin: 0; }
+.wl-card a { color: var(--c-primary); font-weight: 700; }
+
+/* Inner pages in this look */
+.cta-band { background: var(--c-leaf); }
+.eyebrow { color: var(--c-leaf); }
+
+@media (max-width: 1000px) {
+  .wl-notes { grid-template-columns: 1fr; }
+  .wl-notes li { min-height: 0; }
+  .wl-promise__grid { grid-template-columns: 1fr; gap: var(--space-5); }
+}
+@media (max-width: 860px) {
+  .wl-hero { padding-top: var(--space-4); }
+  .wl-hero__grid, .wl-parts__grid, .wl-visit__grid { grid-template-columns: 1fr; gap: var(--space-5); }
+  .wl-hero h1 { font-size: clamp(2.3rem, 9.5vw, 3.2rem); }
+  .wl-print { width: min(100% - 1.5rem, 420px); }
+  .wl-sticky { left: -.6rem; bottom: 3rem; width: 10.5rem; font-size: 1rem; }
+  .wl-part { padding: var(--space-4); }
+  .wl-rows li { grid-template-columns: 1fr; gap: var(--space-3); }
+  .wl-card { padding: var(--space-3) var(--space-4); }
+  .wl-card div { grid-template-columns: 6rem 1fr; }
+}
+
+/* Finish pass 2026-10-10: 44 px tap targets for the pricing link and the visit card's phone / WhatsApp links */
+.wl-more a, .wl-card a { display: inline-flex; align-items: center; min-height: 44px; }
+.wl-card div { align-items: center; }

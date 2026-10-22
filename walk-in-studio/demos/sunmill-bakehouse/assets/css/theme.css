@@ -1,0 +1,86 @@
+/* theme.css — ONLY CSS variables. A site's whole look changes from this file.
+   Tokens {{COLOR_*}} are filled by tools/new_site.py from site.json.
+   Presets: the default (light) below, plus [data-theme="cinematic"] (dark).
+   Switch preset with <html data-theme="cinematic">. */
+
+:root {
+  /* Colour */
+  --c-bg: #fbf4e9;
+  --c-surface: #ffffff;
+  --c-surface-2: #f5e8d3;
+  --c-text: #2b1a10;
+  --c-muted: #6b5242;          /* ≥ 4.5:1 on --c-bg */
+  --c-border: #ead8bf;
+  --c-primary: #8a3b12;
+  --c-primary-ink: #ffffff;    /* text on primary */
+  --c-accent: #f2b544;
+  --c-accent-ink: #2b1a10;
+  --c-focus: #1a5fd0;
+  --c-banner-bg: #2b1a10;
+  --c-banner-ink: #fbfaf7;
+  --c-scrim: rgba(12, 10, 8, .62);
+  --c-whatsapp: #1a8046;       /* darker than brand green: 5:1 with white (finish check 2026-10-10: #1f8f4e was 4.1) */
+
+  /* Type */
+  --font-body: ui-rounded, "SF Pro Rounded", "Arial Rounded MT Bold", "Segoe UI", system-ui, sans-serif;   /* rounded sans (layout DNA) */
+  --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --fw-body: 400;
+  --fw-display: 700;
+  --ls-display: -0.01em;
+  --tt-display: none;
+  --lh-body: 1.6;
+  --lh-display: 1.08;
+  --fs-base: 1.0625rem;
+  --fs-small: .9rem;
+  --fs-lead: clamp(1.1rem, .6vw + 1rem, 1.3rem);
+  --fs-h1: clamp(2.3rem, 4.5vw + 1rem, 4.4rem);
+  --fs-h2: clamp(1.7rem, 2.4vw + 1rem, 2.7rem);
+  --fs-h3: clamp(1.15rem, .5vw + 1rem, 1.35rem);
+  --fs-kinetic: clamp(3.4rem, 11vw, 9rem);
+
+  /* Shape & space */
+  --radius: 16px;
+  --radius-lg: 28px;
+  --radius-btn: 999px;
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: 4rem;
+  --space-7: clamp(4.5rem, 8vw, 7.5rem);
+  --container: 1320px;   /* wider at big screens (round 3, 2026-10-07) */
+  --header-h: 68px;
+  --shadow: 0 1px 2px rgba(0,0,0,.05), 0 8px 24px rgba(0,0,0,.07);
+  --shadow-lift: 0 2px 4px rgba(0,0,0,.06), 0 18px 40px rgba(0,0,0,.12);
+
+  /* Motion scale (QUALITY_HARNESS.md). The ONLY durations and easings any site may use;
+     check_site.py errors on anything else. Ambient infinite loops are the one exception. */
+  --dur-tap: 120ms;        /* taps, focus rings */
+  --dur-ui: 240ms;         /* buttons, menus, cards, header */
+  --dur-reveal: 480ms;     /* things arriving on screen */
+  --dur-scene: 800ms;      /* scene changes, slow image zooms */
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+  --ease-in-out: cubic-bezier(.6, 0, .2, 1);
+  --stagger: 60ms;
+  --reveal-distance: 24px;   /* 12-24px */
+}
+
+/* Sunmill: warm cream, crust brown, butter yellow. */
+
+/* Dark "cinematic" preset (kinetic type, starfield). */
+[data-theme="cinematic"] {
+  --c-bg: #0b0a0d;
+  --c-surface: #15131a;
+  --c-surface-2: #1d1a23;
+  --c-text: #f3eff6;
+  --c-muted: #b9b1c2;
+  --c-border: #2c2833;
+  --c-primary-ink: #0b0a0d;
+  --c-focus: #9cc2ff;
+  --c-banner-bg: #f3eff6;
+  --c-banner-ink: #0b0a0d;
+  --c-scrim: rgba(5, 4, 8, .66);
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.45);
+  --shadow-lift: 0 2px 6px rgba(0,0,0,.5), 0 22px 50px rgba(0,0,0,.6);
+}

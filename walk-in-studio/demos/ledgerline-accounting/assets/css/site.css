@@ -1,0 +1,142 @@
+/* Type (finish pass 2026-10-10): Cabin, a humanist sans in the Gill Sans line, for headings AND body (Gill Sans MT's "1" reads as "I" in dates). Self-hosted (CREDITS.md) */
+@font-face { font-family: "Cabin"; src: url("../fonts/cabin-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Cabin"; src: url("../fonts/cabin-600.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Cabin"; src: url("../fonts/cabin-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+/* Ledgerline Accounting — site-only layout. Calm, lots of white space, one accent. */
+.hero--ledger { padding-block: var(--space-6) var(--space-7); background:
+  radial-gradient(60rem 30rem at 85% -10%, color-mix(in srgb, var(--c-primary) 9%, transparent), transparent 70%); }
+.hero--ledger .hero__grid { display: grid; gap: var(--space-6); grid-template-columns: 1.15fr .85fr; align-items: center; }
+.hero--ledger h1 { max-width: 15ch; }
+.hero--ledger .lead { max-width: 48ch; }
+.btn--ghost { color: var(--c-primary); }
+.trust { display: flex; flex-wrap: wrap; gap: .5rem 1.6rem; margin-top: var(--space-4); padding: 0; list-style: none; color: var(--c-muted); font-size: .95rem; }
+.trust li { display: inline-flex; align-items: center; gap: .45rem; }
+.trust svg { width: 18px; height: 18px; color: var(--c-primary); }
+.year-card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-lift); padding: var(--space-4); }
+.year-card__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--space-3); }
+.year-card__head strong { font-family: var(--font-display); font-size: 1.05rem; }
+.year-card__head span { color: var(--c-muted); font-size: .85rem; }
+.year-card ol { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
+.year-card li { display: grid; grid-template-columns: 104px 1fr; gap: .8rem; align-items: center; padding: .7rem .8rem; border-radius: 10px; background: var(--c-surface-2); font-size: .95rem; }
+.year-card li time { white-space: nowrap; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--c-primary); }
+.year-card li.is-next { background: var(--c-primary); color: var(--c-primary-ink); }
+.year-card li.is-next time { color: inherit; }
+.year-card small { display: block; color: var(--c-muted); margin-top: var(--space-3); font-size: .8rem; }
+.svc { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
+.svc .card { padding: var(--space-5) var(--space-4); }
+.svc .card__icon { width: 40px; height: 40px; border-radius: 10px; background: var(--c-accent); color: var(--c-primary); display: grid; place-items: center; }
+.svc .card__icon svg { width: 22px; height: 22px; }
+.plan__price { color: var(--c-text); }
+.plan__note { color: var(--c-muted); font-size: .9rem; margin: 0; }
+.pricing-note { margin-top: var(--space-4); color: var(--c-muted); font-size: .92rem; }
+/* Filing dates helper */
+.fd { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius-lg); padding: var(--space-5); box-shadow: var(--shadow); }
+.fd__controls { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); margin-bottom: var(--space-4); }
+.fd label { display: block; font-weight: 600; margin-bottom: .35rem; }
+.fd select { width: 100%; font: inherit; min-height: 48px; padding: .6rem .8rem; border: 1.5px solid var(--c-border); border-radius: var(--radius); background: var(--c-bg); color: var(--c-text); }
+.fd__list { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+.fd__item { display: grid; grid-template-columns: 130px 130px 1fr; gap: .4rem 1rem; align-items: baseline; padding: .85rem 1rem; border-radius: var(--radius); background: var(--c-surface-2); }
+.fd__item time { font-weight: 700; font-variant-numeric: tabular-nums; }
+.fd__what { font-weight: 600; color: var(--c-primary); }
+.fd__detail { color: var(--c-muted); font-size: .95rem; }
+.fd__item.is-next { background: var(--c-primary); color: var(--c-primary-ink); }
+.fd__item.is-next .fd__what, .fd__item.is-next .fd__detail { color: inherit; }
+.fd__item.is-past { background: transparent; color: var(--c-muted); }  /* readable, not faded (QUALITY_HARNESS) */
+.fd__item.is-past small { font-weight: 400; }
+.fd__nojs { color: var(--c-muted); }
+.fd.is-ready .fd__nojs { display: none; }
+.fd__note { margin-top: var(--space-4); padding: var(--space-3) var(--space-4); border-left: 3px solid var(--c-primary); background: var(--c-accent); border-radius: 0 var(--radius) var(--radius) 0; font-size: .92rem; }
+.fd__note p { margin: 0 0 .4rem; } .fd__note p:last-child { margin: 0; }
+.team { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+.team .card { text-align: left; }
+.avatar { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--c-accent); color: var(--c-primary); font-weight: 700; margin-bottom: var(--space-3); }
+.fictional { display: inline-block; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--c-muted); border: 1px solid var(--c-border); border-radius: 99px; padding: .1rem .5rem; margin-left: .4rem; vertical-align: middle; }
+.not-list { list-style: none; padding: 0; display: grid; gap: .5rem; }
+.not-list li { padding-left: 1.6rem; position: relative; color: var(--c-muted); }
+.not-list li::before { content: "\2013"; position: absolute; left: .3rem; }
+@media (max-width: 900px) {
+  .hero--ledger .hero__grid { grid-template-columns: 1fr; }
+  .fd__item { grid-template-columns: 1fr; gap: .1rem; }
+  .fd { padding: var(--space-4) var(--space-3); }
+}
+
+/* 2026-10-07 demo quality pass */
+@media (max-width: 600px) {
+  .trust, .year-card li, .fd__detail, .fd__note, .pricing-note, .plan__note, .year-card__head span { font-size: 1rem; }
+}
+
+/* Round 3: "calm trust desk" (business/layout_dna.md) */
+.ll-hero { padding-block: var(--space-6); }
+.ll-hero__grid { display: grid; gap: var(--space-6); grid-template-columns: 1.15fr .85fr; align-items: center; }
+.ll-hero h1 { font-size: clamp(2.4rem, 3.6vw + 1rem, 4.4rem); line-height: 1.02; max-width: 16ch; font-weight: 600; }
+.ll-head { max-width: 46rem; margin-bottom: var(--space-4); }
+.need { position: relative; }
+.need__menu summary { list-style: none; cursor: pointer; }
+.need__menu summary::-webkit-details-marker { display: none; }
+.need__menu summary::after { content: "\25BE"; margin-left: .35rem; font-family: system-ui, sans-serif; }
+.need__menu ul { list-style: none; margin: 0; padding: .4rem; position: absolute; top: 100%; left: 0; z-index: 60; min-width: 18rem;
+  background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); box-shadow: var(--shadow-lift); }
+.need__menu a { display: flex; align-items: center; min-height: 44px; padding: 0 .8rem; border-radius: 8px; text-decoration: none; }
+.need__menu a:hover { background: var(--c-accent); }
+@media (max-width: 860px) { .need__menu ul { position: static; box-shadow: none; border: 0; padding-left: .8rem; } }
+.ll-table-wrap { overflow-x: auto; }
+.ll-packages { width: 100%; border-collapse: collapse; min-width: 640px; background: var(--c-surface); }
+.ll-packages th, .ll-packages td { padding: .9rem 1rem; border-bottom: 1px solid var(--c-border); text-align: left; vertical-align: top; }
+.ll-packages thead th { font-size: 1.25rem; vertical-align: bottom; }
+.ll-packages thead th span { display: block; font-size: 1.6rem; color: var(--c-primary); font-variant-numeric: tabular-nums; }
+.ll-packages thead th small { font-size: 1rem; color: var(--c-muted); }
+.ll-packages thead th em { display: block; font-style: normal; font-size: .95rem; color: var(--c-muted); }
+.ll-packages .is-featured { background: var(--c-accent); }
+.ll-packages tbody td { font-variant-numeric: tabular-nums; }
+.ll-founder { background: var(--c-accent); }
+.ll-founder__grid { display: grid; gap: var(--space-5); grid-template-columns: auto 1fr; align-items: start; max-width: 60rem; }
+.ll-founder__mark { width: 96px; height: 96px; border-radius: 50%; display: grid; place-items: center; background: var(--c-primary); color: #fff; font-size: 1.8rem; font-weight: 600; letter-spacing: .05em; }
+.ll-founder blockquote { margin: 0; }
+.ll-founder blockquote p { font-family: var(--font-quote); font-size: clamp(1.3rem, 1vw + 1rem, 1.7rem); line-height: 1.5; margin: 0 0 var(--space-3); }
+.ll-founder footer { font-weight: 600; }
+.ll-founder footer span { font-weight: 400; color: var(--c-muted); }
+@media (max-width: 860px) { .ll-hero__grid, .ll-founder__grid { grid-template-columns: 1fr; } }
+
+/* Phones: packages as stacked cards, no sideways scrolling (round 3 review) */
+@media (max-width: 760px) {
+  .ll-packages, .ll-packages tbody, .ll-packages tr, .ll-packages td, .ll-packages th { display: block; min-width: 0; }
+  .ll-packages { min-width: 0; background: none; }
+  .ll-packages thead { display: none; }
+  .ll-packages tbody tr { padding: .4rem 0; border-bottom: 1px solid var(--c-border); }
+  .ll-packages tbody th { padding: .5rem 0 .2rem; border: 0; font-weight: 700; }
+  .ll-packages tbody td { display: flex; justify-content: space-between; padding: .25rem 0; border: 0; }
+  .ll-packages tbody td::before { content: attr(data-plan); color: var(--c-muted); }
+}
+
+/* the price row only shows on phones (desktop has the prices in the column heads) */
+.ll-price-row { display: none; }
+@media (max-width: 760px) {
+  .ll-packages tbody tr.ll-price-row { display: block; }
+  .ll-price-row td { font-weight: 700; color: var(--c-primary); }
+}
+
+/* Phones: three short package cards instead of the long comparison (round 6 review) */
+.ll-plan-cards, .ll-plan-more { display: none; }
+@media (max-width: 760px) {
+  .ll-table-wrap { display: none; }
+  .ll-plan-cards { display: grid; gap: var(--space-3); list-style: none; margin: 0; padding: 0; }
+  .ll-plan-cards li { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius, 12px); padding: var(--space-3) var(--space-4); }
+  .ll-plan-cards li.is-featured { background: var(--c-accent); }
+  .ll-plan-cards h3 { display: flex; justify-content: space-between; align-items: baseline; margin: 0 0 .4rem; font-size: 1.2rem; }
+  .ll-plan-cards b { color: var(--c-primary); font-variant-numeric: tabular-nums; }
+  .ll-plan-cards small { font-size: 1rem; font-weight: 400; color: var(--c-muted); }
+  .ll-plan-cards p { margin: 0 0 .3rem; }
+  .ll-plan-more { display: block; margin-top: var(--space-3); }
+}
+
+/* Atmosphere band under the hero (sample photo, 2026-10-07 go-public brief) */
+.ll-band { position: relative; margin: 0; }
+.ll-band img { display: block; width: 100%; height: auto; aspect-ratio: 1920 / 732; object-fit: cover; }
+.ll-band figcaption { position: absolute; right: var(--space-3); bottom: var(--space-3); padding: .2rem .6rem; border-radius: 999px; background: rgba(0,0,0,.6); color: #fff; font-size: .8rem; }
+
+/* Finish pass 2026-10-10: 44 px tap targets on phones (contact list in every look, the phone "compare" link) */
+.contact-list li:has(> div > a) { align-items: center; }
+.contact-list li:has(> div > a) svg { margin-top: 0; }
+.contact-list a { display: inline-flex; align-items: center; min-height: 44px; }
+.ll-plan-more a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+@media (max-width: 600px) { .year-card small { font-size: .9rem; } }   /* the example-year footnote is read, not just glanced at */

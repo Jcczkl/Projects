@@ -1,0 +1,22 @@
+/* carry: the product walks from one section into the next */
+.sig-carry { position: relative; display: grid; overflow-x: clip; } /* clip, not hidden: the product stays sticky */
+.sig-carry > * { grid-area: 1 / 1; }
+.sig-carry__rail { position: relative; z-index: 2; pointer-events: none; }
+.sig-carry__product { position: sticky; top: calc(50vh - var(--sig-product-h, 300px) / 2); display: block;
+  width: var(--sig-product-w, 200px); height: var(--sig-product-h, 300px); margin-left: auto; margin-right: var(--sig-product-x, 8vw);
+  will-change: transform; } /* signature.js moves it along --sig-path (e.g. "1, .5, 1": right, centre, right) */
+.sig-carry__product svg, .sig-carry__product img { width: 100%; height: 100%; display: block; }
+/* real cut-outs (signature_capture.py): one [data-sig-shot] photo per scene; the first shows without JS or when calm */
+.sig-carry__product img { object-fit: contain; }
+[data-sig-shot] ~ [data-sig-shot], .sig-on .is-picking [data-sig-shot]:not(.is-shown) { display: none; }
+.sig-on .is-picking .is-shown { display: block; }
+.sig-carry__scenes { position: relative; z-index: 1; }
+.sig-carry__scene { min-height: 100vh; min-height: 100svh; display: grid; align-items: center; }
+.sig-on .sig-carry__product :is(svg, img) { transform: translateY(calc((var(--sig-p, .5) - .5) * -40px)) rotate(calc((var(--sig-p, .5) - .5) * 26deg));
+  transition: color var(--dur-reveal) var(--ease-out); }
+.sig-carry__product svg { color: var(--sig-cup, var(--sig-accent)); }
+/* a photo scene is a flat picture: it never rolls (carry.js gives it a slow push-in instead; Joseph 2026-10-13) */
+.sig-on [data-sig-carry=push] .sig-carry__product :is(svg,img), .sig-on .sig-carry__product .sig-photo { transform: none; transition: opacity var(--dur-reveal) var(--ease-out); }
+
+/* part: a statement moves aside for the product */
+.sig-word { display: inline-block; will-change: transform; }

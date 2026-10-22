@@ -1,0 +1,8 @@
+{
+  "name": "Clean planner",
+  "title": "Marblewick Learning Hub | Small-group tuition in Bishan (style D: Clean planner)",
+  "description": "Demo website, style D: a clean, planner-like look for a tuition centre in Bishan: the term's timetable is the first screen, times in a mono face.",
+  "preload": [
+    "ibm-plex-mono-400.woff2"
+  ]
+}

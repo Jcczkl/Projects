@@ -1,0 +1,105 @@
+/* Style C - Fine-dining calm (Cinderlane Pizza demo): stone, charcoal, wine; Didone serif + small-caps sans; printed menu card. */
+/* Display face (template polish 2026-10-10): Bodoni Moda, a true Didone with its own italic, for the menu-card voice. Self-hosted, OFL. */
+@font-face { font-family: "Bodoni Moda"; src: url("../../assets/fonts/bodoni-moda-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Bodoni Moda"; src: url("../../assets/fonts/bodoni-moda-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+:root {
+  --c-bg: #f4f1ec;
+  --c-surface: #fbfaf7;
+  --c-surface-2: #ebe6de;
+  --c-text: #26231f;
+  --c-muted: #5c564e;
+  --c-border: #d6cec2;
+  --c-primary: #6b2a2a;
+  --c-primary-ink: #ffffff;
+  --c-accent: #8a7a5c;
+  --c-accent-ink: #ffffff;
+  --font-display: "Bodoni Moda", "Bodoni MT", "Bodoni 72", Didot, "Didot LT STD", "Libre Bodoni", "Times New Roman", serif;
+  --font-body: Optima, Candara, "Segoe UI", "Gill Sans", system-ui, sans-serif;
+  --fw-display: 400;
+  --radius: 0px;
+  --radius-lg: 0px;
+  --radius-btn: 0px;
+  --c-header-bg: #f4f1ec;
+  --fc-label-ink: #6e6046;   /* the brass, darkened for text: 5.4:1 on stone, 4.9:1 on the menu band */   /* base.css paints the header bar (::before) with this */
+}
+body { background: var(--c-bg); color: var(--c-text); }
+.site-header, .site-header .brand, .site-header .nav__link { color: var(--c-text); }
+.site-header::before { border-bottom-color: var(--c-border); }
+.site-header .brand__mark { display: none; }
+.site-header .brand span { font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; letter-spacing: .06em; }
+.nav__link { font-weight: 400; letter-spacing: .14em; text-transform: uppercase; font-size: .9rem; }
+.nav__cta { background: transparent; color: var(--c-primary); border: 1px solid var(--c-primary); border-radius: 0; letter-spacing: .1em; text-transform: uppercase; font-size: .9rem; font-weight: 400; }
+.nav__cta:hover { background: var(--c-primary); color: #fff; }
+@media (max-width: 860px) { .js .site-header .nav { background: var(--c-bg); } }
+
+.fc-label { margin: 0 0 var(--space-3); font-family: var(--font-body); font-size: 1rem; letter-spacing: .26em; text-transform: uppercase; color: var(--fc-label-ink); }
+.fc-btn { background: var(--c-primary); color: #fff; border-radius: 0; letter-spacing: .12em; text-transform: uppercase; font-weight: 400; font-size: .95rem;
+  padding: .95rem 1.6rem; transition: background var(--dur-ui) var(--ease-out); }
+.fc-btn:hover { background: #4f1d1d; }
+.fc-link { color: var(--c-primary); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .3em; letter-spacing: .08em;
+  transition: color var(--dur-ui) var(--ease-out); }
+.fc-link:hover { color: var(--c-text); }
+.fc-small { font-size: 1rem; color: var(--c-muted); }
+
+/* Hero: quiet type, then a letterbox through the pizza */
+.fc-hero { padding-block: clamp(2.5rem, 7vh, 5rem) var(--space-6); text-align: center; }
+.fc-hero__inner { max-width: 54rem; }
+.fc-hero h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(3rem, 4.6vw + 1rem, 6rem); line-height: 1.02; margin: 0 0 var(--space-4); letter-spacing: -.01em; }
+.fc-hero h1 em { display: block; font-style: italic; color: var(--c-primary); }
+.fc-lead { font-size: var(--fs-lead); line-height: 1.8; margin: 0 auto var(--space-4); max-width: 38rem; }
+.fc-actions { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: var(--space-3) var(--space-5); }
+.fc-letterbox { margin: var(--space-6) auto 0; max-width: 1100px; }
+.fc-letterbox img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; object-position: 50% 52%; }
+.fc-letterbox figcaption, .fc-frame figcaption { margin-top: .6rem; font-size: 1rem; color: var(--c-muted); letter-spacing: .04em; font-style: italic; font-family: var(--font-display); }
+
+/* The dough */
+.fc-dough { padding-block: var(--space-6) var(--space-7); }
+.fc-dough__grid { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 34rem); justify-content: center; gap: var(--space-6); align-items: center; }
+.fc-frame { margin: 0; padding: 14px; background: var(--c-surface); border: 1px solid var(--c-border); }
+.fc-frame img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 40% 50%; }
+.fc-dough h2, .fc-find h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.2rem, 2.4vw + 1rem, 3.4rem); line-height: 1.05; margin: 0 0 var(--space-4); }
+.fc-dough__text p:not(.fc-label) { font-size: 1.12rem; line-height: 1.85; }
+.fc-drop::first-letter { float: left; font-family: var(--font-display); font-size: 4.4rem; line-height: .8; padding: .35rem .6rem 0 0; color: var(--c-primary); }
+
+/* The printed menu card */
+.fc-menu { padding-block: var(--space-7); background: var(--c-surface-2); }
+.fc-card { max-width: 980px; margin-inline: auto; padding: clamp(2rem, 5vw, 4.5rem); background: var(--c-surface); text-align: center;
+  border: 1px solid var(--c-border); outline: 1px solid var(--c-border); outline-offset: -14px; }
+.fc-card h2 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: clamp(2.4rem, 2vw + 1.4rem, 3.4rem); margin: 0; }
+.fc-card__note { color: var(--c-muted); font-size: 1rem; letter-spacing: .04em; margin: .4rem 0 0; }
+.fc-dishes { list-style: none; margin: var(--space-5) 0; padding: var(--space-5) 0 0; border-top: 3px double var(--c-accent);
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5) var(--space-6); }
+.fc-dishes h3, .fc-courses h3 { font-family: var(--font-body); font-weight: 400; font-size: 1.05rem; letter-spacing: .2em; text-transform: uppercase; margin: 0 0 .35rem; }
+.fc-dishes p, .fc-courses p { margin: 0 auto .35rem; max-width: 22rem; font-family: var(--font-display); font-style: italic; font-size: 1.15rem; color: var(--c-muted); }
+.fc-dishes span, .fc-courses span { font-family: var(--font-display); font-size: 1.3rem; color: var(--c-primary); }
+.fc-card abbr { text-decoration: none; font-size: .8rem; letter-spacing: 0; color: var(--fc-label-ink); border: 1px solid var(--fc-label-ink); border-radius: 50%; padding: .05rem .32rem; vertical-align: middle; }
+.fc-courses { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5) var(--space-6); padding: var(--space-5) 0; border-block: 3px double var(--c-accent); margin-bottom: var(--space-4); }
+.fc-courses h2 { font-size: 1.9rem; margin-bottom: var(--space-3); }
+
+/* Reservations */
+.fc-find { padding-block: var(--space-7); text-align: center; }
+.fc-find__inner { max-width: 40rem; }
+.fc-find__inner > p { font-size: 1.12rem; line-height: 1.8; }
+.fc-hours { margin: var(--space-5) 0 0; border-top: 1px solid var(--c-border); }
+.fc-hours div { display: flex; justify-content: space-between; gap: 1rem; padding: .8rem 0; border-bottom: 1px solid var(--c-border); }
+.fc-hours dt { letter-spacing: .14em; text-transform: uppercase; font-size: .95rem; }
+.fc-hours dd { margin: 0; font-family: var(--font-display); font-size: 1.2rem; }
+.fc-addr { font-style: normal; font-family: var(--font-display); font-size: 1.35rem; line-height: 1.6; margin: var(--space-5) 0 var(--space-3); }
+.fc-notes { margin-top: var(--space-6); padding-top: var(--space-5); border-top: 3px double var(--c-accent); text-align: left; }
+.fc-notes h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.8rem; text-align: center; margin: 0 0 var(--space-4); }
+.fc-notes p { margin: 0 0 var(--space-3); line-height: 1.8; }
+.fc-notes b { font-weight: 400; letter-spacing: .14em; text-transform: uppercase; font-size: .95rem; color: var(--c-primary); margin-right: .3rem; }
+
+@media (max-width: 860px) {
+  .fc-letterbox img { aspect-ratio: 4 / 3; }
+  .fc-dough__grid { grid-template-columns: 1fr; gap: var(--space-5); }
+  .fc-frame { max-width: 340px; margin-inline: auto; }
+  .fc-dishes, .fc-courses { grid-template-columns: 1fr; gap: var(--space-4); }
+  .fc-card { outline-offset: -8px; }
+}
+@media (max-width: 600px) {
+  .fc-btn { width: 100%; }
+  .fc-actions { flex-direction: column; }
+}
+/* Tap targets (template polish 2026-10-10): the stand-alone text links get a 44 px tall hit area; links inside a sentence stay inline. */
+.fc-actions .fc-link, .fc-find__inner > p > .fc-link { display: inline-flex; align-items: center; min-height: 44px; }

@@ -1,0 +1,157 @@
+<!doctype html>
+<html data-style="c" lang="en-SG" data-motion-switch>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo: Pricing — Walk-In Studio, a side project</title>
+<meta name="description" content="Transparent monthly accounting packages for SMEs: Dormant, Starter and Growing SME, plus add-ons. Demo figures for illustration.">
+<meta name="theme-color" content="#0e5a52">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/css/theme.css">
+<link rel="stylesheet" href="../../assets/css/base.css">
+<script>(function(h){h.classList.add('js');if(h.hasAttribute('data-motion-switch')){var m='standard';try{m=localStorage.getItem('ws-motion')||m}catch(e){}h.setAttribute('data-motion',m)}if(h.getAttribute('data-motion')!=='smooth'){var s=function(e){if(e.viewTransition)e.viewTransition.skipTransition()};addEventListener('pageswap',s);addEventListener('pagereveal',s)}})(document.documentElement)</script>
+<script src="../../assets/js/site.js" defer></script>
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="preload" href="../../assets/fonts/manrope-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<style>.museum-back{position:fixed;left:12px;bottom:12px;z-index:2147483000;display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:999px;background:#14201b;color:#f4f1ea;font:600 13px/1.1 system-ui,-apple-system,'Segoe UI',sans-serif;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.28)}.museum-back:hover{background:#2f5d50;color:#fff}.museum-back:focus-visible{outline:3px solid #85bda8;outline-offset:2px}.demo-note{padding:14px 16px;border:1px dashed currentColor;border-radius:10px;opacity:.8}.demo-toast{position:fixed;left:50%;bottom:64px;transform:translateX(-50%);z-index:2147483001;max-width:min(92vw,420px);padding:12px 16px;border-radius:12px;background:#14201b;color:#f4f1ea;font:500 14px/1.4 system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.3)}[data-demo-inert]{cursor:pointer}@media print{.museum-back{display:none}}</style>
+</head>
+<body>
+<a class="museum-back" href="../../../../../#walk-in-studio">&larr; Back to the museum</a>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="demo-top" data-demo-top>
+<div class="site-banner" role="note"><a class="site-banner__back" href="../../../../templates/">&larr; All demos</a><strong>Demo website</strong> &mdash; a made-up shop, from Walk-In Studio, a side project. Photos are samples; contact links and forms are removed in this copy.</div>
+<nav class="demo-choices" aria-label="Choices for this demo" data-choices><div class="demo-choices__inner"><a class="demo-choices__back" href="../../../../templates/">&larr;<span class="demo-choices__back-text"> All demos</span></a><span class="demo-choices__tag">Demo</span><div class="demo-choices__styles" id="demo-styles"><p class="demo-choices__label"><strong>4 styles</strong> &mdash; see them all</p><ul class="demo-choices__list"><li><a href="../../"><img src="../thumbs/a.webp" width="120" height="75" alt="" loading="lazy"><span class="demo-choices__name"><b>A</b> Calm &amp; credible</span></a></li><li><a href="../b/"><img src="../thumbs/b.webp" width="120" height="75" alt="" loading="lazy"><span class="demo-choices__name"><b>B</b> Global</span></a></li><li><a href="../c/" aria-current="page"><img src="../thumbs/c.webp" width="120" height="75" alt="" loading="lazy"><span class="demo-choices__name"><b>C</b> Modern fintech-light</span><em>Showing</em></a></li><li><a href="../d/"><img src="../thumbs/d.webp" width="120" height="75" alt="" loading="lazy"><span class="demo-choices__name"><b>D</b> Warm local partner</span></a></li></ul></div><button class="demo-choices__peek" type="button" aria-expanded="false" aria-controls="demo-styles"><span class="demo-choices__peek-text">See the styles </span><span class="demo-choices__peek-count">4 styles </span>&#9662;</button><div class="demo-choices__motion"><p class="demo-choices__label"><strong>Motion</strong> &mdash; calm or gentle</p><span class="motion-switch" role="group" aria-label="Motion"><span>Motion:</span><button type="button" data-motion-set="standard" aria-pressed="true">Standard</button><button type="button" data-motion-set="smooth" aria-pressed="false">Smooth</button></span><button class="demo-choices__toggle" type="button" data-motion-toggle><span class="demo-choices__toggle-label">Motion:</span><span data-motion-now>Standard</span></button></div></div></nav>
+</div><!-- /demo-top -->
+<div class="scroll-progress" aria-hidden="true"></div>
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="./">
+      <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="var(--c-primary)"/><text x="20" y="27" text-anchor="middle" font-size="19" font-weight="700" fill="var(--c-primary-ink)" font-family="Georgia, serif">L</text></svg>
+      <span>Ledgerline Accounting</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle__bars"></span><span class="visually-hidden">Menu</span></button>
+    <nav id="site-nav" class="nav" aria-label="Main">
+      <ul class="nav__list">
+        <li class="need">
+          <details class="need__menu"><summary class="nav__link">I need&hellip;</summary>
+            <ul>
+              <li><a href="services.html">to start a company&rsquo;s books</a></li>
+              <li><a href="./#filing-dates">to catch up on GST or tax dates</a></li>
+              <li><a href="pricing.html">monthly bookkeeping</a></li>
+              <li><a href="services.html">my corporate tax filed</a></li>
+            </ul>
+          </details>
+        </li>
+        <li><a class="nav__link" href="pricing.html">Pricing</a></li>
+        <li><a class="nav__link" href="about.html">About</a></li>
+        <li><a class="btn nav__cta" href="contact.html">Free consultation</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">Pricing</p>
+      <h1>Know the cost before you sign.</h1>
+      <p class="lead">Monthly packages, billed quarterly. No set-up fee for companies that switch with clean records. <strong>Demo figures, for illustration only.</strong></p>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <div class="pricing" data-reveal-group>
+        <div class="plan">
+          <h2 class="plan__name">Dormant</h2>
+          <p class="plan__note">Registered but not trading</p>
+          <p class="plan__price">$40<small>/month</small></p>
+          <ul><li>Annual unaudited accounts</li><li>Form C-S or dormant company filing</li><li>ECI waiver check</li><li>Email support</li></ul>
+          <a class="btn btn--ghost" href="contact.html">Ask about Dormant</a>
+        </div>
+        <div class="plan plan--featured">
+          <span class="plan__tag">Typical small company</span>
+          <h2 class="plan__name">Starter</h2>
+          <p class="plan__note">Up to 40 transactions a month</p>
+          <p class="plan__price">$180<small>/month</small></p>
+          <ul><li>Monthly bookkeeping and reconciliations</li><li>Quarterly management report</li><li>ECI and Form C-S / C</li><li>GST returns, if registered</li><li>Annual unaudited accounts</li></ul>
+          <a class="btn" href="contact.html">Book a consultation</a>
+        </div>
+        <div class="plan">
+          <h2 class="plan__name">Growing SME</h2>
+          <p class="plan__note">Up to 150 transactions a month</p>
+          <p class="plan__price">$420<small>/month</small></p>
+          <ul><li>Everything in Starter</li><li>Payroll for up to 10 staff</li><li>Monthly management report</li><li>Quarterly review call</li></ul>
+          <a class="btn btn--ghost" href="contact.html">Ask about Growing SME</a>
+        </div>
+      </div>
+
+      <div class="grid grid--2" style="margin-top:var(--space-6)">
+        <div data-reveal>
+          <h2 style="font-size:var(--fs-h3)">Add-ons</h2>
+          <table class="price-list">
+            <caption class="visually-hidden">Add-on prices</caption>
+            <tbody>
+              <tr><th scope="row">Payroll (Starter), per employee</th><td>$15/month</td></tr>
+              <tr><th scope="row">GST registration</th><td>$250 one-off</td></tr>
+              <tr><th scope="row">Catch-up bookkeeping, per month of records</th><td>from $120</td></tr>
+              <tr><th scope="row">Extra transactions, per block of 20</th><td>$40/month</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div data-reveal>
+          <h2 style="font-size:var(--fs-h3)">How billing works</h2>
+          <ul class="not-list">
+            <li>Quarterly invoice in advance; e-wallet or bank transfer</li>
+            <li>Change package any quarter as you grow</li>
+            <li>Leave with 1 month&rsquo;s notice; we hand over your records</li>
+            <li>Government fees and penalties are not included</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <div class="cta-band" data-reveal="scale">
+        <div><h2>Which package fits?</h2><p>Send us your rough monthly volume and we&rsquo;ll tell you.</p></div>
+        <a class="btn btn--light" href="contact.html">Book a free consultation</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div>
+        <p class="brand">Ledgerline Accounting</p>
+        <p class="muted">Bookkeeping, GST and corporate tax for SMEs</p>
+      </div>
+      <div>
+        <h2>Visit</h2>
+        <address style="font-style:normal">123 Demo Street</address>
+        <p class="muted">Mon–Fri 9am–6pm</p>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul>
+          <li><span role="button" tabindex="0" data-demo-inert>(demo number)</span></li>
+          <li><span role="button" tabindex="0" data-demo-inert>WhatsApp</span></li>
+          <li><span role="button" tabindex="0" data-demo-inert>(demo email)</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__base">
+      <span>&copy; <span data-year>2026</span> Ledgerline Accounting</span>
+      <span>Privacy notice</span>
+      <span>Website by Walk-In Studio</span>
+    </div>
+  </div>
+</footer>
+
+<script>(function(){var t,box;function show(){if(!box){box=document.createElement('div');box.className='demo-toast';box.setAttribute('role','status');document.body.appendChild(box)}box.textContent='Demo shop, not real: on a real site this button would open a chat or call.';box.hidden=false;clearTimeout(t);t=setTimeout(function(){box.hidden=true},3200)}document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-demo-inert]');if(b){e.preventDefault();show()}});document.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('[data-demo-inert]')){e.preventDefault();show()}});addEventListener('pagereveal',function(e){var v=e.viewTransition,q=function(){};if(v){v.ready.catch(q);v.finished.catch(q);v.updateCallbackDone.catch(q)}})})()</script>
+</body>
+</html>

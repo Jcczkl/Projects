@@ -1,0 +1,148 @@
+/* Style B - Global (Ledgerline Accounting demo): navy, gold rules, ivory paper; serif display; the route globe.
+   Loaded after the demo's CSS; tokens from the template scale only. */
+@import url("../../assets/css/route-globe.css");
+
+/* Display face (finish pass 2026-10-10): Bodoni Moda, a high-contrast Didone for the navy-and-gold look; self-hosted, OFL (CREDITS.md) */
+@font-face { font-family: "Bodoni Moda"; src: url("../../assets/fonts/bodoni-moda-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Bodoni Moda"; src: url("../../assets/fonts/bodoni-moda-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+:root {
+  --c-bg: #f6f3ea;
+  --c-surface: #fffdf7;
+  --c-surface-2: #ece6d6;
+  --c-text: #0f1a33;
+  --c-muted: #4a5168;
+  --c-border: #d8cfb8;
+  --c-primary: #13214a;
+  --c-primary-ink: #fbf7ea;
+  --c-accent: #ece3c8;
+  --c-accent-ink: #13214a;
+  --c-gold: #c9a14a;
+  --c-navy: #0c1633;
+  --c-header-bg: #0c1633;
+  --font-display: "Bodoni Moda", "Bodoni MT", Didot, "Book Antiqua", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-body: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --fw-display: 400;
+  --ls-display: -0.01em;
+  --radius: 4px;
+  --radius-lg: 6px;
+  --radius-btn: 2px;
+}
+
+/* Header: navy bar, ivory links, gold underline */
+.site-header .brand, .site-header .nav__link { color: var(--c-primary-ink); }
+.site-header .brand__mark rect { fill: var(--c-gold); }
+.site-header .brand__mark text { fill: var(--c-navy); }
+.nav__link::after { background: var(--c-gold); }
+.site-header .nav__cta { --btn-bg: var(--c-gold); --btn-ink: var(--c-navy); }
+.nav-toggle { color: var(--c-primary-ink); }
+.need__menu ul a { color: var(--c-text); }
+@media (max-width: 860px) {
+  .js .site-header .nav { background: var(--c-navy); border-bottom-color: #1f2c55; }
+  .need__menu ul { background: transparent; }
+  .need__menu ul a { color: var(--c-primary-ink); }
+  .need__menu a:hover { background: rgba(255,255,255,.08); }
+}
+
+.btn { font-family: var(--font-body); letter-spacing: .02em; }
+.gb-btn { --btn-bg: var(--c-gold); --btn-ink: var(--c-navy); }
+.gb-btn--ghost { color: var(--c-primary-ink); border-color: rgba(251,247,234,.6); }
+
+.gb-eyebrow { margin: 0 0 var(--space-2); font-size: .82rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #7a5c1c; }
+.gb-head { max-width: 46rem; margin-bottom: var(--space-5); padding-top: var(--space-3); border-top: 1px solid var(--c-gold); }
+.gb-head h2, .gb-year__head h2, .gb-consult h2 { font-size: clamp(2rem, 2.6vw + 1rem, 3.3rem); line-height: 1.08; margin: 0 0 var(--space-3); }
+.gb-sub { color: var(--c-muted); font-size: var(--fs-lead); margin: 0; }
+.gb-more { margin: var(--space-4) 0 0; }
+.gb-more a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; color: var(--c-primary); }
+
+/* Hero: navy band, words left, live globe right */
+.gb-hero { background: radial-gradient(52rem 34rem at 78% 46%, #1b2a5c 0%, var(--c-navy) 70%); color: var(--c-primary-ink); }
+.gb-hero__grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: var(--space-5); align-items: center; padding-block: var(--space-5) var(--space-6); }
+.gb-kicker { margin: 0 0 var(--space-3); font-size: .9rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--c-gold); }
+.gb-hero h1 { font-size: clamp(2.5rem, 3.8vw + 1rem, 4.9rem); line-height: 1.02; margin: 0 0 var(--space-4); max-width: 14ch; color: #fffaf0; }
+.gb-hero h1 em { display: block; font-style: italic; color: var(--c-gold); }
+.gb-lead { font-size: var(--fs-lead); max-width: 34rem; margin: 0 0 var(--space-4); color: rgba(251,247,234,.9); }
+.gb-hero__globe { justify-self: center; width: min(100%, 560px); }
+.gb-hero__globe .rg { max-width: 560px; }
+.gb-hero__globe .rg-hint { color: var(--c-gold); opacity: .8; }
+/* Only the lit route's name and Singapore show: faint back names read as ghosts on the gold land (round 1 review).
+   The component only sets display/opacity inline, never visibility. Measured 100 s at 390 + 1920: no name crosses the rim. */
+.gb-hero .rg-label:not(.is-live) { visibility: hidden; }
+.gb-globe-note { margin: var(--space-2) 0 0; text-align: center; font-size: .9rem; color: rgba(251,247,234,.78); }
+
+/* Handled here: four ruled columns */
+.gb-handled { padding-block: var(--space-7) var(--space-6); }
+.gb-cols { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); }
+.gb-cols li { padding: var(--space-2) var(--space-4) var(--space-3); border-left: 1px solid var(--c-border); }
+.gb-cols li:first-child { border-left: 0; padding-left: 0; }
+.gb-num { display: block; font-family: var(--font-display); font-size: 2.6rem; line-height: 1; color: #9a7628; margin-bottom: var(--space-3); }   /* deep gold: 3.8:1 on the paper (AA large) */
+.gb-cols h3 { font-size: 1.45rem; margin: 0 0 var(--space-2); }
+.gb-cols p { margin: 0; color: var(--c-muted); }
+
+/* Example year: gold timeline on navy */
+.gb-year { background: var(--c-navy); color: var(--c-primary-ink); padding-block: var(--space-6); }
+.gb-year .gb-eyebrow { color: var(--c-gold); }
+.gb-year h2 { color: #fffaf0; }
+.gb-line { list-style: none; margin: var(--space-5) 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4);
+  position: relative; }
+.gb-line::before { content: ""; position: absolute; left: 0; right: 0; top: 9px; height: 1px; background: var(--c-gold); opacity: .7; }
+.gb-line li { position: relative; padding-top: var(--space-5); }
+.gb-line li::before { content: ""; position: absolute; left: 0; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--c-gold);
+  box-shadow: 0 0 0 5px var(--c-navy); }
+.gb-line time { display: block; font-family: var(--font-display); font-size: clamp(1.6rem, 1.2vw + 1rem, 2.2rem); line-height: 1.1; color: #fffaf0;
+  font-variant-numeric: lining-nums; margin-bottom: .4rem; }
+.gb-line span { color: rgba(251,247,234,.86); }
+.gb-year__note { margin: var(--space-5) 0 0; color: rgba(251,247,234,.8); }
+.gb-year__note a { color: var(--c-gold); font-weight: 600; }
+
+/* Packages: three columns under gold rules */
+.gb-packages { padding-block: var(--space-7) var(--space-5); }
+.gb-plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); align-items: stretch; }
+.gb-plan { background: var(--c-surface); border: 1px solid var(--c-border); border-top: 3px solid var(--c-primary); padding: var(--space-4); }
+.gb-plan--featured { border-top-color: var(--c-gold); box-shadow: 0 18px 40px rgba(12,22,51,.10); }
+.gb-tag { margin: 0 0 var(--space-2); font-size: .82rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #7a5c1c; }
+.gb-plan h3 { font-size: 1.7rem; margin: 0 0 var(--space-2); }
+.gb-price { font-family: var(--font-display); font-size: 2.8rem; line-height: 1; margin: 0 0 var(--space-2); color: var(--c-primary); }
+.gb-price small { font-family: var(--font-body); font-size: 1rem; color: var(--c-muted); margin-left: .2rem; }
+.gb-who { color: var(--c-muted); margin: 0 0 var(--space-3); }
+.gb-plan ul { list-style: none; margin: 0; padding: var(--space-3) 0 0; border-top: 1px solid var(--c-border); display: grid; gap: .5rem; }
+.gb-plan li { position: relative; padding-left: 1.3rem; }
+.gb-plan li::before { content: ""; position: absolute; left: 0; top: .6em; width: 7px; height: 7px; background: var(--c-gold); transform: rotate(45deg); }
+
+/* Filing dates helper, in this option's paper */
+.gb-dates { padding-block: var(--space-6) var(--space-7); }
+.gb-fd { border-radius: var(--radius-lg); border-top: 3px solid var(--c-gold); box-shadow: none; }
+.gb-fd .fd__note { background: var(--c-surface-2); border-left-color: var(--c-gold); }
+.gb-fd .fd__what { color: var(--c-primary); }
+
+/* Consult band */
+.gb-consult { background: var(--c-navy); color: var(--c-primary-ink); padding-block: var(--space-6); }
+.gb-consult__grid { display: grid; grid-template-columns: 1fr auto; gap: var(--space-5); align-items: center; }
+.gb-consult h2 { color: #fffaf0; max-width: 22ch; }
+.gb-consult p { margin: 0; color: rgba(251,247,234,.86); font-size: var(--fs-lead); }
+
+/* Inner pages in this look */
+.cta-band { background: var(--c-navy); border-top: 3px solid var(--c-gold); }
+.cta-band .btn--light { --btn-bg: var(--c-gold); --btn-ink: var(--c-navy); }
+.eyebrow { color: #7a5c1c; }
+
+@media (max-width: 1100px) {
+  .gb-cols { grid-template-columns: repeat(2, 1fr); row-gap: var(--space-5); }
+  .gb-cols li:nth-child(3) { border-left: 0; padding-left: 0; }
+}
+@media (max-width: 860px) {
+  .gb-hero__grid { grid-template-columns: 1fr; padding-block: var(--space-4) var(--space-5); gap: var(--space-4); }
+  .gb-hero h1 { font-size: clamp(2.3rem, 9vw, 3.2rem); }
+  .gb-kicker { font-size: 1rem; letter-spacing: .04em; text-transform: none; }
+  .gb-globe-note { font-size: 1rem; }
+  .gb-plans { grid-template-columns: 1fr; }
+  .gb-line { grid-template-columns: 1fr; gap: var(--space-3); padding-left: var(--space-5); }
+  .gb-line::before { left: 7px; right: auto; top: 0; bottom: 0; width: 1px; height: auto; }
+  .gb-line li { padding-top: 0; }
+  .gb-line li::before { left: calc(-1 * var(--space-5)); top: .45rem; }
+  .gb-consult__grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .gb-cols { grid-template-columns: 1fr; }
+  .gb-cols li, .gb-cols li:first-child, .gb-cols li:nth-child(3) { border-left: 0; padding: var(--space-3) 0 0; border-top: 1px solid var(--c-border); }
+  .gb-num { font-size: 2rem; margin-bottom: var(--space-2); }
+}

@@ -1,0 +1,221 @@
+<!doctype html>
+<html data-style="d" lang="en-SG" data-motion-switch>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo: Ledgerline Accounting — Walk-In Studio, a side project</title>
+<meta name="description" content="Demo website, style D: a warm, plain-words look for an owner-run accounting practice in Ubi. Who does what, packages in plain words with prices, a deadlines helper and a free consultation.">
+<meta name="theme-color" content="#0e5a52">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/css/theme.css">
+<link rel="stylesheet" href="../../assets/css/base.css">
+<script>(function(h){h.classList.add('js');if(h.hasAttribute('data-motion-switch')){var m='standard';try{m=localStorage.getItem('ws-motion')||m}catch(e){}h.setAttribute('data-motion',m)}if(h.getAttribute('data-motion')!=='smooth'){var s=function(e){if(e.viewTransition)e.viewTransition.skipTransition()};addEventListener('pageswap',s);addEventListener('pagereveal',s)}})(document.documentElement)</script>
+<script src="../../assets/js/site.js" defer></script>
+<link rel="stylesheet" href="../../assets/css/site.css">
+<script src="../../assets/js/filing-dates.js" defer></script>
+<link rel="preload" href="../../assets/fonts/fraunces-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<style>.museum-back{position:fixed;left:12px;bottom:12px;z-index:2147483000;display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:999px;background:#14201b;color:#f4f1ea;font:600 13px/1.1 system-ui,-apple-system,'Segoe UI',sans-serif;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.28)}.museum-back:hover{background:#2f5d50;color:#fff}.museum-back:focus-visible{outline:3px solid #85bda8;outline-offset:2px}.demo-note{padding:14px 16px;border:1px dashed currentColor;border-radius:10px;opacity:.8}.demo-toast{position:fixed;left:50%;bottom:64px;transform:translateX(-50%);z-index:2147483001;max-width:min(92vw,420px);padding:12px 16px;border-radius:12px;background:#14201b;color:#f4f1ea;font:500 14px/1.4 system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.3)}[data-demo-inert]{cursor:pointer}@media print{.museum-back{display:none}}</style>
+</head>
+<body>
+<a class="museum-back" href="../../../../../#walk-in-studio">&larr; Back to the museum</a>
+<div class="demo-top" data-demo-top>
+<div class="site-banner" role="note"><a class="site-banner__back" href="../../../../templates/">&larr; All demos</a><strong>Demo website</strong> &mdash; a made-up shop, from Walk-In Studio, a side project. Photos are samples; contact links and forms are removed in this copy.</div>
+<nav class="demo-choices" aria-label="Choices for this demo" data-choices><div class="demo-choices__inner"><a class="demo-choices__back" href="../../../../templates/">&larr;<span class="demo-choices__back-text"> All demos</span></a><span class="demo-choices__tag">Demo</span><div class="demo-choices__styles" id="demo-styles"><p class="demo-choices__label"><strong>4 styles</strong> &mdash; see them all</p><ul class="demo-choices__list"><li><a href="../../"><img src="../thumbs/a.webp" width="120" height="75" alt="" loading="lazy"><span class="demo-choices__name"><b>A</b> Calm &amp; credible</span></a></li><li><a href="../b/"><img src="../thumbs/b.webp" width="120" height="75" alt="" loading="lazy"><span class="demo-choices__name"><b>B</b> Global</span></a></li><li><a href="../c/"><img src="../thumbs/c.webp" width="120" height="75" alt="" loading="lazy"><span class="demo-choices__name"><b>C</b> Modern fintech-light</span></a></li><li><a href="../d/" aria-current="page"><img src="../thumbs/d.webp" width="120" height="75" alt="" loading="lazy"><span class="demo-choices__name"><b>D</b> Warm local partner</span><em>Showing</em></a></li></ul></div><button class="demo-choices__peek" type="button" aria-expanded="false" aria-controls="demo-styles"><span class="demo-choices__peek-text">See the styles </span><span class="demo-choices__peek-count">4 styles </span>&#9662;</button><div class="demo-choices__motion"><p class="demo-choices__label"><strong>Motion</strong> &mdash; calm or gentle</p><span class="motion-switch" role="group" aria-label="Motion"><span>Motion:</span><button type="button" data-motion-set="standard" aria-pressed="true">Standard</button><button type="button" data-motion-set="smooth" aria-pressed="false">Smooth</button></span><button class="demo-choices__toggle" type="button" data-motion-toggle><span class="demo-choices__toggle-label">Motion:</span><span data-motion-now>Standard</span></button></div></div></nav>
+</div><!-- /demo-top -->
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="./">
+      <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="var(--c-primary)"/><text x="20" y="27" text-anchor="middle" font-size="19" font-weight="700" fill="var(--c-primary-ink)" font-family="Georgia, serif">L</text></svg>
+      <span>Ledgerline Accounting</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle__bars"></span><span class="visually-hidden">Menu</span></button>
+    <nav id="site-nav" class="nav" aria-label="Main">
+      <ul class="nav__list">
+        <li class="need">
+          <details class="need__menu"><summary class="nav__link">I need&hellip;</summary>
+            <ul>
+              <li><a href="services.html">to start a company&rsquo;s books</a></li>
+              <li><a href="./#filing-dates">to catch up on GST or tax dates</a></li>
+              <li><a href="pricing.html">monthly bookkeeping</a></li>
+              <li><a href="services.html">my corporate tax filed</a></li>
+            </ul>
+          </details>
+        </li>
+        <li><a class="nav__link" href="pricing.html">Pricing</a></li>
+        <li><a class="nav__link" href="about.html">About</a></li>
+        <li><a class="btn nav__cta" href="contact.html">Free consultation</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <section class="wl-hero" aria-label="Ledgerline Accounting">
+    <div class="container wl-hero__grid">
+      <div class="wl-hero__text">
+        <p class="wl-where">Your accountant in Ubi</p>
+        <h1>Busy running the business? We&rsquo;ll keep the books.</h1>
+        <p class="wl-lead">Bookkeeping, GST and corporate tax for small companies, from $40 a month. One named accountant who knows your company and answers the phone.</p>
+        <div class="btn-row">
+          <a class="btn wl-btn" href="contact.html">Book a free consultation</a>
+          <span class="btn btn--ghost wl-btn--ghost" role="button" tabindex="0" data-demo-inert>WhatsApp us</span>
+        </div>
+      </div>
+      <figure class="wl-print">
+        <span class="wl-crop"><img src="../../assets/img/ledger-desk-900.webp" srcset="../../assets/img/ledger-desk-600.webp 600w, ../../assets/img/ledger-desk-900.webp 900w, ../../assets/img/ledger-desk-1200.webp 1200w" sizes="(max-width: 860px) calc(100vw - 4rem), 472px" width="1200" height="1500" alt="A hand writing in a squared ledger book beside a desk calculator on a wooden desk (sample photo)" fetchpriority="high"></span>
+        <figcaption>Sample photo</figcaption>
+        <p class="wl-sticky">Your price, in writing, before we start.</p>
+      </figure>
+    </div>
+  </section>
+
+  <section class="wl-parts">
+    <div class="container">
+      <div class="wl-head" data-reveal>
+        <h2>Who does what</h2>
+        <p>Most owners who come to us aren&rsquo;t bad at numbers. They&rsquo;re busy running the business. So we keep your part small.</p>
+      </div>
+      <div class="wl-parts__grid">
+        <div class="wl-part wl-part--you">
+          <h3>Your part</h3>
+          <ul data-reveal-group>
+            <li>Upload your receipts and bank statements each month, into the shared folder we set up.</li>
+            <li>When IRAS writes to you, forward the letter to us.</li>
+            <li>At the start, bring last year&rsquo;s Form C-S / C and financial statements.</li>
+          </ul>
+        </div>
+        <div class="wl-part wl-part--us">
+          <h3>Our part</h3>
+          <ul data-reveal-group>
+            <li>Post and reconcile your books every month.</li>
+            <li>Prepare and file your GST returns, ECI and Form C-S / C.</li>
+            <li>Remind you before every deadline.</li>
+            <li>Explain your numbers in plain English.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wl-packages" id="packages">
+    <div class="container">
+      <div class="wl-head" data-reveal>
+        <h2>Which one sounds like you?</h2>
+        <p>Fixed monthly packages, billed quarterly. Demo figures, for illustration only.</p>
+      </div>
+      <ul class="wl-rows" data-reveal>
+        <li><p class="wl-say">&ldquo;We&rsquo;ve registered the company but we&rsquo;re not trading yet.&rdquo;</p>
+          <div class="wl-pick"><strong>Dormant</strong><span class="wl-price">$40<small> a month</small></span><span class="wl-incl">Annual accounts + Form C-S</span></div></li>
+        <li class="is-common"><p class="wl-say">&ldquo;We&rsquo;re a small company: up to 40 transactions a month.&rdquo;</p>
+          <div class="wl-pick"><strong>Starter</strong><span class="wl-price">$180<small> a month</small></span><span class="wl-incl">Monthly bookkeeping, accounts, ECI, Form C-S, GST returns, quarterly report</span></div></li>
+        <li><p class="wl-say">&ldquo;We&rsquo;re growing: up to 150 transactions a month, and staff to pay.&rdquo;</p>
+          <div class="wl-pick"><strong>Growing SME</strong><span class="wl-price">$420<small> a month</small></span><span class="wl-incl">Everything in Starter, plus payroll for up to 10 staff, a monthly report and a quarterly review call</span></div></li>
+      </ul>
+      <p class="wl-more"><a href="pricing.html">See full pricing and add-ons &rarr;</a></p>
+    </div>
+  </section>
+
+  <section class="wl-promise">
+    <div class="container wl-promise__grid">
+      <div>
+        <h2 data-reveal>What we promise</h2>
+        <ul class="wl-notes" data-reveal-group>
+          <li>Prices in writing before we start.</li>
+          <li>Replies within one working day.</li>
+          <li>Your records are yours; we hand them over if you leave.</li>
+        </ul>
+      </div>
+      <figure class="wl-letter" data-reveal>
+        <p>&ldquo;I started Ledgerline so every client has one accountant who knows their company and answers the phone. You&rsquo;ll always get the price in writing before we start.&rdquo;</p>
+        <figcaption>The founder <span>(a fictional founder for this demo)</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="wl-dates" id="filing-dates">
+    <div class="container">
+      <div class="wl-head" data-reveal>
+        <h2>When are your IRAS deadlines?</h2>
+        <p>Pick your financial year end. We&rsquo;ll list the main corporate tax and GST dates that follow from it.</p>
+      </div>
+      <form class="fd wl-fd" data-filing-dates data-reveal>
+        <div class="fd__controls">
+          <div>
+            <label for="fd-fye">Financial year ends on the last day of</label>
+            <select id="fd-fye" name="fye">
+              <option value="0">January</option><option value="1">February</option><option value="2">March</option>
+              <option value="3">April</option><option value="4">May</option><option value="5">June</option>
+              <option value="6">July</option><option value="7">August</option><option value="8">September</option>
+              <option value="9">October</option><option value="10">November</option><option value="11" selected>December</option>
+            </select>
+          </div>
+          <div>
+            <label for="fd-gst">GST-registered? Your quarters end in</label>
+            <select id="fd-gst" name="gst">
+              <option value="none">Not GST-registered</option>
+              <option value="2" selected>Mar, Jun, Sep, Dec</option>
+              <option value="0">Jan, Apr, Jul, Oct</option>
+              <option value="1">Feb, May, Aug, Nov</option>
+            </select>
+          </div>
+        </div>
+        <ol class="fd__list" aria-live="polite">
+          <li class="fd__nojs">With JavaScript off: ECI is due 3 months after your financial year end; Form C-S / C is due 30 Nov of the following year; quarterly GST returns are due one month after each quarter ends.</li>
+        </ol>
+        <div class="fd__note">
+          <p><strong>A general guide, not advice.</strong> Confirm your own dates with us or IRAS. GST quarters are set by IRAS (see your GST registration letter).</p>
+          <p>No ECI is needed if revenue is $5 million or below and ECI is nil. For YA 2023&ndash;2027, IRAS allows Form C-S filed through accounting software until 15 Dec.</p>
+          <p>Sources: IRAS pages on <a href="https://www.iras.gov.sg/taxes/corporate-income-tax/estimated-chargeable-income-(eci)-filing">ECI filing</a>, <a href="https://www.iras.gov.sg/taxes/corporate-income-tax/form-c-s-form-c-s-(lite)-form-c-filing/guidance-on-filing-form-c-s-form-c-s-(lite)-form-c">Form C-S / C filing</a> and <a href="https://www.iras.gov.sg/taxes/goods-services-tax-(gst)/filing-gst/due-dates-and-requests-for-extension">GST due dates</a>.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="wl-visit">
+    <div class="container wl-visit__grid">
+      <div data-reveal>
+        <h2>Come and talk to us.</h2>
+        <p class="wl-lead">A free 30-minute consultation, in person in Ubi or by video call.</p>
+        <a class="btn wl-btn" href="contact.html">Book a free consultation</a>
+      </div>
+      <dl class="wl-card" data-reveal>
+        <div><dt>Office</dt><dd>123 Demo Street</dd></div>
+        <div><dt>Hours</dt><dd>Mon&ndash;Fri 9am&ndash;6pm</dd></div>
+        <div><dt>Phone</dt><dd><span role="button" tabindex="0" data-demo-inert>(demo number)</span></dd></div>
+        <div><dt>WhatsApp</dt><dd><span role="button" tabindex="0" data-demo-inert>Message us</span></dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div>
+        <p class="brand">Ledgerline Accounting</p>
+        <p class="muted">Bookkeeping, GST and corporate tax for SMEs</p>
+      </div>
+      <div>
+        <h2>Visit</h2>
+        <address style="font-style:normal">123 Demo Street</address>
+        <p class="muted">Mon–Fri 9am–6pm</p>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul>
+          <li><span role="button" tabindex="0" data-demo-inert>(demo number)</span></li>
+          <li><span role="button" tabindex="0" data-demo-inert>WhatsApp</span></li>
+          <li><span role="button" tabindex="0" data-demo-inert>(demo email)</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__base">
+      <span>&copy; <span data-year>2026</span> Ledgerline Accounting</span>
+      <span>Privacy notice</span>
+      <span>Website by Walk-In Studio</span>
+    </div>
+  </div>
+</footer>
+
+<script>(function(){var t,box;function show(){if(!box){box=document.createElement('div');box.className='demo-toast';box.setAttribute('role','status');document.body.appendChild(box)}box.textContent='Demo shop, not real: on a real site this button would open a chat or call.';box.hidden=false;clearTimeout(t);t=setTimeout(function(){box.hidden=true},3200)}document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-demo-inert]');if(b){e.preventDefault();show()}});document.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('[data-demo-inert]')){e.preventDefault();show()}});addEventListener('pagereveal',function(e){var v=e.viewTransition,q=function(){};if(v){v.ready.catch(q);v.finished.catch(q);v.updateCallbackDone.catch(q)}})})()</script>
+</body>
+</html>

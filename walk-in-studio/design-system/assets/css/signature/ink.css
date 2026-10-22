@@ -1,0 +1,15 @@
+:root { --sig-ink-mask: url("../img/sig-ink.png"); } /* declared here, beside its use, so the relative path resolves the same everywhere */
+/* ink: full-screen flavour scenes, each blooming in through an ink blot when it comes into view.
+   Triggered, not scrubbed (claude_code_batch_gal_motion_tuition.md Part 2): ink.js plays --sig-k 0 -> 1 by the clock
+   (about 1.1 s) once a scene is well in view, however fast the visitor scrolls; the page itself scrolls normally. */
+.sig-ink { position: relative; }
+.sig-ink__stage { position: relative; }
+.sig-ink__scene { position: relative; min-height: min(100vh, 46rem); min-height: min(100svh, 46rem); padding-block: clamp(2.5rem, 6vh, 4.5rem);
+  display: grid; align-items: center;
+  background: var(--scene-bg, var(--c-bg)); color: var(--scene-ink, var(--c-text)); }
+.sig-on .sig-ink__scene:not(.is-done) .sig-ink__content { -webkit-mask: var(--sig-ink-mask) center / calc(var(--sig-k, 0) * 330vmax) no-repeat;
+  mask: var(--sig-ink-mask) center / calc(var(--sig-k, 0) * 330vmax) no-repeat; }
+/* its first frame already shows the content (empty-gaps brief): the bloom starts part-way and the words are half there */
+.sig-on .sig-ink__scene:not(.is-done) .sig-ink__content > div { opacity: clamp(0, calc(.45 + (var(--sig-k, 0) - .22) * 1.6), 1); }
+/* gl variant (WebGL flood between pinned scenes) retired with the scroll-scrubbed range: a "gl" page shows the mask bloom */
+.sig-ink__gl { display: none; }

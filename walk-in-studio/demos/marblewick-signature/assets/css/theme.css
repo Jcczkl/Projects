@@ -1,0 +1,85 @@
+/* theme.css — ONLY CSS variables. A site's whole look changes from this file.
+   Tokens {{COLOR_*}} are filled by tools/new_site.py from site.json.
+   Presets: the default (light) below, plus [data-theme="cinematic"] (dark).
+   Switch preset with <html data-theme="cinematic">. */
+
+:root {
+  /* Colour */
+  --c-bg: #fbfaf7;
+  --c-surface: #ffffff;
+  --c-surface-2: #f2efe8;
+  --c-text: #1d1b18;
+  --c-muted: #5a554d;          /* ≥ 4.5:1 on --c-bg */
+  --c-border: #e3ded3;
+  --c-primary: #1f3a5f;
+  --c-primary-ink: #ffffff;    /* text on primary */
+  --c-accent: #f2c94c;
+  --c-accent-ink: #1d1b18;
+  --c-focus: #1a5fd0;
+  --c-banner-bg: #1d1b18;
+  --c-banner-ink: #fbfaf7;
+  --c-scrim: rgba(12, 10, 8, .62);
+  --c-whatsapp: #1f8f4e;       /* darker than brand green for 4.5:1 with white */
+
+  /* Type */
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-body);
+  --fw-body: 400;
+  --fw-display: 700;
+  --ls-display: -0.02em;
+  --tt-display: none;
+  --lh-body: 1.6;
+  --lh-display: 1.08;
+  --fs-base: 1.0625rem;
+  --fs-small: .9rem;
+  --fs-lead: clamp(1.1rem, .6vw + 1rem, 1.3rem);
+  --fs-h1: clamp(2.3rem, 4.5vw + 1rem, 4.4rem);
+  --fs-h2: clamp(1.7rem, 2.4vw + 1rem, 2.7rem);
+  --fs-h3: clamp(1.15rem, .5vw + 1rem, 1.35rem);
+  --fs-kinetic: clamp(4rem, 16vw, 14rem);
+
+  /* Shape & space */
+  --radius: 10px;
+  --radius-lg: 20px;
+  --radius-btn: 999px;
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: 4rem;
+  --space-7: clamp(4.5rem, 8vw, 7.5rem);
+  --container: 1320px;   /* wider at big screens (round 3, 2026-10-07) */
+  --header-h: 68px;
+  --shadow: 0 1px 2px rgba(0,0,0,.05), 0 8px 24px rgba(0,0,0,.07);
+  --shadow-lift: 0 2px 4px rgba(0,0,0,.06), 0 18px 40px rgba(0,0,0,.12);
+
+  /* Motion scale (QUALITY_HARNESS.md). The ONLY durations and easings any site may use;
+     check_site.py errors on anything else. Ambient infinite loops are the one exception. */
+  --dur-tap: 120ms;        /* taps, focus rings */
+  --dur-ui: 240ms;         /* buttons, menus, cards, header */
+  --dur-reveal: 480ms;     /* things arriving on screen */
+  --dur-scene: 800ms;      /* scene changes, slow image zooms */
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+  --ease-in-out: cubic-bezier(.6, 0, .2, 1);
+  --ease-pop: cubic-bezier(.34, 1.56, .64, 1);   /* Signature tier only: a small overshoot for sticker pops */
+  --stagger: 60ms;
+  --reveal-distance: 16px;   /* 12-24px */
+}
+
+/* Dark "cinematic" preset (kinetic type, starfield). */
+[data-theme="cinematic"] {
+  --c-bg: #0b0a0d;
+  --c-surface: #15131a;
+  --c-surface-2: #1d1a23;
+  --c-text: #f3eff6;
+  --c-muted: #b9b1c2;
+  --c-border: #2c2833;
+  --c-primary-ink: #0b0a0d;
+  --c-focus: #9cc2ff;
+  --c-banner-bg: #f3eff6;
+  --c-banner-ink: #0b0a0d;
+  --c-scrim: rgba(5, 4, 8, .66);
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.45);
+  --shadow-lift: 0 2px 6px rgba(0,0,0,.5), 0 22px 50px rgba(0,0,0,.6);
+}

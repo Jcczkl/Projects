@@ -1,0 +1,158 @@
+/* Style B - Soft pastel (Lumi Nail Studio demo). Loaded after the demo's CSS; tokens from the template scale only. */
+@font-face { font-family: "Nunito"; src: url("../../assets/fonts/nunito-700.woff2") format("woff2"); font-weight: 600 800; font-style: normal; font-display: swap; }
+:root {
+  --c-bg: #fbf6f1;
+  --c-surface: #ffffff;
+  --c-surface-2: #f3ecf8;
+  --c-text: #3b2744;
+  --c-muted: #645468;
+  --c-border: #e6d9ea;
+  --c-primary: #6d3c7d;
+  --c-primary-ink: #ffffff;
+  --c-accent: #e8dcf6;
+  --c-accent-ink: #3b2744;
+  --font-display: "Nunito", ui-rounded, "SF Pro Rounded", Candara, "Trebuchet MS", system-ui, sans-serif;
+  --font-body: Candara, "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  --fw-display: 700;
+  --radius: 28px;
+  --radius-lg: 44px;
+  --c-header-bg: #fbf6f1;
+  --sp-peach: #ffe2d4;
+  --sp-mint: #dcf1e7;
+  --sp-butter: #fff0c7;
+}
+body { font-size: 1.1rem; }
+h1 em, h2 em { color: var(--c-primary); }
+.eyebrow { color: var(--c-primary); }
+.btn { letter-spacing: 0; }
+.site-header .brand { font-weight: 700; }
+.site-header .brand__mark rect { rx: 20; }
+.nav__link { font-weight: 700; }
+.nav__link::after { height: 6px; bottom: 6px; border-radius: 6px; background: var(--c-accent); z-index: -1; }
+
+.sp-btn { border-radius: 999px; }
+.sp-btn--soft { --btn-bg: var(--c-surface); --btn-ink: var(--c-primary); border-color: var(--c-primary); }
+
+/* Split hero: words on a lilac card, the photo beside it */
+.sp-hero { padding-block: var(--space-5) var(--space-6); }
+.sp-hero__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); align-items: center; }
+.sp-hero__card { background: var(--c-accent); border-radius: var(--radius-lg); padding: var(--space-6) var(--space-5); }
+.sp-tag { display: inline-block; margin: 0 0 var(--space-3); padding: .3rem .9rem; border-radius: 999px; background: var(--c-surface);
+  color: var(--c-primary); font-weight: 700; }
+.sp-hero h1 { font-size: clamp(2.5rem, 3.6vw + 1rem, 4.6rem); line-height: 1.02; margin: 0 0 var(--space-3); }
+.sp-hero h1 span { display: block; color: var(--c-primary); }
+.sp-lead { font-size: var(--fs-lead); max-width: 30rem; margin: 0 0 var(--space-4); }
+.sp-pills { list-style: none; margin: 0 0 var(--space-4); padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+.sp-pills li { padding: .45rem 1rem; border-radius: 999px; background: var(--c-surface); font-weight: 600; }
+.sp-pills li:nth-child(2) { background: var(--sp-peach); }
+.sp-pills li:nth-child(3) { background: var(--sp-mint); }
+.sp-pills b { color: var(--c-primary); }
+.sp-hero__pic { position: relative; margin: 0; max-width: 620px; justify-self: end; width: 100%; }
+.sp-hero__main { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius-lg); }
+.sp-hero__inset { position: absolute; left: -36px; bottom: -36px; width: clamp(120px, 12vw, 180px); aspect-ratio: 1; object-fit: cover;
+  object-position: 40% 35%; border-radius: 50%; border: 8px solid var(--c-bg); }
+.sp-note { position: absolute; right: 1rem; bottom: 1rem; margin: 0; padding: .2rem .7rem; border-radius: 999px; background: rgba(255,255,255,.92);
+  color: var(--c-text); font-size: .9rem; font-weight: 600; }
+
+/* How a visit goes */
+.sp-steps { padding-block: var(--space-6); }
+.sp-steps h2, .sp-looks h2, .sp-prices h2, .sp-chat h2, .sp-visit h2 { font-size: clamp(2rem, 2.4vw + 1rem, 3.1rem); margin: 0 0 var(--space-4); }
+.sp-steps__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+.sp-step { border-radius: var(--radius); padding: var(--space-4); background: var(--c-surface); }
+.sp-step--1 { background: var(--c-accent); } .sp-step--2 { background: var(--sp-peach); } .sp-step--3 { background: var(--sp-mint); }
+.sp-step__n { display: grid; place-content: center; width: 48px; height: 48px; border-radius: 50%; background: var(--c-surface);
+  font-family: var(--font-display); font-weight: 700; font-size: 1.4rem; color: var(--c-primary); margin-bottom: var(--space-3); }
+.sp-step h3 { font-size: 1.45rem; margin: 0 0 .4rem; }
+.sp-step p { margin: 0; }
+
+/* Pick a look: arch-topped tiles on pastel swatches (the lightbox is site.js's own) */
+.sp-looks { padding-block: var(--space-6); background: var(--c-surface); }
+.sp-looks__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0 var(--space-4); }
+.sp-looks__head p { margin: 0 0 var(--space-4); color: var(--c-muted); }
+.sp-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5) var(--space-4); }
+.sp-tile { padding: var(--space-3) var(--space-3) var(--space-2); border-radius: 999px 999px var(--radius) var(--radius); background: var(--c-accent); }
+.sp-tile--peach { background: var(--sp-peach); } .sp-tile--mint { background: var(--sp-mint); } .sp-tile--butter { background: var(--sp-butter); }
+.sp-tile .look__open { border-radius: 999px 999px 18px 18px; }
+.sp-tile figcaption { padding: 0 .4rem; }
+.sp-tile .look__name { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; }
+.sp-tile .look__meta { color: var(--c-text); }
+.sp-tile .look__book { color: var(--c-primary); text-underline-offset: .2em; }
+.sp-looks__note { margin: var(--space-4) 0 0; color: var(--c-muted); }
+
+/* Prices: one tint per card */
+.sp-prices { padding-block: var(--space-6); }
+.sp-prices__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0 var(--space-4); }
+.sp-prices__head p { margin: 0 0 var(--space-4); color: var(--c-muted); }
+.sp-prices__head a { color: var(--c-primary); font-weight: 700; }
+.sp-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3); }
+.sp-card { border-radius: var(--radius); padding: var(--space-4); background: var(--c-accent); }
+.sp-card--peach { background: var(--sp-peach); } .sp-card--mint { background: var(--sp-mint); } .sp-card--butter { background: var(--sp-butter); }
+.sp-card h3 { font-size: 1.5rem; margin: 0 0 .5rem; }
+.sp-card dl { margin: 0; }
+.sp-card dl div { display: flex; justify-content: space-between; gap: .8rem; padding: .45rem 0; border-top: 2px dotted rgba(59,39,68,.18); }
+.sp-card dd { margin: 0; font-weight: 700; color: var(--c-primary); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* Before your visit: chat bubbles, like the WhatsApp booking */
+.sp-chat { padding-block: var(--space-6); background: var(--c-surface-2); }
+.sp-chat__inner { max-width: 820px; }
+.sp-chat__thread { display: grid; gap: .7rem; }
+.sp-bubble { margin: 0; max-width: 34rem; padding: .85rem 1.2rem; border-radius: 22px; }
+.sp-bubble--q { justify-self: end; background: var(--c-primary); color: var(--c-primary-ink); border-bottom-right-radius: 6px; font-weight: 700; }
+.sp-bubble--a { justify-self: start; background: var(--c-surface); border-bottom-left-radius: 6px; margin-bottom: .6rem; }
+
+/* Visit */
+.sp-visit { padding-block: var(--space-6); }
+.sp-visit__grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-5); align-items: center; background: var(--sp-mint);
+  border-radius: var(--radius-lg); padding: var(--space-5); }
+.sp-addr { font-size: 1.3rem; font-weight: 700; margin-bottom: .3rem; }
+.sp-hours { margin: 0; display: grid; gap: var(--space-2); }
+.sp-hours div { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: var(--space-3) var(--space-4);
+  border-radius: 999px; background: var(--c-surface); }
+.sp-hours dt { font-weight: 700; }
+.sp-hours dd { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; color: var(--c-primary); }
+
+/* Inner pages in this look */
+.page-head h1 { font-size: clamp(2.4rem, 3vw + 1rem, 4rem); }
+.svc-hero img { border-radius: var(--radius-lg); }
+.find-us, .cta-band { border-radius: var(--radius-lg); }
+.find-us { background: var(--sp-mint); border: 0; }
+
+@media (max-width: 1000px) {
+  .sp-cards { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 860px) {
+  .sp-hero { padding-block: var(--space-3) var(--space-5); }
+  .sp-hero__grid, .sp-visit__grid { grid-template-columns: 1fr; }
+  .sp-hero__card { padding: var(--space-4) var(--space-4) var(--space-4); }
+  .sp-hero__pic { justify-self: stretch; max-width: none; }
+  .sp-hero__inset { left: auto; right: 12px; bottom: -28px; width: 110px; border-width: 6px; }
+  .sp-hero .sp-note { right: auto; left: 1rem; }
+  .sp-steps__list { grid-template-columns: 1fr; gap: var(--space-3); }
+  .sp-step { display: grid; grid-template-columns: 48px 1fr; gap: 0 var(--space-3); padding: var(--space-3) var(--space-4); }
+  .sp-step__n { grid-row: span 2; margin: 0; }
+  .sp-visit__grid { padding: var(--space-4); }
+}
+@media (max-width: 600px) {
+  .sp-hero h1 { font-size: 2.4rem; }
+  .sp-lead { margin-bottom: var(--space-3); }
+  .sp-pills { gap: .4rem; margin-bottom: var(--space-3); }
+  .sp-pills li { padding: .3rem .75rem; font-size: 1rem; }
+  .sp-hero .btn-row { gap: .6rem; }
+  .sp-hero .btn { padding-inline: 1.1rem; }
+  .sp-hours div { display: grid; gap: 0; border-radius: var(--radius); }
+}
+@media (max-width: 760px) {
+  .sp-tiles { grid-template-columns: 1fr 1fr; gap: var(--space-4) .7rem; }
+  .sp-tile { padding: .5rem .5rem .3rem; }
+  .sp-tile .look__name { font-size: 1.1rem; }
+  .sp-cards { grid-template-columns: 1fr; }
+  .sp-bubble { max-width: 88%; }
+}
+
+/* Finish pass 2026-10-10 - Smooth never delays reading: look tiles arrive in pairs, price cards with no stagger,
+   each answer just after its question (no long cascade down the thread). */
+.js[data-motion="smooth"] .sp-tiles > [data-reveal],
+.js[data-motion="smooth"] .sp-cards > [data-reveal],
+.js[data-motion="smooth"] .sp-chat__thread > [data-reveal] { transition-delay: 0s; }
+.js[data-motion="smooth"] .sp-tiles > [data-reveal]:nth-child(even),
+.js[data-motion="smooth"] .sp-chat__thread > .sp-bubble--a { transition-delay: var(--stagger); }

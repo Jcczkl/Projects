@@ -1,0 +1,8 @@
+{
+  "name": "Modern fintech-light",
+  "title": "Ledgerline Accounting | Fixed monthly accounting plans for SMEs (style C: Modern fintech-light)",
+  "description": "Demo website, style C: a crisp, product-like look for an accounting firm. Three monthly plans with prices first, what happens each month, add-on prices, a deadlines helper and a free consultation.",
+  "preload": [
+    "manrope-700.woff2"
+  ]
+}

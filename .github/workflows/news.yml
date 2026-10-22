@@ -1,4 +1,5 @@
 # Publishes the site to GitHub Pages on every push to main (or when started by hand).
+# walk-in-studio/ is a static copy of the Walk-In Studio side project, opened from Room 6.
 # Room 5's board is a frozen week of top stories embedded in index.html, so nothing is
 # rebuilt and nothing runs on a schedule (the hourly news.json build was removed on
 # 12 Oct 2026: GitHub's scheduled runs fired too unreliably). newsroom/ is kept as the
@@ -32,6 +33,7 @@ jobs:
           mkdir _site
           cp index.html .nojekyll _site/
           cp ./*.jpg ./*.mp4 _site/
+          cp -r walk-in-studio _site/
           ls -la _site
 
       - uses: actions/configure-pages@v6

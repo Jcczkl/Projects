@@ -1,0 +1,80 @@
+/* Bobbinmere Tailoring — "magazine spread" (business/layout_dna.md, round 3).
+   Asymmetric craft hero, the work, numbered process, before/after, price guide, visit. Big, readable text. */
+
+/* Display face: Libre Baskerville (OFL, self-hosted, CREDITS.md). The 400 file is preloaded in index.html. */
+@font-face { font-family: "Libre Baskerville"; src: url("../fonts/libre-baskerville-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Libre Baskerville"; src: url("../fonts/libre-baskerville-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Libre Baskerville"; src: url("../fonts/libre-baskerville-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+
+/* WhatsApp: same icon and words, in the shop's navy instead of the bright green bar (polish pass 2026-10-10) */
+.wa-fab { background: var(--c-primary); color: var(--c-primary-ink); }
+@media (max-width: 600px) { .wa-fab { border-top: 3px solid var(--c-accent); } }
+.nav__link { font-size: 1.05rem; letter-spacing: .02em; }
+.btn { min-height: 52px; font-size: 1.1rem; }
+.eyebrow { letter-spacing: .32em; color: var(--c-accent); }
+h1, h2 { font-weight: 400; letter-spacing: .005em; }
+h1 em, h2 em { font-style: italic; }
+
+/* Magazine masthead hero: a huge headline across the page, the details in one row, then the
+   craft photo edge to edge (layout DNA: magazine spread; unlike every other demo's hero) */
+.tf-hero { padding-top: var(--space-5); }
+.tf-hero h1 { font-size: clamp(3rem, 8.6vw, 11.5rem); line-height: .92; letter-spacing: -.02em; margin: 0 0 var(--space-4); max-width: none; }
+.tf-hero__row { display: grid; gap: var(--space-4); grid-template-columns: 1.2fr auto 1fr; align-items: center; padding-block: var(--space-4); border-top: 1px solid var(--c-text); margin-bottom: var(--space-5); }
+.tf-hero__row .lead { margin: 0; font-size: 1.2rem; }
+.tf-hero__row .hero__actions { margin: 0; }
+.tf-hours { margin: 0; color: var(--c-muted); text-align: right; }
+.tf-hero__media { margin: 0; position: relative; }
+.tf-hero__media img { display: block; width: 100%; aspect-ratio: 21 / 9; object-fit: cover; }
+.tf-hero__media figcaption { position: absolute; right: .8rem; bottom: .8rem; padding: .2rem .6rem; background: rgba(255,255,255,.92); font-size: .85rem; font-weight: 600; }
+@media (max-width: 860px) {
+  .tf-hero__row { grid-template-columns: 1fr; }
+  .tf-hours { text-align: left; }
+  .tf-hero__media img { aspect-ratio: 4 / 3; }
+}
+
+.tf-head { max-width: 46rem; margin-bottom: var(--space-5); }
+.tf-head h2 { font-size: clamp(2rem, 2.5vw + 1rem, 3.2rem); }
+
+/* The work: one large piece + three, asymmetric */
+.tf-pieces { display: grid; gap: var(--space-4); grid-template-columns: 2fr 1fr 1fr; grid-template-rows: auto auto; margin-bottom: var(--space-3); }
+.tf-piece--0 { grid-row: span 2; }
+.tf-piece--0 .look__open img { aspect-ratio: 4 / 5; }
+.tf-piece--3 { grid-column: 2 / span 2; }
+.tf-piece--3 .look__open img { aspect-ratio: 16 / 9; }
+.look__name { font-family: var(--font-display); font-size: 1.5rem; }
+.look__meta { font-size: 1.05rem; }
+.look__book { color: var(--c-accent); }
+@media (max-width: 760px) {
+  .tf-pieces { grid-template-columns: 1fr; }
+  .tf-piece--0, .tf-piece--3 { grid-row: auto; grid-column: auto; }
+  .tf-piece--3 .look__open img { aspect-ratio: 4 / 5; }
+}
+
+/* Numbered process: big numerals, no cards */
+.tf-process { background: var(--c-primary); color: #f7f3ea; }
+.tf-process .eyebrow { color: #f0b9a8; }
+.tf-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-5); grid-template-columns: repeat(3, 1fr); }
+.tf-steps__n { display: block; font-family: var(--font-display); font-size: 4.5rem; line-height: 1; color: #f0b9a8; }
+.tf-steps h3 { font-size: 1.5rem; margin: .4rem 0; }
+.tf-steps p { font-size: 1.1rem; margin: 0; }
+@media (max-width: 760px) { .tf-steps { grid-template-columns: 1fr; } }
+
+.tf-ba-wrap { display: grid; gap: var(--space-5); grid-template-columns: 1fr 1.4fr; align-items: center; }
+@media (max-width: 860px) { .tf-ba-wrap { grid-template-columns: 1fr; } }
+
+/* Price guide */
+.price-guide { display: grid; gap: var(--space-5) var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
+.price-guide .price-list { font-size: 1.15rem; background: var(--c-surface); border: 1px solid var(--c-border); }
+.price-guide .price-list caption { font-family: var(--font-display); font-size: 1.5rem; padding: 0 0 .6rem; text-align: left; }
+.price-guide .price-list th, .price-guide .price-list td { padding: .85rem 1rem; }
+.price-guide .price-list th { font-weight: 400; }
+.price-guide .price-list tr:last-child th, .price-guide .price-list tr:last-child td { border-bottom: 0; }
+
+/* Visit */
+.tf-visit { display: grid; gap: var(--space-6); grid-template-columns: 1fr 1fr; align-items: start; }
+.tf-visit .hours { font-size: 1.15rem; margin-bottom: var(--space-4); }
+.find-us { padding: var(--space-5); background: var(--c-surface); border: 1px solid var(--c-border); }
+.find-us h3 { margin-top: 0; font-size: 1.6rem; }
+.find-us__addr { font-size: 1.25rem; font-weight: 700; }
+@media (max-width: 860px) { .tf-visit { grid-template-columns: 1fr; } }
+.site-footer { font-size: 1.05rem; }

@@ -1,0 +1,68 @@
+@font-face { font-family: "Cormorant Garamond"; src: url("../../assets/fonts/cormorant-garamond-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+/* Style C - Minimal & artisan (Sunmill Bakehouse demo): white, one quiet serif, type first, contained photographs. */
+:root {
+  --c-bg: #ffffff;
+  --c-surface: #ffffff;
+  --c-surface-2: #f6f3ef;
+  --c-text: #1f1b17;
+  --c-muted: #5f5850;
+  --c-border: #e4ded6;
+  --c-primary: #a5502a;
+  --c-primary-ink: #ffffff;
+  --c-accent: #a5502a;
+  --c-accent-ink: #ffffff;
+  --font-display: "Cormorant Garamond", Garamond, "EB Garamond", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-body: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --fw-display: 400;
+  --radius: 0px;
+  --radius-lg: 0px;
+}
+.site-header { border-bottom: 1px solid var(--c-border); }
+.site-header .brand__mark { display: none; }
+.site-header .brand span { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: .04em; }
+.nav__link { font-family: var(--font-body); letter-spacing: .06em; }
+.nav__cta { background: transparent; color: var(--c-text); border: 1px solid var(--c-text); border-radius: 0; }
+
+.ma-narrow { max-width: 44rem; margin-inline: auto; }
+.ma-intro { padding-block: clamp(3rem, 8vh, 6rem) var(--space-5); text-align: center; }
+.ma-label { margin: 0 0 var(--space-3); font-family: var(--font-body); font-size: .95rem; letter-spacing: .22em; text-transform: uppercase; color: var(--c-muted); }
+.ma-intro h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(3.2rem, 6vw + 1rem, 6.5rem); line-height: 1; margin: 0 0 var(--space-4); }
+.ma-lead { font-size: var(--fs-lead); line-height: 1.7; color: var(--c-text); }
+.ma-actions { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-4); }
+.ma-textlink { display: inline-flex; align-items: center; min-height: 44px; color: var(--c-text); text-underline-offset: .35em; text-decoration-thickness: 1px; }
+
+.ma-feature { max-width: 1100px; margin: 0 auto; }
+.ma-feature img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: 50% 55%; }
+.ma-feature figcaption, .ma-pair figcaption { padding: var(--space-3) 0; font-style: italic; color: var(--c-muted); }
+
+.ma-pair { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); padding-bottom: var(--space-6); }
+.ma-pair figure { margin: 0; }
+.ma-pair img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
+.ma-menu, .ma-cakes, .ma-visit { padding-block: var(--space-7); }
+.ma-menu { text-align: center; }
+.ma-list { margin: 0; text-align: left; }
+.ma-list div { display: flex; justify-content: space-between; gap: 1rem; padding: .9rem 0; border-bottom: 1px solid var(--c-border); font-size: 1.2rem; }
+.ma-list dd { margin: 0; font-variant-numeric: oldstyle-nums tabular-nums; }
+.ma-list small { color: var(--c-muted); font-style: italic; }
+.ma-cakes { background: var(--c-surface-2); text-align: center; }
+.ma-cta { display: inline-block; margin-top: var(--space-3); padding: .9rem 1.6rem; border: 1px solid var(--c-text); color: var(--c-text);
+  text-decoration: none; letter-spacing: .08em; transition: background var(--dur-ui) var(--ease-out), color var(--dur-ui) var(--ease-out); }
+.ma-cta:hover { background: var(--c-text); color: #fff; }
+.ma-cta--solid { margin-top: 0; background: var(--c-text); color: #fff; }
+.ma-cta--solid:hover { background: var(--c-primary); border-color: var(--c-primary); }
+.ma-visit__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+
+@media (max-width: 760px) {
+  .ma-pair, .ma-visit__grid { grid-template-columns: 1fr; }
+  .ma-feature img { aspect-ratio: 4 / 3; }
+  .ma-pair img { aspect-ratio: 3 / 2; }
+}
+
+/* Inner pages (privacy, 404): eyebrow labels in C's quiet grey, not A's rust (review 2026-10-10, Consistency) */
+.eyebrow { color: var(--c-muted); letter-spacing: .22em; font-weight: 400; font-size: .95rem; }
+.ma-cta { min-height: 44px; }
+
+/* WhatsApp bar on phones: ink black like C's solid button, not the bright green */
+.wa-fab { background: var(--c-text); color: #fff; }
+@media (max-width: 600px) { .wa-fab { font-family: var(--font-body); letter-spacing: .06em; font-weight: 400; } }

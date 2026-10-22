@@ -1,0 +1,11 @@
+/* wipe: the next colour rises from below, a few splatter dots fly */
+/* a band, not a screen: the colour change never fills a whole screen with nothing in it (empty-gaps brief, Joseph 2026-10-14) */
+.sig-wipe { position: relative; height: clamp(5rem, 22vh, 12rem); height: clamp(5rem, 22svh, 12rem); overflow: hidden; background: var(--sig-wipe-from, var(--c-bg)); }
+.sig-wipe__fill { position: absolute; inset: 0; background: var(--sig-wipe-to, var(--sig-accent)); }
+.sig-on .sig-wipe__fill { clip-path: inset(calc((1 - var(--sig-t, 1)) * 100%) 0 0 0 round calc((1 - var(--sig-t, 1)) * 40vw) calc((1 - var(--sig-t, 1)) * 40vw) 0 0); }
+.sig-dot { position: absolute; left: var(--left, 50%); bottom: 18%; width: var(--s, 18px); aspect-ratio: 1; border-radius: 50%;
+  background: var(--sig-dot, var(--sig-wipe-to, var(--sig-accent))); opacity: 0; }
+.sig-on .sig-wipe { --sig-burst: clamp(0, calc((var(--sig-t, 0) - .3) * 2.6), 1); }
+.sig-on .sig-dot { opacity: clamp(0, calc(min(var(--sig-t, 0) - .28, .98 - var(--sig-t, 0)) * 7), 1);
+  transform: translate(calc(var(--dx, 0px) * var(--sig-burst)), calc(var(--dy, -120px) * var(--sig-burst))) scale(calc(.4 + var(--sig-burst) * .6)); }
+html:not(.sig-on) .sig-wipe { height: auto; min-height: 6rem; background: var(--sig-wipe-to, var(--sig-accent)); }

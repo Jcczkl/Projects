@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en-SG" data-theme="cinematic" data-motion-switch>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo: Cinderlane Pizza — Walk-In Studio, a side project</title>
+<meta name="description" content="Cinderlane Pizza: wood-fired sourdough pizza in Upper Thomson. See the menu with prices and book a table on WhatsApp.">
+<meta name="theme-color" content="#0b0a0d">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/theme.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<script>(function(h){h.classList.add('js');if(h.hasAttribute('data-motion-switch')){var m='standard';try{m=localStorage.getItem('ws-motion')||m}catch(e){}h.setAttribute('data-motion',m)}if(h.getAttribute('data-motion')!=='smooth'){var s=function(e){if(e.viewTransition)e.viewTransition.skipTransition()};addEventListener('pageswap',s);addEventListener('pagereveal',s)}})(document.documentElement)</script>
+<script src="assets/js/site.js" defer></script>
+<link rel="preload" href="assets/fonts/fraunces-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<style>.museum-back{position:fixed;left:12px;bottom:12px;z-index:2147483000;display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:999px;background:#14201b;color:#f4f1ea;font:600 13px/1.1 system-ui,-apple-system,'Segoe UI',sans-serif;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.28)}.museum-back:hover{background:#2f5d50;color:#fff}.museum-back:focus-visible{outline:3px solid #85bda8;outline-offset:2px}.demo-note{padding:14px 16px;border:1px dashed currentColor;border-radius:10px;opacity:.8}.demo-toast{position:fixed;left:50%;bottom:64px;transform:translateX(-50%);z-index:2147483001;max-width:min(92vw,420px);padding:12px 16px;border-radius:12px;background:#14201b;color:#f4f1ea;font:500 14px/1.4 system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.3)}[data-demo-inert]{cursor:pointer}@media print{.museum-back{display:none}}</style>
+</head>
+<body>
+<a class="museum-back" href="../../../#walk-in-studio">&larr; Back to the museum</a>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="demo-top" data-demo-top>
+<div class="site-banner" role="note"><a class="site-banner__back" href="../../templates/">&larr; All demos</a><strong>Demo website</strong> &mdash; a made-up shop, from Walk-In Studio, a side project. Photos are samples; contact links and forms are removed in this copy.</div>
+<nav class="demo-choices" aria-label="Choices for this demo" data-choices><div class="demo-choices__inner"><a class="demo-choices__back" href="../../templates/">&larr;<span class="demo-choices__back-text"> All demos</span></a><span class="demo-choices__tag">Demo</span><div class="demo-choices__styles" id="demo-styles"><p class="demo-choices__label"><strong>4 styles</strong> &mdash; see them all</p><ul class="demo-choices__list"><li><a href="./" aria-current="page"><img src="styles/thumbs/a.webp" width="120" height="75" alt="" loading="lazy"><span class="demo-choices__name"><b>A</b> Warm &amp; local</span><em>Showing</em></a></li><li><a href="styles/b/"><img src="styles/thumbs/b.webp" width="120" height="75" alt="" loading="lazy"><span class="demo-choices__name"><b>B</b> Modern casual</span></a></li><li><a href="styles/c/"><img src="styles/thumbs/c.webp" width="120" height="75" alt="" loading="lazy"><span class="demo-choices__name"><b>C</b> Fine-dining calm</span></a></li><li><a href="styles/d/"><img src="styles/thumbs/d.webp" width="120" height="75" alt="" loading="lazy"><span class="demo-choices__name"><b>D</b> Food story</span></a></li></ul></div><button class="demo-choices__peek" type="button" aria-expanded="false" aria-controls="demo-styles"><span class="demo-choices__peek-text">See the styles </span><span class="demo-choices__peek-count">4 styles </span>&#9662;</button><div class="demo-choices__motion"><p class="demo-choices__label"><strong>Motion</strong> &mdash; calm or gentle</p><span class="motion-switch" role="group" aria-label="Motion"><span>Motion:</span><button type="button" data-motion-set="standard" aria-pressed="true">Standard</button><button type="button" data-motion-set="smooth" aria-pressed="false">Smooth</button></span><button class="demo-choices__toggle" type="button" data-motion-toggle><span class="demo-choices__toggle-label">Motion:</span><span data-motion-now>Standard</span></button></div></div></nav>
+</div><!-- /demo-top -->
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="./">
+      <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="var(--c-primary)"/><text x="20" y="27" text-anchor="middle" font-size="19" font-weight="700" fill="var(--c-primary-ink)" font-family="Georgia, serif">C</text></svg>
+      <span>Cinderlane Pizza</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle__bars"></span><span class="visually-hidden">Menu</span></button>
+    <nav id="site-nav" class="nav" aria-label="Main">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="#menu">Menu</a></li>
+        <li><a class="nav__link" href="#dough">The dough</a></li>
+        <li><a class="nav__link" href="#find">Find us</a></li>
+        <li><span class="btn nav__cta" role="button" tabindex="0" data-demo-inert>Book a table</span></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="kn-hero" aria-label="Cinderlane Pizza, wood-fired sourdough pizza">
+    <img class="kn-hero__img" src="assets/img/hero-pizza-1920.webp" srcset="assets/img/hero-pizza-800.webp 800w, assets/img/hero-pizza-1200.webp 1200w, assets/img/hero-pizza-1920.webp 1920w, assets/img/hero-pizza-2400.webp 2400w" sizes="(max-width: 860px) 300vw, 100vw" width="1920" height="1280" alt="A blistered white pizza with ham and grated cheese on a wooden board (sample photo)" fetchpriority="high">
+    <div class="container kn-hero__text">
+      <div class="kn-hero__panel">
+      <p class="eyebrow">Upper Thomson &middot; wood-fired pizza</p>
+      <h1>Blistered crust, <em>straight from the fire.</em></h1>
+      <p class="lead">Pizzas from $16. Dinner Tuesday to Sunday, lunch at weekends.</p>
+      <div class="btn-row hero__actions">
+        <span class="btn btn--whatsapp" role="button" tabindex="0" data-demo-inert><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Book a table on WhatsApp</span>
+        <a class="btn btn--ghost" href="#menu">See the menu</a>
+      </div>
+      </div>
+    </div>
+    <p class="sample-note">Sample photo</p>
+  </section>
+
+  <section class="section" id="menu">
+    <div class="container kn-menu-wrap" data-reveal>
+      <div class="kn-head">
+        <p class="eyebrow">The menu</p>
+        <h2>Six pizzas, <em>one fire.</em></h2>
+        <p>Every pizza is about 12 inches, enough for one hungry person or two to share with a starter. Sample prices for this demo.</p>
+        <p class="kn-veg"><span>V</span> vegetarian</p>
+      </div>
+      <ul class="kn-menu">
+          <li><span class="kn-menu__name">Cotto Bianco <em>signature</em><small>No tomato: smoked scamorza, ham, parmesan, cracked pepper</small></span><span class="kn-menu__dots" aria-hidden="true"></span><span>$26</span></li>
+          <li><span class="kn-menu__name">Margherita <b class="kn-v" title="vegetarian">V</b><small>Tomato, fior di latte, basil, olive oil</small></span><span class="kn-menu__dots" aria-hidden="true"></span><span>$19</span></li>
+          <li><span class="kn-menu__name">Marinara <b class="kn-v" title="vegetarian">V</b><small>Tomato, garlic, oregano. No cheese, all crust</small></span><span class="kn-menu__dots" aria-hidden="true"></span><span>$16</span></li>
+          <li><span class="kn-menu__name">Funghi <b class="kn-v" title="vegetarian">V</b><small>Roasted mushrooms, fior di latte, thyme, garlic cream</small></span><span class="kn-menu__dots" aria-hidden="true"></span><span>$24</span></li>
+          <li><span class="kn-menu__name">Sambal Prawn<small>Sambal tomato, prawns, lime leaf, spring onion</small></span><span class="kn-menu__dots" aria-hidden="true"></span><span>$28</span></li>
+          <li><span class="kn-menu__name">Spicy Salami &amp; Honey<small>Tomato, salami, chilli, fior di latte, a drizzle of honey</small></span><span class="kn-menu__dots" aria-hidden="true"></span><span>$27</span></li>
+          <li class="kn-menu__side"><span class="kn-menu__name">Burrata &amp; tomatoes <b class="kn-v" title="vegetarian">V</b><small>To start: with wood-fired bread for the plate</small></span><span class="kn-menu__dots" aria-hidden="true"></span><span>$18</span></li>
+          <li class="kn-menu__side"><span class="kn-menu__name">Gula melaka tiramisu <b class="kn-v" title="vegetarian">V</b><small>To finish: coffee, mascarpone, palm sugar</small></span><span class="kn-menu__dots" aria-hidden="true"></span><span>$11</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="kn-dough" id="dough">
+    <img src="assets/img/dough-1200.webp" srcset="assets/img/dough-800.webp 800w, assets/img/dough-1200.webp 1200w, assets/img/dough-1600.webp 1600w" sizes="(max-width: 860px) 100vw, 50vw" width="1200" height="900" alt="Hands shaping a round of pizza dough on a floured marble counter (sample photo)" loading="lazy" decoding="async">
+    <div class="kn-dough__text" data-reveal>
+      <p class="eyebrow">The dough</p>
+      <h2>Two days to rise. <em>Ninety seconds to bake.</em></h2>
+      <p>Flour, water, salt and our own sourdough starter. Nothing else. Each dough ball rests for 48 hours, gets stretched by hand when you order, and goes into a wood fire at around 450&deg;C. It comes out blistered outside, soft inside and a little smoky.</p>
+      <ul class="kn-topics"><li>48-hour sourdough</li><li>Stretched by hand</li><li>Wood fire, about 450&deg;C</li></ul>
+      <p class="muted">Sample photo.</p>
+    </div>
+  </section>
+
+  <section class="section" id="find">
+    <div class="container kn-find">
+      <div>
+        <p class="eyebrow">Find us</p>
+        <h2>Come hungry, come early.</h2>
+        <address class="kn-addr">123 Demo Street</address>
+        <table class="hours">
+            <caption class="visually-hidden">Opening hours</caption>
+            <tbody>
+              <tr data-days="2,3,4,5"><th scope="row">Tuesday &ndash; Friday</th><td>5pm &ndash; 10pm</td></tr>
+              <tr data-days="0,6"><th scope="row">Saturday &ndash; Sunday</th><td>12pm &ndash; 10pm</td></tr>
+              <tr data-days="1"><th scope="row">Monday</th><td>Closed</td></tr>
+            </tbody>
+          </table>
+        <p class="muted">Last orders 9:30pm. Upper Thomson MRT, 5 minutes&rsquo; walk. Cash, e-wallet and cards.</p>
+        <p><a class="btn btn--ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Upper+Thomson+Singapore" target="_blank" rel="noopener">Open Upper Thomson in Google Maps</a></p>
+        <p class="muted small">Demo: the real site links to the restaurant&rsquo;s own Google Maps listing.</p>
+      </div>
+      <div class="kn-book">
+        <p class="eyebrow">Book or take away</p>
+        <h3>Tables</h3>
+        <p>WhatsApp us the day, time and how many. Walk-ins are welcome; for 8 or more, message us a day ahead.</p>
+        <p><span class="btn btn--whatsapp" role="button" tabindex="0" data-demo-inert><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Book a table</span></p>
+        <h3>Takeaway</h3>
+        <p>Send your order on WhatsApp and collect it hot in about 20 minutes. We don&rsquo;t deliver.</p>
+        <p><span class="btn btn--ghost" role="button" tabindex="0" data-demo-inert>Order takeaway</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container kn-faq">
+      <h2>Good to know</h2>
+      <div class="faq">
+        <details><summary>Do I need to book?</summary><div class="faq__a"><p>Not for small groups on weeknights. Friday and weekend evenings fill up, so a WhatsApp message the day before is safer.</p></div></details>
+        <details><summary>Do you have vegetarian pizzas?</summary><div class="faq__a"><p>Yes: the Margherita, Marinara and Funghi, plus the burrata starter and the tiramisu. They are marked V on the menu.</p></div></details>
+        <details><summary>Do you deliver?</summary><div class="faq__a"><p>No. Pizza from a wood fire goes soft in a delivery box, so we do takeaway only: order on WhatsApp and collect.</p></div></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div>
+        <p class="brand">Cinderlane Pizza</p>
+        <p class="muted">Wood-fired sourdough pizza in Upper Thomson</p>
+      </div>
+      <div>
+        <h2>Find us</h2>
+        <address style="font-style:normal">123 Demo Street</address>
+        <p class="muted">Tue&ndash;Fri 5pm&ndash;10pm &middot; Sat&ndash;Sun 12pm&ndash;10pm &middot; Closed Mon</p>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul><li><span role="button" tabindex="0" data-demo-inert>(demo number)</span></li><li><span role="button" tabindex="0" data-demo-inert>WhatsApp</span></li></ul>
+      </div>
+    </div>
+    <div class="site-footer__base">
+      <span>Website by Walk-In Studio</span>
+      <span>Privacy notice</span>
+    </div>
+  </div>
+</footer>
+<script>(function(){var t,box;function show(){if(!box){box=document.createElement('div');box.className='demo-toast';box.setAttribute('role','status');document.body.appendChild(box)}box.textContent='Demo shop, not real: on a real site this button would open a chat or call.';box.hidden=false;clearTimeout(t);t=setTimeout(function(){box.hidden=true},3200)}document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-demo-inert]');if(b){e.preventDefault();show()}});document.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('[data-demo-inert]')){e.preventDefault();show()}});addEventListener('pagereveal',function(e){var v=e.viewTransition,q=function(){};if(v){v.ready.catch(q);v.finished.catch(q);v.updateCallbackDone.catch(q)}})})()</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+/* signature.css - Signature scenes (COMPONENTS.md "Signature motion"). Motion only under html.sig-on; else finished state.
+   Built by tools/build_signature.py from template/assets/css/signature/ (core + one file per scene): edit those. */
+:root { --sig-accent: var(--c-accent); --sig-accent-ink: var(--c-accent-ink, #fff); }
+/* a photo scene: the sharpest frames of a clip, framed, when clean cut-outs could not be made (one-video pipeline, TEST ONLY) */
+.sig-photo { border-radius: 18px; box-shadow: 0 18px 40px rgba(0, 0, 0, .28); object-fit: cover; aspect-ratio: 4 / 5; background: #ddd; }

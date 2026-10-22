@@ -1,0 +1,26 @@
+/* Style C - Bright & friendly (Marblewick Learning Hub demo): white, a colour per level (teal, coral, violet),
+   heavy rounded type. Loaded after the demo's CSS; tokens from the template scale only. */
+:root { --c-bg: #ffffff; --c-surface: #ffffff; --c-surface-2: #f2f6f8; --c-border: #dde6ea; --c-primary: #0f6f6a; --mw-ink: #173a46; --mw-mark: #ff8a65;
+  --font-display: "Nunito", ui-rounded, "Arial Rounded MT Bold", sans-serif; --fw-display: 800; --tt-display: none;
+  --lv-p: #0f6f6a; --lv-s: #b8452a; --lv-j: #5b3fa0; }
+h1, h2, h3 { font-weight: 800; letter-spacing: -.01em; }
+.sc-hero { padding-block: var(--space-6); background: linear-gradient(180deg, #e8f6f4, #fff); }
+.sc-hero__grid { display: grid; gap: var(--space-6); grid-template-columns: 1.2fr .8fr; align-items: center; }
+.sc-hello { font-weight: 800; color: var(--lv-s); margin: 0 0 .4rem; font-size: 1.1rem; }
+.sc-hero h1 { font-size: clamp(2.4rem, 3.4vw + 1rem, 4.2rem); line-height: 1.04; color: var(--mw-ink); max-width: 16ch; }
+.sc-hero__actions { margin-top: var(--space-3); }
+.sc-hero__actions .btn svg { width: 1.1em; height: 1.1em; }
+.sc-tiles { list-style: none; margin: var(--space-4) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: .7rem; }
+.sc-tile a { display: grid; gap: .2rem; padding: var(--space-3); border-radius: 18px; color: #fff; text-decoration: none; min-height: 44px; }
+.sc-tile b { font-size: 1.3rem; }
+.sc-tile span { font-size: .92rem; opacity: .95; }
+.sc-tile--p a { background: var(--lv-p); } .sc-tile--s a { background: var(--lv-s); } .sc-tile--j a { background: var(--lv-j); }
+.sc-tile a:focus-visible { outline: 3px solid var(--mw-ink); outline-offset: 2px; }
+.sc-hero__photo img { border-radius: 28px; }
+.mw-level { border-radius: 22px; border-top-width: 10px; }
+#primary { border-top-color: var(--lv-p); } #secondary { border-top-color: var(--lv-s); } #jc { border-top-color: var(--lv-j); }
+#primary h3 { color: var(--lv-p); } #secondary h3 { color: var(--lv-s); } #jc h3 { color: var(--lv-j); }
+.mw-chips li { background: #eef4f6; }
+.mw-tutor__mark { background: #e8f6f4; color: var(--lv-p); }
+.mw-filter button { border-radius: 14px; }
+@media (max-width: 860px) { .sc-hero__grid { grid-template-columns: 1fr; } .sc-tiles { grid-template-columns: 1fr; } .sc-hero__photo { max-width: 22rem; } }

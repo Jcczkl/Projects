@@ -1,0 +1,14 @@
+/* ring: a 3D ring of words as a section divider */
+.sig-ring { display: grid; place-items: center; min-height: clamp(13rem, 26vw, 20rem); overflow: hidden; perspective: 900px; }
+.sig-ring__tilt { transform: rotateX(-18deg); transform-style: preserve-3d; }
+.sig-ring__spin { position: relative; width: 1px; height: 1.2em; transform-style: preserve-3d; font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3.4vw, 2.6rem); text-transform: uppercase; color: var(--sig-ring-ink, var(--sig-accent)); }
+.sig-ring__ch { position: absolute; left: -.3em; top: 0; width: .6em; text-align: center; backface-visibility: hidden;
+  transform: rotateY(calc(var(--i) * var(--step))) translateZ(var(--r)); }
+.sig-ring__ch--back { backface-visibility: visible; opacity: .3; }
+.sig-on .sig-ring__spin { animation: sig-spin 22s linear infinite; }
+.sig-on .sig-ring:not(.is-live) .sig-ring__spin { animation-play-state: paused; }
+@keyframes sig-spin { to { transform: rotateY(-360deg); } }
+.sig-ring--flat .sig-ring__flat { font-family: var(--font-display); font-size: clamp(1.2rem, 3vw, 2rem); text-transform: uppercase;
+  letter-spacing: .08em; color: var(--sig-ring-ink, var(--sig-accent)); text-align: center; margin: 0; }
+@media (prefers-reduced-motion: reduce) { .sig-ring__spin { animation: none !important; } }

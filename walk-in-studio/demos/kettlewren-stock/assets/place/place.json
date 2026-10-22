@@ -1,0 +1,66 @@
+{
+  "path": "assets/place",
+  "frames": 61,
+  "portrait_source": false,
+  "sets": {
+    "m": {
+      "w": 720,
+      "h": 1280,
+      "bytes": 1567180,
+      "quality": 45
+    },
+    "d": {
+      "w": 1600,
+      "h": 900,
+      "bytes": 2840280,
+      "quality": 45
+    }
+  },
+  "hero_t": 1.0,
+  "end_t": 15.0,
+  "walk_vh": 363,
+  "stops": [
+    {
+      "i": 0,
+      "t": 2.1,
+      "frame": 5,
+      "fills": [
+        "thin"
+      ],
+      "thin": true
+    },
+    {
+      "i": 1,
+      "t": 5.65,
+      "frame": 20,
+      "fills": []
+    },
+    {
+      "i": 2,
+      "t": 9.35,
+      "frame": 36,
+      "fills": []
+    },
+    {
+      "i": 3,
+      "t": 12.9,
+      "frame": 51,
+      "fills": []
+    }
+  ],
+  "source": {
+    "clip": "stock walk"
+  },
+  "at": "2026-10-14T15:15:35",
+  "grade": "rich",
+  "fills": {
+    "available": true,
+    "frames_before": 61,
+    "frames_after": 61,
+    "interpolated": 0,
+    "dissolved": 0,
+    "edge_frames": 0,
+    "thin_stops": 1
+  },
+  "depth": false
+}

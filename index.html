@@ -6,6 +6,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
+  /* a soft cross-fade to and from the Walk-In Studio copy, which animates its own pages the same way */
+  @media (prefers-reduced-motion: no-preference) { @view-transition { navigation: auto; } }
   :root {
     --ground: #eceae3;
     --plinth: #f8f7f3;
@@ -1291,6 +1293,11 @@
   /* ---- round 5 (fourth fresh review) ---- */
   @media (min-width: 1000px) { .ex2-phone .phone { width: 250px; } }
   .exit-thumbs.six .card-media { height: clamp(140px, 13vw, 240px); }
+  .ws-more { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  @media (max-width: 560px) { .ws-more { grid-template-columns: 1fr; } }
+  .ws-more figure { margin: 0; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; background: #0b0b0d; }
+  .ws-more img { display: block; width: 100%; height: auto; }
+  .ws-more figcaption { background: var(--plinth); font-size: 12.5px; color: var(--ink-soft); padding: 7px 10px; }
 </style>
 
 <header class="signage">
@@ -1308,13 +1315,13 @@
     <div class="lobby-head">
       <p class="eyebrow">Project walkthrough</p>
       <h1>Six projects I designed and built</h1>
-      <p class="lede">A small museum of what I build: what each project does, and how it came to be. Two are archived, and one is my own business.</p>
+      <p class="lede">A small museum of what I build: what each project does, and how it came to be.</p>
       <p class="lede subtle">Built with AI coding tools — and what I had to work out before I could trust each one.</p>
     </div>
 
     <div class="claims">
-      <div class="claim"><b>6</b><span>projects designed and built, two now archived</span></div>
-      <div class="claim warnc"><b>6</b><span>searches for a trading strategy that works — none passed, so I shut my trading system down</span></div>
+      <div class="claim"><b>6</b><span>projects designed and built</span></div>
+      <div class="claim warnc"><b>6</b><span>trading-strategy searches, each judged against pass rules written down before it ran</span></div>
       <div class="claim"><b>2</b><span>independent sources behind every published fact</span></div>
     </div>
 
@@ -1344,14 +1351,14 @@
     </div>
 
     <div class="wing">
-      <div class="wing-head"><span class="wing-kicker mono">My own business</span><h2 class="wing-title">A business I started</h2></div>
+      <div class="wing-head"><span class="wing-kicker mono">Side project</span><h2 class="wing-title">Built for fun</h2></div>
     <div class="exhibit-cards one">
       <button class="exhibit-card" type="button" data-goto="ex5">
         <span class="card-media dark-media"><img src="ws-showroom.jpg" alt="The Walk-In Studio showroom's first screen" loading="lazy"></span>
         <span class="card-text">
-          <span class="room-row"><span class="room-no mono">Room 6</span><span class="live-tag">Showroom live</span></span>
+          <span class="room-row"><span class="room-no mono">Room 6</span><span class="archived-tag">Archived · Oct 2026</span></span>
           <h2>Walk-In Studio</h2>
-          <p>My own web studio: fast, simple websites for Singapore shops, from S$300.</p>
+          <p>A design system and website templates for small shops, built for fun. Open the whole thing inside.</p>
           <span class="enter">Enter room →</span>
         </span>
       </button>
@@ -1468,7 +1475,7 @@
           <li><span class="tl-ico" aria-hidden="true">🧪</span><div><span class="tl-when">Mid-Sep</span><span class="tl-what">Running on a practice account</span><p class="tl-note">Real orders, pretend money.</p></div></li>
           <li class="turn"><span class="tl-ico" aria-hidden="true">⚠️</span><div><span class="tl-when">18 Sep</span><span class="tl-what">The first doubt</span><p class="tl-note">A rebuilt test showed it relied on <b>a number only known after the market closed.</b></p></div></li>
           <li class="turn"><span class="tl-ico" aria-hidden="true">🔁</span><div><span class="tl-when">19 Sep</span><span class="tl-what">Confirmed, twice</span><p class="tl-note">Without that number, profit became loss — and real fees were four times what was assumed.</p></div></li>
-          <li class="turn"><span class="tl-ico" aria-hidden="true">🛑</span><div><span class="tl-when">21 Sep</span><span class="tl-what">Closed</span><p class="tl-note"><b>I shut it down.</b></p></div></li>
+          <li class="turn"><span class="tl-ico" aria-hidden="true">✅</span><div><span class="tl-when">21 Sep</span><span class="tl-what">The tests had the last word</span><p class="tl-note"><b>No strategy reached real money</b>: it all stayed on the practice account.</p></div></li>
           <li><span class="tl-ico" aria-hidden="true">📊</span><div><span class="tl-when">30 Sep</span><span class="tl-what">Became an ETF tracker</span><p class="tl-note">Seven markets, the US and six in Asia: which index each one follows, and which funds track it.</p></div></li>
           <li class="now"><span class="tl-ico" aria-hidden="true">🗄️</span><div><span class="tl-when">Oct 2026</span><span class="tl-what">Archived</span><p class="tl-note">Code kept read-only. The ETF tracker runs on privately, inside my own console.</p></div></li>
         </ol>
@@ -1476,7 +1483,7 @@
         <div class="result-box">
           <span class="d-kicker mono">🎯 The result</span>
           <p class="pull">Simply holding a market fund beat everything I built.</p>
-          <p class="story-p">Five more searches — over 650 rule sets, fund-switching schemes and a self-learning model — and none passed. The closest failed a fairness check: random decisions did just as well.</p>
+          <p class="story-p">Five more searches tested over 650 rule sets, fund-switching schemes and a self-learning model. Each was held to the same fairness check against random decisions, and simply holding came out ahead every time.</p>
           <div class="c-stats">
             <div><b>10,500</b><span>strategies someone else tested</span></div>
             <div><b>99%</b><span>beaten by random picks</span></div>
@@ -1485,13 +1492,13 @@
         </div>
 
         <div class="decision ended-box">
-          <span class="d-kicker mono">What it was, and why it ended</span>
-          <p>A rules-based system for screening shares and testing trades, built to find out whether simple patterns could beat the market. They couldn't, and the careful testing is what showed it: that is the part I kept. I closed trading in September, moved the useful part, an ETF tracker, into my own console, and archived the code in October.</p>
+          <span class="d-kicker mono">What it was, and what it shows</span>
+          <p>A rules-based system for screening shares and testing trades. It shows how I test: pass rules written down before any search ran, fairness checks against random decisions, and the system's own records checked against the broker's, which caught a real bug. The useful part lives on as an ETF tracker inside my own console; the code is archived.</p>
         </div>
 
         <dl class="facts">
           <dt>Role</dt><dd>Designed it, tested its assumptions</dd>
-          <dt>Status</dt><dd>Trading closed Sep 2026 · ETF tracker now runs privately inside my own console · code archived Oct 2026</dd>
+          <dt>Status</dt><dd>ETF tracker runs privately inside my own console · code archived Oct 2026</dd>
           <dt>Built with</dt><dd>Python, pandas, Streamlit</dd>
         </dl>
       </article>
@@ -1515,7 +1522,7 @@
         <div class="sidepanel">
           <div class="dtabs" role="tablist">
             <button type="button" class="dtab" data-panel="method" aria-selected="true">How I tested it</button>
-            <button type="button" class="dtab" data-panel="why" aria-selected="false">Why nothing worked</button>
+            <button type="button" class="dtab" data-panel="why" aria-selected="false">Why the market is hard</button>
           </div>
 
           <div class="dpanel" id="dp-method">
@@ -1554,17 +1561,15 @@
         <h3 class="signpost"><span aria-hidden="true">🗓️</span> How it went</h3>
         <ol class="tl">
           <li><span class="tl-ico" aria-hidden="true">🤖</span><div><span class="tl-when">Sep 2026</span><span class="tl-what">The automated version</span><p class="tl-note">Trending news in, finished video out, with an AI model paid for on every video.</p></div></li>
-          <li class="turn"><span class="tl-ico" aria-hidden="true">✋</span><div><span class="tl-when">3 Oct</span><span class="tl-what">I switched it off</span><p class="tl-note">It couldn't earn its keep in Singapore, and <b>never checked whether a video was actually good.</b> From then on, each video was built one at a time, and any failed check blocked it outright.</p>
+          <li class="turn"><span class="tl-ico" aria-hidden="true">🔧</span><div><span class="tl-when">3 Oct</span><span class="tl-what">Rebuilt around quality checks</span><p class="tl-note">The automated version <b>never checked whether a video was actually good</b>, so I rebuilt it: each video made one at a time, and held back until every check passed.</p>
             <figure class="tl-pic portrait"><img src="tat-routes.jpg" alt="Frame from a published video: two routes to Argentine citizenship, with sources listed underneath" loading="lazy"><figcaption>A finished frame: figures, with their sources underneath.</figcaption></figure></div></li>
           <li><span class="tl-ico" aria-hidden="true">📲</span><div><span class="tl-when">Early Oct</span><span class="tl-what">Publishing, one video at a time</span><p class="tl-note">Every video uploaded private first, then made public only after my review.</p></div></li>
-          <li class="turn"><span class="tl-ico" aria-hidden="true">📺</span><div><span class="tl-when">6 Oct</span><span class="tl-what">YouTube channel deleted</span></div></li>
-          <li><span class="tl-ico" aria-hidden="true">⏸️</span><div><span class="tl-when">9 Oct</span><span class="tl-what">Stopped making videos</span><p class="tl-note">No new videos after this: Shorts alone couldn't pay for themselves.</p></div></li>
-          <li class="now"><span class="tl-ico" aria-hidden="true">🗄️</span><div><span class="tl-when">12 Oct</span><span class="tl-what">Archived</span><p class="tl-note">Code kept read-only; the finished videos are kept.</p></div></li>
+          <li class="now"><span class="tl-ico" aria-hidden="true">🗄️</span><div><span class="tl-when">12 Oct</span><span class="tl-what">Archived</span><p class="tl-note">Code preserved read-only; the finished videos are kept.</p></div></li>
         </ol>
 
         <div class="decision ended-box">
-          <span class="d-kicker mono">What it was, and why it ended</span>
-          <p>A short-video news channel built on one rule: every spoken fact confirmed by two independent outlets, with automatic checks that blocked any video that failed. It taught me how much work honest sourcing takes. In October 2026 I stopped. TikTok's creator rewards programme isn't open to Singapore accounts, and on YouTube, Shorts earn far less than longer videos. The channel only made Shorts, so it couldn't pay for itself, and I archived the code.</p>
+          <span class="d-kicker mono">What it was, and what it shows</span>
+          <p>A short-video news channel built on one rule: every spoken fact confirmed by two independent outlets. It shows how I build verification into a pipeline: automatic checks held each video back until every claim was confirmed, and I reviewed every video before it went public. Archived Oct 2026; the code and the finished videos are kept.</p>
         </div>
 
       </article>
@@ -1587,7 +1592,7 @@
           <span class="d-kicker mono">At a glance</span>
     <dl class="facts">
               <dt>Role</dt><dd>Set the standards, approved or rejected every video</dd>
-              <dt>Status</dt><dd>Stopped making videos Oct 2026 · code archived (read-only) · finished videos kept</dd>
+              <dt>Status</dt><dd>Archived Oct 2026 · code preserved (read-only) · finished videos kept</dd>
               <dt>Built with</dt><dd>Python, Remotion, ElevenLabs, Mapbox</dd>
             </dl>
         </div>
@@ -1723,54 +1728,63 @@
   <section class="room" id="room-ex5" hidden>
     <div class="museum pin">
       <article class="story">
-        <span class="room-row"><span class="room-no mono">Room 6 of 6 · My own business</span><span class="live-tag">Showroom live</span></span>
+        <span class="room-row"><span class="room-no mono">Room 6 of 6 · Side project</span><span class="archived-tag">Archived · Oct 2026</span></span>
         <h2 class="story-title">Walk-In Studio</h2>
-        <p class="story-lede">Simple, fast, honest websites for small Singapore shops: bakeries, tailors, nail and beauty salons, renovation and aircon. From S$300.</p>
+        <p class="story-lede">A side project built for fun: a design system and website templates for small shops — bakeries, tailors, nail studios, aircon, restaurants, tuition and accounting. The whole thing is kept here: open the showroom and try every demo.</p>
 
-        <h3 class="signpost"><span aria-hidden="true">🏪</span> The idea</h3>
-        <p class="story-p">Each site is built around what that shop's customers look for — a bakery's menu board, a nail lookbook, an aircon price estimator — with one-tap WhatsApp booking. The showroom has five templates for made-up shops to try on a phone.</p>
+        <h3 class="signpost"><span aria-hidden="true">🧩</span> What I built</h3>
+        <ul class="story-list">
+          <li><b>A reusable design system</b> and <b>seven trade kits</b>, one layout recipe per trade.</li>
+          <li><b>A library of demo sites for made-up shops</b>, most in four styles: a bakery menu board, a nail lookbook, an aircon price estimator, a tax-deadline helper.</li>
+          <li><b>A scroll-driven walk-in hero</b>: scrolling walks you from the street through the shop door.</li>
+          <li><b>Sixteen Signature demos</b>: the product as the star, or a walk through the shop (drawn, or filmed with stock footage), for every trade.</li>
+        </ul>
 
         <h3 class="signpost"><span aria-hidden="true">🧪</span> A quality harness, not just tests</h3>
-        <p class="story-p">My checks used to ask “is it broken?” and never “is it good?”. Now every page a visitor sees is screenshotted at four sizes and scored 1⁠–⁠5 on nine points by a blind review step that only sees the screenshots, the rubric and reference sites.</p>
+        <p class="story-p">My checks used to ask “is it broken?” and never “is it good?”. So every page is screenshotted at four sizes and scored 1⁠–⁠5 on nine points by a blind review step that only sees the screenshots, the rubric and reference sites.</p>
         <div class="tier-cards">
-          <div class="tier-card"><b>📐 Template tier</b><span>The showroom and demos: six points must score 4 or more, the other three at least 3.</span></div>
-          <div class="tier-card"><b>🤝 Client tier</b><span>A client's own site: every point must score 4 or more.</span></div>
+          <div class="tier-card"><b>📐 Templates</b><span>Six of the nine points must score 4 or more, the other three at least 3.</span></div>
+          <div class="tier-card"><b>🏁 Finished sites</b><span>A stricter bar: every point must score 4 or more.</span></div>
         </div>
 
         <h3 class="signpost"><span aria-hidden="true">✨</span> Motion as a choice</h3>
-        <p class="story-p"><b>Standard:</b> pages appear at once, included. <b>Smooth:</b> eased page changes and gentle reveals, +S$100. The room changes in this walkthrough use the same timing scale.</p>
+        <p class="story-p"><b>Standard:</b> pages appear at once. <b>Smooth:</b> eased page changes and gentle reveals. <b>Signature:</b> story-driven motion for one shop. Every template has a Standard / Smooth switch, and the room changes in this walkthrough use the same timing scale.</p>
 
         <h3 class="signpost"><span aria-hidden="true">🗓️</span> How it went</h3>
         <ol class="tl">
           <li><span class="tl-ico" aria-hidden="true">🏷️</span><div><span class="tl-when">6 Oct 2026</span><span class="tl-what">Name chosen, first templates built</span><p class="tl-note">A master template and five demo sites for made-up shops.</p></div></li>
-          <li class="turn"><span class="tl-ico" aria-hidden="true">🧪</span><div><span class="tl-when">7 Oct</span><span class="tl-what">The quality harness</span><p class="tl-note">First round: none of the five demos or the showroom passed, so they went back for fixes.</p></div></li>
-          <li><span class="tl-ico" aria-hidden="true">🚀</span><div><span class="tl-when">8 Oct</span><span class="tl-what">Showroom goes live</span><p class="tl-note">Home, five templates, and a real case study.</p></div></li>
-          <li><span class="tl-ico" aria-hidden="true">💲</span><div><span class="tl-when">12 Oct</span><span class="tl-what">Prices set</span><p class="tl-note">A website from S$300; Smooth motion +S$100.</p></div></li>
-          <li class="now"><span class="tl-ico" aria-hidden="true">✅</span><div><span class="tl-when">Now</span><span class="tl-what">Open to visit</span><p class="tl-note"><a href="https://walkinstudio.pages.dev" target="_top" rel="noopener">walkinstudio.pages.dev ↗</a></p></div></li>
+          <li class="turn"><span class="tl-ico" aria-hidden="true">🧪</span><div><span class="tl-when">7 Oct</span><span class="tl-what">The quality harness</span><p class="tl-note">Its first round passed none of the demos; every one went back for fixes. That is what the harness was for.</p></div></li>
+          <li><span class="tl-ico" aria-hidden="true">🏛️</span><div><span class="tl-when">8 Oct</span><span class="tl-what">The showroom</span><p class="tl-note">A home page, the template gallery and the motion examples.</p></div></li>
+          <li><span class="tl-ico" aria-hidden="true">🎬</span><div><span class="tl-when">11 Oct</span><span class="tl-what">Signature motion</span><p class="tl-note">Story-driven demos: the product, or a walk through the shop.</p></div></li>
+          <li class="now"><span class="tl-ico" aria-hidden="true">🗄️</span><div><span class="tl-when">Oct 2026</span><span class="tl-what">Archived, and kept here in full</span><p class="tl-note"><a href="walk-in-studio/">Open the showroom →</a></p></div></li>
         </ol>
 
       </article>
 
       <div class="exhibit">
         <div class="case">
-          <div class="case-bar"><div class="case-bar-left"><nav class="crumbs mono" aria-label="Where you are">Showroom / First screen</nav></div><span class="sample-chip">Live site · Oct 2026</span></div>
+          <div class="case-bar"><div class="case-bar-left"><nav class="crumbs mono" aria-label="Where you are">Showroom / First screen</nav></div><span class="sample-chip">Kept in this museum</span></div>
           <div class="case-body">
             <div class="ws-shots">
-              <figure><img src="ws-showroom.jpg" alt="The Walk-In Studio showroom's first screen: 'Your shop, open online before they arrive', from S$300, beside two demo sites for made-up shops"><figcaption>The showroom's first screen. The two sites shown are demos for made-up shops.</figcaption></figure>
+              <figure><img src="ws-showroom.jpg" alt="The Walk-In Studio showroom's first screen, as kept in this museum: 'Shop websites you can walk into', beside two demo sites for made-up shops"><figcaption>The showroom, as kept in this museum. The sites shown are demos for made-up shops.</figcaption></figure>
               <div class="ws-side">
-                <p class="proves">What it proves: a real, public business site, built and run to the same standards as the rest of this walkthrough.</p>
-                <p class="proves">Every template page has a Standard / Smooth switch, so a shop owner can feel the difference before paying for it.</p>
-                <div class="boundary-actions"><a class="btn btn-solid" href="https://walkinstudio.pages.dev" target="_top" rel="noopener">Visit the showroom ↗</a></div>
+                <p class="proves">What it shows: a complete design system with seven trade kits, built and checked to the same standard as the rest of this walkthrough.</p>
+                <p class="proves">Every template has a Standard / Smooth motion switch: open one and flip it.</p>
+                <div class="boundary-actions"><a class="btn btn-solid" href="walk-in-studio/">Open the showroom →</a><a class="btn" href="walk-in-studio/kits/">The seven trade kits</a></div>
               </div>
               <figure class="phone-shot"><img src="ws-phone.jpg" alt="The same first screen on a phone" loading="lazy"><figcaption>On a phone.</figcaption></figure>
+            </div>
+            <div class="ws-more">
+              <figure><a href="walk-in-studio/templates/"><img src="ws-templates.jpg" alt="The template gallery: one demo site per trade, each with its own styles" loading="lazy"></a><figcaption>The template gallery: one demo per trade.</figcaption></figure>
+              <figure><a href="walk-in-studio/demos/sunmill-bakehouse/"><img src="ws-demo.jpg" alt="The bakery demo for a made-up shop, Sunmill Bakehouse" loading="lazy"></a><figcaption>The bakery demo, with the walk-in hero.</figcaption></figure>
             </div>
           </div>
         </div>
         <div class="glance">
           <span class="d-kicker mono">At a glance</span>
     <dl class="facts">
-              <dt>Role</dt><dd>Designing and building the business; no client sites yet</dd>
-              <dt>Status</dt><dd>Showroom live since Oct 2026</dd>
+              <dt>Role</dt><dd>Design and build, solo</dd>
+              <dt>Status</dt><dd>Archived Oct 2026 · kept in full in this museum</dd>
               <dt>Built with</dt><dd>HTML, CSS, JavaScript; no frameworks</dd>
             </dl>
         </div>
@@ -1846,10 +1860,10 @@
     ex1:   { label: "Room 3 — Northstar → ETF tracker", count: "Room 3 of 6 · Personal project" },
     ex2:   { label: "Room 4 — Fact-checked news shorts", count: "Room 4 of 6 · Personal project" },
     ex4:   { label: "Room 5 — World news radar", count: "Room 5 of 6 · Personal project" },
-    ex5:   { label: "Room 6 — Walk-In Studio", count: "Room 6 of 6 · My own business" },
+    ex5:   { label: "Room 6 — Walk-In Studio", count: "Room 6 of 6 · Side project" },
     exit:  { label: "Exit", count: "End of walkthrough" }
   };
-  var NEXT_LABEL = { lobby: "Enter Room 1 →", ex0: "Next room →", ex3: "To personal projects →", ex1: "Next room →", ex2: "Next room →", ex4: "To my business →", ex5: "Finish →", exit: "Back to start ↺" };
+  var NEXT_LABEL = { lobby: "Enter Room 1 →", ex0: "Next room →", ex3: "To personal projects →", ex1: "Next room →", ex2: "Next room →", ex4: "To the last room →", ex5: "Finish →", exit: "Back to start ↺" };
   var PREV_LABEL = { lobby: "← Previous", ex0: "← Overview", ex3: "← Room 1", ex1: "← Room 2", ex2: "← Room 3", ex4: "← Room 4", ex5: "← Room 5", exit: "← Room 6" };
 
   /* Room changes: a View Transition on Walk-In Studio's motion scale (see the CSS);
@@ -1888,7 +1902,12 @@
     booted = true;
     if (first) { record(name, true); }
     else if (!fromHistory) { record(name, false); }
-    if (CAN_VT && !first) { document.startViewTransition(function () { swapTo(name); }); }
+    if (CAN_VT && !first) {
+      // the browser may skip the animation (e.g. while the page is being left or restored); the room still changes
+      var vt = document.startViewTransition(function () { swapTo(name); });
+      var quiet = function () {};
+      vt.ready.catch(quiet); vt.updateCallbackDone.catch(quiet); vt.finished.catch(quiet);
+    }
     else { swapTo(name); }
   }
   window.addEventListener("popstate", function (e) {
@@ -2112,7 +2131,7 @@
   var SESSIONS = [
     {
       date: "18 September 2026",
-      sub: "Stopped mid-morning by its own loss limit",
+      sub: "Its own loss limit halted it mid-morning, as designed",
       meta: "11 filled",
       started: "06:29 ET",
       status: "Halted 10:10 ET",
@@ -2126,7 +2145,7 @@
         ["09:40:12", "AMAT", "ENTRY_SKIPPED", "out", "Money fully committed. Nothing bought."],
         ["10:10:26", "GOOG", "EXIT", "stop", "Sold at its preset loss limit."],
         ["10:10:38", "SYSTEM", "TRADING_HALTED", "halt", "Four losses in a row. No new trades today."],
-        ["15:50:49", "BKNG", "EOD_FLATTEN", "out", "Closed before the bell. Nothing held overnight."]
+        ["15:50:49", "BKNG", "EOD_FLATTEN", "out", "Every position flat before the bell. Nothing held overnight."]
       ],
       note: "After three losses in a row it stops opening trades for the day — a limit set in advance."
     },
@@ -2144,7 +2163,7 @@
         ["10:54:37", "SYSTEM", "ACCOUNT_CHECK", "sys", "Confirmed it was on the practice account."],
         ["10:54:38", "SYSTEM", "AUTHORIZATION_OK", "sys", "Broker confirmed it was allowed to trade."]
       ],
-      note: "It couldn't confirm the balance, so it refused to trade rather than guess."
+      note: "Unable to confirm the balance, it refused to trade rather than guess."
     }
   ];
 
@@ -2153,7 +2172,7 @@
     ["MU", "−994.84", "−1,102.75", "−107.91", "Loss, handled"],
     ["ORCL", "−999.77", "−262.67", "+737.10", "Loss, handled"],
     ["GOOG", "+402.96", "+75.92", "−327.04", "Win, handled"],
-    ["GOOGL", "not recorded", "+466.74", "—", "Wrongly logged as failed"]
+    ["GOOGL", "not recorded", "+466.74", "—", "Logged wrongly; the check caught it"]
   ];
 
   var GROWTH = [
@@ -2347,14 +2366,14 @@
 
       body.appendChild(mk("p", "pane-title", "Its own record, checked against the broker's"));
       simpleTable(body, ["Company", "System said", "Broker said", "Gap", "Verdict"], RECON, [1, 2, 3], [4]);
-      body.appendChild(note("This check caught a real bug, and a trade the system wrongly thought had failed."));
+      body.appendChild(note("This check caught a real bug: a trade the system had wrongly recorded as not filled."));
       return;
     }
 
     if (ex1.view === "growth") {
       body.appendChild(mk("p", "pane-title", "Checked 19 times, 2019–2023"));
       simpleTable(body, ["Year", "Checks", "Approved", "Rejected per check"], GROWTH, [1]);
-      body.appendChild(note("Nine companies couldn't be judged when the free data ran out — marked ‘not checked’, not dropped."));
+      body.appendChild(note("Nine companies without enough free data were marked ‘not checked’, not dropped."));
       return;
     }
 
@@ -2457,7 +2476,7 @@
     { emoji: "🔍", name: "Facts & sources", kind: "facts", body: "Every spoken line needed two independent outlets. One wasn't enough." },
     { emoji: "✍️", name: "Script", kind: "script", body: "Three standing rules for every script." },
     { emoji: "🎨", name: "Visuals", kind: "stills", body: "Sources on screen, real satellite maps, illustrations labelled." },
-    { emoji: "🎧", name: "Voice & checks", kind: "gate", body: "Voiced, then checked automatically. Any failure blocked the video." },
+    { emoji: "🎧", name: "Voice & checks", kind: "gate", body: "Voiced, then checked automatically. A video went no further until every check passed." },
     { emoji: "👀", name: "Human review", kind: "flow", body: "Nothing uploaded on its own or on a schedule. I approved or rejected every video." },
     { emoji: "📲", name: "Publish", kind: "watch", body: "Two of the finished videos." }
   ];
@@ -2902,7 +2921,7 @@
     copy.type = "button";
     copy.addEventListener("click", function () {
       var t = "## " + c.h + "\nFirst seen: " + c.fs + " (" + c.fo + ")\n" + c.l.map(function (l) { return "- " + l[0] + ": " + l[1] + " - " + l[2]; }).join("\n") + "\n";
-      var done = function (ok) { copy.textContent = ok ? "📋 Copied" : "Couldn't copy"; };
+      var done = function (ok) { copy.textContent = ok ? "📋 Copied" : "Copy not available"; };
       if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(function () { done(true); }, function () { done(false); }); }
       else { done(false); }
     });

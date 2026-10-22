@@ -1,0 +1,59 @@
+/* route-globe.css — styles for route-globe.js (ported from the GAL Global website globe).
+   Colours come from --rg-* custom properties that route-globe.js sets from the preset/config,
+   so a site restyles the globe in config, not here. Defaults below = the "gal-style" preset. */
+@font-face { font-family: "Poppins"; font-style: normal; font-weight: 600; font-display: swap;
+  src: url("../fonts/poppins-600-latin.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-style: normal; font-weight: 700; font-display: swap;
+  src: url("../fonts/poppins-700-latin.woff2") format("woff2"); }
+
+.rg { margin: 0; width: 100%; max-width: 580px; margin-inline: auto; position: relative; }
+.rg-poster { display: block; width: 100%; height: auto; }
+.rg--live .rg-poster { display: none; }
+.rg-svg { display: block; width: 100%; height: auto; overflow: visible; touch-action: none; cursor: grab; }
+.rg--no-drag .rg-svg { cursor: default; touch-action: auto; }
+.rg-svg:active, .rg.is-dragging .rg-svg { cursor: grabbing; }
+/* the svg box is 680x584, so an outline would be an oval: the focus ring is a real circle */
+.rg-svg:focus-visible { outline: none; }
+.rg-focus { fill: none; stroke: var(--rg-focus, #FBF187); stroke-width: 2; stroke-opacity: 0; transition: stroke-opacity var(--dur-tap, 120ms) var(--ease-out, cubic-bezier(.2, .7, .2, 1)); }
+.rg-svg:focus-visible .rg-focus { stroke-opacity: .85; }
+.rg-grat { fill: none; stroke: var(--rg-grat, #FBF187); stroke-opacity: var(--rg-grat-opacity, .13); stroke-width: 1; }
+/* metal reads as metal because of the gradient ramp AND a dark edge */
+.rg-land { stroke: var(--rg-land-stroke, #6B4F16); stroke-opacity: .85; stroke-width: .9; stroke-linejoin: round; }
+.rg-gloss, .rg-terminator, .rg-shine { pointer-events: none; }
+.rg-inner-ring { stroke: var(--rg-inner-ring, #3A2C0C); }
+.rg-outer-ring { stroke: var(--rg-outer-ring, #FFF6CB); }
+/* each route is drawn twice: a pale casing to carry it over water, a dark core over land */
+.rg-casing { fill: none; stroke: var(--rg-casing, #F3E2AE); stroke-width: 2.6; stroke-linecap: round; opacity: .2; }
+.rg-trail { fill: none; stroke: var(--rg-trail, #4A3A12); stroke-width: 1.2; stroke-linecap: round; opacity: .42; }
+.rg-light { fill: none; stroke: var(--rg-light, #FFF6D6); stroke-width: 3.4; stroke-linecap: round;
+  filter: drop-shadow(0 0 6px var(--rg-glow, rgba(255,236,160,.9))); }
+.rg-origin { fill: var(--rg-origin, #4A3A12); opacity: .75; }
+.rg-hub { fill: var(--rg-hub, #E8C86A); stroke: var(--rg-hub-stroke, #fff); stroke-width: 1.6; }
+.rg-hub-halo { fill: var(--rg-hub, #E8C86A); opacity: 0; transform-box: fill-box; transform-origin: center; animation: rg-pulse 2.6s ease-out infinite; /* ambient loop: exempt */ }
+.rg-label rect { fill: var(--rg-pill, #141A45); stroke: var(--rg-pill-stroke, #E8C86A); stroke-opacity: .5; stroke-width: 1; }
+.rg-label text, .rg-hub-label text { fill: var(--rg-pill-text, #E8C86A); font: 600 13px var(--rg-font, Poppins, "Segoe UI", Arial, sans-serif); letter-spacing: .02em; }
+.rg-label.is-live rect { stroke: var(--rg-live-stroke, #FFDF8F); stroke-opacity: 1; stroke-width: 1.3; }
+.rg-label.is-live text { fill: var(--rg-live-text, #FFE9A8); }
+.rg-label.is-dim text { fill-opacity: .62; }   /* used when the preset sets solidDim (lines never show through a name) */
+.rg-label.is-dim rect { stroke-opacity: .25; }
+.rg-hub-label rect { fill: var(--rg-hub-pill, #E8C86A); stroke: var(--rg-hub-pill-stroke, #141A45); stroke-width: 1.4; }
+.rg-hub-label text { fill: var(--rg-hub-pill-text, #141A45); font-weight: 700; }
+/* labels move every frame, so only opacity may transition */
+.rg-label { transition: opacity var(--dur-tap, 120ms) var(--ease-out, cubic-bezier(.2, .7, .2, 1)); }
+.rg.is-dragging .rg-label { transition: none; }
+.rg-leader { stroke: var(--rg-leader, #FFDF8F); stroke-width: 1; stroke-opacity: .8; stroke-linecap: round; }
+.rg-shine { animation: rg-shine 30s ease-in-out infinite alternate; /* ambient loop: exempt */ }
+.rg-glow { animation: rg-glow 8s ease-in-out infinite alternate; /* ambient loop: exempt */ }
+@keyframes rg-pulse { 0% { opacity: .55; transform: scale(1); } 100% { opacity: 0; transform: scale(3.2); } }
+@keyframes rg-shine { from { transform: translate(-26px, -10px); } to { transform: translate(34px, 14px); } }
+@keyframes rg-glow { from { opacity: .55; } to { opacity: 1; } }
+.rg-hint { margin: 14px 0 0; display: flex; align-items: center; justify-content: center; gap: 7px;
+  font-size: .82rem; letter-spacing: .04em; text-transform: uppercase; color: var(--rg-focus, #FBF187); opacity: .55; user-select: none; }
+.rg-hint svg { width: 16px; height: 16px; }
+.rg:not(.rg--live) .rg-hint, .rg--no-drag .rg-hint { display: none; }
+.rg.is-dragging .rg-hint { opacity: 0; transition: opacity var(--dur-ui, 240ms) var(--ease-out, cubic-bezier(.2, .7, .2, 1)); }
+@media (max-width: 560px) { .rg-label text, .rg-hub-label text { font-size: 17px; } }
+@media (prefers-reduced-motion: reduce) {
+  .rg-hub-halo, .rg-shine, .rg-glow { animation: none; }
+  .rg-light { display: none; }
+}

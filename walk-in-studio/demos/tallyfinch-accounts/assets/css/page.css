@@ -1,0 +1,29 @@
+/* page.css - layout of a Signature homepage made by new_site.py --tier signature (the motion is signature.css) */
+.sig-hero { padding-block: var(--space-6) var(--space-5); overflow: clip; }
+.sig-hero__grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: var(--space-5); align-items: center; }
+.sig-hero__products { position: relative; display: flex; justify-content: center; align-items: flex-end; gap: 4%; min-height: 18rem; }
+.sig-hero__products .sig-float { flex: 0 1 34%; }                     /* size the wrappers: the cut-outs fill them */
+.sig-hero__products .sig-float:only-child { flex-basis: 56%; }
+.sig-hero__products .sig-float:nth-child(2) { flex-basis: 42%; }
+.sig-hero__products img { width: 100%; height: auto; display: block; filter: drop-shadow(0 18px 24px rgb(0 0 0 / .18)); }
+.sig-band { background: var(--c-primary); color: var(--c-bg); padding-block: var(--space-3); }
+.sig-carry { --sig-path: 1, .5, 1; --sig-product-w: clamp(140px, 22vw, 300px); --sig-product-h: clamp(210px, 33vw, 450px); }
+.sig-carry__product img { filter: drop-shadow(0 18px 24px rgb(0 0 0 / .18)); }
+.sig-carry__scene .container { max-width: 40rem; margin-left: max(var(--space-4), 6vw); }
+.sig-statement { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 4rem); line-height: 1.05; text-align: center;
+  max-width: 75%; margin-inline: auto; }
+.sig-flavour { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); align-items: center; }
+.sig-flavour h2 { font-family: var(--font-display); font-size: clamp(2.6rem, 7vw, 6rem); line-height: .95; margin: 0 0 var(--space-3); }
+.sig-flavour img { width: min(100%, 420px); height: auto; justify-self: center; filter: drop-shadow(0 18px 24px rgb(0 0 0 / .22)); }
+.sig-visit { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-4); align-items: center; }
+@media (max-width: 860px) {
+  .sig-hero__grid, .sig-flavour { grid-template-columns: 1fr; }
+  .sig-hero__products { order: -1; min-height: 12rem; }
+  .sig-carry { --sig-path: 1, 1, 1; --sig-part: 0; --sig-product-w: 84px; --sig-product-h: 126px; --sig-product-x: 10px; }
+  /* phones: the product rides low in its own corner, above the WhatsApp bar, so it never sits on the text */
+  .sig-carry .sig-carry__product { top: calc(100vh - 200px); top: calc(100svh - 200px); }
+  .sig-carry__scene .container { width: auto; margin-left: 1rem; margin-right: 104px; }   /* the cup's corner stays clear */
+  .sig-statement { max-width: none; text-align: left; }
+  .sig-flavour img { width: min(70%, 300px); }
+}
+.slot { border-bottom: 2px dashed currentColor; opacity: .8; }   /* still to write or film */

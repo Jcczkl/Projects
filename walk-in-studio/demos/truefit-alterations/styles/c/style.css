@@ -1,0 +1,130 @@
+/* Style C - Friendly neighbourhood (Truefit Alterations demo). Loaded after the demo's CSS; tokens from the template scale only. */
+/* Display face: Bricolage Grotesque 700 (OFL, self-hosted, CREDITS.md), preloaded (style.json): a friendly shop-sign grotesque. */
+@font-face { font-family: "Bricolage Grotesque"; src: url("../../assets/fonts/bricolage-grotesque-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+:root {
+  --c-bg: #ffffff;
+  --c-surface: #fff9e8;
+  --c-surface-2: #fff1bf;
+  --c-text: #1f1a14;
+  --c-muted: #554c42;
+  --c-border: #e6d9b8;
+  --c-primary: #c2410c;
+  --c-primary-ink: #ffffff;
+  --c-accent: #ffd23f;
+  --c-accent-ink: #1f1a14;
+  --c-header-bg: #ffd23f;
+  --font-display: "Bricolage Grotesque", "Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", "Arial Narrow", Arial, sans-serif;
+  --font-body: Tahoma, Verdana, "Segoe UI", system-ui, sans-serif;
+  --fw-display: 700;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --radius-btn: 999px;
+}
+.site-header::before { border-bottom: 2px solid var(--c-text); }
+.site-header .nav__link { color: var(--c-text); font-weight: 700; }
+.site-header .nav__link::after { background: var(--c-text); }
+.site-header .brand__mark rect { fill: var(--c-text); }
+.site-header .brand__mark text { fill: var(--c-accent); }
+@media (max-width: 860px) {
+  .js .site-header .nav { background: #ffd23f; border-bottom: 2px solid var(--c-text); }
+}
+.site-footer { background: var(--c-surface); }
+h1, h2, h3 { letter-spacing: 0; }
+
+/* Ruler: tape-measure ticks drawn with gradients (decoration only) */
+.fn-rule { height: 34px; background-color: var(--c-accent); border-block: 2px solid var(--c-text);
+  background-image: repeating-linear-gradient(90deg, var(--c-text) 0 2px, transparent 2px 60px),
+    repeating-linear-gradient(90deg, var(--c-text) 0 1px, transparent 1px 12px);
+  background-size: 100% 18px, 100% 9px; background-repeat: no-repeat; background-position: 0 0, 0 0; }
+
+.fn-btn { font-family: var(--font-body); font-weight: 700; box-shadow: 0 3px 0 var(--c-text); }
+.fn-btn:hover { box-shadow: 0 5px 0 var(--c-text); }
+.fn-btn--white { --btn-bg: #ffffff; --btn-ink: var(--c-text); border-color: var(--c-text); }
+.fn-small { color: var(--c-muted); font-size: var(--fs-small); }
+.eyebrow { color: var(--c-primary); }   /* inner pages: tape yellow is a background colour, never text */
+
+/* WhatsApp: same icon and words on the tape-measure yellow with an ink edge, not the bright green bar (polish pass 2026-10-10) */
+.wa-fab { background: var(--c-accent); color: var(--c-text); border: 2px solid var(--c-text); }
+@media (max-width: 600px) { .wa-fab { border-width: 2px 0 0; } }
+
+/* Signboard hero (type-led, no photo) */
+.fn-hero { background: var(--c-surface); }
+.fn-hero .container { padding-block: var(--space-5) var(--space-5); }
+.fn-tag { display: inline-block; margin: 0 0 var(--space-3); padding: .3rem .9rem; border-radius: 999px; background: var(--c-text); color: var(--c-accent); font-weight: 700; font-size: 1rem; }
+.fn-hero h1 { font-size: clamp(2.7rem, 5.4vw + 1rem, 6.6rem); line-height: .98; margin: 0 0 var(--space-3); max-width: none; }
+.fn-hero h1 span { display: block; color: var(--c-primary); }   /* fixed line break: no reflow when the web font swaps in */
+.fn-lead { font-size: var(--fs-lead); max-width: 40rem; margin: 0 0 var(--space-4); }
+.fn-tickets { list-style: none; margin: var(--space-5) 0 var(--space-3); padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3); }
+.fn-tickets li { position: relative; padding: var(--space-3) var(--space-4); background: #fff; border: 2px solid var(--c-text); border-radius: var(--radius);
+  display: flex; flex-direction: column; }
+.fn-tickets li::before { content: ""; position: absolute; top: 50%; left: -2px; width: 12px; height: 24px; margin-top: -12px; border: 2px solid var(--c-text); border-left: 0; border-radius: 0 12px 12px 0; background: var(--c-surface); }
+.fn-tickets span { font-weight: 700; color: var(--c-muted); }
+.fn-tickets b { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.2rem, 2vw + 1.2rem, 3.2rem); line-height: 1.05; color: var(--c-primary); }
+.fn-tickets small { color: var(--c-muted); font-size: 1rem; }
+.fn-tickets__time { background: var(--c-accent) !important; }
+.fn-tickets__time b { color: var(--c-text); }
+.fn-tickets__time span, .fn-tickets__time small { color: var(--c-text); }
+.fn-open { margin: 0; font-weight: 700; }
+
+/* Price board (signature) */
+.fn-board { padding-block: var(--space-7) var(--space-6); }
+.fn-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--space-3); margin-bottom: var(--space-5); }
+.fn-head h2, .fn-work h2, .fn-ready h2, .fn-visit h2 { font-size: clamp(2.2rem, 2.8vw + 1rem, 3.8rem); margin: 0; }
+.fn-head p { margin: 0; max-width: 34rem; color: var(--c-muted); }
+.fn-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3); }
+.fn-card { border: 2px solid var(--c-text); border-radius: var(--radius-lg); overflow: hidden; background: #fff; }
+.fn-card h3 { margin: 0; padding: .8rem 1.1rem; background: var(--c-accent); border-bottom: 2px solid var(--c-text); font-size: 1.35rem; }
+.fn-card ul { list-style: none; margin: 0; padding: .4rem 1.1rem .8rem; }
+.fn-card li { display: flex; justify-content: space-between; align-items: baseline; gap: .8rem; padding: .6rem 0; border-bottom: 1px dashed var(--c-border); }
+.fn-card li:last-child { border-bottom: 0; }
+.fn-card b { font-family: var(--font-display); font-weight: 700; font-size: 1.45rem; color: var(--c-primary); white-space: nowrap; }
+.fn-uniform { margin: var(--space-4) 0 0; padding: var(--space-3) var(--space-4); border-radius: var(--radius); background: var(--c-surface-2); }
+
+/* What we fix */
+.fn-work { padding-block: var(--space-6); background: var(--c-surface); border-block: 2px solid var(--c-text); }
+.fn-work__grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: var(--space-6); align-items: center; }
+.fn-work__pic { position: relative; margin: 0; }
+.fn-work__pic img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; object-position: 35% 40%; border: 2px solid var(--c-text); border-radius: var(--radius-lg); }
+.fn-work__pic figcaption { position: absolute; left: .8rem; bottom: .8rem; padding: .15rem .7rem; border-radius: 999px; background: #fff; border: 2px solid var(--c-text); font-size: .9rem; font-weight: 700; }
+.fn-work h2 { margin-bottom: var(--space-3); }
+.fn-chips { list-style: none; margin: var(--space-4) 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+.fn-chips li { padding: .35rem .95rem; border: 2px solid var(--c-text); border-radius: 999px; background: #fff; font-weight: 700; font-size: 1.05rem; }
+
+/* When is it ready: a tape-measure timeline */
+.fn-ready { padding-block: var(--space-7); }
+.fn-ready h2 { margin-bottom: var(--space-5); }
+.fn-line { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); position: relative; }
+.fn-line::before { content: ""; position: absolute; left: 0; right: 0; top: 1.05rem; height: 10px; background: var(--c-accent); border-block: 2px solid var(--c-text); }
+.fn-line li { position: relative; padding-top: 0; }
+.fn-line b { position: relative; display: inline-block; padding: .3rem .9rem; border: 2px solid var(--c-text); border-radius: 999px; background: #fff; font-size: 1.05rem; margin-bottom: var(--space-3); }
+.fn-line h3 { margin-bottom: .3rem; }
+.fn-line p { margin: 0; color: var(--c-muted); }
+
+/* Visit + FAQ */
+.fn-visit { padding-block: var(--space-6) var(--space-7); background: var(--c-surface-2); }
+.fn-visit__grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: var(--space-6); align-items: start; }
+.fn-visit__card { padding: var(--space-5); background: #fff; border: 2px solid var(--c-text); border-radius: var(--radius-lg); }
+.fn-visit h2 { margin-bottom: var(--space-3); }
+.fn-addr { font-size: 1.35rem; font-weight: 700; margin-bottom: .3rem; }
+.fn-hours { margin: var(--space-3) 0 var(--space-4); }
+.fn-hours td { white-space: nowrap; }   /* "10am – 7pm" stays on one line on phones */
+.fn-faq-h { margin-bottom: var(--space-4) !important; }
+.fn-visit .faq details { border: 2px solid var(--c-text); background: #fff; border-radius: var(--radius); }
+
+@media (max-width: 1100px) {
+  .fn-cards { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 860px) {
+  .fn-hero .container { padding-block: var(--space-4); }
+  .fn-tickets { grid-template-columns: 1fr 1fr; margin-top: var(--space-4); gap: .6rem; }
+  .fn-tickets li { padding: .6rem .9rem; }
+  .fn-work__grid, .fn-visit__grid { grid-template-columns: 1fr; gap: var(--space-4); }
+  .fn-work__pic img { aspect-ratio: 4 / 3; }
+  .fn-line { grid-template-columns: 1fr; gap: var(--space-4); padding-left: 1.6rem; }
+  .fn-line::before { left: 0; right: auto; top: 0; bottom: 0; width: 10px; height: auto; border-block: 0; border-inline: 2px solid var(--c-text); }
+  .fn-visit__card { padding: var(--space-4); }
+}
+@media (max-width: 600px) {
+  .fn-cards { grid-template-columns: 1fr; }
+  .fn-tickets b { font-size: 2rem; }
+}

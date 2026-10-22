@@ -1,0 +1,8 @@
+{
+  "name": "Heritage kopitiam",
+  "title": "Sunmill Bakehouse | Neighbourhood bakery in Bedok (style D: Heritage kopitiam)",
+  "description": "Demo website, style D: an old-school kopitiam signboard look for a neighbourhood bakery in Bedok. The price board, cakes to order, opening hours.",
+  "preload": [
+    "zilla-slab-700.woff2"
+  ]
+}

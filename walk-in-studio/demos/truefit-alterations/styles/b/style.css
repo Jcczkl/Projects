@@ -1,0 +1,117 @@
+/* Style B - Premium dark (Truefit Alterations demo). Loaded after the demo's CSS; tokens from the template scale only. */
+/* Display face: Bodoni Moda (OFL, self-hosted, CREDITS.md); the 400 file is preloaded (style.json). */
+@font-face { font-family: "Bodoni Moda"; src: url("../../assets/fonts/bodoni-moda-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Bodoni Moda"; src: url("../../assets/fonts/bodoni-moda-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+:root {
+  color-scheme: dark;
+  --c-bg: #121110;
+  --c-surface: #1b1a18;
+  --c-surface-2: #201e1b;
+  --c-text: #f1ebe0;
+  --c-muted: #bdb4a6;
+  --c-border: #3a3631;
+  --c-primary: #c8a25e;
+  --c-primary-ink: #121110;
+  --c-accent: #c8a25e;
+  --c-accent-ink: #121110;
+  --c-focus: #f0d49a;
+  --c-header-bg: #121110;
+  --font-display: "Bodoni Moda", "Bodoni MT", "Bodoni 72", Didot, "Didot LT STD", "Book Antiqua", Georgia, serif;
+  --font-body: "Gill Sans MT", "Gill Sans", Calibri, "Segoe UI", system-ui, sans-serif;
+  --fw-display: 400;
+  --radius: 2px;
+  --radius-lg: 4px;
+  --radius-btn: 2px;
+}
+.site-header::before { border-bottom: 1px solid var(--c-border); }
+.site-header .nav__link { color: var(--c-text); letter-spacing: .12em; text-transform: uppercase; font-size: .9rem; }
+.site-header .brand { color: var(--c-text); }
+@media (max-width: 860px) {
+  .js .site-header .nav { background: #121110; border-bottom-color: var(--c-border); }
+  .js .site-header .nav__link { font-size: 1.1rem; }
+}
+.site-footer { background: #0c0b0a; border-top: 1px solid var(--c-border); }
+.site-footer a { color: var(--c-text); }
+h1 em, h2 em { font-style: italic; }
+
+.pd-label { margin: 0 0 var(--space-3); font-size: .85rem; letter-spacing: .28em; text-transform: uppercase; color: var(--c-primary); }
+.pd-btn { border-radius: var(--radius-btn); letter-spacing: .06em; }
+.pd-btn--line { --btn-bg: transparent; --btn-ink: var(--c-text); border-color: var(--c-primary); }
+.pd-btn--line:hover { background: rgba(200,162,94,.12); }
+.pd-note { color: var(--c-muted); font-size: var(--fs-small); }
+.pd-link { color: var(--c-primary); display: inline-flex; align-items: center; min-height: 44px; }
+
+/* WhatsApp: same icon and words, dark with a gold line instead of the bright green bar (polish pass 2026-10-10) */
+.wa-fab { background: #1b1a18; color: var(--c-primary); border: 1px solid var(--c-primary); }
+@media (max-width: 600px) { .wa-fab { border-width: 1px 0 0; } }
+
+/* Hero: split, words left, tall framed photo right */
+.pd-hero { padding-block: var(--space-6) var(--space-7); }
+.pd-hero__grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: var(--space-6); align-items: center; }
+.pd-hero h1 { font-size: clamp(2.8rem, 4.6vw + 1rem, 6rem); line-height: 1.02; margin: 0 0 var(--space-4); letter-spacing: -.01em; }
+.pd-hero h1 em { display: block; color: var(--c-primary); }
+.pd-lead { font-size: var(--fs-lead); color: var(--c-muted); max-width: 32rem; margin: 0 0 var(--space-5); }
+.pd-also { margin: var(--space-5) 0 0; padding-top: var(--space-3); border-top: 1px solid var(--c-border); color: var(--c-muted); font-size: var(--fs-small); max-width: 34rem; }
+.pd-hero__pic { position: relative; margin: 0 18px 0 0; justify-self: end; width: min(100% - 18px, 500px); }
+.pd-hero__pic::before { content: ""; position: absolute; inset: 18px -18px -18px 18px; border: 1px solid var(--c-primary); }
+.pd-hero__pic img { position: relative; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 40% 60%; filter: saturate(.75) brightness(.92); }
+.pd-hero__pic figcaption, .pd-sheet__pic figcaption { position: absolute; left: .8rem; bottom: .8rem; padding: .15rem .6rem; background: rgba(18,17,16,.92); color: var(--c-text); font-size: .85rem; }
+
+/* Order sheet (signature) */
+.pd-sheet { padding-block: var(--space-7); background: var(--c-surface); border-block: 1px solid var(--c-border); }
+.pd-sheet__grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: var(--space-6); align-items: center; }
+.pd-sheet__pic { position: relative; margin: 0; width: min(100%, 460px); }
+.pd-sheet__pic img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.pd-sheet h2 { font-size: clamp(2.2rem, 2.6vw + 1rem, 3.6rem); margin-bottom: var(--space-4); }
+.pd-lines { list-style: none; margin: 0 0 var(--space-4); padding: 0; }
+.pd-lines li { display: flex; align-items: baseline; gap: .8rem; padding: .9rem 0; border-bottom: 1px solid var(--c-border); }
+.pd-lines span { font-family: var(--font-display); font-size: clamp(1.35rem, .6vw + 1.1rem, 1.7rem); }
+.pd-lines small { display: block; font-family: var(--font-body); font-size: 1rem; color: var(--c-muted); }
+.pd-lines i { flex: 1; min-width: 1.5rem; border-bottom: 2px dotted rgba(200,162,94,.55); transform: translateY(-.35em); }
+.pd-lines b { font-weight: 400; font-size: 1.25rem; color: var(--c-primary); white-space: nowrap; letter-spacing: .04em; }
+
+/* The fitting: I / II / III */
+.pd-fit { padding-block: var(--space-7); }
+.pd-fit h2 { font-size: clamp(2.2rem, 2.6vw + 1rem, 3.6rem); max-width: 40rem; margin-bottom: var(--space-6); }
+.pd-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
+.pd-steps li { border-top: 1px solid var(--c-primary); padding-top: var(--space-4); }
+.pd-steps__n { display: block; font-family: var(--font-display); font-size: 4rem; line-height: 1; color: var(--c-primary); margin-bottom: var(--space-3); }
+.pd-steps h3 { font-size: 1.6rem; margin-bottom: .5rem; }
+.pd-steps p { color: var(--c-muted); margin: 0; }
+
+/* Alterations line */
+.pd-alt { padding-block: var(--space-6); background: var(--c-surface-2); border-block: 1px solid var(--c-border); }
+.pd-alt__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--space-3); margin-bottom: var(--space-5); }
+.pd-alt__head h2 { margin: 0; font-size: clamp(1.9rem, 1.8vw + 1rem, 2.8rem); }
+.pd-alt__head p { margin: 0; color: var(--c-muted); }
+.pd-alt__row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 0; }
+.pd-alt__row div { display: flex; flex-direction: column; justify-content: space-between; padding: var(--space-3) var(--space-4); border-left: 1px solid var(--c-border); }
+.pd-alt__row div:first-child { border-left: 0; padding-left: 0; }
+.pd-alt__row dt { color: var(--c-muted); }
+.pd-alt__row dd { margin: .2rem 0 0; font-family: var(--font-display); font-size: 2.4rem; line-height: 1.1; color: var(--c-text); }
+
+/* Visit */
+.pd-visit { padding-block: var(--space-7); }
+.pd-visit__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); align-items: start; }
+.pd-visit h2 { font-size: clamp(2.2rem, 2.6vw + 1rem, 3.6rem); }
+.pd-hours { margin: var(--space-4) 0 0; }
+.pd-hours div { display: flex; justify-content: space-between; gap: 1rem; padding: .85rem 0; border-bottom: 1px solid var(--c-border); }
+.pd-hours dd { margin: 0; font-family: var(--font-display); font-size: 1.4rem; }
+.pd-visit__card { padding: var(--space-5); border: 1px solid var(--c-primary); }
+.pd-addr { font-family: var(--font-display); font-size: 1.7rem; line-height: 1.2; }
+.pd-visit__card p:not(.pd-addr):not(.pd-note) { color: var(--c-muted); }
+.pd-visit__card .btn-row { margin-block: var(--space-4); }
+
+@media (max-width: 860px) {
+  .pd-hero { padding-block: var(--space-5) var(--space-6); }
+  .pd-hero__grid, .pd-sheet__grid, .pd-visit__grid { grid-template-columns: 1fr; gap: var(--space-5); }
+  .pd-hero__pic { justify-self: start; width: calc(100% - 18px); }
+  .pd-hero__pic img { aspect-ratio: 5 / 4; object-position: 40% 70%; }
+  .pd-sheet__pic { order: 2; }
+  .pd-sheet__pic img { aspect-ratio: 5 / 4; object-position: 50% 70%; }
+  .pd-steps { grid-template-columns: 1fr; gap: var(--space-4); }
+  .pd-steps__n { font-size: 3rem; }
+  .pd-alt__row { grid-template-columns: 1fr 1fr; }
+  .pd-alt__row div, .pd-alt__row div:first-child { border-left: 0; padding: var(--space-3) 0; border-top: 1px solid var(--c-border); }
+  .pd-visit__card { padding: var(--space-4); }
+}

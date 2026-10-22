@@ -1,0 +1,85 @@
+@font-face { font-family: "Fraunces"; src: url("../fonts/fraunces-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+/* Sunmill Bakehouse — "warm shop counter" (business/layout_dna.md, round 3).
+   Full-bleed bake, a typographic menu board, cakes by occasion, Step inside, Find us. */
+h1, h2, h3 { letter-spacing: -.01em; }
+
+/* Hero: the bake, full-bleed; words on the clean pale wood at the left (no dark wash) */
+.sm-hero { position: relative; min-height: min(86svh, 900px); display: grid; align-items: center; overflow: hidden; background: #e9e4dc; }
+.sm-hero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 85% 50%; }
+/* a light cream fade on the left holds the words; the bread stays bright on the right */
+.sm-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--c-bg) 0%, color-mix(in srgb, var(--c-bg) 88%, transparent) 30%, transparent 58%); }
+.sm-hero__text, .sm-hero .sample-note { z-index: 1; }
+.sm-hero__text { position: relative; padding-block: var(--space-6); }
+.sm-hero__text > * { max-width: 30rem; }
+.sm-hero h1 { font-size: clamp(2.8rem, 3.6vw + 1rem, 4.8rem); line-height: 1.02; letter-spacing: -.02em; color: #2a1a0f; }
+.sm-hero__text > h1 { max-width: 34rem; }   /* Fraunces is wider than the old Palatino stack: three lines at 1440, not five */
+.sm-hero .lead { color: #3b2a1e; font-weight: 600; }
+.sm-hero .eyebrow { color: var(--c-primary); }
+.sample-note { position: absolute; right: 1rem; bottom: 1rem; margin: 0; padding: .2rem .6rem; border-radius: 999px; background: rgba(255,255,255,.9); color: #111; font-size: .85rem; font-weight: 600; }
+@media (max-width: 760px) {
+  .sm-hero { display: block; min-height: 0; background: var(--c-bg); }
+  .sm-hero__img { position: relative; height: 34svh; object-position: 72% 50%; }   /* 34svh: order buttons fully on the first phone screen (review 2026-10-08) */
+  .sm-hero::after { display: none; }
+  .sm-hero__text { padding-block: var(--space-4) var(--space-5); }
+  .sm-hero .sample-note { top: calc(34svh - 2.4rem); bottom: auto; }
+}
+
+/* Menu board: a list with dotted leaders, not cards */
+.mb { display: grid; gap: var(--space-6); grid-template-columns: .8fr 1.2fr; align-items: start; }
+.mb__photos { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); margin-top: var(--space-4); }
+.mb__photos img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); }
+.mb__list { list-style: none; margin: 0; padding: var(--space-5); background: #2b1d14; color: #f7ecd9; border-radius: var(--radius-lg); }
+.mb__list li { display: grid; grid-template-columns: auto 1fr auto; gap: .6rem; align-items: baseline; padding: .7rem 0; border-bottom: 1px solid rgba(247,236,217,.14); }
+.mb__list li:last-child { border-bottom: 0; }
+.mb__name { font-family: var(--font-display); font-size: 1.25rem; }
+.mb__name small { display: block; font-family: var(--font-body); font-size: 1rem; color: #d9c6a8; }
+.mb__dots { border-bottom: 2px dotted rgba(247,236,217,.35); transform: translateY(-.3em); }
+.mb__price { font-variant-numeric: tabular-nums; font-weight: 700; color: #f2c46d; }
+
+/* Cakes by occasion */
+.sm-cakes { background: var(--c-surface-2); }
+.sm-cakes__head { display: grid; gap: var(--space-5); grid-template-columns: 1.4fr .6fr; align-items: center; margin-bottom: var(--space-5); }
+.sm-cakes__head img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-lg); }
+.occasions { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
+.occasion { padding: var(--space-4); border-top: 4px solid var(--c-primary); background: var(--c-bg); border-radius: 0 0 var(--radius) var(--radius); display: grid; gap: .4rem; align-content: start; }
+.occasion h3 { margin: 0; font-size: 1.5rem; }
+.occasion p { margin: 0; }
+.occasion__when { color: var(--c-primary); font-weight: 700; }
+.occasion__order { font-weight: 700; display: inline-flex; min-height: 44px; align-items: center; }
+
+/* Visit + Find us */
+.visit { display: grid; gap: var(--space-6); grid-template-columns: 1fr 1fr; align-items: start; }
+.find-us { padding: var(--space-5); border: 2px solid var(--c-border); border-radius: var(--radius-lg); }
+.find-us h3 { margin-top: 0; }
+.find-us__addr { font-size: 1.2rem; font-weight: 700; }
+.find-us ul { list-style: none; padding: 0; margin: 0 0 var(--space-4); display: grid; gap: .4rem; }
+.find-us li { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: .5rem; }   /* a long line wraps in its own column (review 2026-10-13) */
+.find-us strong { display: block; }
+@media (max-width: 600px) { .find-us .btn { width: 100%; justify-content: center; text-align: center; } }
+.sm-faq { max-width: 52rem; }
+
+@media (max-width: 860px) {
+  .mb, .sm-cakes__head, .visit { grid-template-columns: 1fr; }
+  .sm-cakes__head img { max-width: 60%; }
+  .mb__list { padding: var(--space-4); }
+}
+
+/* Hierarchy fixes (review 2026-10-08): the photos fill the column beside the board; the cake photo leads its section */
+.mb { align-items: stretch; }
+.mb__head { display: flex; flex-direction: column; }
+.mb__photos { grid-template-columns: 1fr; flex: 1; }
+.mb__photos img { aspect-ratio: 3 / 2; height: 100%; }
+.sm-cakes__head { grid-template-columns: .7fr 1.3fr; }
+.sm-cakes__head img { order: -1; aspect-ratio: 4 / 3; object-position: 50% 52%; }   /* the layer cake, centred (photo swapped 2026-10-10) */
+@media (max-width: 860px) {
+  .mb__photos { grid-template-columns: 1fr 1fr; }
+  .mb__photos img { aspect-ratio: 1; }
+  .sm-cakes__head { grid-template-columns: 1fr; }
+  .sm-cakes__head img { max-width: none; aspect-ratio: 16 / 10; object-position: 50% 52%; }
+}
+
+/* WhatsApp bar / bubble in A's palette: espresso with a gold glyph instead of the bright green (finish pass 2026-10-10).
+   Scoped to option A: the style options load this file too and tint the bar themselves. */
+html:not([data-style]) .wa-fab { background: #2b1a10; color: #fbf4e9; }
+html:not([data-style]) .wa-fab svg { color: #f2b544; }
+@media (max-width: 600px) { html:not([data-style]) .wa-fab { border-top: 3px solid #f2b544; } }

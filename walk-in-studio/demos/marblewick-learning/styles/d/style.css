@@ -1,0 +1,20 @@
+/* Style D - Clean planner (Marblewick Learning Hub demo): white, graphite, a faint planner grid, one green; the
+   timetable is the first screen, times in a mono face. Loaded after the demo's CSS; tokens from the template scale only. */
+@font-face { font-family: "IBM Plex Mono"; src: url("../../assets/fonts/ibm-plex-mono-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+:root { --c-bg: #ffffff; --c-surface: #ffffff; --c-surface-2: #f3f5f4; --c-border: #dfe3e1; --c-primary: #1d6b4f; --mw-ink: #22282b; --mw-mark: #1d6b4f;
+  --font-display: system-ui, "Segoe UI", Roboto, sans-serif; --fw-display: 700; --tt-display: none;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace; }
+body { background-image: linear-gradient(var(--c-border) 1px, transparent 1px); background-size: 100% 2.2rem; background-attachment: local; }
+.sd-hero { padding-block: var(--space-5) var(--space-2); }
+.sd-hero h1 { font-size: clamp(2.2rem, 3vw + 1rem, 3.6rem); color: var(--mw-ink); }
+.sd-hero .lead { max-width: 40rem; }
+.sd-tt { padding-top: var(--space-3); background: transparent; }
+.mw-table td:nth-child(2), .mw-table td:first-child, .price-list td { font-family: var(--font-mono); }
+.mw-table td:first-child { color: var(--mw-mark); }
+.mw-tt__wrap { border-radius: 6px; }
+.mw-level { border-radius: 6px; border-top: 3px solid var(--mw-mark); }
+.mw-filter button { border-radius: 6px; border-color: var(--mw-ink); color: var(--mw-ink); }
+.mw-filter button[aria-pressed="true"] { background: var(--mw-mark); border-color: var(--mw-mark); color: #fff; }
+.mw-tutor, .mw-faq details { border-radius: 6px; }
+.mw-tutor__mark { border-radius: 6px; background: var(--c-surface-2); color: var(--mw-mark); }
+.mw-steps li::before { border-radius: 6px; background: var(--mw-mark); }

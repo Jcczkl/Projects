@@ -1,0 +1,150 @@
+/* Tumblepearl Tea Bar - Signature demo (design.md). Look only; the moving parts live in signature.css. */
+@font-face { font-family: "Anton"; src: url("../fonts/anton-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Nunito"; src: url("../fonts/nunito-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Nunito"; src: url("../fonts/nunito-800.woff2") format("woff2"); font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: "Pacifico"; src: url("../fonts/pacifico-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+
+:root {
+  --c-bg: #fff4e2; --c-surface: #fffaf1; --c-surface-2: #fbe9c9; --c-text: #2b160c; --c-muted: #5f4636; --c-border: #ead6b6;
+  --c-primary: #3a1d12; --c-primary-ink: #fff4e2; --c-accent: #ffcf3f; --c-accent-ink: #2b160c;
+  --c-header-bg: #fff4e2; --c-whatsapp: #1f7a46;
+  --font-display: "Anton", "Impact", "Arial Narrow", sans-serif;
+  --font-body: "Nunito", "Segoe UI", system-ui, sans-serif;
+  --fw-display: 400; --radius: 18px; --radius-lg: 28px; --reveal-distance: 24px;
+  --sig-accent: #ffcf3f; --sig-accent-ink: #2b160c; --sig-intro-bg: #3a1d12; --sig-bubble: #fff4e2;
+}
+body { background: var(--c-bg); color: var(--c-text); font-family: var(--font-body); }
+.site-header .brand span { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: .01em; text-transform: lowercase; }
+.nav__link { font-weight: 800; }
+.nav__cta { background: var(--c-primary); color: var(--c-primary-ink); }
+.tp-display, .tp-h1 { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; line-height: .9; letter-spacing: .005em; }
+.tp-script { font-family: "Pacifico", cursive; text-transform: none; font-weight: 400; }
+.tp-kicker { font-weight: 800; letter-spacing: .14em; text-transform: uppercase; font-size: 1rem; margin: 0 0 var(--space-3); }
+.tp-btn { min-height: 52px; padding-inline: 1.5rem; border-radius: 999px; background: var(--c-primary); color: var(--c-primary-ink); font-weight: 800;
+  border: 3px solid var(--c-primary); transition: transform var(--dur-tap) var(--ease-out), background var(--dur-ui) var(--ease-out); }
+.tp-btn:hover { transform: translateY(-2px); }
+.tp-btn--ghost { background: transparent; color: var(--c-primary); }
+.tp-link { color: inherit; font-weight: 800; text-underline-offset: .25em; display: inline-flex; min-height: 44px; align-items: center; }
+
+/* intro */
+.sig-intro { color: #fff4e2; }
+
+/* hero */
+.tp-hero { position: relative; overflow: hidden; padding-block: var(--space-6) var(--space-7); }
+.tp-pearls { position: absolute; inset: 0; pointer-events: none; opacity: .14;
+  background-image: radial-gradient(circle at 30% 30%, #2b160c 0 7px, transparent 8px), radial-gradient(circle at 60% 70%, #2b160c 0 5px, transparent 6px);
+  background-size: 120px 120px, 170px 170px; background-position: 0 0, 40px 60px;
+  /* the pearls stay on the cups' side, never behind the words */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0 50%, #000 66%); mask-image: linear-gradient(90deg, transparent 0 50%, #000 66%); }
+.sig-on .tp-pearls { animation: tp-drift 40s linear infinite; }
+@keyframes tp-drift { to { background-position: 0 -480px, 40px -620px; } }
+.tp-hero__grid { position: relative; display: grid; grid-template-columns: 1.15fr .85fr; gap: var(--space-5); align-items: center; min-height: min(78vh, 760px); }
+.tp-eyebrow { font-weight: 800; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 var(--space-3); }
+.tp-hero h1 { margin: 0 0 var(--space-4); }
+.tp-hero h1 .tp-script { display: block; font-size: clamp(2.4rem, 5vw, 4.6rem); color: #e8505b; line-height: 1; transform: rotate(-6deg) translate(.3em, -.2em);
+  margin-bottom: .3em; position: relative; z-index: 1; }   /* sits above SHAKE, never on it */
+.tp-h1 { display: block; font-size: clamp(4.6rem, 13vw, 11rem); color: var(--c-primary); }
+.tp-lead { font-size: var(--fs-lead); max-width: 30rem; margin: 0 0 var(--space-4); }
+.tp-hero__cups { position: relative; height: min(70vh, 640px); }
+.tp-cup { position: absolute; height: auto; filter: drop-shadow(0 18px 22px rgba(43,22,12,.22)); }
+.tp-cup--1 { width: 42%; left: 4%; top: 30%; color: #c98a4b; }
+.tp-cup--2 { width: 54%; left: 30%; top: 4%; color: #f2a516; }
+.tp-cup--3 { width: 36%; right: 0; top: 46%; color: #9b7cc4; }
+
+/* band */
+.tp-band { background: var(--c-primary); color: var(--sig-accent); --sig-band-ink: var(--sig-accent); padding-block: var(--space-4); }
+
+/* carry */
+.tp-carry { --sig-product-w: clamp(150px, 20vw, 260px); --sig-product-h: clamp(225px, 30vw, 390px); --sig-product-x: 9vw; --sig-path: 1, 1, 1, .2, 0; color: var(--c-primary-ink); }
+.tp-scene--1 { background: #3a1d12; }
+.tp-scene--2 { background: #8a4b22; }
+.tp-scene--3 { background: #5a3c86; }
+.tp-scene__text { max-width: 34rem; }
+.tp-scene__text h2 { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; font-size: clamp(2.6rem, 6vw, 5rem); line-height: .95; margin: 0 0 var(--space-3); }
+.tp-scene__text p { font-size: var(--fs-lead); }
+.tp-kicker { color: var(--sig-accent); }
+.tp-statement { font-family: var(--font-display); text-transform: uppercase; font-size: clamp(2.8rem, 6.4vw, 5.8rem); line-height: 1; margin: 0;
+  max-width: min(62%, 46rem); }
+/* scene 2 rests low with the cup to its right; on the way to scene 3 the cup sweeps left through it (the parting),
+   and scene 3's text moves right */
+.tp-scene--2 { align-items: end; padding-bottom: 12vh; }
+.tp-scene--3 .tp-scene__text { margin-right: 6vw; }
+
+/* wipe + sweetness */
+.tp-wipe { --sig-wipe-from: #5a3c86; --sig-wipe-to: var(--sig-accent); height: 55vh; height: 55svh; }
+/* the wipe ends on a half pixel, where its purple base showed as a 1 px line: the yellow section overlaps it by 1 px */
+.tp-sweet { position: relative; margin-top: -1px; background: var(--sig-accent); color: var(--sig-accent-ink); padding-block: var(--space-3) var(--space-7); }
+.tp-sweet .tp-display { font-size: clamp(3.4rem, 9vw, 8rem); margin: 0 0 var(--space-3); }
+.tp-sweet__lead { font-size: var(--fs-lead); max-width: 36rem; }
+.tp-sweet__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); margin-top: var(--space-5); }
+.tp-sweet h3 { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; font-size: 1.8rem; margin: var(--space-4) 0 var(--space-3); }
+/* sugar/ice levels are information, not buttons: a plain list with dots, no pill */
+.tp-chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .3rem .8rem; }
+.tp-chips li { font-weight: 800; font-size: 1.15rem; }
+.tp-chips li:not(:last-child)::after { content: "\00b7"; margin-left: .8rem; opacity: .6; }
+.tp-stickers { list-style: none; margin: 0; padding: var(--space-3) 0 0; display: flex; flex-wrap: wrap; gap: 1.2rem 1rem; }
+.tp-sticker { padding: .9rem 1.3rem; border-radius: 999px; background: #c8323f; color: #fff; font-family: var(--font-display); text-transform: uppercase;
+  font-size: 1.5rem; letter-spacing: .02em; box-shadow: 4px 5px 0 var(--c-text); }
+.tp-sticker b { font-family: var(--font-body); font-weight: 800; font-size: 1.1rem; margin-left: .4rem; text-transform: none; }
+.tp-sticker--dark { background: var(--c-text); color: var(--sig-accent); }
+.tp-sticker--cream { background: #fff4e2; color: var(--c-text); }
+
+/* ink flavour scenes */
+.tp-flavour { display: grid; grid-template-columns: .8fr 1.2fr; gap: var(--space-6); align-items: center; padding-block: var(--space-6); }
+.tp-flavour__cup { width: min(100%, 300px); height: auto; justify-self: center; filter: drop-shadow(0 22px 26px rgba(0,0,0,.28)); }
+.tp-flavour .tp-display { font-size: clamp(3.6rem, 10vw, 9rem); margin: 0 0 var(--space-3); }
+.tp-flavour p { font-size: var(--fs-lead); max-width: 30rem; }
+.tp-flavour .tp-kicker { color: inherit; opacity: .9; }
+.tp-price { font-family: var(--font-display); font-size: 2.4rem !important; margin-top: var(--space-3); }
+
+/* ring */
+.tp-ring { background: var(--c-primary); --sig-ring-ink: var(--sig-accent); padding-block: var(--space-4) var(--space-5); }
+
+/* menu + visit */
+.tp-menu .tp-display, .tp-visit .tp-display { font-size: clamp(3rem, 7vw, 5.6rem); margin: 0 0 var(--space-3); }
+.tp-menu__lead { color: var(--c-muted); }
+.tp-menu__cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); margin-top: var(--space-5); }
+.tp-menu h3, .tp-visit h3 { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; font-size: 1.7rem; margin: 0 0 var(--space-3); }
+.tp-list { margin: 0; }
+.tp-list div { display: flex; justify-content: space-between; gap: 1rem; padding: .7rem 0; border-bottom: 2px dashed var(--c-border); font-size: 1.1rem; }
+.tp-list dd { margin: 0; font-weight: 800; white-space: nowrap; }
+.tp-visit__grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-6); align-items: start; }
+.tp-steps { padding-left: 1.4rem; font-size: 1.1rem; }
+.tp-steps li { margin-bottom: .6rem; }
+.tp-visit__card { background: var(--c-surface); border: 3px solid var(--c-text); border-radius: var(--radius-lg); padding: var(--space-5); box-shadow: 6px 7px 0 var(--sig-accent); }
+.tp-visit__card address { font-style: normal; font-weight: 800; font-size: 1.15rem; }
+.tp-faq { margin-top: var(--space-6); max-width: 48rem; }
+
+/* close */
+.tp-close { background: var(--c-primary); color: var(--c-primary-ink); padding-block: var(--space-7); text-align: center; }
+.tp-close__line { font-family: var(--font-display); text-transform: uppercase; font-size: clamp(2.6rem, 7vw, 6rem); line-height: 1; margin: 0; }
+.tp-close__line .tp-script { color: var(--sig-accent); text-transform: none; font-size: .8em; }
+
+.wa-fab { background: var(--c-primary); color: var(--sig-accent); }
+
+@media (max-width: 860px) {
+  .tp-hero__grid, .tp-sweet__grid, .tp-visit__grid, .tp-menu__cols { grid-template-columns: 1fr; }
+  .tp-hero__grid { min-height: 0; }
+  .tp-hero { padding-top: var(--space-4); }
+  .tp-hero__cups { order: -1; height: 200px; }
+  .tp-cup--1 { width: 24%; left: 14%; top: 26%; }
+  .tp-cup--2 { width: 30%; left: 36%; top: 0; }
+  .tp-cup--3 { width: 21%; left: auto; right: 12%; top: 34%; }
+  .tp-hero__grid { gap: var(--space-3); }
+  .tp-wipe { height: 40vh; height: 40svh; }
+  .tp-carry { --sig-product-w: 120px; --sig-product-h: 180px; --sig-product-x: 3vw; }
+  /* phones: the cup keeps its own column on the right, so it never sits on text */
+  .tp-carry { --sig-path: 1, 1, 1; --sig-part: 0; --sig-product-w: 76px; --sig-product-h: 114px; --sig-product-x: 10px; }
+  .tp-carry .sig-carry__product { top: calc(100vh - 190px); }
+  .tp-carry .sig-carry__scene { align-items: start; padding-top: 14vh; padding-bottom: 0; }
+  .tp-carry .tp-scene__text, .tp-carry .tp-statement { padding-right: 92px; max-width: none; margin-right: 0; }
+  .tp-statement { font-size: 2.3rem; }
+  .tp-scene__text { padding-right: 0; }
+  .tp-flavour { grid-template-columns: 1fr; gap: var(--space-4); text-align: left; }
+  .tp-flavour__cup { width: 150px; justify-self: start; }
+  .tp-pearls { -webkit-mask-image: linear-gradient(180deg, #000 0 22%, transparent 34%); mask-image: linear-gradient(180deg, #000 0 22%, transparent 34%); }
+  .tp-ring .sig-ring__spin { font-size: 1.05rem; }   /* the whole ring fits inside a phone screen */
+}
+@media (max-width: 860px) {
+  .wa-fab { background: var(--c-primary); }
+}

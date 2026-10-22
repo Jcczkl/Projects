@@ -1,0 +1,123 @@
+<!doctype html>
+<html data-style="c" lang="en-SG" data-motion-switch>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo: Contact and booking — Walk-In Studio, a side project</title>
+<meta name="description" content="Book a nail or lash appointment at Lumi Nail Studio, Toa Payoh. WhatsApp is fastest. Open 11am to 9pm, closed Tuesdays.">
+<meta name="theme-color" content="#a3406a">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/css/theme.css">
+<link rel="stylesheet" href="../../assets/css/base.css">
+<script>(function(h){h.classList.add('js');if(h.hasAttribute('data-motion-switch')){var m='standard';try{m=localStorage.getItem('ws-motion')||m}catch(e){}h.setAttribute('data-motion',m)}if(h.getAttribute('data-motion')!=='smooth'){var s=function(e){if(e.viewTransition)e.viewTransition.skipTransition()};addEventListener('pageswap',s);addEventListener('pagereveal',s)}})(document.documentElement)</script>
+<script src="../../assets/js/site.js" defer></script>
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="preload" href="../../assets/fonts/jost-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<style>.museum-back{position:fixed;left:12px;bottom:12px;z-index:2147483000;display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:999px;background:#14201b;color:#f4f1ea;font:600 13px/1.1 system-ui,-apple-system,'Segoe UI',sans-serif;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.28)}.museum-back:hover{background:#2f5d50;color:#fff}.museum-back:focus-visible{outline:3px solid #85bda8;outline-offset:2px}.demo-note{padding:14px 16px;border:1px dashed currentColor;border-radius:10px;opacity:.8}.demo-toast{position:fixed;left:50%;bottom:64px;transform:translateX(-50%);z-index:2147483001;max-width:min(92vw,420px);padding:12px 16px;border-radius:12px;background:#14201b;color:#f4f1ea;font:500 14px/1.4 system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.3)}[data-demo-inert]{cursor:pointer}@media print{.museum-back{display:none}}</style>
+</head>
+<body>
+<a class="museum-back" href="../../../../../#walk-in-studio">&larr; Back to the museum</a>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="demo-top" data-demo-top>
+<div class="site-banner" role="note"><a class="site-banner__back" href="../../../../templates/">&larr; All demos</a><strong>Demo website</strong> &mdash; a made-up shop, from Walk-In Studio, a side project. Photos are samples; contact links and forms are removed in this copy.</div>
+<nav class="demo-choices" aria-label="Choices for this demo" data-choices><div class="demo-choices__inner"><a class="demo-choices__back" href="../../../../templates/">&larr;<span class="demo-choices__back-text"> All demos</span></a><span class="demo-choices__tag">Demo</span><div class="demo-choices__styles" id="demo-styles"><p class="demo-choices__label"><strong>4 styles</strong> &mdash; see them all</p><ul class="demo-choices__list"><li><a href="../../"><img src="../thumbs/a.webp" width="120" height="75" alt="" loading="lazy"><span class="demo-choices__name"><b>A</b> Light &amp; elegant</span></a></li><li><a href="../b/"><img src="../thumbs/b.webp" width="120" height="75" alt="" loading="lazy"><span class="demo-choices__name"><b>B</b> Soft pastel</span></a></li><li><a href="../c/" aria-current="page"><img src="../thumbs/c.webp" width="120" height="75" alt="" loading="lazy"><span class="demo-choices__name"><b>C</b> Clean &amp; luxe</span><em>Showing</em></a></li><li><a href="../d/"><img src="../thumbs/d.webp" width="120" height="75" alt="" loading="lazy"><span class="demo-choices__name"><b>D</b> Playful colour</span></a></li></ul></div><button class="demo-choices__peek" type="button" aria-expanded="false" aria-controls="demo-styles"><span class="demo-choices__peek-text">See the styles </span><span class="demo-choices__peek-count">4 styles </span>&#9662;</button><div class="demo-choices__motion"><p class="demo-choices__label"><strong>Motion</strong> &mdash; calm or gentle</p><span class="motion-switch" role="group" aria-label="Motion"><span>Motion:</span><button type="button" data-motion-set="standard" aria-pressed="true">Standard</button><button type="button" data-motion-set="smooth" aria-pressed="false">Smooth</button></span><button class="demo-choices__toggle" type="button" data-motion-toggle><span class="demo-choices__toggle-label">Motion:</span><span data-motion-now>Standard</span></button></div></div></nav>
+</div><!-- /demo-top -->
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="./">
+      <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="var(--c-primary)"/><text x="20" y="27" text-anchor="middle" font-size="19" font-weight="700" fill="var(--c-primary-ink)" font-family="Georgia, serif">L</text></svg>
+      <span>Lumi Nail Studio</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle__bars"></span><span class="visually-hidden">Menu</span></button>
+    <nav id="site-nav" class="nav" aria-label="Main">
+      <ul class="nav__list">
+        <li data-page="index"><a class="nav__link" href="./#looks">Looks</a></li>
+        <li data-page="services"><a class="nav__link" href="services.html">Prices</a></li>
+        <li data-page="contact"><a class="nav__link" href="contact.html" aria-current="page">Book</a></li>
+        <li><span class="btn nav__cta" role="button" tabindex="0" data-demo-inert>WhatsApp us</span></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">Contact</p>
+      <h1>Book a <em>slot</em>.</h1>
+      <p class="lead">WhatsApp is the fastest way. Tell us the service and a day, and we&rsquo;ll send the free times.</p>
+    </div>
+  </section>
+  <section class="section section--tight">
+    <div class="container grid grid--2">
+      <div data-reveal>
+        <ul class="contact-list">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg><div><span role="button" tabindex="0" data-demo-inert>WhatsApp (demo number)</span><br><span class="muted small">Fastest reply</span></div></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg><div><span role="button" tabindex="0" data-demo-inert>(demo number)</span></div></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg><div><span role="button" tabindex="0" data-demo-inert>(demo email)</span></div></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><div>123 Demo Street</div></li>
+        </ul>
+        <h2 style="font-size:var(--fs-h3);margin-top:var(--space-5)">Opening hours</h2>
+        <table class="hours">
+            <caption class="visually-hidden">Opening hours</caption>
+            <tbody>
+              <tr data-days="0,1,3,4,5,6"><th scope="row">Wednesday – Monday</th><td>11am – 9pm</td></tr>
+              <tr data-days="2"><th scope="row">Tuesday</th><td>Closed</td></tr>
+            </tbody>
+          </table>
+      </div>
+      <div data-reveal>
+        <h2 style="font-size:var(--fs-h3)">Or send a message</h2>
+        <p class="demo-note" role="note">Demo: no form in this copy.</p>
+      </div>
+    </div>
+  </section>
+  <section class="section section--tight">
+    <div class="container">
+      <div class="find-us">
+        <h2>Find us</h2>
+        <p><strong>123 Demo Street</strong></p>
+        <p><strong>MRT</strong> Toa Payoh, 4 minutes&rsquo; walk &middot; <strong>Bus</strong> interchange across the road</p>
+        <a class="btn btn--ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Toa+Payoh+Singapore">Open Toa Payoh in Google Maps</a>
+        <p class="muted small">Demo: the real site links to the studio&rsquo;s own Google Maps listing.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div>
+        <p class="brand">Lumi Nail Studio</p>
+        <p class="muted">Nails and lashes in Toa Payoh, by appointment</p>
+      </div>
+      <div>
+        <h2>Visit</h2>
+        <address style="font-style:normal">123 Demo Street</address>
+        <p class="muted">11am–9pm · Closed Tue</p>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul>
+          <li><span role="button" tabindex="0" data-demo-inert>(demo number)</span></li>
+          <li><span role="button" tabindex="0" data-demo-inert>WhatsApp</span></li>
+          <li><span role="button" tabindex="0" data-demo-inert>(demo email)</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__base">
+      <span>&copy; <span data-year>2026</span> Lumi Nail Studio</span>
+      <span>Privacy notice</span>
+      <span>Website by Walk-In Studio</span>
+    </div>
+  </div>
+</footer>
+
+<span class="wa-fab" aria-label="Chat with us on WhatsApp" role="button" tabindex="0" data-demo-inert>
+  <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</span>
+<script>(function(){var t,box;function show(){if(!box){box=document.createElement('div');box.className='demo-toast';box.setAttribute('role','status');document.body.appendChild(box)}box.textContent='Demo shop, not real: on a real site this button would open a chat or call.';box.hidden=false;clearTimeout(t);t=setTimeout(function(){box.hidden=true},3200)}document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-demo-inert]');if(b){e.preventDefault();show()}});document.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('[data-demo-inert]')){e.preventDefault();show()}});addEventListener('pagereveal',function(e){var v=e.viewTransition,q=function(){};if(v){v.ready.catch(q);v.finished.catch(q);v.updateCallbackDone.catch(q)}})})()</script>
+</body>
+</html>

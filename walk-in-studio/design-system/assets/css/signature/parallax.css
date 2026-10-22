@@ -1,0 +1,3 @@
+/* parallax: things float at different depths as you scroll */
+.sig-float { will-change: transform; }
+.sig-on [data-sig-parallax] .sig-float { transform: translate3d(0, calc(var(--sig-p, 0) * var(--depth, 1) * -140px), 0); }

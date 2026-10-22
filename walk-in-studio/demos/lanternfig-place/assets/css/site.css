@@ -1,0 +1,62 @@
+/* Lanternfig Kitchen (demo, style A "Warm & local"): restaurant layout row - after dark, the dish first, a typographic menu. */
+/* Display face (template polish 2026-10-10): Fraunces, a warm soft serif with a real italic for the ember lines. Self-hosted, OFL (CREDITS.md). */
+@font-face { font-family: "Fraunces"; src: url("../fonts/fraunces-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Fraunces"; src: url("../fonts/fraunces-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Fraunces"; src: url("../fonts/fraunces-700-italic.woff2") format("woff2"); font-weight: 700; font-style: italic; font-display: swap; }
+:root { --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif; }
+[data-theme="cinematic"] { --c-primary: #e8743b; --c-primary-ink: #0b0a0d; --c-accent: #c2410c; }
+.slot { display: inline-block; padding: 0 .4em; border: 1px dashed currentColor; border-radius: 6px; font-size: .9em; opacity: .85; }
+.sample-note { position: absolute; right: 1rem; bottom: 1rem; margin: 0; padding: .2rem .6rem; border-radius: 999px; background: rgba(255,255,255,.9); color: #111; font-size: .85rem; font-weight: 600; z-index: 2; }
+.kn-hero { position: relative; min-height: min(calc(100svh - var(--demo-top-full, 0px) - var(--header-h, 64px)), 980px);   /* price + buttons on the first screen under the demo bar (review 2026-10-13) */ display: grid; align-items: end; overflow: hidden; }
+.kn-hero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; }
+.kn-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(11,10,13,.92) 0%, rgba(11,10,13,.5) 38%, rgba(11,10,13,0) 70%), linear-gradient(90deg, rgba(11,10,13,.85) 0%, rgba(11,10,13,.55) 35%, rgba(11,10,13,0) 60%); }
+.kn-hero__text { position: relative; z-index: 1; padding-block: var(--space-6); }
+.kn-hero h1 { font-family: var(--font-display); font-size: clamp(2.8rem, 5vw + 1rem, 6rem); line-height: 1; margin: 0 0 var(--space-3); max-width: 14ch; }
+.kn-hero h1 em, .kn-dough h2 em, .kn-head h2 em { color: var(--c-primary); font-style: italic; }
+.kn-rating { color: inherit; font-weight: 700; }
+.kn-head { max-width: 34rem; }
+.kn-head h2 { font-family: var(--font-display); font-size: clamp(2.6rem, 4vw + 1rem, 4.6rem); margin: 0; }
+.kn-menu-wrap { display: grid; gap: var(--space-6); grid-template-columns: .8fr 1.2fr; align-items: start; }
+.kn-menu { list-style: none; margin: 0; padding: 0; }
+.kn-menu li { display: grid; grid-template-columns: auto 1fr auto; gap: .8rem; align-items: baseline; padding: 1.1rem 0; border-bottom: 1px solid var(--c-border); }
+.kn-menu__name { font-family: var(--font-display); font-size: clamp(1.5rem, 1vw + 1.1rem, 2rem); }
+.kn-menu__name em { white-space: nowrap;  font-family: var(--font-body); font-size: 1rem; font-style: normal; color: var(--c-primary); margin-left: .4rem; vertical-align: middle; }
+.kn-menu__name small { display: block; font-family: var(--font-body); font-size: 1rem; color: var(--c-muted); margin-top: .2rem; }
+.kn-menu__dots { border-bottom: 2px dotted var(--c-border); transform: translateY(-.35em); }
+.kn-dough { display: grid; grid-template-columns: 1fr 1fr; background: var(--c-surface); }
+.kn-dough img { width: 100%; height: 100%; min-height: 420px; object-fit: cover; }
+.kn-dough__text { padding: var(--space-6) var(--space-5); align-self: center; max-width: 36rem; }
+.kn-dough h2 { font-family: var(--font-display); font-size: clamp(2.2rem, 3vw + 1rem, 3.6rem); line-height: 1.05; }
+.kn-topics { list-style: none; padding: 0; margin: var(--space-4) 0 var(--space-3); display: flex; flex-wrap: wrap; gap: .6rem; }
+.kn-topics li { padding: .45rem .95rem; border-radius: 999px; border: 1px solid var(--c-border); }
+.kn-find { display: grid; gap: var(--space-6); grid-template-columns: 1.2fr .8fr; align-items: start; }
+.kn-find h2 { font-family: var(--font-display); font-size: clamp(2rem, 2vw + 1rem, 3rem); }
+@media (max-width: 860px) {
+  .kn-menu-wrap, .kn-dough, .kn-find { grid-template-columns: 1fr; }
+  .kn-dough img { min-height: 0; aspect-ratio: 4 / 3; }
+  .kn-dough__text { padding: var(--space-5) var(--space-4); }
+}
+/* Dailies: no wash over 35% on the photo; the words get their own dark panel instead */
+.kn-hero::after { background: linear-gradient(0deg, rgba(11,10,13,.35) 0%, rgba(11,10,13,0) 55%); }
+.kn-hero__panel { max-width: 36rem; padding: var(--space-5); background: #0b0a0d; border-radius: var(--radius-lg); box-shadow: 0 20px 60px rgba(0,0,0,.45); }
+.kn-hero__panel > :last-child { margin-bottom: 0; }
+@media (max-width: 600px) { .kn-hero__panel { padding: var(--space-4); } }
+.kn-hero__panel h1 { font-size: clamp(2.6rem, 2.6vw + 1.2rem, 4.4rem); max-width: none; }
+/* Demo content (2026-10-10): veg marks, sides, booking card, address, FAQ */
+.kn-veg { display: flex; align-items: center; gap: .5rem; color: var(--c-muted); }
+.kn-veg span, .kn-v { display: inline-grid; place-items: center; width: 1.4rem; height: 1.4rem; border: 1.5px solid #7fb069; border-radius: 4px;
+  color: #9ccc84; font: 700 .75rem/1 var(--font-body); vertical-align: middle; margin-left: .3rem; }
+.kn-veg span { margin-left: 0; }
+.kn-menu__side .kn-menu__name { font-size: clamp(1.2rem, .6vw + 1rem, 1.5rem); }
+.kn-menu li.kn-menu__side:nth-child(7) { margin-top: var(--space-4); border-top: 1px solid var(--c-border); }
+.kn-addr { font-style: normal; font-size: 1.2rem; font-weight: 700; margin-bottom: var(--space-3); }
+.kn-find .hours { max-width: 30rem; margin-bottom: var(--space-3); }
+.kn-book { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius-lg); padding: var(--space-5); }
+.kn-book h3 { font-family: var(--font-display); font-size: 1.6rem; margin: var(--space-4) 0 .3rem; }
+.kn-book h3:first-of-type { margin-top: 0; }
+.kn-faq > * { max-width: 52rem; }
+.kn-faq h2 { font-family: var(--font-display); font-size: clamp(2rem, 2vw + 1rem, 3rem); }
+@media (max-width: 600px) { .kn-book { padding: var(--space-4); } }
+/* WhatsApp buttons in the look's own ember (template polish 2026-10-10): the icon and wording stay, the off-palette green goes.
+   Ember #e8743b with near-black ink = 6.6:1. Options set their own --c-primary, so this follows each look. */
+.btn--whatsapp { --btn-bg: var(--c-primary); --btn-ink: var(--c-primary-ink); }

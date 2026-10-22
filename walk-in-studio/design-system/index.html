@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en-SG">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Components and motion kit — Walk-In Studio, a side project</title>
+<meta name="description" content="Every component in the Walk-In Studio master template, with the motion kit, on one page.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="assets/css/theme.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/route-globe.css">
+<style>
+/* This showcase page only: real sites get these from site.json via new_site.py. */
+:root { --c-primary: #1f4fd6; --c-accent: #f2b134; }
+.demo-label { font: 600 .75rem/1 system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--c-muted); background: var(--c-surface-2); display: inline-block; padding: .4rem .7rem; border-radius: 6px; margin: var(--space-5) 0 var(--space-3); }
+.demo-label code { font: inherit; text-transform: none; letter-spacing: 0; }
+</style>
+<script>(function(h){h.classList.add('js');if(h.hasAttribute('data-motion-switch')){var m='standard';try{m=localStorage.getItem('ws-motion')||m}catch(e){}h.setAttribute('data-motion',m)}if(h.getAttribute('data-motion')!=='smooth'){var s=function(e){if(e.viewTransition)e.viewTransition.skipTransition()};addEventListener('pageswap',s);addEventListener('pagereveal',s)}})(document.documentElement)</script>
+<script src="assets/js/site.js" defer></script>
+<script src="assets/js/walkin.js" defer></script>
+<script src="assets/js/fx.js" defer></script>
+<script src="assets/js/route-globe-land.js" defer></script>
+<script src="assets/js/route-globe.js" defer></script>
+<script src="assets/js/estimator.js" defer></script>
+<script src="assets/js/notice.js" defer></script>
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<style>.museum-back{position:fixed;left:12px;bottom:12px;z-index:2147483000;display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:999px;background:#14201b;color:#f4f1ea;font:600 13px/1.1 system-ui,-apple-system,'Segoe UI',sans-serif;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.28)}.museum-back:hover{background:#2f5d50;color:#fff}.museum-back:focus-visible{outline:3px solid #85bda8;outline-offset:2px}.demo-note{padding:14px 16px;border:1px dashed currentColor;border-radius:10px;opacity:.8}.demo-toast{position:fixed;left:50%;bottom:64px;transform:translateX(-50%);z-index:2147483001;max-width:min(92vw,420px);padding:12px 16px;border-radius:12px;background:#14201b;color:#f4f1ea;font:500 14px/1.4 system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.3)}[data-demo-inert]{cursor:pointer}@media print{.museum-back{display:none}}</style>
+</head>
+<body>
+<a class="museum-back" href="../../#walk-in-studio">&larr; Back to the museum</a>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="site-banner" role="note"><strong>Demo website</strong> &mdash; made-up shop, made by Walk-In Studio. Photos are samples; contact links and forms are removed in this copy.</div>
+<div class="scroll-progress" aria-hidden="true"></div>
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="components.html">
+      <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="var(--c-primary)"/><text x="20" y="27" text-anchor="middle" font-size="19" font-weight="700" fill="var(--c-primary-ink)" font-family="Georgia, serif">W</text></svg>
+      <span>Components</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle__bars"></span><span class="visually-hidden">Menu</span></button>
+    <nav id="site-nav" class="nav" aria-label="Main">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="#heroes" aria-current="page">Heroes</a></li>
+        <li><a class="nav__link" href="#blocks">Blocks</a></li>
+        <li><a class="nav__link" href="#motion">Motion</a></li>
+        <li><a class="nav__link" href="#globe">Globe</a></li>
+        <li><a class="btn nav__cta" href="#contact">Header CTA</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container"><p class="demo-label">Header + mobile nav, demo banner, scroll-progress bar (top edge) &mdash; above</p></div>
+  <div class="site-banner" role="note" style="view-transition-name:none"><strong>Free preview</strong> made for Example Shop &mdash; unsolicited, not affiliated with or approved by them. Made by Walk-In Studio.</div>
+  <div class="container"><p class="demo-label">Mockup banner <code>.site-banner</code></p></div>
+
+  <div id="heroes" class="container"><p class="demo-label">Hero 1: split image <code>.hero--split</code></p></div>
+  <section class="hero hero--split">
+    <div class="container hero__grid">
+      <div>
+        <p class="eyebrow">Eyebrow line</p>
+        <h1>The one heading on the page.</h1>
+        <p class="lead">A short lead paragraph that says what the shop does and who for.</p>
+        <div class="btn-row hero__actions">
+          <a class="btn btn--whatsapp" href="#contact">WhatsApp us</a>
+          <a class="btn btn--ghost" href="#contact">Call (demo number)</a>
+        </div>
+      </div>
+      <div class="hero__media"><img src="../demos/sunmill-bakehouse/assets/img/croissants-800.webp" alt="Croissants on a rack (sample image)" width="800" height="534"></div>
+    </div>
+  </section>
+
+  <div class="container"><p class="demo-label">Hero 2: full-bleed image <code>.hero--bleed</code></p></div>
+  <section class="hero hero--bleed" style="min-height:70svh">
+    <div class="hero__bg"><img src="../demos/sunmill-bakehouse/assets/img/hero-bread-1920.webp" alt="" width="1600" height="1152" loading="lazy"></div>
+    <div class="container hero__content">
+      <p class="eyebrow" style="color:var(--c-accent)">Eyebrow</p>
+      <h2 style="font-size:var(--fs-h1)">Big photo, text on a scrim.</h2>
+      <p class="lead" style="color:#fff">Good when the shop has one great photo.</p>
+    </div>
+  </section>
+
+  <div class="container"><p class="demo-label">Hero 3: text-only bold <code>.hero--text</code></p></div>
+  <section class="hero hero--text section--alt">
+    <div class="container">
+      <p class="eyebrow">No photo needed</p>
+      <h2 style="font-size:clamp(2.6rem, 7vw + 1rem, 6.5rem);max-width:14ch">Cold air, back by tonight.</h2>
+      <p class="lead">For trades with nothing to walk into. Type does the work.</p>
+    </div>
+  </section>
+
+  <div class="container"><p class="demo-label">Hero 4: walk-in (scroll plays the shop video) <code>[data-walkin]</code> &mdash; uses the bakery demo&rsquo;s frames</p></div>
+  <section class="walkin" data-walkin data-frames="84" data-path="../demos/sunmill-bakehouse/assets/walk" data-height="260" aria-label="Walk-in hero example">
+    <div class="walkin__sticky">
+      <picture>
+        <source media="(max-width: 767px), (orientation: portrait) and (max-width: 1024px)" srcset="../demos/sunmill-bakehouse/assets/walk/poster-m.webp" width="600" height="800">
+        <img class="walkin__poster" src="../demos/sunmill-bakehouse/assets/walk/poster.webp" width="1280" height="720" alt="Inside a bakery (sample footage)" loading="lazy">
+      </picture>
+      <canvas class="walkin__canvas" aria-hidden="true"></canvas>
+      <div class="walkin__scrim"></div>
+      <div class="walkin__content"><div class="container"><h2 style="font-size:var(--fs-h1)">Scroll to walk in.</h2><p class="lead">Shop name + one line + main button, readable on every frame.</p></div></div>
+      <p class="walkin__hint" aria-hidden="true">Scroll to walk in</p>
+    </div>
+  </section>
+
+  <section class="section" id="blocks">
+    <div class="container">
+      <p class="demo-label">Services grid <code>.grid--3 .card</code> with staggered reveal <code>data-reveal-group</code></p>
+      <div class="grid grid--3" data-reveal-group>
+        <article class="card card--link" data-vt-source><div class="card__media"><img src="../demos/sunmill-bakehouse/assets/img/bread-rolls-800.webp" alt="" width="800" height="534" loading="lazy"></div><h3>Service one</h3><p>One or two lines about it.</p><p class="card__price">from $30</p><a class="card__link" href="#blocks">See prices</a></article>
+        <article class="card card--link"><div class="card__media"><img src="../demos/sunmill-bakehouse/assets/img/birthday-cake-800.webp" alt="" width="800" height="534" loading="lazy"></div><h3>Service two</h3><p>Cards lift on hover; the image zooms gently.</p><p class="card__price">from $45</p><a class="card__link" href="#blocks">See prices</a></article>
+        <article class="card card--link"><div class="card__media"><img src="../demos/sunmill-bakehouse/assets/img/croissants-800.webp" alt="" width="800" height="534" loading="lazy"></div><h3>Service three</h3><p>The whole card is clickable.</p><p class="card__price">from $60</p><a class="card__link" href="#blocks">See prices</a></article>
+      </div>
+
+      <p class="demo-label">Feature / why-us list <code>.features</code></p>
+      <ul class="features" data-reveal-group>
+        <li><span class="features__icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><h3>A clear reason</h3><p>Something the shop can back up.</p></div></li>
+        <li><span class="features__icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><h3>Another reason</h3><p>No "best", no "No. 1".</p></div></li>
+        <li><span class="features__icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><h3>A third reason</h3><p>Short and specific.</p></div></li>
+      </ul>
+
+      <p class="demo-label">Steps / how it works <code>ol.steps</code></p>
+      <ol class="steps" data-reveal-group>
+        <li><h3>Message us</h3><p>Step one.</p></li><li><h3>Get a price</h3><p>Step two.</p></li><li><h3>We do it</h3><p>Step three.</p></li><li><h3>Done</h3><p>Step four.</p></li>
+      </ol>
+
+      <p class="demo-label">Pricing table <code>.pricing .plan</code></p>
+      <div class="pricing" data-reveal-group>
+        <div class="plan"><h3 class="plan__name">Basic</h3><p class="plan__price">$40<small>/month</small></p><ul><li>One thing</li><li>Another thing</li></ul><a class="btn btn--ghost" href="#contact">Ask</a></div>
+        <div class="plan plan--featured"><span class="plan__tag">Typical choice</span><h3 class="plan__name">Standard</h3><p class="plan__price">$180<small>/month</small></p><ul><li>Everything in Basic</li><li>More</li></ul><a class="btn" href="#contact">Book</a></div>
+        <div class="plan"><h3 class="plan__name">Plus</h3><p class="plan__price">$420<small>/month</small></p><ul><li>Everything in Standard</li><li>Even more</li></ul><a class="btn btn--ghost" href="#contact">Ask</a></div>
+      </div>
+
+      <div class="grid grid--2" style="margin-top:var(--space-5)">
+        <div>
+          <p class="demo-label">Price list <code>table.price-list</code></p>
+          <table class="price-list"><caption>Sample prices</caption><tbody><tr><th scope="row">Item one</th><td>$10</td></tr><tr><th scope="row">Item two</th><td>from $15</td></tr><tr><th scope="row">Item three</th><td>Quote</td></tr></tbody></table>
+        </div>
+        <div>
+          <p class="demo-label">Opening hours <code>table.hours</code> (today highlighted)</p>
+          <table class="hours"><caption class="visually-hidden">Opening hours</caption><tbody>
+            <tr data-days="1,2,3,4,5"><th scope="row">Monday &ndash; Friday</th><td>9am &ndash; 6pm</td></tr>
+            <tr data-days="6"><th scope="row">Saturday</th><td>9am &ndash; 1pm</td></tr>
+            <tr data-days="0"><th scope="row">Sunday</th><td>Closed</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="grid grid--2" style="margin-top:var(--space-5)">
+        <div>
+          <p class="demo-label">FAQ <code>.faq details</code></p>
+          <div class="faq">
+            <details><summary>A question visitors ask?</summary><div class="faq__a"><p>A short, honest answer.</p></div></details>
+            <details><summary>Another question?</summary><div class="faq__a"><p>Opens with a small slide.</p></div></details>
+          </div>
+        </div>
+        <div>
+          <p class="demo-label">Reviews placeholder (demos only) <code>.reviews-placeholder</code></p>
+          <div class="reviews-placeholder"><strong>Your Google reviews can appear here</strong>Real sites show only real reviews the shop supplies.</div>
+        </div>
+      </div>
+
+      <p class="demo-label">Map (optional) <code>.map</code> &mdash; placeholder here; real sites use a lazy Google Maps iframe</p>
+      <div class="map map--placeholder" style="aspect-ratio:16/5"><p>Map placeholder</p></div>
+
+      <div class="grid grid--2" style="margin-top:var(--space-5)" id="contact">
+        <div>
+          <p class="demo-label">Contact list <code>.contact-list</code></p>
+          <ul class="contact-list">
+            <li><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg><div><span role="button" tabindex="0" data-demo-inert>(demo number)</span></div></li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg><div><span role="button" tabindex="0" data-demo-inert>(demo email)</span></div></li>
+          </ul>
+        </div>
+        <div>
+          <p class="demo-label">Contact form &mdash; demo state (not connected) <code>.form</code></p>
+          <p class="demo-note" role="note">Demo: no form in this copy.</p>
+        </div>
+      </div>
+
+      <p class="demo-label">Gallery <code>.gallery figure</code></p>
+      <div class="gallery" data-reveal-group>
+        <figure><img src="../demos/lumi-nails/assets/img/nails-colour-pop-800.webp" alt="" width="800" height="534" loading="lazy"><figcaption>Caption</figcaption></figure>
+        <figure><img src="../demos/lumi-nails/assets/img/nails-sky-art-800.webp" alt="" width="800" height="534" loading="lazy"><figcaption>Caption</figcaption></figure>
+        <figure><img src="../demos/lumi-nails/assets/img/nails-mono-art-800.webp" alt="" width="800" height="534" loading="lazy"><figcaption>Caption</figcaption></figure>
+      </div>
+
+      <p class="demo-label">CTA band <code>.cta-band</code> (reveal: scale)</p>
+      <div class="cta-band" data-reveal="scale"><div><h2>Call to action heading</h2><p>One line under it.</p></div><a class="btn btn--light" href="#contact">Main action</a></div>
+    </div>
+  </section>
+
+  <section id="motion" class="section section--alt section--tight">
+    <div class="container"><p class="demo-label">Motion kit: kinetic headline <code>.kinetic__line</code> (+ <code>--reverse</code>, <code>--outline</code>)</p></div>
+    <div class="kinetic" aria-hidden="true"><p class="kinetic__line">Slides as you scroll &middot; slides as you scroll</p></div>
+    <div class="kinetic" aria-hidden="true"><p class="kinetic__line kinetic__line--reverse kinetic__line--outline">The other way &middot; the other way</p></div>
+  </section>
+
+  <div data-theme="cinematic" style="background:var(--c-bg);color:var(--c-text)">
+    <div class="container"><p class="demo-label" style="margin-top:var(--space-5)">Pinned chapter <code>.chapter</code> + starfield <code>data-fx="stars"</code> on the dark cinematic preset <code>data-theme="cinematic"</code></p></div>
+    <section class="chapter" style="--chapter-height:240">
+      <div class="chapter__sticky" data-fx="stars">
+        <div class="container">
+          <p class="chapter__line">The section sticks.</p>
+          <p class="chapter__line">Lines arrive one by one.</p>
+          <p class="chapter__line">Then it lets go.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <section id="globe">
+    <div class="container"><p class="demo-label">Route globe <code>[data-route-globe]</code> &mdash; preset <code>gal-style</code> (on a navy band, as on gal-global.com): 21 places &rarr; Singapore, tour + two finales, drag to spin</p></div>
+    <div class="rg-band" style="background:radial-gradient(ellipse at 70% 45%,#2B3680 0%,#1F2866 55%,#161D4A 100%);padding-block:clamp(48px,6vw,76px);overflow-x:clip">
+      <div class="container">
+        <figure class="rg" data-route-globe="gal-style" id="globe-gal">
+          <img class="rg-poster" src="assets/img/route-globe-gal-style.webp" width="680" height="584" alt="A gold globe on navy with routes from 21 countries to Singapore">
+          <p class="rg-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7L4 12l4 5M16 7l4 5-4 5"/></svg>Drag the globe to turn it</p>
+        </figure>
+      </div>
+    </div>
+    <div class="container"><p class="demo-label">Same component, preset <code>flat-teal</code>: flat land, no bezel or gloss, 6 places &rarr; Singapore, no finale</p>
+      <figure class="rg" data-route-globe="flat-teal" id="globe-teal" style="max-width:520px">
+        <img class="rg-poster" src="assets/img/route-globe-flat-teal.webp" width="680" height="584" alt="A teal globe with routes from six cities to our office">
+        <p class="rg-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7L4 12l4 5M16 7l4 5-4 5"/></svg>Drag the globe to turn it</p>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" id="production-components">
+    <div class="container">
+      <p class="demo-label">Notice banner <code>.notice</code> + notice.js (hides itself after <code>data-notice-until</code>)</p>
+      <p class="notice" data-notice-until="2099-01-01">Closed for Chinese New Year, 9&ndash;11 Feb.</p>
+      <p class="notice" data-notice-until="2000-01-01" data-test="expired-notice">This expired notice is hidden by notice.js.</p>
+      <p class="demo-label">Request builder <code>form.est[data-estimator]</code> without prices: choices become one WhatsApp message</p>
+      <form class="est est--picker" data-estimator data-greeting="Hi, I'd like to book this set" onsubmit="return false" data-test="picker">
+        <fieldset><legend>Shape</legend><div class="est__chips">
+          <label><input type="radio" name="shape" data-label="Almond" checked> Almond</label>
+          <label><input type="radio" name="shape" data-label="Square"> Square</label>
+        </div></fieldset>
+        <fieldset><legend>Length</legend><div class="est__chips">
+          <label><input type="radio" name="length" data-label="Short" checked> Short</label>
+          <label><input type="radio" name="length" data-label="Medium"> Medium</label>
+        </div></fieldset>
+        <p class="est__sum" aria-live="polite"></p>
+        <span class="btn btn--whatsapp est__book" role="button" tabindex="0" data-demo-inert>Send to WhatsApp</span>
+      </form>
+      <p class="demo-label">Estimator with shop price rules: per-unit add-on (<code>data-add</code>) and bulk discount (<code>data-bulk-min</code>/<code>data-bulk-off</code>)</p>
+      <form class="est" data-estimator data-bulk-min="3" data-bulk-off="10" data-greeting="Hi, I'd like" onsubmit="return false" data-test="rules">
+        <fieldset class="est__svc"><legend>Service</legend>
+          <label class="est__opt"><input type="radio" name="svc" data-price="70" data-label="Chemical wash" checked><span>Chemical wash</span><b>$70</b></label>
+        </fieldset>
+        <fieldset><legend>Unit type</legend><div class="est__chips">
+          <label><input type="radio" name="type" data-label="Wall-mounted" checked> Wall-mounted</label>
+          <label><input type="radio" name="type" data-label="Ceiling cassette" data-add="30"> Ceiling cassette +$30</label>
+        </div></fieldset>
+        <fieldset class="est__units"><legend>Units</legend>
+          <button type="button" class="est__step" data-step="-1" aria-label="One unit fewer">&minus;</button>
+          <output class="est__n">2</output>
+          <button type="button" class="est__step" data-step="1" aria-label="One unit more">+</button>
+        </fieldset>
+        <p class="est__total"><span>Estimate</span> <b class="est__sum"></b></p>
+        <span class="btn btn--whatsapp est__book" role="button" tabindex="0" data-demo-inert>Book on WhatsApp</span>
+      </form>
+      <p class="demo-label">Certificate card <code>.cert</code>: the shop's own certificate, its exact words, dated</p>
+      <div class="cert" data-notice-until="2099-01-01" data-notice-expired="Our certificate is being renewed. Ask us for the latest." data-test="cert">
+        <div class="cert__slot">Certificate photo from the shop</div>
+        <div><h3>Halal-certified</h3><p>Certificate no. EXAMPLE-0000</p><p class="cert__meta">Valid until 31 Dec 2098 (as on the certificate)</p></div>
+      </div>
+      <p data-notice-until="2000-01-01" data-notice-expired="After its date, notice.js swaps in this fallback line." data-test="expired-fallback">Before its date this line shows.</p>
+
+      <p class="demo-label">Real rating <code>a.rating</code> (always links to the Google listing; check_site enforces it)</p>
+      <p>Rated <a class="rating" href="https://www.google.com/maps/search/?api=1&amp;query=Business%20Name" target="_blank" rel="noopener">4.8 &#9733; on Google (100 reviews)</a></p>
+      <a class="rating rating--big" href="https://www.google.com/maps/search/?api=1&amp;query=Business%20Name" target="_blank" rel="noopener">4.8 &#9733;</a>
+
+      <div class="grid grid--2" style="margin-top:var(--space-5)">
+        <div>
+          <p class="demo-label">Menu board <code>ul.menu-board</code> (<code>.menu-board--dark</code> for a chalkboard)</p>
+          <ul class="menu-board menu-board--dark">
+            <li><span class="menu-board__name">Country sourdough<small>Two-day ferment</small></span><span class="menu-board__dots" aria-hidden="true"></span><span class="menu-board__price">$9.50</span></li>
+            <li><span class="menu-board__name">Butter croissant<small>Laminated by hand</small></span><span class="menu-board__dots" aria-hidden="true"></span><span class="menu-board__price">$3.80</span></li>
+          </ul>
+          <p class="demo-label">Map card <code>.map-card</code> (no embed; the lazy Maps iframe stays optional)</p>
+          <div class="map-card">
+            <address>123 Demo Street</address>
+            <p class="muted">5 minutes from Demo MRT, exit B.</p>
+            <div class="map-card__actions">
+              <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=123%20Demo%20Street%20Singapore" target="_blank" rel="noopener">Open in Google Maps</a>
+              <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=123%20Demo%20Street%20Singapore" target="_blank" rel="noopener">Directions</a>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="demo-label">Price estimator <code>form.est[data-estimator]</code> + estimator.js</p>
+          <form class="est" data-estimator data-greeting="Hi, I'd like" aria-labelledby="est-demo" onsubmit="return false">
+            <h2 id="est-demo">Your price in a minute</h2>
+            <fieldset class="est__svc"><legend>1. What do you need?</legend>
+              <label class="est__opt"><input type="radio" name="svc" data-label="General servicing" data-price="30" checked><span>General servicing</span><b>$30</b></label>
+              <label class="est__opt"><input type="radio" name="svc" data-label="Chemical wash" data-price="80"><span>Chemical wash</span><b>$80</b></label>
+              <label class="est__opt"><input type="radio" name="svc" data-label="Repair"><span>Repair</span><b>after a check</b></label>
+            </fieldset>
+            <fieldset class="est__units"><legend>2. How many units?</legend>
+              <button type="button" class="est__step" data-step="-1" aria-label="One fewer">&minus;</button>
+              <output class="est__n" aria-live="polite">2</output>
+              <button type="button" class="est__step" data-step="1" aria-label="One more">+</button>
+            </fieldset>
+            <p class="est__total" aria-live="polite"><span>Estimate</span> <b class="est__sum">$60</b></p>
+            <span class="btn btn--whatsapp est__book" role="button" tabindex="0" data-demo-inert>Book on WhatsApp</span>
+            <p class="est__note">Prices confirmed before the work starts.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <p class="demo-label">Buttons</p>
+      <div class="btn-row">
+        <a class="btn" href="#motion">Primary</a>
+        <a class="btn btn--ghost" href="#motion">Ghost</a>
+        <a class="btn btn--accent" href="#motion">Accent</a>
+        <a class="btn btn--whatsapp" href="#motion">WhatsApp</a>
+      </div>
+      <p class="demo-label">Sticky WhatsApp button (bottom right, appears after a little scroll) and footer &mdash; below</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div><p class="brand">Shop Name</p><p class="muted">Tagline</p></div>
+      <div><h2>Visit</h2><address style="font-style:normal">123 Demo Street</address></div>
+      <div><h2>Contact</h2><ul><li><span role="button" tabindex="0" data-demo-inert>(demo number)</span></li><li><span role="button" tabindex="0" data-demo-inert>(demo email)</span></li></ul></div>
+    </div>
+    <div class="site-footer__base"><span>&copy; <span data-year>2026</span> Shop Name</span><span>Privacy notice</span><span>Website by Walk-In Studio</span></div>
+  </div>
+</footer>
+<span class="wa-fab" aria-label="Chat with us on WhatsApp" role="button" tabindex="0" data-demo-inert><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg></span>
+<script>(function(){var t,box;function show(){if(!box){box=document.createElement('div');box.className='demo-toast';box.setAttribute('role','status');document.body.appendChild(box)}box.textContent='Demo shop, not real: on a real site this button would open a chat or call.';box.hidden=false;clearTimeout(t);t=setTimeout(function(){box.hidden=true},3200)}document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-demo-inert]');if(b){e.preventDefault();show()}});document.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('[data-demo-inert]')){e.preventDefault();show()}});addEventListener('pagereveal',function(e){var v=e.viewTransition,q=function(){};if(v){v.ready.catch(q);v.finished.catch(q);v.updateCallbackDone.catch(q)}})})()</script>
+</body>
+</html>

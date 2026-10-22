@@ -1,0 +1,192 @@
+{
+  "_doc": "Signature · Place, illustrated (matrix brief Stage 2): one drawn shop per trade for tools/store_build.py + template/assets/js/store.js. World units = px; x left/right (-room.w/2 .. room.w/2), z depth (0 = the front wall, -room.d = the back wall), y up is negative (0 = the floor). A prop: kind (tools/store_art.py PROPS, or 'board' = a sign in the page font), w, h, then either wall back|left|right + at (x along the back wall, z along a side wall) or x + z (+ ry) on the floor; y lifts it (negative = up); box {d, top} gives it a real top and sides. A stop: id, title, text or list, look [x, y, z] (the middle of what it shows), yaw (0 = facing the back wall, -90 the left wall, 90 the right), fw / fh (how much to frame). A 'visit' stop (the door from inside, the card from site.json) is added at the end. Stops run left to right. Sample copy only: made-up businesses, no claims, prices, grades or energy numbers.",
+  "defaults": {
+    "room": {"w": 2800, "d": 2000, "h": 1000},
+    "eye": 560,
+    "street": 1750,
+    "facade": {"w": 4600, "h": 1500, "shop_w": 2900},
+    "door": [-160, -640, 320, 640],
+    "windows": [[-1240, -860, 880, 640], [360, -860, 880, 640]],
+    "visit": {"look": [0, -330, 0], "yaw": 200, "fw": 1100, "fh": 760}
+  },
+  "bakery": {
+    "palette": {"wall": "#f3e6d3", "wall2": "#e6cfae", "floor": "#b98552", "floor2": "#a87446", "ceiling": "#fbf6ee", "wood": "#a8703f",
+      "accent": "#c8553d", "accent2": "#e2a54b", "counter": "#7a4b2a", "metal": "#b9c0c8", "goods": ["#d79a4f", "#c8773a", "#e9c38a", "#a8612e"],
+      "facade": "#efe4d0", "awning": "#c8553d", "sign_bg": "#5a3420", "shopfront": "#7a4b2a", "door": "#5a3420", "sky": "#bfe0f2",
+      "board": "#2a2a26", "board_frame": "#7a4b2a", "board_ink": "#f2c94c", "crust": "#a8612e", "glow": "#ffb347", "sign_ink": "#ffe2b0"},
+    "floor_style": "planks", "wall_style": "wainscot",
+    "props": [
+      {"kind": "oven", "wall": "left", "at": -1150, "w": 820, "h": 760},
+      {"kind": "shelf", "fill": "loaves", "rows": 4, "wall": "left", "at": -420, "w": 620, "h": 900},
+      {"kind": "shelf", "fill": "loaves", "rows": 4, "wall": "back", "at": -650, "w": 1000, "h": 880},
+      {"kind": "counter", "items": "coffee,register,jars", "x": -650, "z": -1560, "w": 1100, "h": 560, "box": {"d": 220, "top": 0.66}},
+      {"kind": "display_case", "goods": "cake", "x": 520, "z": -1560, "w": 1000, "h": 560, "box": {"d": 240, "top": 0.7}},
+      {"kind": "board", "wall": "back", "at": 520, "y": -520, "w": 760, "h": 420, "title": "Baked today", "lines": ["Country loaf", "Butter croissants", "Cinnamon buns"]},
+      {"kind": "rope_queue", "x": 1060, "z": -1150, "ry": -90, "w": 640, "h": 240},
+      {"kind": "frame", "wall": "right", "at": -1550, "y": -460, "w": 420, "h": 320},
+      {"kind": "clock", "wall": "right", "at": -900, "y": -640, "w": 170, "h": 170},
+      {"kind": "plant", "x": 1240, "z": -1840, "ry": -55, "w": 260, "h": 520},
+      {"kind": "plant", "x": -1240, "z": -980, "ry": 55, "w": 220, "h": 440},
+      {"kind": "pendant", "x": -650, "z": -1500, "y": -700, "w": 200, "h": 300},
+      {"kind": "pendant", "x": 520, "z": -1500, "y": -700, "w": 200, "h": 300}
+    ],
+    "stops": [
+      {"id": "oven", "title": "From the oven", "text": "A sample stop: bread comes out through the morning, so the shelves fill up by nine.", "look": [-1396, -400, -1100], "yaw": -72, "fw": 1100, "fh": 760},
+      {"id": "counter", "title": "The counter", "text": "Order here, coffee at the same time. A sample bakery, made to show the style.", "look": [-650, -440, -1650], "yaw": -14, "fw": 1250, "fh": 820},
+      {"id": "menu", "title": "In the case", "list": ["Country loaf", "Butter croissants", "Cinnamon buns", "Filter coffee"], "look": [520, -440, -1640], "yaw": 12, "fw": 1200, "fh": 820},
+      {"id": "queue", "title": "Busy mornings", "text": "The line forms along the rope; order ahead on WhatsApp and skip it.", "look": [1300, -400, -1150], "yaw": 70, "fw": 1000, "fh": 720}
+    ],
+    "nav": [["oven", "The oven"], ["menu", "Menu"], ["visit", "Visit"]]
+  },
+  "restaurant": {
+    "palette": {"wall": "#f1e3cf", "wall2": "#e2c9a7", "floor": "#c97b55", "floor2": "#b46a46", "ceiling": "#f7efe2", "wood": "#8a5a3b",
+      "accent": "#c2410c", "accent2": "#2f6f4f", "chair": "#2f6f4f", "counter": "#6b4129", "food": "#d9893a", "food2": "#6aa84f", "metal": "#b9c0c8",
+      "facade": "#ede2cf", "awning": "#2f6f4f", "sign_bg": "#203a2e", "shopfront": "#2f4a3c", "door": "#203a2e", "sky": "#bfe0f2",
+      "board": "#1f2a24", "board_frame": "#6b4129", "board_ink": "#ffb57a", "tile": "#f3efe6", "glow": "#ffcf7a", "sign_ink": "#ffe2b0"},
+    "floor_style": "tiles", "wall_style": "wainscot",
+    "props": [
+      {"kind": "counter", "items": "register,jars", "x": -1120, "z": -900, "ry": 90, "w": 1100, "h": 540, "box": {"d": 220, "top": 0.66}},
+      {"kind": "shelf", "fill": "jars", "rows": 2, "wall": "left", "at": -900, "y": -600, "w": 1000, "h": 360},
+      {"kind": "bar_stools", "x": -880, "z": -900, "ry": 90, "w": 900, "h": 320},
+      {"kind": "table_set", "x": -680, "z": -1560, "w": 660, "h": 430},
+      {"kind": "table_set", "x": -120, "z": -1720, "w": 620, "h": 420},
+      {"kind": "kitchen_pass", "wall": "back", "at": 620, "w": 1400, "h": 1000},
+      {"kind": "board", "wall": "right", "at": -950, "y": -360, "w": 820, "h": 560, "title": "Today's specials", "lines": ["Claypot rice", "Grilled fish, sambal", "Kai lan, garlic", "Lime soda"]},
+      {"kind": "plant", "x": 1240, "z": -980, "ry": -55, "w": 240, "h": 480},
+      {"kind": "frame", "wall": "back", "at": -680, "y": -560, "w": 460, "h": 320},
+      {"kind": "pendant", "x": -680, "z": -1520, "y": -700, "w": 200, "h": 300},
+      {"kind": "pendant", "x": -120, "z": -1680, "y": -700, "w": 200, "h": 300}
+    ],
+    "stops": [
+      {"id": "counter", "title": "Order at the counter", "text": "A sample stop: pay here, drinks come over to your table.", "look": [-1120, -400, -900], "yaw": -72, "fw": 1150, "fh": 720},
+      {"id": "tables", "title": "Sit anywhere", "text": "Small tables for two or four, near the kitchen.", "look": [-400, -300, -1620], "yaw": -10, "fw": 1300, "fh": 700},
+      {"id": "kitchen", "title": "The kitchen pass", "text": "Plates come up hot from the kitchen behind.", "look": [620, -540, -1995], "yaw": 12, "fw": 1400, "fh": 900},
+      {"id": "menu", "title": "Today's specials", "list": ["Claypot rice", "Grilled fish, sambal", "Kai lan, garlic", "Lime soda"], "look": [1396, -640, -950], "yaw": 72, "fw": 950, "fh": 640}
+    ],
+    "nav": [["tables", "Tables"], ["menu", "Specials"], ["visit", "Visit"]]
+  },
+  "nails": {
+    "palette": {"wall": "#f8e9ec", "wall2": "#f1d6dc", "floor": "#efe6e1", "floor2": "#d9c9c1", "ceiling": "#fdf8f6", "wood": "#e3cbbb",
+      "accent": "#c2557a", "accent2": "#8a5cc2", "chair": "#d9a6b5", "chair2": "#c9c3e3", "counter": "#f3e3e7", "desk": "#fbf6f4",
+      "polish": ["#d64f73", "#f29fb4", "#8a5cc2", "#e0b04f"], "metal": "#cfd5db", "panel": "#fff7f8",
+      "facade": "#f4e9e6", "awning": "#e7a7bd", "sign_bg": "#5b2340", "shopfront": "#7a3552", "door": "#5b2340", "sky": "#c8e3f2", "sign_ink": "#ffe0ea"},
+    "floor_style": "terrazzo", "wall_style": "plain",
+    "props": [
+      {"kind": "counter", "items": "bell,plant,monitor", "x": -1100, "z": -820, "ry": 90, "w": 960, "h": 520, "box": {"d": 220, "top": 0.66}},
+      {"kind": "frame", "wall": "left", "at": -1400, "y": -520, "w": 420, "h": 320},
+      {"kind": "nail_station", "x": -780, "z": -1700, "w": 760, "h": 520},
+      {"kind": "nail_station", "x": -60, "z": -1700, "w": 760, "h": 520},
+      {"kind": "polish_wall", "wall": "back", "at": 780, "y": -120, "w": 1000, "h": 800},
+      {"kind": "pedicure_chair", "x": 1080, "z": -1050, "ry": -90, "w": 720, "h": 640},
+      {"kind": "plant", "x": 1240, "z": -980, "ry": -55, "w": 240, "h": 480},
+      {"kind": "pendant", "x": -780, "z": -1640, "y": -700, "w": 200, "h": 300},
+      {"kind": "pendant", "x": -60, "z": -1640, "y": -700, "w": 200, "h": 300}
+    ],
+    "stops": [
+      {"id": "welcome", "title": "Welcome in", "text": "A sample stop: say hello at the front desk; walk-ins when a chair is free.", "look": [-1100, -400, -820], "yaw": -72, "fw": 1050, "fh": 700},
+      {"id": "manicures", "title": "Manicures", "text": "Two stations by the window light, each with its own lamp.", "look": [-420, -350, -1700], "yaw": -6, "fw": 1500, "fh": 700},
+      {"id": "colours", "title": "Pick a colour", "text": "The whole wall to choose from. Sample shades for this demo.", "look": [780, -520, -1995], "yaw": 14, "fw": 1100, "fh": 860},
+      {"id": "pedicures", "title": "Pedicures", "text": "A deep chair and a warm foot bath.", "look": [1080, -330, -1050], "yaw": 72, "fw": 950, "fh": 700}
+    ],
+    "nav": [["manicures", "Manicures"], ["colours", "Colours"], ["visit", "Visit"]]
+  },
+  "accounting": {
+    "palette": {"wall": "#eef1f4", "wall2": "#dde3e9", "floor": "#9aa6b2", "floor2": "#8b97a3", "ceiling": "#f8fafb", "wood": "#b08a62",
+      "accent": "#1f4e79", "accent2": "#d9a441", "chair": "#3c4656", "counter": "#e4e8ec", "cabinet": "#d7dbe0", "desk": "#d9c3a6",
+      "goods": ["#1f4e79", "#d9a441", "#6c7a89", "#9fb5c9"], "screen": "#cfe3f2",
+      "facade": "#e9ecef", "awning": "#1f4e79", "sign_bg": "#14324f", "shopfront": "#1f3a54", "door": "#14324f", "sky": "#c3dff0", "sign_ink": "#f4ead2"},
+    "floor_style": "carpet", "wall_style": "plain",
+    "props": [
+      {"kind": "counter", "items": "plant,monitor,bell", "x": -1100, "z": -820, "ry": 90, "w": 960, "h": 520, "box": {"d": 220, "top": 0.66}},
+      {"kind": "frame", "wall": "left", "at": -1420, "y": -520, "w": 420, "h": 320},
+      {"kind": "table_set", "things": "laptop", "x": -650, "z": -1650, "w": 900, "h": 460},
+      {"kind": "frame", "wall": "back", "at": -650, "y": -560, "w": 520, "h": 340},
+      {"kind": "desk", "things": "monitor,lamp", "x": 300, "z": -1740, "w": 720, "h": 560},
+      {"kind": "desk", "things": "monitor,papers", "x": 960, "z": -1740, "w": 680, "h": 560},
+      {"kind": "filing_wall", "wall": "right", "at": -1100, "w": 1300, "h": 900},
+      {"kind": "plant", "x": 1240, "z": -980, "ry": -55, "w": 240, "h": 480},
+      {"kind": "clock", "wall": "back", "at": 630, "y": -700, "w": 160, "h": 160}
+    ],
+    "stops": [
+      {"id": "reception", "title": "Come in", "text": "A sample stop: reception takes your papers; no appointment needed to drop them off.", "look": [-1100, -400, -820], "yaw": -72, "fw": 1050, "fh": 700},
+      {"id": "meet", "title": "Meet us", "text": "Sit down with the accountant who does your books, at the same table each time.", "look": [-650, -320, -1650], "yaw": -10, "fw": 1150, "fh": 650},
+      {"id": "work", "title": "What we do", "list": ["Bookkeeping", "GST returns", "Form C-S and ECI", "Payroll"], "look": [630, -380, -1760], "yaw": 10, "fw": 1450, "fh": 760},
+      {"id": "files", "title": "Your files, kept", "text": "Everything filed by client and year, so nothing goes missing at tax time.", "look": [1396, -450, -1100], "yaw": 72, "fw": 1300, "fh": 900}
+    ],
+    "nav": [["meet", "Meet us"], ["work", "Services"], ["visit", "Visit"]]
+  },
+  "tuition": {
+    "palette": {"wall": "#f6f1e6", "wall2": "#e9dfc9", "floor": "#c9b48f", "floor2": "#b9a27b", "ceiling": "#fcfaf4", "wood": "#b98d5a",
+      "accent": "#1f3a5f", "accent2": "#f2c94c", "mark": "#f2c94c", "chair": "#3f6fb0", "counter": "#f1e9d8", "table": "#e6d4b2", "ink": "#2b4a7a",
+      "goods": ["#1f3a5f", "#f2c94c", "#3f6fb0", "#c9714f", "#6aa84f"],
+      "facade": "#f1ece0", "awning": "#f2c94c", "sign_bg": "#1f3a5f", "shopfront": "#2b4a7a", "door": "#1f3a5f", "sky": "#c3e0f2", "sign_ink": "#ffe9a8"},
+    "floor_style": "planks", "wall_style": "wainscot",
+    "props": [
+      {"kind": "counter", "items": "plant,papers,bell", "x": -1100, "z": -820, "ry": 90, "w": 960, "h": 520, "box": {"d": 220, "top": 0.66}},
+      {"kind": "board", "wall": "left", "at": -1450, "y": -480, "w": 640, "h": 380, "title": "This week", "lines": ["Mon  P5 Maths", "Tue  Sec 3 Chemistry", "Sat  P4 English"]},
+      {"kind": "whiteboard", "wall": "back", "at": -620, "y": -240, "w": 1200, "h": 640},
+      {"kind": "class_tables", "x": -620, "z": -1480, "w": 1200, "h": 420},
+      {"kind": "shelf", "fill": "books", "rows": 4, "wall": "back", "at": 560, "w": 900, "h": 860},
+      {"kind": "table_set", "things": "books", "x": 470, "z": -1640, "w": 820, "h": 440},
+      {"kind": "desk", "things": "lamp,books", "x": 1100, "z": -1120, "ry": -90, "w": 820, "h": 560},
+      {"kind": "shelf", "fill": "books", "rows": 4, "wall": "right", "at": -1650, "w": 560, "h": 900},
+      {"kind": "plant", "x": 1240, "z": -980, "ry": -55, "w": 240, "h": 480},
+      {"kind": "clock", "wall": "back", "at": 120, "y": -720, "w": 150, "h": 150}
+    ],
+    "stops": [
+      {"id": "front-desk", "title": "Front desk", "text": "A sample stop: ask about levels and a trial class here.", "look": [-1100, -400, -820], "yaw": -72, "fw": 1050, "fh": 700},
+      {"id": "classroom", "title": "The classroom", "text": "Small groups around one board, worked through step by step.", "look": [-620, -450, -1700], "yaw": -10, "fw": 1300, "fh": 820},
+      {"id": "group", "title": "Small-group table", "text": "Up to four at a table for questions and practice.", "look": [470, -330, -1700], "yaw": 10, "fw": 1050, "fh": 660},
+      {"id": "tutors", "title": "Tutor corner", "text": "Where tutors prepare each week's lessons and mark homework.", "look": [1200, -380, -1250], "yaw": 70, "fw": 1050, "fh": 720}
+    ],
+    "nav": [["classroom", "Classroom"], ["tutors", "Tutors"], ["visit", "Visit"]]
+  },
+  "tailor": {
+    "palette": {"wall": "#ece6dc", "wall2": "#dcd2c2", "floor": "#7a5a3e", "floor2": "#6b4e35", "ceiling": "#f6f2ea", "wood": "#6b4a33",
+      "accent": "#7a2e3b", "accent2": "#3b5a7a", "curtain": "#7a2e3b", "fabric": "#3b5a7a", "tape": "#f2c94c", "frame": "#c9a54a", "metal": "#c9a54a",
+      "goods": ["#3b5a7a", "#7a2e3b", "#c9b48f", "#2f4f3f", "#8a8f99", "#d9c7a8"], "form": "#efe4d2", "jacket": "#2f3e52", "table": "#c9a87e",
+      "facade": "#ebe4d7", "awning": "#7a2e3b", "sign_bg": "#2b2420", "shopfront": "#3a2f29", "door": "#2b2420", "sky": "#c3dfef", "sign_ink": "#f0d9a8"},
+    "floor_style": "planks", "wall_style": "wainscot",
+    "props": [
+      {"kind": "fitting_room", "wall": "left", "at": -1250, "w": 720, "h": 900},
+      {"kind": "mirror", "wall": "left", "at": -560, "w": 300, "h": 820},
+      {"kind": "shelf", "fill": "fabric", "rows": 4, "wall": "back", "at": -650, "w": 1100, "h": 900},
+      {"kind": "dress_form", "x": -100, "z": -1780, "w": 240, "h": 620},
+      {"kind": "cutting_table", "x": 470, "z": -1560, "w": 1100, "h": 460},
+      {"kind": "desk", "things": "machine", "wall": "back", "at": 820, "w": 760, "h": 540, "off": 120},
+      {"kind": "mirror", "wall": "right", "at": -1500, "w": 340, "h": 860},
+      {"kind": "mirror", "wall": "right", "at": -1040, "w": 340, "h": 860},
+      {"kind": "dress_form", "x": 1100, "z": -760, "w": 260, "h": 640},
+      {"kind": "pendant", "x": 470, "z": -1520, "y": -700, "w": 200, "h": 300}
+    ],
+    "stops": [
+      {"id": "fitting", "title": "Fitting room", "text": "A sample stop: try it on, then we pin what needs to change.", "look": [-1396, -450, -900], "yaw": -72, "fw": 1250, "fh": 900},
+      {"id": "fabrics", "title": "The fabric wall", "text": "Wools and cottons to choose from for a new piece.", "look": [-650, -450, -1995], "yaw": -10, "fw": 1200, "fh": 900},
+      {"id": "cutting", "title": "Cutting table", "text": "Measured, chalked and cut by hand.", "look": [470, -320, -1560], "yaw": 10, "fw": 1200, "fh": 620},
+      {"id": "mirrors", "title": "Check the fit", "text": "Full-length mirrors to see it from every side.", "look": [1396, -430, -1270], "yaw": 72, "fw": 1000, "fh": 860}
+    ],
+    "nav": [["fitting", "Fitting"], ["fabrics", "Fabrics"], ["visit", "Visit"]]
+  },
+  "aircon": {
+    "palette": {"wall": "#eef4f7", "wall2": "#dce7ed", "floor": "#c9d1d6", "floor2": "#b6c0c6", "ceiling": "#f8fbfc", "wood": "#8f9aa5",
+      "accent": "#1d7fc4", "accent2": "#f2a33a", "unit": "#f7f9fb", "panel": "#c9d8e2", "peg": "#d9c39a", "counter": "#dfe6eb", "carton": "#c8a27a", "screen": "#cfe9ff",
+      "facade": "#e6edf1", "awning": "#1d7fc4", "sign_bg": "#0f3550", "shopfront": "#16405e", "door": "#0f3550", "sky": "#c3e2f4", "sign_ink": "#e3f4ff"},
+    "floor_style": "tiles", "wall_style": "plain",
+    "props": [
+      {"kind": "ac_split", "wall": "left", "at": -1250, "y": -640, "w": 520, "h": 200},
+      {"kind": "ac_split", "wall": "left", "at": -650, "y": -640, "w": 520, "h": 200},
+      {"kind": "ac_floor", "x": -1180, "z": -1500, "w": 260, "h": 640},
+      {"kind": "ac_wall", "wall": "back", "at": -600, "y": -80, "w": 1300, "h": 880},
+      {"kind": "tool_wall", "wall": "back", "at": 680, "y": -60, "w": 1100, "h": 880},
+      {"kind": "counter", "items": "monitor,boxes", "x": 1100, "z": -950, "ry": -90, "w": 1000, "h": 520, "box": {"d": 220, "top": 0.66}},
+      {"kind": "shelf", "fill": "boxes", "rows": 3, "wall": "right", "at": -1650, "w": 560, "h": 860},
+      {"kind": "plant", "x": -1240, "z": -980, "ry": 55, "w": 240, "h": 480}
+    ],
+    "stops": [
+      {"id": "units", "title": "See the units", "text": "A sample stop: wall and floor units side by side, so you can compare sizes.", "look": [-600, -500, -1990], "yaw": -12, "fw": 1400, "fh": 900},
+      {"id": "tools", "title": "The tool wall", "text": "Gauges, hoses and the kit the team takes to every job.", "look": [680, -500, -1995], "yaw": 12, "fw": 1200, "fh": 900},
+      {"id": "service", "title": "Service desk", "text": "Book a servicing or a chemical wash; we confirm a slot on WhatsApp.", "look": [1100, -380, -950], "yaw": 72, "fw": 1100, "fh": 700}
+    ],
+    "nav": [["units", "Units"], ["service", "Service"], ["visit", "Visit"]]
+  }
+}

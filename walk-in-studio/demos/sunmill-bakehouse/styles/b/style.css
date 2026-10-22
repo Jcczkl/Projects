@@ -1,0 +1,94 @@
+@font-face { font-family: "Fredoka"; src: url("../../assets/fonts/fredoka-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+/* Style B - Bold & playful (Sunmill Bakehouse demo). Loaded after the demo's CSS; tokens from the template scale only. */
+:root {
+  --c-bg: #fffaf0;
+  --c-surface: #ffffff;
+  --c-surface-2: #ffe9a8;
+  --c-text: #1d1424;
+  --c-muted: #4e4356;
+  --c-border: #1d1424;
+  --c-primary: #d42a62;   /* bubblegum pink, deepened for AA: 4.9:1 with white, 3.4:1 on the yellow (large text) */
+  --c-primary-ink: #ffffff;
+  --c-accent: #ffd23f;
+  --c-accent-ink: #1d1424;
+  --font-display: "Fredoka", "Arial Rounded MT Bold", ui-rounded, "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --fw-display: 700;
+  --radius: 22px;
+  --radius-lg: 34px;
+}
+.site-header { border-bottom: 3px solid var(--c-text); }   /* bar colour = --c-bg (base.css paints it via --c-header-bg) */
+.site-header .brand__mark rect { fill: var(--c-primary); }
+.nav__link { font-weight: 700; }
+
+.bp-hero { position: relative; background: var(--c-accent); border-bottom: 3px solid var(--c-text); overflow: hidden; }
+.bp-hero__grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: var(--space-6); align-items: center; padding-block: var(--space-6) var(--space-7); }
+.bp-tag { display: inline-block; margin: 0 0 var(--space-3); padding: .35rem .9rem; border: 2px solid var(--c-text); border-radius: 999px;
+  background: #fff; font-weight: 800; }
+.bp-hero h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(3rem, 6.4vw + .5rem, 6.6rem); line-height: .95;
+  letter-spacing: -0.02em; margin: 0 0 var(--space-4); }
+.bp-hero h1 span { display: block; color: var(--c-primary); }
+.bp-lead { font-size: var(--fs-lead); font-weight: 700; max-width: 28rem; margin: 0 0 var(--space-4); }
+.bp-btn { background: var(--c-text); color: #fff; border: 3px solid var(--c-text); box-shadow: 4px 4px 0 var(--c-primary);
+  transition: transform var(--dur-tap) var(--ease-out), box-shadow var(--dur-tap) var(--ease-out); }
+.bp-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--c-primary); }
+.bp-btn--ghost { background: #fff; color: var(--c-text); }
+.bp-hero__pic { position: relative; margin: 0; justify-self: center; width: min(100%, 420px); }
+.bp-hero__pic img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: 50% 42%; border: 3px solid var(--c-text); border-radius: 50% 50% var(--radius-lg) var(--radius-lg);
+  box-shadow: 10px 10px 0 var(--c-primary); }
+.bp-badge { position: absolute; display: grid; place-content: center; text-align: center; width: clamp(96px, 9vw, 128px); aspect-ratio: 1;
+  border: 3px solid var(--c-text); border-radius: 50%; background: #fff; font-family: var(--font-display); font-weight: 700;
+  font-size: .95rem; line-height: 1.1; box-shadow: 4px 4px 0 var(--c-text); }
+.bp-badge b { display: block; font-size: 1.35rem; }
+.bp-badge--a { left: -9%; bottom: 2%; transform: rotate(-10deg); background: var(--c-primary); color: #fff; }
+.bp-badge--b { right: -9%; bottom: 14%; transform: rotate(8deg); }
+.bp-hero .sample-note { bottom: .8rem; right: 1rem; }
+
+.bp-best { padding-block: var(--space-7); }
+.bp-best h2, .bp-party h2, .bp-visit h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.2rem, 3.5vw + 1rem, 3.8rem);
+  line-height: 1; margin: 0 0 var(--space-5); }
+.bp-tiles { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); grid-template-columns: repeat(3, 1fr); }
+.bp-tile { position: relative; border: 3px solid var(--c-text); border-radius: var(--radius-lg); background: #fff; padding: var(--space-3);
+  box-shadow: 6px 6px 0 var(--c-text); }
+.bp-tile img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); }
+.bp-card { background: var(--c-surface-2); }
+.bp-card h3 { margin-top: 0; }
+.bp-tile h3 { font-family: var(--font-display); font-size: 1.5rem; margin: var(--space-3) 0 .2rem; }
+.bp-tile p { margin: 0; color: var(--c-muted); }
+.bp-price { position: absolute; top: -14px; right: -10px; padding: .5rem .85rem; border: 3px solid var(--c-text); border-radius: 999px;
+  background: var(--c-accent); font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; transform: rotate(5deg); }
+.bp-tile--2 .bp-price { background: var(--c-primary); color: #fff; transform: rotate(-4deg); }
+.bp-list { list-style: none; margin: var(--space-2) 0 0; padding: 0; }
+.bp-list li { display: flex; justify-content: space-between; gap: 1rem; padding: .5rem 0; border-bottom: 2px dashed rgba(29,20,36,.25); }
+.bp-list li:last-child { border-bottom: 0; }
+.bp-list small { color: var(--c-muted); font-weight: 600; }
+.bp-list b { font-family: var(--font-display); }
+
+.bp-party { background: var(--c-primary); color: #fff; padding-block: var(--space-7); border-block: 3px solid var(--c-text); }
+.bp-party p { font-size: var(--fs-lead); max-width: 36rem; }
+.bp-chips { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: var(--space-3); margin-top: var(--space-5); }
+.bp-chip { display: grid; gap: .3rem; padding: var(--space-4); border: 3px solid var(--c-text); border-radius: var(--radius-lg); background: #fff;
+  color: var(--c-text); text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: 1.5rem;
+  box-shadow: 5px 5px 0 var(--c-text); transition: transform var(--dur-tap) var(--ease-out); }
+.bp-chip small { font-family: var(--font-body); font-weight: 600; font-size: 1rem; color: var(--c-muted); }
+.bp-chip:hover { transform: translateY(-3px); }
+
+.bp-visit { padding-block: var(--space-7); background: var(--c-accent); }
+.bp-visit__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); align-items: center; }
+.bp-addr { font-size: 1.3rem; font-weight: 800; }
+.bp-hours { margin: 0; display: grid; gap: var(--space-3); }
+.bp-hours div { display: flex; justify-content: space-between; align-items: baseline; padding: var(--space-3) var(--space-4); border: 3px solid var(--c-text);
+  border-radius: var(--radius); background: #fff; }
+.bp-hours dt { font-weight: 800; }
+.bp-hours dd { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.4rem, 1.5vw + 1rem, 2rem); }
+
+@media (max-width: 860px) {
+  .bp-hero__grid, .bp-visit__grid { grid-template-columns: 1fr; }
+  .bp-hero__grid { padding-block: var(--space-5) var(--space-6); gap: var(--space-5); }
+  .bp-badge--a { left: -3%; } .bp-badge--b { right: -3%; }
+  .bp-tiles { grid-template-columns: 1fr; gap: var(--space-5); }
+}
+
+/* WhatsApp bar on phones: B's pink with an ink rule, not the bright green */
+.wa-fab { background: var(--c-primary); color: #fff; border: 3px solid var(--c-text); }
+@media (max-width: 600px) { .wa-fab { border-width: 3px 0 0; font-family: var(--font-display); font-size: 1.1rem; } }

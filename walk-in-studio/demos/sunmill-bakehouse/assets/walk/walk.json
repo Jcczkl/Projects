@@ -1,0 +1,19 @@
+{
+  "frames": 26,
+  "desktop": [
+    1920,
+    1080
+  ],
+  "mobile": [
+    810,
+    1080
+  ],
+  "source": "pexels-video-7405923.mp4",
+  "start": 0.0,
+  "end": 9.642,
+  "quality": 75,
+  "bytes": {
+    "desktop": 2185038,
+    "mobile": 986404
+  }
+}

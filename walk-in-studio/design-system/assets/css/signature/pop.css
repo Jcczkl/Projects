@@ -1,0 +1,5 @@
+/* pop: stickers land with a tilt and a bounce */
+.sig-sticker { display: inline-block; transform: rotate(var(--tilt, -6deg)); }
+.sig-on .sig-sticker { transition: transform var(--dur-reveal) var(--ease-pop), opacity var(--dur-ui) var(--ease-out);
+  transition-delay: calc(var(--i, 0) * var(--stagger)); }
+.sig-on .sig-sticker:not(.is-in) { opacity: 0; transform: scale(.4) rotate(calc(var(--tilt, -6deg) - 16deg)); }

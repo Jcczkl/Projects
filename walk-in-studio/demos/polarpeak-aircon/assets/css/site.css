@@ -1,0 +1,99 @@
+/* Polar Peak Aircon — "dispatch board" (business/layout_dna.md, round 3).
+   No big photo: area in the headline + an instant price estimator, a price board in mono
+   numbers, the towns we cover, plans as products, a 3-field booking form. */
+@font-face { font-family: "Barlow Condensed"; src: url("../fonts/barlow-condensed-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+:root {
+  --font-mono: "Cascadia Mono", Consolas, ui-monospace, "SF Mono", Menlo, monospace;
+  /* Self-hosted condensed grotesk (finish pass 2026-10-10): the same dispatch-board look on every OS. */
+  --font-display: "Barlow Condensed", "Bahnschrift Condensed", "Bahnschrift", "DIN Condensed", "Arial Narrow", sans-serif;
+  --c-whatsapp: #187a43;   /* WhatsApp buttons: deeper green, 5.4:1 with white (was 4.1:1) */
+}
+h1, h2, h3 { font-stretch: 75%; text-transform: uppercase; letter-spacing: .01em; }
+.btn { text-transform: uppercase; letter-spacing: .04em; }
+.topbar { background: var(--c-text); color: #fff; }
+.topbar .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .3rem 1.2rem; padding-block: .45rem; }
+.topbar a { color: var(--c-accent); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; min-height: 32px; }
+.pp-head { max-width: 44rem; margin-bottom: var(--space-4); }
+
+/* Hero: words + the estimator, on white */
+.pp-hero { padding-block: var(--space-5) var(--space-6); border-bottom: 6px solid var(--c-primary); }
+.pp-hero__grid { display: grid; gap: var(--space-6); grid-template-columns: 1.1fr .9fr; align-items: center; }
+.pp-hero h1 { font-size: clamp(2.6rem, 4vw + 1rem, 5.2rem); line-height: .95; color: var(--c-primary); max-width: 14ch; }
+.pp-hero .lead { font-size: 1.25rem; }
+.pp-hero__call a { display: inline-flex; gap: .4rem; align-items: center; min-height: 44px; font-family: var(--font-mono); font-size: 1.3rem; font-weight: 700; color: var(--c-text); }
+.pp-hero__call svg { width: 1.1em; height: 1.1em; }
+
+.est { background: var(--c-text); color: #fff; border-radius: var(--radius-lg); padding: var(--space-5); display: grid; gap: var(--space-3); }
+.est h2 { margin: 0; font-size: 1.8rem; color: var(--c-accent); }
+.est fieldset { border: 0; margin: 0; padding: 0; }
+.est legend { font-weight: 700; margin-bottom: .5rem; }
+.est__svc { display: grid; gap: .4rem; }
+.est__opt { display: grid; grid-template-columns: auto 1fr auto; gap: .7rem; align-items: center; min-height: 48px; padding: .4rem .8rem; border: 1px solid rgba(255,255,255,.25); border-radius: var(--radius); cursor: pointer; transition: border-color var(--dur-tap) var(--ease-out), background var(--dur-tap) var(--ease-out); }
+.est__opt:has(input:checked) { border-color: var(--c-accent); background: rgba(255,225,77,.08); }
+/* The whole 48 px row is the radio's tap target: the real input covers the row (invisible, still focusable and
+   read out), and the row draws the dot. Finish pass 2026-10-10: a 19 px radio was the only target on phones. */
+.est__opt { position: relative; }
+.est__opt input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.est__opt::before { content: ""; width: 1.2rem; height: 1.2rem; box-sizing: border-box; border-radius: 50%; border: 2px solid rgba(255,255,255,.7); }
+.est__opt:has(input:checked)::before { border-color: var(--c-accent); background: radial-gradient(circle, var(--c-accent) 0 38%, transparent 42%); }
+.est__opt:has(input:focus-visible) { outline: 3px solid var(--c-accent); outline-offset: 2px; }
+.est__opt b, .est__n, .est__sum { font-family: var(--font-mono); }
+.est__units { display: flex; align-items: center; gap: .8rem; }
+.est__units legend { width: 100%; }
+.est__step { width: 48px; height: 48px; border-radius: var(--radius); border: 1px solid rgba(255,255,255,.4); background: transparent; color: #fff; font-size: 1.5rem; cursor: pointer; }
+.est__n { font-size: 1.8rem; min-width: 2ch; text-align: center; }
+.est__total { margin: 0; display: flex; justify-content: space-between; align-items: baseline; border-top: 1px dashed rgba(255,255,255,.3); padding-top: .8rem; }
+.est__sum { font-size: 2.2rem; color: var(--c-accent); }
+.est__note { margin: 0; color: #c8cfdf; }
+
+/* Price board */
+.pp-board .price-list { font-size: 1.15rem; max-width: 56rem; }
+.pp-board .price-list th, .pp-board .price-list td { padding: 1rem .8rem; }
+.pp-board .price-list small { display: block; color: var(--c-muted); font-weight: 400; font-size: var(--fs-small); }
+.pp-board .price-list td { font-family: var(--font-mono); color: var(--c-primary); font-size: 1.3rem; font-weight: 700; text-align: right; }
+
+/* Areas */
+.pp-areas { background: var(--c-primary); color: #fff; }
+.pp-areas .eyebrow { color: var(--c-accent); }
+.pp-areas__grid { display: grid; gap: var(--space-5); grid-template-columns: 1fr 1.2fr; align-items: center; }
+.pp-towns { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .5rem; }
+.pp-towns li { padding: .7rem .9rem; border: 1px solid rgba(255,255,255,.35); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+
+/* Plans as products */
+.plan-cards { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+.plan-card { background: var(--c-surface); border: 2px solid var(--c-text); padding: var(--space-4); display: grid; gap: .4rem; align-content: start; }
+.plan-card h3 { margin: 0; font-size: 1.6rem; }
+.plan-card p { margin: 0; }
+.plan-card__price b { font-family: var(--font-mono); font-size: 2rem; color: var(--c-primary); }
+.plan-card .btn { justify-self: start; margin-top: .6rem; }
+
+.pp-book { display: grid; gap: var(--space-5); grid-template-columns: 1fr 1fr; align-items: start; }
+@media (max-width: 860px) {
+  .pp-hero__grid, .pp-areas__grid, .pp-book { grid-template-columns: 1fr; }
+}
+
+.pp-board__grid { display: grid; gap: var(--space-5); grid-template-columns: 1.6fr 1fr; align-items: start; }
+.pp-board__photo { margin: 0; position: relative; }
+.pp-board__photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.pp-board__photo figcaption { position: absolute; left: .6rem; bottom: .6rem; padding: .15rem .5rem; background: rgba(255,255,255,.92); font-size: .85rem; font-weight: 600; }
+@media (max-width: 860px) { .pp-board__grid { grid-template-columns: 1fr; } .pp-board__photo img { aspect-ratio: 4 / 3; } }
+
+/* Atmosphere band under the estimator (sample photo, 2026-10-08 go-public) */
+.pp-band { position: relative; margin: 0; }
+.pp-band img { display: block; width: 100%; height: auto; aspect-ratio: 1920 / 732; object-fit: cover; }
+.pp-band figcaption { position: absolute; right: var(--space-3); bottom: var(--space-3); padding: .2rem .6rem; border-radius: 999px; background: rgba(0,0,0,.6); color: #fff; font-size: .8rem; }
+/* Smooth tier: the estimate counts to its new value and flashes once, so the change is noticed */
+html[data-motion="smooth"] .est__sum.is-changing { color: var(--c-accent, #ffd23f); transition: color var(--dur-reveal) var(--ease-out); }
+
+/* Finish pass 2026-10-10. The demo form is switched off (fieldset disabled), but it must not LOOK switched off:
+   full-strength button, fields with a visible border (>= 3:1 against the card). */
+.form fieldset[disabled] .btn { opacity: 1; }
+.form fieldset[disabled] input, .form fieldset[disabled] textarea, .form fieldset[disabled] select { opacity: 1; }
+.form input, .form textarea, .form select { border: 1.5px solid color-mix(in srgb, var(--c-text) 50%, var(--c-surface)); }
+
+/* Phone WhatsApp bar in this look's colours: navy bar, WhatsApp-green glyph, white words, a blue top rule. */
+@media (max-width: 600px) {
+  .wa-fab { background: var(--c-text); color: #fff; border-top: 3px solid var(--c-primary); box-shadow: 0 -4px 16px rgba(10,18,48,.25); }
+  .wa-fab svg { color: #25d366; }
+  .wa-fab::after { text-transform: uppercase; letter-spacing: .04em; }
+}

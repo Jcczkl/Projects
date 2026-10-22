@@ -1,0 +1,152 @@
+/* Style D - Food story (Cinderlane Pizza demo): flour white darkening to charcoal, one ember spine; Franklin Gothic + mono labels. */
+/* Faces (template polish 2026-10-10): Libre Franklin 600 (the Franklin Gothic the design asks for, on every device) and
+   IBM Plex Mono for the step labels and figures. Self-hosted, OFL. */
+@font-face { font-family: "Libre Franklin"; src: url("../../assets/fonts/libre-franklin-600.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("../../assets/fonts/ibm-plex-mono-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+:root {
+  --c-bg: #f6f3ee;
+  --c-surface: #fffdf9;
+  --c-surface-2: #efe4d0;
+  --c-text: #231d18;
+  --c-muted: #5d534a;
+  --c-border: #ddd0bb;
+  --c-primary: #1a1512;
+  --c-primary-ink: #ffffff;
+  --c-accent: #e2531f;
+  --c-accent-ink: #1a1512;
+  --font-display: "Libre Franklin", "Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", "Libre Franklin", "Arial Narrow", Arial, sans-serif;
+  --font-body: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", Consolas, "SF Mono", ui-monospace, Menlo, "Courier New", monospace;
+  --fw-display: 600;
+  --radius: 6px;
+  --radius-lg: 10px;
+  --c-header-bg: #f6f3ee;   /* base.css paints the header bar (::before) with this */
+  --fs-char: #1a1512;
+  --fs-ember: #ff7a3d;     /* ember text on charcoal: 6.9:1 */
+  --fs-ember-ink: #a8360c; /* ember text on flour / dough (step labels, today's hours): 5.2:1 or better */
+  --spine: clamp(1.4rem, 4vw, 4rem);
+}
+body { background: var(--c-bg); color: var(--c-text); }
+.site-header, .site-header .brand, .site-header .nav__link { color: var(--c-text); }
+.site-header .brand span { font-family: var(--font-display); font-weight: 400; font-size: 1.35rem; }
+.site-header .brand__mark rect { fill: var(--fs-char); }
+.site-header .brand__mark text { fill: var(--fs-ember); }
+.nav__link { font-family: var(--font-mono); font-weight: 400; font-size: .95rem; }
+.nav__link::after { background: var(--c-accent); }
+.nav__cta { background: var(--fs-char); color: #fff; border-radius: var(--radius); }
+@media (max-width: 860px) { .js .site-header .nav { background: var(--c-bg); } }
+
+.fs-btn { border-radius: var(--radius); font-weight: 700; transition: transform var(--dur-tap) var(--ease-out), background var(--dur-ui) var(--ease-out); }
+.fs-btn:hover { transform: translateY(-2px); }
+.fs-btn--line { background: transparent; color: var(--c-text); border: 2px solid var(--c-text); }
+.fs-no { font-family: var(--font-mono); font-size: 1rem; letter-spacing: .08em; text-transform: uppercase; color: var(--fs-ember-ink); margin: 0 0 var(--space-2); }
+.fs-small { color: var(--c-muted); font-size: 1rem; }
+.fs-ch h2, .fs-find h2 { font-family: var(--font-display); font-weight: 400; line-height: 1.02; letter-spacing: -.015em;
+  font-size: clamp(2.3rem, 3vw + 1rem, 4.2rem); margin: 0 0 var(--space-3); max-width: 18ch; }
+
+/* Hero: type-led, then the five-step strip */
+.fs-hero { padding-block: clamp(2.5rem, 7vh, 5.5rem) var(--space-6); }
+.fs-kicker { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .04em; font-size: 1rem; margin: 0 0 var(--space-3); color: var(--c-muted); }
+.fs-hero h1 { font-family: var(--font-display); font-weight: 400; letter-spacing: -.025em; line-height: .98;
+  font-size: clamp(3rem, 5.4vw + 1rem, 7rem); margin: 0 0 var(--space-4); max-width: 15ch; }
+.fs-hero h1 span { color: var(--c-accent); }
+.fs-lead { font-size: var(--fs-lead); max-width: 40rem; margin: 0 0 var(--space-4); }
+.fs-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+.fs-steps { list-style: none; margin: var(--space-6) 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); position: relative; }
+.fs-steps::before { content: ""; position: absolute; left: 0; right: 0; top: 11px; height: 2px; background: var(--c-accent); }
+.fs-steps a { position: relative; display: grid; gap: .2rem; padding-top: 2rem; color: var(--c-text); text-decoration: none; font-family: var(--font-display); font-size: 1.35rem;
+  transition: color var(--dur-ui) var(--ease-out); }
+.fs-steps a::before { content: ""; position: absolute; left: 0; top: 2px; width: 20px; height: 20px; border-radius: 50%; background: var(--c-bg); border: 3px solid var(--c-accent);
+  transition: background var(--dur-ui) var(--ease-out); }
+.fs-steps a:hover { color: var(--c-accent); }
+.fs-steps a:hover::before { background: var(--c-accent); }
+.fs-steps span { font-family: var(--font-mono); font-size: 1rem; color: var(--c-muted); }
+
+/* Chapters on one spine: the line runs through every chapter's inner block */
+.fs-ch__inner { position: relative; padding: var(--space-7) 0 var(--space-7) var(--spine); }
+.fs-ch__inner::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--c-accent); }
+.fs-ch__inner::after { content: ""; position: absolute; left: -9px; top: calc(var(--fs-dot-top, var(--space-7)) + .15rem); width: 20px; height: 20px;
+  border-radius: 50%; background: var(--c-accent); border: 3px solid var(--c-accent); box-shadow: 0 0 0 5px var(--fs-dot-ring, var(--c-bg)); }
+/* Smooth only: the spine tells you where you are in the dough's story. As each chapter arrives, its stretch of the
+   ember line grows down from the top and its dot fills (empty ring -> ember with a small glow) just after the line
+   reaches it. The chapter's text rises in at once as one block (base.css reveal); nothing waits row by row.
+   Standard, no-JS and reduced motion show the full spine and filled dots. */
+.js[data-motion="smooth"] .fs-ch__inner::before { transform-origin: 50% 0; transition: transform var(--dur-scene) var(--ease-in-out) var(--dur-ui); }
+.js[data-motion="smooth"] .fs-ch__inner:not(.is-in)::before { transform: scaleY(0); }
+.js[data-motion="smooth"] .fs-ch__inner::after {
+  transition: background-color var(--dur-reveal) var(--ease-out) var(--dur-reveal),
+              box-shadow var(--dur-reveal) var(--ease-out) var(--dur-reveal); }
+.js[data-motion="smooth"] .fs-ch__inner:not(.is-in)::after { background-color: var(--fs-dot-ring, var(--c-bg)); }
+.js[data-motion="smooth"] .fs-ch__inner.is-in::after { box-shadow: 0 0 0 5px var(--fs-dot-ring, var(--c-bg)), 0 0 16px 4px rgba(226, 83, 31, .55); }
+@media (prefers-reduced-motion: reduce) {
+  .js .fs-ch__inner::before { transform: none !important; }
+  .js .fs-ch__inner::after { background-color: var(--c-accent) !important; }
+}
+.fs-ch p:not(.fs-no):not(.fs-big) { font-size: 1.15rem; max-width: 38rem; }
+.fs-ch--flour { background: var(--c-bg); }
+.fs-ch--dough { background: var(--c-surface-2); --fs-dot-ring: var(--c-surface-2); }
+.fs-ch--dough + .fs-ch--dough .fs-ch__inner { padding-top: 0; --fs-dot-top: 0px; }
+.fs-ch__split::after { top: 50%; margin-top: -10px; }
+.fs-ingredients { list-style: none; margin: var(--space-4) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .6rem; }
+.fs-ingredients li { padding: .5rem 1rem; border: 2px solid var(--c-text); border-radius: 999px; font-family: var(--font-mono); font-size: 1rem; }
+.fs-ch__split { display: grid; grid-template-columns: auto 1fr; gap: var(--space-6); align-items: center; }
+.fs-big { margin: 0; font-family: var(--font-mono); font-size: clamp(5rem, 10vw + 1rem, 11rem); line-height: .9; letter-spacing: -.04em; color: var(--c-text); }
+.fs-wide { margin: var(--space-4) 0 0; max-width: 1000px; }
+.fs-wide img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: 50% 45%; border-radius: var(--radius-lg); }
+.fs-wide figcaption { margin-top: .5rem; font-family: var(--font-mono); font-size: 1rem; color: var(--c-muted); }
+
+/* 04 Fire: the page goes dark */
+.fs-ch--fire { background: radial-gradient(120% 70% at 30% 115%, #6a2410 0%, #2a1712 45%, var(--fs-char) 75%); color: #f6efe7; --fs-dot-ring: var(--fs-char); }
+.fs-ch--fire .fs-no { color: var(--fs-ember); }
+.fs-heat { display: grid; grid-template-columns: repeat(2, minmax(0, 22rem)); gap: var(--space-5); margin: var(--space-5) 0; }
+.fs-heat p { margin: 0; display: grid; gap: .4rem; }
+.fs-heat b { font-family: var(--font-mono); font-weight: 400; font-size: clamp(3.6rem, 5vw + 1rem, 6.4rem); line-height: 1; color: var(--fs-ember); text-shadow: 0 0 28px rgba(255, 106, 43, .45); }
+.fs-heat span { color: #dccfc2; font-size: 1.1rem; }
+.fs-big small, .fs-heat b small { font-size: .45em; letter-spacing: 0; margin-left: .15em; }
+.fs-ch .fs-fire__line { color: #f6efe7; font-size: 1.3rem; }
+
+/* 05 Table: the pizza and the menu, still on charcoal */
+.fs-ch--table { background: var(--fs-char); color: #f6efe7; }
+.fs-table { display: grid; grid-template-columns: minmax(0, 460px) minmax(0, 1fr); gap: var(--space-6); align-items: start; padding-block: var(--space-7); }
+.fs-plate { margin: 0; position: sticky; top: calc(var(--header-h) + 1.5rem); }
+.fs-plate img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 48% 50%; border-radius: var(--radius-lg); }
+.fs-plate figcaption { margin-top: .5rem; font-family: var(--font-mono); font-size: 1rem; color: #cbbfb2; }
+.fs-ch--table .fs-no { color: var(--fs-ember); }
+.fs-ch--table h2 { color: #fff; }
+.fs-sub { color: #cbbfb2; margin: 0 0 var(--space-4); }
+.fs-menu { list-style: none; margin: 0; padding: 0; }
+.fs-menu li { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-3); padding: 1rem 0; border-bottom: 1px solid #3a302a; }
+.fs-menu li > span { font-family: var(--font-display); font-size: 1.55rem; line-height: 1.15; }
+.fs-menu small { display: block; font-family: var(--font-body); font-size: 1rem; color: #cbbfb2; margin-top: .25rem; }
+.fs-menu i { font-style: normal; font-family: var(--font-mono); font-size: 1rem; color: var(--fs-ember); border: 1px solid currentColor; border-radius: 999px; padding: .05rem .5rem; margin-left: .4rem; vertical-align: middle; }
+.fs-menu b { font-family: var(--font-mono); font-weight: 400; font-size: 1.3rem; color: var(--fs-ember); white-space: nowrap; }
+.fs-menu__more > span { font-size: 1.25rem !important; }
+.fs-menu li.fs-menu__more:nth-child(7) { margin-top: var(--space-3); border-top: 1px solid #3a302a; }
+
+/* Your table: back to flour */
+.fs-find { padding-block: var(--space-7); }
+.fs-find__grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: var(--space-6); align-items: start; }
+.fs-faq { margin-top: var(--space-5); }
+.fs-visit { padding: var(--space-5); background: var(--c-surface-2); border-radius: var(--radius-lg); }
+.fs-visit h3 { font-family: var(--font-display); font-weight: 400; font-size: 2rem; margin: 0 0 .5rem; }
+.fs-visit address { font-style: normal; font-weight: 700; font-size: 1.15rem; }
+.fs-visit .hours { margin-block: var(--space-3); }
+.fs-visit .hours tr.is-today th, .fs-visit .hours tr.is-today td { color: var(--fs-ember-ink); }
+
+@media (max-width: 860px) {
+  .fs-steps { grid-template-columns: 1fr; margin-top: var(--space-5); }
+  .fs-steps::before { left: 9px; right: auto; top: 6px; bottom: 6px; width: 2px; height: auto; }
+  .fs-steps a { padding: .45rem 0 .45rem 2.2rem; grid-auto-flow: column; justify-content: start; gap: .7rem; align-items: baseline; }
+  .fs-steps a::before { top: 50%; margin-top: -10px; }
+  .fs-ch__split, .fs-table, .fs-find__grid, .fs-heat { grid-template-columns: 1fr; }
+  .fs-ch__split { gap: var(--space-3); }
+  .fs-plate { position: static; }
+  .fs-plate img { aspect-ratio: 1; }
+  .fs-wide img { aspect-ratio: 4 / 3; }
+}
+@media (max-width: 600px) {
+  .fs-ch__inner { padding-block: var(--space-6); --fs-dot-top: var(--space-6); }
+  .fs-ch__split::after { top: calc(var(--space-6) + .15rem); margin-top: 0; }
+  .fs-visit { padding: var(--space-4); }
+  .fs-menu li > span { font-size: 1.35rem; }
+}

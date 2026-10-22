@@ -1,0 +1,35 @@
+/* Signature · Place, illustrated: the drawn shop in CSS 3D (store.js). Loaded after place.css, which gives the stage,
+   the name, the cards, the dots and Next / Back. Without JS or CSS 3D the page shows the stills (place.css). */
+.store { --inside: 0; }
+.store__view { position: absolute; inset: 0; overflow: hidden; display: none; perspective-origin: 50% 50%;
+  background: linear-gradient(180deg, var(--store-sky, #bcdff0) 0%, var(--store-sky2, #e9f3f6) 60%, #cfd5d8 100%); }
+.place--live .store__view { display: block; }
+.store:not(.is-drawn) .place__poster { z-index: 1; }   /* covers the warm-up (store.js) until the drawing is ready */
+.store__world { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform-style: preserve-3d; will-change: transform; }
+.store__p { position: absolute; left: 0; top: 0; display: block; transform-origin: 0 0; -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  user-select: none; pointer-events: none; max-width: none; max-height: none; will-change: transform; }   /* drawn once, not re-drawn at every new size while the camera moves */
+.store__two { -webkit-backface-visibility: visible; backface-visibility: visible; }
+
+/* the name over the shop, and the boards inside: page fonts, not pictures */
+.store__sign { display: flex; align-items: center; justify-content: center; text-align: center; white-space: nowrap; overflow: hidden;
+  font-family: var(--font-display); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: 132px; line-height: 1;
+  color: var(--store-sign-ink, #fff3d6); text-shadow: 0 0 34px color-mix(in srgb, var(--store-sign-ink, #fff3d6) 45%, transparent); }
+.store__board { box-sizing: border-box; padding: 34px 44px; border: 18px solid var(--store-board-frame, #6b4a2f); border-radius: 10px;
+  background: var(--store-board, #23302b); color: #f4f1e8; font-family: var(--font-display); overflow: hidden; }
+.store__board b { display: block; font-size: 56px; letter-spacing: .04em; margin-bottom: 18px; color: var(--store-board-ink, #f2c94c); }
+.store__board span { display: block; font-family: var(--font-body); font-size: 36px; line-height: 1.5; opacity: .92; }
+
+/* street light outside, warm light inside (--inside 0..1, set by the camera) */
+.store__light { position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background: radial-gradient(ellipse at 50% 42%, transparent 50%, rgba(46, 24, 6, .34) 100%); opacity: var(--inside); }
+.store__light::after { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(255, 252, 240, .14), rgba(255, 252, 240, 0) 55%); opacity: calc(1 - var(--inside)); }
+
+/* the visitor's hand pushing the door (screen space; place.js's door rules hide it once through) */
+.store .place__door { z-index: 2; opacity: 1; }
+.store__arm { position: absolute; right: 30%; bottom: -2%; width: min(52vmin, 440px); height: auto; transform: translate(0, 105%);
+  transform-origin: 60% 100%; will-change: transform; filter: drop-shadow(0 10px 24px rgba(0, 0, 0, .25)); }
+@media (max-width: 767px) { .store__arm { right: 6%; width: min(64vmin, 340px); } }
+.place--calm .store__arm { display: none; }
+.store--still .place__hero, .store--still .place__stops, .store--still .place__dots, .store--still .place__steps,
+.store--still .place__scrim, .store--still .place__door { display: none !important; }

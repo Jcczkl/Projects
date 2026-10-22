@@ -1,0 +1,34 @@
+/* intro: the story in 2.4 s (3 x --dur-scene), then it dissolves into the hero */
+.sig-intro { position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; pointer-events: none;
+  background: var(--sig-intro-bg, var(--c-bg)); }
+html:not(.js) .sig-intro, html.sig-seen .sig-intro, html.sig-calm .sig-intro { display: none; }
+.sig-intro__stage { position: relative; width: min(46vw, 260px); aspect-ratio: 1; }
+.sig-intro__shape { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; }
+.sig-intro__shape svg { width: 70%; height: auto; }
+.sig-intro__bubble { position: absolute; left: 50%; top: 50%; width: var(--s, 14px); aspect-ratio: 1; border-radius: 50%;
+  background: var(--sig-bubble, currentColor); opacity: 0; }
+.sig-intro__skip { position: absolute; right: 16px; bottom: 16px; min-height: 44px; padding: 0 1.1rem; border-radius: 999px;
+  border: 1px solid currentColor; background: transparent; color: inherit; font: inherit; font-weight: 700; cursor: pointer;
+  pointer-events: auto; }
+.sig-on .sig-intro.is-playing .sig-intro__shape { animation: sig-shape var(--dur-scene) var(--ease-in-out) both;
+  animation-delay: calc(var(--n, 0) * var(--dur-scene)); }
+.sig-on .sig-intro.is-playing .sig-intro__shape--last { animation-name: sig-shape-last; }
+.sig-on .sig-intro.is-playing .sig-intro__bubble { animation: sig-burst var(--dur-scene) var(--ease-out) both;
+  animation-delay: calc(var(--dur-scene) * 2 + var(--dur-ui)); }
+.sig-on .sig-intro.is-done { opacity: 0; transition: opacity var(--dur-ui) var(--ease-out); }
+@keyframes sig-shape {
+  0% { opacity: 0; transform: scale(.55) rotate(-24deg); filter: blur(6px); }
+  35%, 65% { opacity: 1; transform: scale(1) rotate(0); filter: blur(0); }
+  100% { opacity: 0; transform: scale(1.25) rotate(18deg); filter: blur(8px); }
+}
+@keyframes sig-shape-last {
+  0% { opacity: 0; transform: scale(.55) rotate(-24deg); filter: blur(6px); }
+  40%, 70% { opacity: 1; transform: scale(1); filter: blur(0); }
+  100% { opacity: 0; transform: scale(.2); filter: blur(2px); }
+}
+@keyframes sig-burst {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(.2); }
+  25% { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) { .sig-intro { display: none !important; } }

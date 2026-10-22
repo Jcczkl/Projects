@@ -1,0 +1,8 @@
+{
+  "name": "Global",
+  "title": "Ledgerline Accounting | Your company's books, wherever you are (style B: Global)",
+  "description": "Demo website, style B: a calm navy-and-gold international look for an accounting firm, built around a live route globe. Packages with prices, an example filing year, a deadlines helper and a free consultation.",
+  "preload": [
+    "bodoni-moda-400.woff2"
+  ]
+}

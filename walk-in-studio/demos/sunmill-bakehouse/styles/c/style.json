@@ -1,0 +1,8 @@
+{
+  "name": "Minimal & artisan",
+  "title": "Sunmill Bakehouse | Bread, slowly, in Bedok (style C: Minimal & artisan)",
+  "description": "Demo website, style C: a minimal, photo-led look for a neighbourhood bakery in Bedok. The bread, the menu with prices, cakes to order, opening hours.",
+  "preload": [
+    "cormorant-garamond-400.woff2"
+  ]
+}
