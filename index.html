@@ -22,7 +22,7 @@
     --signal: #9a5426;
     --signal-soft: #f0e3d8;
     --pass: #2f5d50;
-    --fail: #8a8f87;
+    --miss: #8a8f87;
     --focus: #2f5d50;
     --shadow: rgba(27, 32, 29, 0.07);
     --gain: #2a78d6;
@@ -45,7 +45,7 @@
       --signal: #d59463;
       --signal-soft: #2b211a;
       --pass: #85bda8;
-      --fail: #7b827a;
+      --miss: #7b827a;
       --focus: #85bda8;
       --shadow: rgba(0, 0, 0, 0.4);
       --gain: #3987e5;
@@ -68,7 +68,7 @@
     --signal: #d59463;
     --signal-soft: #2b211a;
     --pass: #85bda8;
-    --fail: #7b827a;
+    --miss: #7b827a;
     --focus: #85bda8;
     --shadow: rgba(0, 0, 0, 0.4);
     --gain: #3987e5;
@@ -359,7 +359,7 @@
     padding: 2px 7px; border-radius: 100px; border: 1px solid currentColor;
   }
   .gate.y { color: var(--pass); }
-  .gate.n { color: var(--fail); }
+  .gate.n { color: var(--miss); }
   .verdict {
     font-family: "IBM Plex Mono", ui-monospace, monospace;
     font-size: 11px; color: var(--ink-faint);
@@ -1378,7 +1378,7 @@
         </span>
       </button>
       <button class="exhibit-card" type="button" data-goto="ex2">
-        <span class="card-media dark-media"><video src="tat-clip.mp4" poster="tat-poster.jpg" muted autoplay loop playsinline aria-label="Clip from a published video: a satellite map flying from South America to the Caribbean"></video></span>
+        <span class="card-media dark-media"><video src="tat-clip.mp4" poster="tat-poster.jpg" muted autoplay loop playsinline aria-label="Clip from a finished video: a satellite map flying from South America to the Caribbean"></video></span>
         <span class="card-text">
           <span class="room-row"><span class="room-no mono">Room 4</span><span class="archived-tag">Archived · Oct 2026</span></span>
           <h2>Fact-checked news shorts</h2>
@@ -1464,7 +1464,7 @@
   <section class="room" id="room-ex1" hidden>
     <div class="museum">
       <article class="story">
-        <span class="room-row"><span class="room-no mono">Room 3 of 6 · Personal project</span><span class="archived-tag">Archived · Oct 2026</span></span>
+        <span class="room-row"><span class="room-no mono">Room 3 of 6 · Side project</span><span class="archived-tag">Archived · Oct 2026</span></span>
         <h2 class="story-title">Northstar: from trading system to ETF tracker</h2>
         <p class="story-lede">I built a trading system, tested it honestly, and found that simply holding the shares beat it. What survived is a tracker for regular ETF investing.</p>
 
@@ -1488,7 +1488,7 @@
             <div><b>10,500</b><span>strategies someone else tested</span></div>
             <div><b>99%</b><span>beaten by random picks</span></div>
           </div>
-          <p class="c-src">A trading YouTuber's own published figures, which argue against his video's framing. <a href="https://youtu.be/XLMG6-SATRk" target="_top" rel="noopener">Source ↗</a></p>
+          <p class="c-src">A trader's own published figures, which argue against the framing of his video. <a href="https://youtu.be/XLMG6-SATRk" target="_top" rel="noopener">Source ↗</a></p>
         </div>
 
         <div class="decision ended-box">
@@ -1498,7 +1498,7 @@
 
         <dl class="facts">
           <dt>Role</dt><dd>Designed it, tested its assumptions</dd>
-          <dt>Status</dt><dd>ETF tracker runs privately inside my own console · code archived Oct 2026</dd>
+          <dt>Status</dt><dd>Archived Oct 2026 · code kept read-only; the ETF tracker lives on inside my console</dd>
           <dt>Built with</dt><dd>Python, pandas, Streamlit</dd>
         </dl>
       </article>
@@ -1547,29 +1547,29 @@
     </div>
   </section>
 
-  <!-- ===================== ROOM 4: NEWS CHANNEL ===================== -->
+  <!-- ===================== ROOM 4: NEWS SHORTS ===================== -->
   <section class="room" id="room-ex2" hidden>
     <div class="museum pin">
       <article class="story">
-        <span class="room-row"><span class="room-no mono">Room 4 of 6 · Personal project</span><span class="archived-tag">Archived · Oct 2026</span></span>
+        <span class="room-row"><span class="room-no mono">Room 4 of 6 · Side project, for fun</span><span class="archived-tag">Archived · Oct 2026</span></span>
         <h2 class="story-title">Fact-checked news shorts</h2>
-        <p class="story-lede">A news channel where every fact was confirmed by two outlets before it aired. Tap a step to see how one video was made.</p>
+        <p class="story-lede">A for-fun experiment: a tiny newsroom that makes short news videos, where every spoken fact has to be confirmed by two outlets first. Tap a step to see how one video was made.</p>
 
         <h3 class="signpost"><span aria-hidden="true">🎬</span> How one video was made</h3>
         <div class="vstrip" id="ex2-strip" role="group" aria-label="Steps of one video"></div>
 
         <h3 class="signpost"><span aria-hidden="true">🗓️</span> How it went</h3>
         <ol class="tl">
-          <li><span class="tl-ico" aria-hidden="true">🤖</span><div><span class="tl-when">Sep 2026</span><span class="tl-what">The automated version</span><p class="tl-note">Trending news in, finished video out, with an AI model paid for on every video.</p></div></li>
-          <li class="turn"><span class="tl-ico" aria-hidden="true">🔧</span><div><span class="tl-when">3 Oct</span><span class="tl-what">Rebuilt around quality checks</span><p class="tl-note">The automated version <b>never checked whether a video was actually good</b>, so I rebuilt it: each video made one at a time, and held back until every check passed.</p>
-            <figure class="tl-pic portrait"><img src="tat-routes.jpg" alt="Frame from a published video: two routes to Argentine citizenship, with sources listed underneath" loading="lazy"><figcaption>A finished frame: figures, with their sources underneath.</figcaption></figure></div></li>
-          <li><span class="tl-ico" aria-hidden="true">📲</span><div><span class="tl-when">Early Oct</span><span class="tl-what">Publishing, one video at a time</span><p class="tl-note">Every video uploaded private first, then made public only after my review.</p></div></li>
-          <li class="now"><span class="tl-ico" aria-hidden="true">🗄️</span><div><span class="tl-when">12 Oct</span><span class="tl-what">Archived</span><p class="tl-note">Code preserved read-only; the finished videos are kept.</p></div></li>
+          <li><span class="tl-ico" aria-hidden="true">🤖</span><div><span class="tl-when">Sep 2026</span><span class="tl-what">First version</span><p class="tl-note">Trending news in, finished video out, scripted by an AI model.</p></div></li>
+          <li class="turn"><span class="tl-ico" aria-hidden="true">🔧</span><div><span class="tl-when">3 Oct</span><span class="tl-what">Rebuilt around quality checks</span><p class="tl-note">I added a check for <b>whether each video was actually good</b>, so each video was made one at a time and held back until every check passed.</p>
+            <figure class="tl-pic portrait"><img src="tat-routes.jpg" alt="Frame from a finished video: two routes to Argentine citizenship, with sources listed underneath" loading="lazy"><figcaption>A finished frame: figures, with their sources underneath.</figcaption></figure></div></li>
+          <li><span class="tl-ico" aria-hidden="true">👀</span><div><span class="tl-when">Early Oct</span><span class="tl-what">Reviewed by me</span><p class="tl-note">Every video waited for my review before it was shared.</p></div></li>
+          <li class="now"><span class="tl-ico" aria-hidden="true">🗄️</span><div><span class="tl-when">12 Oct</span><span class="tl-what">Wrapped up</span><p class="tl-note">Finished and archived: code preserved read-only, the finished videos kept.</p></div></li>
         </ol>
 
         <div class="decision ended-box">
           <span class="d-kicker mono">What it was, and what it shows</span>
-          <p>A short-video news channel built on one rule: every spoken fact confirmed by two independent outlets. It shows how I build verification into a pipeline: automatic checks held each video back until every claim was confirmed, and I reviewed every video before it went public. Archived Oct 2026; the code and the finished videos are kept.</p>
+          <p>A side project made for fun: a small automated newsroom built on one rule, every spoken fact confirmed by two independent outlets. It shows how I build verification into a pipeline: automatic checks held each video back until every claim was confirmed, and I reviewed each one. Archived Oct 2026; the code is preserved read-only and the finished videos are kept.</p>
         </div>
 
       </article>
@@ -1580,18 +1580,18 @@
             <div class="case-bar-left">
               <nav class="crumbs mono" id="ex2-crumbs" aria-label="Where you are"></nav>
             </div>
-            <span class="sample-chip">Real channel output · Oct 2026</span>
+            <span class="sample-chip">Sample output · Oct 2026</span>
           </div>
           <div class="case-body" id="ex2-body"></div>
         </div>
         <div class="ex2-phone">
-          <div class="phone"><video src="tat-clip.mp4" poster="tat-poster.jpg" muted autoplay loop playsinline aria-label="Clip from a published video: a satellite map flying from South America to the Caribbean, with the five island nations marked"></video></div>
-          <p class="phone-cap">From a published video</p>
+          <div class="phone"><video src="tat-clip.mp4" poster="tat-poster.jpg" muted autoplay loop playsinline aria-label="Clip from a finished video: a satellite map flying from South America to the Caribbean, with the five island nations marked"></video></div>
+          <p class="phone-cap">A finished video</p>
         </div>
         <div class="glance">
           <span class="d-kicker mono">At a glance</span>
     <dl class="facts">
-              <dt>Role</dt><dd>Set the standards, approved or rejected every video</dd>
+              <dt>Role</dt><dd>Set the standards, reviewed every video</dd>
               <dt>Status</dt><dd>Archived Oct 2026 · code preserved (read-only) · finished videos kept</dd>
               <dt>Built with</dt><dd>Python, Remotion, ElevenLabs, Mapbox</dd>
             </dl>
@@ -1661,7 +1661,7 @@
   <section class="room" id="room-ex4" hidden>
     <div class="museum">
       <article class="story">
-        <span class="room-row"><span class="room-no mono">Room 5 of 6 · Personal project</span></span>
+        <span class="room-row"><span class="room-no mono">Room 5 of 6 · Side project</span></span>
         <h2 class="story-title">World news radar</h2>
         <p class="story-lede">A board that reads news outlets around the world and shows which stories are spreading. Plain code, no AI, $0 to run. Below: twelve of the biggest stories from its first week.</p>
 
@@ -1681,7 +1681,7 @@
           <div><span class="nr-b nonwest">🌏 Non-Western</span><span>every outlet carrying it is outside the West</span></div>
           <div><span class="nr-b maybe-elsewhere">📍 Maybe elsewhere</span><span>a wire dateline suggests it happened in another country</span></div>
         </div>
-        <p class="proves">Two more badges, 🔄 Update and ✅ Covered, came from my news channel's files and were retired with it in Oct 2026.</p>
+        <p class="proves">Two more badges, 🔄 Update and ✅ Covered, came from my news-shorts project's files and were retired when that project was wrapped up in Oct 2026.</p>
 
         <details class="story-more">
           <summary class="signpost"><span aria-hidden="true">🤝</span> Rules it keeps</summary>
@@ -1698,7 +1698,7 @@
             <li><b>Stories can merge or split.</b> Headlines are grouped by shared words, so two events can become one story, or one event two.</li>
             <li><b>One wire story can look like many.</b> Several outlets running the same AP or AFP report each count as an outlet.</li>
             <li><b>Headlines only.</b> It never reads the articles, so it can't tell whether a headline is accurate.</li>
-            <li><b>Gaps in coverage.</b> Some outlets can't be read (see Sources); China, TikTok and Reddit aren't covered.</li>
+            <li><b>Gaps in coverage.</b> Some outlets can't be read (see Sources); Chinese outlets and social media aren't covered.</li>
             <li><b>This page is a frozen week.</b> The app itself keeps reading every 5 minutes; this selection doesn't change.</li>
           </ul>
         </details>
@@ -1857,9 +1857,9 @@
     lobby: { label: "Entrance", count: "Start here" },
     ex0:   { label: "Room 1 — Secretariat", count: "Room 1 of 6 · At GAL Global Advisory" },
     ex3:   { label: "Room 2 — GAL website", count: "Room 2 of 6 · At GAL Global Advisory" },
-    ex1:   { label: "Room 3 — Northstar → ETF tracker", count: "Room 3 of 6 · Personal project" },
-    ex2:   { label: "Room 4 — Fact-checked news shorts", count: "Room 4 of 6 · Personal project" },
-    ex4:   { label: "Room 5 — World news radar", count: "Room 5 of 6 · Personal project" },
+    ex1:   { label: "Room 3 — Northstar → ETF tracker", count: "Room 3 of 6 · Side project" },
+    ex2:   { label: "Room 4 — Fact-checked news shorts", count: "Room 4 of 6 · Side project, for fun" },
+    ex4:   { label: "Room 5 — World news radar", count: "Room 5 of 6 · Side project" },
     ex5:   { label: "Room 6 — Walk-In Studio", count: "Room 6 of 6 · Side project" },
     exit:  { label: "Exit", count: "End of walkthrough" }
   };
@@ -2447,7 +2447,7 @@
     body.appendChild(note(v.note));
   }
 
-  /* ---------------- room 3: news channel ---------------- */
+  /* ---------------- room 4: news shorts ---------------- */
 
   var FACTS = [
     ["1", "For $350,000, you can now buy Argentine citizenship.", "AP · Reuters · Buenos Aires Times"],
@@ -2463,7 +2463,7 @@
   ];
 
   var GATE = [
-    ["Loudness right for YouTube and TikTok", "on target"],
+    ["Loudness right for phone playback", "on target"],
     ["No distortion at peaks", "pass"],
     ["Text clear of phone buttons", "pass"],
     ["No black bands", "pass"],
@@ -2477,8 +2477,8 @@
     { emoji: "✍️", name: "Script", kind: "script", body: "Three standing rules for every script." },
     { emoji: "🎨", name: "Visuals", kind: "stills", body: "Sources on screen, real satellite maps, illustrations labelled." },
     { emoji: "🎧", name: "Voice & checks", kind: "gate", body: "Voiced, then checked automatically. A video went no further until every check passed." },
-    { emoji: "👀", name: "Human review", kind: "flow", body: "Nothing uploaded on its own or on a schedule. I approved or rejected every video." },
-    { emoji: "📲", name: "Publish", kind: "watch", body: "Two of the finished videos." }
+    { emoji: "👀", name: "Human review", kind: "flow", body: "Nothing went out on its own or on a schedule. Every video waited for my review: I approved or rejected each one." },
+    { emoji: "🎞️", name: "Finished videos", kind: "watch", body: "Two of the finished videos." }
   ];
 
   var ex2 = { stage: 0 };
@@ -2590,7 +2590,7 @@
 
   function flowCard() {
     var f = mk("div", "flow");
-    [["01", "Uploaded private", "Always first"], null, ["02", "I review it", "Approve or reject, with notes"], null, ["03", "Made public", "A separate, confirmed step"]]
+    [["01", "Held back", "Always first"], null, ["02", "I review it", "Approve or reject, with notes"], null, ["03", "Shared", "Only after I approve it"]]
       .forEach(function (s) {
         if (!s) { f.appendChild(mk("div", "arrow", "→")); return; }
         var d = mk("div");
@@ -2604,9 +2604,9 @@
 
 
   var VIDEOS = [
-    { src: "tat-okinawa.mp4", poster: "tat-okinawa-poster.jpg", len: "2:04",
+    { src: "tat-okinawa.mp4", poster: "tat-okinawa-poster.jpg", len: "2:02",
       title: "US Marine arrested over a woman's death in Okinawa: why Japan is angry" },
-    { src: "tat-panfilov.mp4", poster: "tat-panfilov-poster.jpg", len: "1:44",
+    { src: "tat-panfilov.mp4", poster: "tat-panfilov-poster.jpg", len: "1:41",
       title: "Ex-Wah!Banana actor speaks out after court overturns rape conviction",
       warn: "Content note: discusses a sexual-assault case" }
   ];
@@ -2646,7 +2646,7 @@
       card.appendChild(volRow);
 
       card.appendChild(mk("p", "watch-title", v.title));
-      card.appendChild(mk("p", "watch-meta", v.len + " · from the channel · sound starts at 30%"));
+      card.appendChild(mk("p", "watch-meta", v.len + " · a finished video · sound starts at 30%"));
       if (v.warn) { card.appendChild(mk("p", "watch-warn", v.warn)); }
       wrap.appendChild(card);
     });
@@ -2700,19 +2700,19 @@
     if (s.kind === "facts") {
       body.appendChild(factTable());
       body.appendChild(leftOut());
-      body.appendChild(note("From a published video on Argentina selling citizenship. All 10 lines passed; 4 shown."));
+      body.appendChild(note("From a finished video on Argentina selling citizenship. All 10 lines passed; 4 shown."));
     }
     if (s.kind === "script") { body.appendChild(scriptCards()); }
     if (s.kind === "stills") {
       var stills = mk("div", "stills");
       stills.appendChild(stillFigure("tat-routes.jpg",
-        "Frame from a published video: two routes to Argentine citizenship, a $350,000 payment or an $800,000 government bond, with sources listed underneath",
+        "Frame from a finished video: two routes to Argentine citizenship, a $350,000 payment or an $800,000 government bond, with sources listed underneath",
         "Figures, with sources underneath."));
       stills.appendChild(stillFigure("tat-map.jpg",
-        "Frame from a published video: a satellite map of the Caribbean with five island nations marked",
+        "Frame from a finished video: a satellite map of the Caribbean with five island nations marked",
         "Real satellite map."));
       stills.appendChild(stillFigure("tat-scale.jpg",
-        "Frame from a published video: a balance scale weighing Argentina's need for cash against the risk of money laundering",
+        "Frame from a finished video: a balance scale weighing Argentina's need for cash against the risk of money laundering",
         "The trade-off, drawn."));
       body.appendChild(stills);
     }
@@ -2962,7 +2962,7 @@
       fig.appendChild(img);
       fig.addEventListener("click", function () { fig.classList.toggle("zoom"); });
       body.appendChild(fig);
-      body.appendChild(note("The tracker on my computer, as it was on 6 Oct 2026. It reads every 5 minutes; two badges in this picture were retired with my news channel."));
+      body.appendChild(note("The tracker on my computer, as it was on 6 Oct 2026. It reads every 5 minutes; two badges in this picture were retired when my news-shorts project was wrapped up."));
       return;
     }
 
