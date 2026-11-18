@@ -732,6 +732,8 @@
     transition: transform .35s ease;
   }
   .dark-media { background: #0d1210; }
+  .card-media.thumb { background: #161a17; }
+  .card-media.thumb img { object-position: center; }
   .dark-media video, .dark-media img { object-position: center; }
   .exhibit-card:hover .card-media img, .exhibit-card:hover .card-media video { transform: scale(1.04); }
   .chart-media { display: flex; flex-direction: column; justify-content: center; padding: 14px 18px; gap: 8px; }
@@ -1327,22 +1329,22 @@
 
     <div class="wings six">
     <div class="wing">
-      <div class="wing-head"><span class="wing-kicker mono">GAL Global Advisory</span><h2 class="wing-title">Projects built for companies</h2></div>
+      <div class="wing-head"><span class="wing-kicker mono">Workplace</span><h2 class="wing-title">Delivered for GAL Global Advisory</h2></div>
     <div class="exhibit-cards two">
       <button class="exhibit-card" type="button" data-goto="ex0">
-        <span class="card-media"><img src="sec-today.jpg" alt="The compliance system's Today screen" loading="lazy"></span>
+        <span class="card-media thumb"><img src="thumb-secretariat.jpg" alt="The compliance platform's Today and company screens" loading="lazy"></span>
         <span class="card-text">
           <span class="room-no mono">Room 1</span>
-          <h2>Secretariat: compliance system</h2>
+          <h2>Secretariat: corporate compliance platform</h2>
           <p>Every filing deadline, document and client check in one place, for the firm I work at.</p>
           <span class="enter">Enter room →</span>
         </span>
       </button>
       <button class="exhibit-card" type="button" data-goto="ex3">
-        <span class="card-media dark-media globe-media"><video src="gal-globe.mp4" poster="gal-globe-poster.jpg" muted autoplay loop playsinline aria-label="The website's animated gold globe touring routes to Singapore"></video></span>
+        <span class="card-media thumb"><img src="thumb-gal.jpg" alt="The GAL Global Advisory website on desktop and phone, with its gold globe" loading="lazy"></span>
         <span class="card-text">
           <span class="room-no mono">Room 2</span>
-          <h2>GAL Global Advisory website</h2>
+          <h2>GAL Global Advisory: corporate website</h2>
           <p>A live gold globe that flies from each client's country to Singapore.</p>
           <span class="enter">Enter room →</span>
         </span>
@@ -1351,14 +1353,14 @@
     </div>
 
     <div class="wing">
-      <div class="wing-head"><span class="wing-kicker mono">Side project</span><h2 class="wing-title">Built for fun</h2></div>
+      <div class="wing-head"><span class="wing-kicker mono">Independent project</span><h2 class="wing-title">Product design</h2></div>
     <div class="exhibit-cards one">
       <button class="exhibit-card" type="button" data-goto="ex5">
-        <span class="card-media dark-media"><img src="ws-showroom.jpg" alt="The Walk-In Studio showroom's first screen" loading="lazy"></span>
+        <span class="card-media thumb"><img src="thumb-walkin.jpg" alt="Walk-In Studio templates and a demo shop site on desktop and phone" loading="lazy"></span>
         <span class="card-text">
           <span class="room-row"><span class="room-no mono">Room 6</span><span class="archived-tag">Archived · Oct 2026</span></span>
-          <h2>Walk-In Studio</h2>
-          <p>A design system and website templates for small shops, built for fun. Open the whole thing inside.</p>
+          <h2>Walk-In Studio: web design system &amp; templates</h2>
+          <p>A design system and website templates for small shops. Open the whole thing inside.</p>
           <span class="enter">Enter room →</span>
         </span>
       </button>
@@ -1366,31 +1368,31 @@
     </div>
 
     <div class="wing wing-personal">
-      <div class="wing-head"><span class="wing-kicker mono">On my own time</span><h2 class="wing-title">Personal projects</h2></div>
+      <div class="wing-head"><span class="wing-kicker mono">Independent projects</span><h2 class="wing-title">Research &amp; automation</h2></div>
     <div class="exhibit-cards three">
       <button class="exhibit-card" type="button" data-goto="ex1">
-        <span class="card-media chart-media" id="lobby-chart"></span>
+        <span class="card-media thumb"><img src="thumb-northstar.jpg" alt="Results: just holding the shares +57%, best strategy found −21%, live strategy −64%" loading="lazy"></span>
         <span class="card-text">
           <span class="room-row"><span class="room-no mono">Room 3</span><span class="archived-tag">Archived · Oct 2026</span></span>
-          <h2>Northstar: from trading system to ETF tracker</h2>
+          <h2>Northstar: trading-strategy research &amp; ETF tracker</h2>
           <p>I tested every strategy honestly. Simply holding the shares beat them all.</p>
           <span class="enter">Enter room →</span>
         </span>
       </button>
       <button class="exhibit-card" type="button" data-goto="ex2">
-        <span class="card-media dark-media"><video src="tat-clip.mp4" poster="tat-poster.jpg" muted autoplay loop playsinline aria-label="Clip from a finished video: a satellite map flying from South America to the Caribbean"></video></span>
+        <span class="card-media thumb"><img src="thumb-news-shorts.jpg" alt="Three frames from finished news explainers" loading="lazy"></span>
         <span class="card-text">
           <span class="room-row"><span class="room-no mono">Room 4</span><span class="archived-tag">Archived · Oct 2026</span></span>
-          <h2>Fact-checked news shorts</h2>
+          <h2>Fact-checked news production pipeline</h2>
           <p>Short news explainers where every fact needed two independent sources.</p>
           <span class="enter">Enter room →</span>
         </span>
       </button>
       <button class="exhibit-card" type="button" data-goto="ex4">
-        <span class="card-media dark-media news-media"><img src="news-card.jpg" alt="The news tracker's board of stories" loading="lazy"></span>
+        <span class="card-media thumb"><img src="thumb-news-radar.jpg" alt="The news monitoring board: story counts and region filters" loading="lazy"></span>
         <span class="card-text">
           <span class="room-no mono">Room 5</span>
-          <h2>World news radar</h2>
+          <h2>Global news monitoring dashboard</h2>
           <p>Reads 43 news outlets and shows which stories are spreading. Here: its first week.</p>
           <span class="enter">Enter room →</span>
         </span>
@@ -1409,7 +1411,7 @@
     <div class="museum pin">
       <article class="story">
         <span class="room-row"><span class="room-no mono">Room 1 of 6 · At GAL Global Advisory</span></span>
-        <h2 class="story-title">Secretariat: compliance system</h2>
+        <h2 class="story-title">Secretariat: corporate compliance platform</h2>
         <p class="story-lede">A corporate secretarial firm can't miss a filing deadline or lose a client's file. I designed this system for GAL Global Advisory, the firm I work at, so neither can happen.</p>
 
         <h3 class="signpost"><span aria-hidden="true">🛡️</span> Four rules it can't break</h3>
@@ -1464,8 +1466,8 @@
   <section class="room" id="room-ex1" hidden>
     <div class="museum">
       <article class="story">
-        <span class="room-row"><span class="room-no mono">Room 3 of 6 · Side project</span><span class="archived-tag">Archived · Oct 2026</span></span>
-        <h2 class="story-title">Northstar: from trading system to ETF tracker</h2>
+        <span class="room-row"><span class="room-no mono">Room 3 of 6 · Independent project</span><span class="archived-tag">Archived · Oct 2026</span></span>
+        <h2 class="story-title">Northstar: trading-strategy research &amp; ETF tracker</h2>
         <p class="story-lede">I built a trading system, tested it honestly, and found that simply holding the shares beat it. What survived is a tracker for regular ETF investing.</p>
 
         <h3 class="signpost"><span aria-hidden="true">🗓️</span> How it went</h3>
@@ -1551,8 +1553,8 @@
   <section class="room" id="room-ex2" hidden>
     <div class="museum pin">
       <article class="story">
-        <span class="room-row"><span class="room-no mono">Room 4 of 6 · Side project, for fun</span><span class="archived-tag">Archived · Oct 2026</span></span>
-        <h2 class="story-title">Fact-checked news shorts</h2>
+        <span class="room-row"><span class="room-no mono">Room 4 of 6 · Independent project</span><span class="archived-tag">Archived · Oct 2026</span></span>
+        <h2 class="story-title">Fact-checked news production pipeline</h2>
         <p class="story-lede">A for-fun experiment: a tiny newsroom that makes short news videos, where every spoken fact has to be confirmed by two outlets first. Tap a step to see how one video was made.</p>
 
         <h3 class="signpost"><span aria-hidden="true">🎬</span> How one video was made</h3>
@@ -1569,7 +1571,7 @@
 
         <div class="decision ended-box">
           <span class="d-kicker mono">What it was, and what it shows</span>
-          <p>A side project made for fun: a small automated newsroom built on one rule, every spoken fact confirmed by two independent outlets. It shows how I build verification into a pipeline: automatic checks held each video back until every claim was confirmed, and I reviewed each one. Archived Oct 2026; the code is preserved read-only and the finished videos are kept.</p>
+          <p>An independent project: a small automated newsroom built on one rule, every spoken fact confirmed by two independent outlets. It shows how I build verification into a pipeline: automatic checks held each video back until every claim was confirmed, and I reviewed each one. Archived Oct 2026; the code is preserved read-only and the finished videos are kept.</p>
         </div>
 
       </article>
@@ -1605,7 +1607,7 @@
     <div class="museum pin">
       <article class="story">
         <span class="room-row"><span class="room-no mono">Room 2 of 6 · At GAL Global Advisory</span></span>
-        <h2 class="story-title">GAL Global Advisory website</h2>
+        <h2 class="story-title">GAL Global Advisory: corporate website</h2>
         <p class="story-lede">I rebuilt GAL Global Advisory's website around a live gold globe that lights a route from each of 21 client markets to Singapore.</p>
 
         <ol class="tl plain">
@@ -1661,8 +1663,8 @@
   <section class="room" id="room-ex4" hidden>
     <div class="museum">
       <article class="story">
-        <span class="room-row"><span class="room-no mono">Room 5 of 6 · Side project</span></span>
-        <h2 class="story-title">World news radar</h2>
+        <span class="room-row"><span class="room-no mono">Room 5 of 6 · Independent project</span></span>
+        <h2 class="story-title">Global news monitoring dashboard</h2>
         <p class="story-lede">A board that reads news outlets around the world and shows which stories are spreading. Plain code, no AI, $0 to run. Below: twelve of the biggest stories from its first week.</p>
 
         <h3 class="signpost"><span aria-hidden="true">⚙️</span> How it works</h3>
@@ -1728,9 +1730,9 @@
   <section class="room" id="room-ex5" hidden>
     <div class="museum pin">
       <article class="story">
-        <span class="room-row"><span class="room-no mono">Room 6 of 6 · Side project</span><span class="archived-tag">Archived · Oct 2026</span></span>
-        <h2 class="story-title">Walk-In Studio</h2>
-        <p class="story-lede">A side project built for fun: a design system and website templates for small shops — bakeries, tailors, nail studios, aircon, restaurants, tuition and accounting. The whole thing is kept here: open the showroom and try every demo.</p>
+        <span class="room-row"><span class="room-no mono">Room 6 of 6 · Independent project</span><span class="archived-tag">Archived · Oct 2026</span></span>
+        <h2 class="story-title">Walk-In Studio: web design system &amp; templates</h2>
+        <p class="story-lede">An independent project: a design system and website templates for small shops — bakeries, tailors, nail studios, aircon, restaurants, tuition and accounting. The whole thing is kept here: open the showroom and try every demo.</p>
 
         <h3 class="signpost"><span aria-hidden="true">🧩</span> What I built</h3>
         <ul class="story-list">
@@ -1798,12 +1800,12 @@
     <h1>Thanks for walking through</h1>
 
     <div class="exit-thumbs six">
-      <button type="button" data-goto="ex0"><span class="card-media"><img src="sec-company.jpg" alt="" loading="lazy"></span><span>Secretariat</span></button>
-      <button type="button" data-goto="ex3"><span class="card-media dark-media"><img src="gal-globe-poster.jpg" alt="" loading="lazy"></span><span>GAL website</span></button>
-      <button type="button" data-goto="ex1"><span class="card-media chart-media" id="exit-chart"></span><span>Northstar → ETF tracker</span></button>
-      <button type="button" data-goto="ex2"><span class="card-media dark-media"><img src="tat-map.jpg" alt="" loading="lazy"></span><span>Fact-checked news shorts</span></button>
-      <button type="button" data-goto="ex4"><span class="card-media dark-media"><img src="news-card.jpg" alt="" loading="lazy"></span><span>World news radar</span></button>
-      <button type="button" data-goto="ex5"><span class="card-media dark-media"><img src="ws-showroom.jpg" alt="" loading="lazy"></span><span>Walk-In Studio</span></button>
+      <button type="button" data-goto="ex0"><span class="card-media thumb"><img src="thumb-secretariat.jpg" alt="" loading="lazy"></span><span>Compliance platform</span></button>
+      <button type="button" data-goto="ex3"><span class="card-media thumb"><img src="thumb-gal.jpg" alt="" loading="lazy"></span><span>Corporate website</span></button>
+      <button type="button" data-goto="ex1"><span class="card-media thumb"><img src="thumb-northstar-sq.jpg" alt="" loading="lazy"></span><span>Strategy research</span></button>
+      <button type="button" data-goto="ex2"><span class="card-media thumb"><img src="thumb-news-shorts.jpg" alt="" loading="lazy"></span><span>News production pipeline</span></button>
+      <button type="button" data-goto="ex4"><span class="card-media thumb"><img src="thumb-news-radar.jpg" alt="" loading="lazy"></span><span>News monitoring</span></button>
+      <button type="button" data-goto="ex5"><span class="card-media thumb"><img src="thumb-walkin.jpg" alt="" loading="lazy"></span><span>Walk-In Studio</span></button>
     </div>
 
     <div class="exit-grid">
@@ -1855,15 +1857,15 @@
   var ORDER = ["lobby", "ex0", "ex3", "ex1", "ex2", "ex4", "ex5", "exit"];
   var META = {
     lobby: { label: "Entrance", count: "Start here" },
-    ex0:   { label: "Room 1 — Secretariat", count: "Room 1 of 6 · At GAL Global Advisory" },
-    ex3:   { label: "Room 2 — GAL website", count: "Room 2 of 6 · At GAL Global Advisory" },
-    ex1:   { label: "Room 3 — Northstar → ETF tracker", count: "Room 3 of 6 · Side project" },
-    ex2:   { label: "Room 4 — Fact-checked news shorts", count: "Room 4 of 6 · Side project, for fun" },
-    ex4:   { label: "Room 5 — World news radar", count: "Room 5 of 6 · Side project" },
-    ex5:   { label: "Room 6 — Walk-In Studio", count: "Room 6 of 6 · Side project" },
+    ex0:   { label: "Room 1 — Compliance platform", count: "Room 1 of 6 · At GAL Global Advisory" },
+    ex3:   { label: "Room 2 — Corporate website", count: "Room 2 of 6 · At GAL Global Advisory" },
+    ex1:   { label: "Room 3 — Strategy research", count: "Room 3 of 6 · Independent project" },
+    ex2:   { label: "Room 4 — News production pipeline", count: "Room 4 of 6 · Independent project" },
+    ex4:   { label: "Room 5 — News monitoring", count: "Room 5 of 6 · Independent project" },
+    ex5:   { label: "Room 6 — Walk-In Studio", count: "Room 6 of 6 · Independent project" },
     exit:  { label: "Exit", count: "End of walkthrough" }
   };
-  var NEXT_LABEL = { lobby: "Enter Room 1 →", ex0: "Next room →", ex3: "To personal projects →", ex1: "Next room →", ex2: "Next room →", ex4: "To the last room →", ex5: "Finish →", exit: "Back to start ↺" };
+  var NEXT_LABEL = { lobby: "Enter Room 1 →", ex0: "Next room →", ex3: "To independent projects →", ex1: "Next room →", ex2: "Next room →", ex4: "To the last room →", ex5: "Finish →", exit: "Back to start ↺" };
   var PREV_LABEL = { lobby: "← Previous", ex0: "← Overview", ex3: "← Room 1", ex1: "← Room 2", ex2: "← Room 3", ex4: "← Room 4", ex5: "← Room 5", exit: "← Room 6" };
 
   /* Room changes: a View Transition on Walk-In Studio's motion scale (see the CSS);
